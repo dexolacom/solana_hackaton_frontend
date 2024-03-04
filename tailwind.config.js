@@ -30,13 +30,13 @@ module.exports = {
       },
       fontSize: {
         // labels
-        labelSemiboldH1: ['24px', '32px'],
-        labelMediumH2: ['20px', '30px'],
-        labelMediumH3: ['14px', '24px'],
+        labelH1: ['24px', '32px'],
+        labelH2: ['20px', '30px'],
+        labelH3: ['14px', '24px'],
         // buttons
-        labelMediumButtonL: ['18px', '24px'],
-        labelMediumButtonM: ['14px', '24px'],
-        labelMediumButtonS: ['12px', '24px'],
+        labelButtonL: ['18px', '24px'],
+        labelButtonM: ['14px', '24px'],
+        labelButtonS: ['12px', '24px'],
         // body
         bodyRegularL: ['16px', '24px'],
         bodyRegularM: ['14px', '24px'],
