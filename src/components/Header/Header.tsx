@@ -1,8 +1,8 @@
-import logo from '../assets/BISCUIT.svg'
-import house from '../assets/icons/house.svg'
-import briefcase from '../assets/icons/briefCase.svg'
-import { Button } from '@/components/ui/button.tsx';
-import { AppLink } from '@/components/link.tsx';
+import logo from '../../assets/BISCUIT.svg'
+import house from '../../assets/icons/house.svg'
+import briefcase from '../../assets/icons/briefCase.svg'
+import { Button } from '@/components/ui/Button.tsx';
+import { AppLink } from '@/components/AppLink/AppLink.tsx';
 import { useLocation } from 'react-router-dom';
 
 

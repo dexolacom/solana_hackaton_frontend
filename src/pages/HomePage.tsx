@@ -1,8 +1,7 @@
+import { HomeCardsContainer } from '@/components/HomeCardsContainer/HomeCardsContainer.tsx';
 
 export const HomePage = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <HomeCardsContainer/>
   )
 }

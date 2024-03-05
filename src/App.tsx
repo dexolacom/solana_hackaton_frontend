@@ -1,6 +1,6 @@
 import './styles/app.css'
 import { AppRouter } from '@/providers/router/AppRouter.tsx';
-import { Header } from '@/components/header.tsx';
+import { Header } from '@/components/Header/Header.tsx';
 
 function App() {
   return (
