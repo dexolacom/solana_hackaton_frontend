@@ -3,21 +3,51 @@ export const cards = [
     title: 'classic',
     badges: [],
     content: {
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla '
+      amount: {
+        title: 'Total amount invested',
+        number: '$1,013,724.41'
+      },
+      holdings: {
+        title: 'Holdings'
+      },
+      description: {
+        title: 'Description',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
+      }
     }
   },
   {
     title: 'classic + earn',
     badges: ['Landing', 'Staking', 'Vaults'],
     content: {
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla '
+      amount: {
+        title: 'Total amount invested',
+        number: '$1,013,724.41'
+      },
+      holdings: {
+        title: 'Holdings'
+      },
+      description: {
+        title: 'Description',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
+      }
     }
   },
   {
     title: 'solana ecosystem',
     badges: [],
     content: {
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla '
+      amount: {
+        title: 'Total amount invested',
+        number: '$1,013,724.41'
+      },
+      holdings: {
+        title: 'Holdings'
+      },
+      description: {
+        title: 'Description',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
+      }
     }
   },
 ]

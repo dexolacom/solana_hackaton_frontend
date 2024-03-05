@@ -1,9 +1,20 @@
-import { Card } from '@/components/ui/Card.tsx';
+import { Card, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 
-export const HoldingsCard = () => {
+interface HoldingsCardProps {
+  holdings: {
+    title: string
+  }
+}
+
+export const HoldingsCard = (props: HoldingsCardProps) => {
+  const { holdings } = props
+  const {title} = holdings
+
   return (
-    <Card>
-
+    <Card className={'border'}>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
     </Card>
   )
 }

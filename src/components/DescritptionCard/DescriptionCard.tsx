@@ -1,12 +1,28 @@
-import { Card, CardTitle } from '@/components/ui/Card.tsx';
+import { Card, CardContent, CardTitle } from '@/components/ui/Card.tsx';
 
-export const DescriptionCard = ({text}: {text: string}) => {
+interface DescriptionCardProps {
+  description: {
+    title: string
+    text: string
+  }
+}
+
+export const DescriptionCard = (props:DescriptionCardProps) => {
+  const { description } = props
+
+  const {
+    title,
+    text
+  } = description;
+
   return (
     <Card className={'border'}>
-      <CardTitle className={'font-medium'}>
-        Desctiption
+      <CardTitle>
+        {title}
       </CardTitle>
-      {text}
+      <CardContent>
+        {text}
+      </CardContent>
     </Card>
   )
 }
