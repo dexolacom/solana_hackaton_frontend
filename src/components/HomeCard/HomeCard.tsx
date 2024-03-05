@@ -44,7 +44,7 @@ export const HomeCard = (props: HomeCardProps) => {
         </CardTitle>
         <span className={'flex gap-2'}>
           {badges?.map((badge, i) => (
-            <Badge variant={'secondary'} key={i}>
+            <Badge key={i}>
               {badge}
             </Badge>
           ))}

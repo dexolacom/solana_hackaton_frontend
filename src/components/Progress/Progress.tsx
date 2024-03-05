@@ -14,7 +14,7 @@ export const Progress = (props: ProgressProps) => {
   return (
     <div
       role={'progressbar'}
-      className={cn(`h-full grow transition-all`, className)}
+      className={cn(`h-full grow`, className)}
       style={{flexBasis: `${value}%`}}
     />
   )
