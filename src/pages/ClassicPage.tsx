@@ -5,6 +5,7 @@ import { DescriptionCard } from '@/components/cards/DescritptionCard/Description
 import { AssetsCard } from '@/components/cards/AssetsCard/AssetsCard.tsx';
 import { InvestCard } from '@/components/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/wrappers/PageTitle/PageTitle.tsx';
+import { ClassicForm } from '@/components/forms/ClassicForm.tsx';
 
 
 const ClassicPage = () => {
@@ -65,8 +66,10 @@ const ClassicPage = () => {
         <DescriptionCard className={'flex-1'} description={tempData.description}/>
       </PageHeader>
       <div className={'flex gap-8'}>
-        <AssetsCard className={'flex-1'}/>
-        <InvestCard className={'flex-2'}/>
+        {/*<AssetsCard className={'flex-1'}/>*/}
+        <InvestCard className={'flex-2'}>
+          <ClassicForm/>
+        </InvestCard>
       </div>
     </div>
   )
