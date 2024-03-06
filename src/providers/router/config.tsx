@@ -1,12 +1,14 @@
+import { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
 import { HomePage } from '@/pages/HomePage.tsx';
+const LazyClassicPage = lazy(() => import('@/pages/ClassicPage'));
 
 
 export const enum commonRoutes {
   HOME = '/',
-  // DEALS = '/',
-  // CONTRACT_PAGE = '/',
-  // NOT_FOUND_PAGE = '/'
+  // MY_HOLDINGS = '/my-holdings',
+  CLASSIC = '/classic',
+  // CLASSIC_EARN = '/classic-earn'
 }
 
 export const routesConfig: Record<commonRoutes, RouteProps> = {
@@ -14,10 +16,10 @@ export const routesConfig: Record<commonRoutes, RouteProps> = {
     path: commonRoutes.HOME,
     element: <HomePage/>
   },
-  // [commonRoutes.DEALS]: {
-  //   path: commonRoutes.DEALS,
-  //   element: <LazyDealsPage/>
-  // },
+  [commonRoutes.CLASSIC]: {
+    path: commonRoutes.CLASSIC,
+    element: <LazyClassicPage/>
+  },
   // [commonRoutes.CONTRACT_PAGE]: {
   //   path: commonRoutes.CONTRACT_PAGE,
   //   element: <Contracts />

@@ -7,16 +7,18 @@ interface AmountCardProps {
     title: string
     number: string
   }
-  variant?: 'accent'
+  variant?: 'accent' | 'bordered'
+  className?: string
 }
 
 export const AmountCard = (props: AmountCardProps) => {
-  const {amount, variant} = props
+  const {amount, variant, className} = props
   const {title, number} = amount
 
-  const cardVariants = cva('border', {
+  const cardVariants = cva('', {
       variants: {
         variant: {
+          bordered: "border",
           accent: "bg-accent text-primary-foreground border-none",
         },
       },
@@ -24,7 +26,7 @@ export const AmountCard = (props: AmountCardProps) => {
   )
 
   return (
-    <Card className={cn(cardVariants({ variant }))}>
+    <Card className={cn(cardVariants({ variant, className }))}>
       <CardHeader>
         <CardTitle>
           {title}

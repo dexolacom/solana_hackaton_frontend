@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/Badge.tsx';
 import { AmountCard } from '@/components/AmountCard/AmountCard.tsx';
 import { HoldingsCard } from '@/components/HoldingsCard/HoldingsCard.tsx';
 import { DescriptionCard } from '@/components/DescritptionCard/DescriptionCard.tsx';
-import { Button } from '@/components/ui/Button.tsx';
+import { AppLink } from '@/components/AppLink/AppLink.tsx';
 
 export interface HomeCardProps {
   title: string
@@ -51,12 +51,14 @@ export const HomeCard = (props: HomeCardProps) => {
         </span>
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 py-6'}>
-        <AmountCard amount={amount}/>
-        <HoldingsCard holdings={holdings}/>
-        <DescriptionCard description={description}/>
+        <AmountCard variant={'bordered'} amount={amount}/>
+        <HoldingsCard variant={'bordered'} holdings={holdings}/>
+        <DescriptionCard variant={'bordered'} description={description}/>
       </CardContent>
       <CardFooter>
-        <Button className={'w-full uppercase'}>go to page</Button>
+        <AppLink to={'/classic'} variant={'solid'} className={'w-full'}>
+          go to classic
+        </AppLink>
       </CardFooter>
     </Card>
   )
