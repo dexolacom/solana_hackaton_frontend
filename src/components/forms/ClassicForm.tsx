@@ -12,23 +12,27 @@ import {
 } from "@/components/ui/Form"
 import { Input } from "@/components/ui/Input"
 import { toast } from "@/lib/use-toast.ts"
+import { Button } from '@/components/ui/Button.tsx';
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
+  amount: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  withdrawal: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  })
 })
 
 export const ClassicForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
+      amount: "",
+      withdrawal: ""
     },
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log('dsf')
     toast({
       title: "You submitted the following values:",
       description: (
@@ -41,24 +45,39 @@ export const ClassicForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
         <FormField
           control={form.control}
-          name="username"
+          name="amount"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Enter amount of investment" {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                MIN sum invested should be ≥ $100
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <button type={'submit'}>dfs</button>
+        <FormField
+          control={form.control}
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Withdrawal Currency</FormLabel>
+              <FormControl>
+                <Input placeholder="Select thye currency of withdraw" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+          name={'withdrawal'}
+        />
+        <Button variant={'secondary'} className={'w-full'}>
+          Invest
+        </Button>
       </form>
     </Form>
   )
