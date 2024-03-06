@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils.ts';
 
 interface AppLinkProps extends LinkProps {
   isActive?: boolean
-  variant?: 'solid' | 'ghost'
+  variant?: 'solid' | 'ghost' | 'secondary'
   className?: string
 }
 
@@ -24,6 +24,7 @@ export const AppLink = (props: AppLinkProps) => {
       variants: {
         variant: {
           solid: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-md h-10 px-4 py-2",
+          secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md h-10 px-4 py-2',
           ghost: `${isActive ? 'border-b-2 border-accent' : 'border-b-2 border-transparent'}`,
         }
       },
