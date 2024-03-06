@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle } from '@/components/ui/Card.tsx';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 import { cn } from '@/lib/utils.ts';
 import { cva } from 'class-variance-authority';
 
@@ -26,10 +26,12 @@ export const DescriptionCard = (props:DescriptionCardProps) => {
 
   return (
     <Card className={cn(cardVariants({ variant, className }))}>
-      <CardTitle>
-        {title}
-      </CardTitle>
-      <CardContent>
+      <CardHeader>
+        <CardTitle>
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className={'text-sm'}>
         {text}
       </CardContent>
     </Card>

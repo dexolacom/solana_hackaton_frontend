@@ -1,11 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
-import { HoldingsCardProgress } from '@/components/HoldingsCardProgress/HoldingsCardProgress.tsx';
+import { HoldingsProgress } from '@/components/common/HoldingsProgress/HoldingsProgress.tsx';
 import { cn } from '@/lib/utils.ts';
 import { cva } from 'class-variance-authority';
 
 interface HoldingsCardProps {
   holdings: {
     title: string
+    items: {
+      name: string
+      percent: string | number
+    }[]
   }
   variant?: 'bordered'
   className?: string
@@ -13,7 +17,7 @@ interface HoldingsCardProps {
 
 export const HoldingsCard = (props: HoldingsCardProps) => {
   const { holdings, className, variant } = props
-  const { title } = holdings
+  const { title, items } = holdings
 
   const cardVariants = cva('', {
       variants: {
@@ -30,7 +34,7 @@ export const HoldingsCard = (props: HoldingsCardProps) => {
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <HoldingsCardProgress/>
+        <HoldingsProgress holdings={items}/>
       </CardContent>
     </Card>
   )

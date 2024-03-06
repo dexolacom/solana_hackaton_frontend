@@ -1,9 +1,9 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 import { Badge } from '@/components/ui/Badge.tsx';
-import { AmountCard } from '@/components/AmountCard/AmountCard.tsx';
-import { HoldingsCard } from '@/components/HoldingsCard/HoldingsCard.tsx';
-import { DescriptionCard } from '@/components/DescritptionCard/DescriptionCard.tsx';
-import { AppLink } from '@/components/AppLink/AppLink.tsx';
+import { AmountCard } from '@/components/cards/AmountCard/AmountCard.tsx';
+import { HoldingsCard } from '@/components/cards/HoldingsCard/HoldingsCard.tsx';
+import { DescriptionCard } from '@/components/cards/DescritptionCard/DescriptionCard.tsx';
+import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
 
 export interface HomeCardProps {
   title: string
@@ -15,6 +15,10 @@ export interface HomeCardProps {
     },
     holdings: {
       title: string
+      items: {
+        name: string
+        percent: string | number
+      }[]
     },
     description: {
       title: string,
@@ -24,21 +28,12 @@ export interface HomeCardProps {
 }
 
 export const HomeCard = (props: HomeCardProps) => {
-  const {
-    title,
-    badges,
-    content
-  } = props;
-
-  const {
-    amount,
-    holdings,
-    description
-  } = content;
+  const {title, badges, content} = props
+  const {amount, holdings, description} = content
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className={'mb-0'}>
         <CardTitle className={'text-3xl font-semibold'}>
           {title}
         </CardTitle>

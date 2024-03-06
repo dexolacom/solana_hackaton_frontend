@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils.ts';
 
 interface ProgressProps {
-  value: number
+  percent: number | string
   className?: string
 }
 
 export const Progress = (props: ProgressProps) => {
   const {
-    value,
+    percent,
     className
   } = props
 
@@ -15,7 +15,7 @@ export const Progress = (props: ProgressProps) => {
     <div
       role={'progressbar'}
       className={cn(`h-full grow`, className)}
-      style={{flexBasis: `${value}%`}}
+      style={{flexBasis: `${percent}%`}}
     />
   )
 }

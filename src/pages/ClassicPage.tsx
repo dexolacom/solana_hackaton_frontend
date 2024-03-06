@@ -1,7 +1,9 @@
-import { PageHeader } from '@/components/PageHeader/PageHeader.tsx';
-import { AmountCard } from '@/components/AmountCard/AmountCard.tsx';
-import { HoldingsCard } from '@/components/HoldingsCard/HoldingsCard.tsx';
-import { DescriptionCard } from '@/components/DescritptionCard/DescriptionCard.tsx';
+import { PageHeader } from '@/components/wrappers/PageHeader/PageHeader.tsx';
+import { AmountCard } from '@/components/cards/AmountCard/AmountCard.tsx';
+import { HoldingsCard } from '@/components/cards/HoldingsCard/HoldingsCard.tsx';
+import { DescriptionCard } from '@/components/cards/DescritptionCard/DescriptionCard.tsx';
+import { AssetsCard } from '@/components/cards/AssetsCard/AssetsCard.tsx';
+import { InvestCard } from '@/components/cards/InvestCard/InvestCard.tsx';
 
 const ClassicPage = () => {
   const tempData = {
@@ -10,7 +12,41 @@ const ClassicPage = () => {
       number: '$1,013,724.41'
     },
     holdings: {
-      title: 'Holdings'
+      title: 'Holdings',
+      items: [
+        {
+          name: 'BTC',
+          percent: 30
+        },
+        {
+          name: 'SOL',
+          percent: 20
+        },
+        {
+          name: 'ETH',
+          percent: 15
+        },
+        {
+          name: 'JUP',
+          percent: 10
+        },
+        {
+          name: 'RNDR',
+          percent: 10
+        },
+        {
+          name: 'HNT',
+          percent: 5
+        },
+        {
+          name: 'BONK',
+          percent: 5
+        },
+        {
+          name: 'PYTH',
+          percent: 5
+        },
+      ]
     },
     description: {
       title: 'Description',
@@ -20,11 +56,18 @@ const ClassicPage = () => {
 
   return (
     <div>
+      <h3 className={'text-3xl font-semibold mb-8'}>
+        Classic
+      </h3>
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount}/>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings}/>
         <DescriptionCard className={'flex-1'} description={tempData.description}/>
       </PageHeader>
+      <div className={'flex gap-8'}>
+        <AssetsCard className={'flex-1'}/>
+        <InvestCard className={'flex-2'}/>
+      </div>
     </div>
   )
 }

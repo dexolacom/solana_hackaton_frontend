@@ -22,7 +22,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex justify-between items-center flex-wrap', className)}
+    className={cn('flex justify-between items-center flex-wrap mb-4', className)}
     {...props}
   />
 ))
@@ -59,7 +59,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("mt-4", className)} {...props} />
+  <div ref={ref} className={cn(className)} {...props} />
 ))
 CardContent.displayName = "CardContent"
 
