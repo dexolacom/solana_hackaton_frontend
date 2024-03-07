@@ -5,9 +5,9 @@ export const HomeCardsContainer = () => {
   return (
     <div className={'grid grid-cols-3 gap-8'}>
       {cards.map((card, i) => {
-        const {title, badges, content} = card;
+        const {title, badges, content, linkPath} = card;
         return (
-          <HomeCard key={i} title={title} badges={badges} content={content}/>
+          <HomeCard key={i} title={title} badges={badges} content={content} linkPath={linkPath}/>
         )
       })}
     </div>

@@ -48,7 +48,8 @@ export const cards = [
         title: 'Description',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
       }
-    }
+    },
+    linkPath: '/classic'
   },
   {
     title: 'classic + earn',
@@ -99,7 +100,8 @@ export const cards = [
         title: 'Description',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
       }
-    }
+    },
+    linkPath: '/classic-earn'
   },
   {
     title: 'solana ecosystem',
@@ -154,6 +156,7 @@ export const cards = [
         title: 'Description',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
       }
-    }
+    },
+    linkPath: '/solana'
   },
 ]

@@ -4,6 +4,7 @@ import { AmountCard } from '@/components/cards/AmountCard/AmountCard.tsx';
 import { HoldingsCard } from '@/components/cards/HoldingsCard/HoldingsCard.tsx';
 import { DescriptionCard } from '@/components/cards/DescritptionCard/DescriptionCard.tsx';
 import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
+import { ArrowRight } from 'lucide-react';
 
 export interface HomeCardProps {
   title: string
@@ -25,10 +26,11 @@ export interface HomeCardProps {
       text: string
     }
   }
+  linkPath: string
 }
 
 export const HomeCard = (props: HomeCardProps) => {
-  const {title, badges, content} = props
+  const {title, badges, content, linkPath} = props
   const {amount, holdings, description} = content
 
   return (
@@ -51,8 +53,9 @@ export const HomeCard = (props: HomeCardProps) => {
         <DescriptionCard variant={'bordered'} description={description}/>
       </CardContent>
       <CardFooter>
-        <AppLink to={'/classic'} variant={'solid'} className={'w-full'}>
-          go to classic
+        <AppLink to={linkPath} variant={'solid'} className={'w-full'}>
+          Details & Invest
+          <ArrowRight className={'w-6 h-6'}/>
         </AppLink>
       </CardFooter>
     </Card>

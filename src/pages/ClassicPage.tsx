@@ -5,7 +5,7 @@ import { DescriptionCard } from '@/components/cards/DescritptionCard/Description
 import { AssetsCard } from '@/components/cards/AssetsCard/AssetsCard.tsx';
 import { InvestCard } from '@/components/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/wrappers/PageTitle/PageTitle.tsx';
-import { ClassicForm } from '@/components/forms/ClassicForm.tsx';
+import { ClassicForm } from '@/components/forms/ClassicForm/ClassicForm.tsx';
 
 
 const ClassicPage = () => {
@@ -59,7 +59,7 @@ const ClassicPage = () => {
 
   return (
     <div>
-      <PageTitle>Classic</PageTitle>
+      <PageTitle>CLASSIC</PageTitle>
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount}/>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings}/>
