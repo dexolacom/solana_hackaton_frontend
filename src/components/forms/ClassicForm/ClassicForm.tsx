@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/Input.tsx"
 import { Button } from '@/components/ui/Button.tsx';
 import { FormCard } from '@/components/cards/FormCard/FormCard.tsx';
 import { useClassicForm } from '@/components/forms/ClassicForm/lib.tsx';
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
 
 
 export const ClassicForm = () => {
@@ -68,6 +69,7 @@ export const ClassicForm = () => {
           )}
         />
         <FormCard/>
+        <FormCurrency/>
         <Button variant={'secondary'} className={'w-full'}>
           Invest
         </Button>
