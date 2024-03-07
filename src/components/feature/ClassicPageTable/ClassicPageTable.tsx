@@ -1,5 +1,5 @@
-import { DataTable } from '@/components/tables/DataTable.tsx';
-import { columns } from '@/components/tables/ClassicPageTable/columns.ts';
+import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx';
+import { columns } from '@/components/feature/ClassicPageTable/columns.ts';
 
 export const ClassicPageTable = () => {
   type Payment = {

@@ -1,8 +1,8 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 import { Badge } from '@/components/ui/Badge.tsx';
-import { AmountCard } from '@/components/cards/AmountCard/AmountCard.tsx';
-import { HoldingsCard } from '@/components/cards/HoldingsCard/HoldingsCard.tsx';
-import { DescriptionCard } from '@/components/cards/DescritptionCard/DescriptionCard.tsx';
+import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx';
+import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx';
+import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/DescriptionCard.tsx';
 import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
 import { ArrowRight } from 'lucide-react';
 

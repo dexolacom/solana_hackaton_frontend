@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
-import { ClassicPageTable } from '@/components/tables/ClassicPageTable/ClassicPageTable.tsx';
+import { ClassicPageTable } from '@/components/feature/ClassicPageTable/ClassicPageTable.tsx';
 
 interface AssetsCardProps {
   className?: string

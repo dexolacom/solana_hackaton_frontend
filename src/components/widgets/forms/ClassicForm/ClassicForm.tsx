@@ -16,8 +16,8 @@ import {
 } from '@/components/ui/Select.tsx';
 import { Input } from "@/components/ui/Input.tsx"
 import { Button } from '@/components/ui/Button.tsx';
-import { FormCard } from '@/components/cards/FormCard/FormCard.tsx';
-import { useClassicForm } from '@/components/forms/ClassicForm/lib.tsx';
+import { FormCard } from '@/components/widgets/cards/FormCard/FormCard.tsx';
+import { useClassicForm } from '@/components/widgets/forms/ClassicForm/lib.tsx';
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
 
 

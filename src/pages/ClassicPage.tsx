@@ -1,11 +1,11 @@
-import { PageHeader } from '@/components/wrappers/PageHeader/PageHeader.tsx';
-import { AmountCard } from '@/components/cards/AmountCard/AmountCard.tsx';
-import { HoldingsCard } from '@/components/cards/HoldingsCard/HoldingsCard.tsx';
-import { DescriptionCard } from '@/components/cards/DescritptionCard/DescriptionCard.tsx';
-import { AssetsCard } from '@/components/cards/AssetsCard/AssetsCard.tsx';
-import { InvestCard } from '@/components/cards/InvestCard/InvestCard.tsx';
-import { PageTitle } from '@/components/wrappers/PageTitle/PageTitle.tsx';
-import { ClassicForm } from '@/components/forms/ClassicForm/ClassicForm.tsx';
+import { PageHeader } from '@/components/common/PageHeader/PageHeader.tsx';
+import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx';
+import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx';
+import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/DescriptionCard.tsx';
+import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx';
+import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
+import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
+import { ClassicForm } from '@/components/widgets/forms/ClassicForm/ClassicForm.tsx';
 
 
 const ClassicPage = () => {

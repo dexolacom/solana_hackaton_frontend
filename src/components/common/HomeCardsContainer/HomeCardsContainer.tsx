@@ -1,5 +1,5 @@
-import { HomeCard } from '@/components/cards/HomeCard/HomeCard.tsx';
-import { cards } from '@/components/wrappers/HomeCardsContainer/lib.ts';
+import { HomeCard } from '@/components/widgets/cards/HomeCard/HomeCard.tsx';
+import { cards } from '@/components/common/HomeCardsContainer/lib.ts';
 
 export const HomeCardsContainer = () => {
   return (
