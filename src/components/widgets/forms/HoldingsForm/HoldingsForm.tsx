@@ -17,16 +17,36 @@ import {
 import { Input } from "@/components/ui/Input.tsx"
 import { Button } from '@/components/ui/Button.tsx';
 import { FormCard } from '@/components/widgets/cards/FormCard/FormCard.tsx';
-import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
-import { useClassicForm } from '@/components/widgets/forms/ClassicForm/lib.tsx';
+import { useHoldingsForm } from '@/components/widgets/forms/HoldingsForm/lib.tsx';
 
 
-export const ClassicForm = () => {
-  const { form, onSubmit } = useClassicForm()
-
+export const HoldingsForm = () => {
+  const { form, onSubmit } = useHoldingsForm()
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
+        <FormField
+          control={form.control}
+          name="portfolio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Portfolio</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select portfolio from the list" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="classic">Classic</SelectItem>
+                  <SelectItem value="classicEarn">Classic + earn</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="amount"
@@ -66,7 +86,6 @@ export const ClassicForm = () => {
           )}
         />
         <FormCard/>
-        <FormCurrency/>
         <Button variant={'accent'} className={'w-full'}>
           Invest
         </Button>

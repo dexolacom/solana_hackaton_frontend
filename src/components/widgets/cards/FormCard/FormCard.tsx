@@ -17,12 +17,12 @@ export const FormCard = () => {
   ]
 
   return (
-    <Card className={'border p-4 bg-primary'}>
+    <Card className={'border border-gray-500 p-4 bg-slate-500'}>
       <CardContent>
         {tempData.map((item, i) => (
           <div key={i} className={'flex items-center justify-between text-sm'}>
-            <span className={'text-gray-500'}>{item?.title}</span>
-            <span className={'text-primary-foreground'}>{item?.number}</span>
+            <span className={'text-slate-300'}>{item?.title}</span>
+            <span className={'text-primary-foreground font-roboto'}>{item?.number}</span>
           </div>
         ))}
         {/*<div className={'flex items-center justify-between text-sm'}>*/}

@@ -15,7 +15,7 @@ export const PageTitle = (props: PageTitleProps) => {
         <ChevronLeft className="h-5 w-5 mt-[2px]"/>
         Home page
       </AppLink>
-      <h3 className={'text-3xl font-semibold mb-8'}>
+      <h3 className={'text-2xl font-semibold mb-8'}>
         {children}
       </h3>
     </div>
