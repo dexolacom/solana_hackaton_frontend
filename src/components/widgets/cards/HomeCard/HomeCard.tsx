@@ -54,7 +54,7 @@ export const HomeCard = (props: HomeCardProps) => {
         <DescriptionCard variant={'bordered'} description={description}/>
       </CardContent>
       <CardFooter>
-        <AppLink to={linkPath} variant={buttonVariant} className={'w-full'}>
+        <AppLink to={linkPath} variant={buttonVariant} className={'w-full self-end'}>
           Details & Invest
           <ArrowRight className={'w-6 h-6'}/>
         </AppLink>

@@ -26,7 +26,7 @@ export const AppLink = (props: AppLinkProps) => {
           solid: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-md h-10 px-4 py-2",
           accent: 'bg-accent text-primary-foreground hover:bg-blue-500/90 rounded-md h-10 px-4 py-2',
           ghost: `${isActive ? 'border-b-2 border-accent' : 'border-b-2 border-transparent'}`,
-          muted: "bg-muted text-muted-foreground h-10 px-4 py-2 cursor-auto pointer-events-none"
+          muted: "bg-muted text-muted-foreground rounded-md h-10 px-4 py-2 cursor-auto pointer-events-none"
         }
       },
     }

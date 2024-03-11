@@ -111,7 +111,7 @@ export const cards = [
     content: {
       amount: {
         title: 'Total amount invested',
-        number: '$1,013,724.41'
+        number: 'Coming soon'
       },
       holdings: {
         title: 'Holdings',
@@ -160,6 +160,6 @@ export const cards = [
       }
     },
     linkPath: '/solana',
-    buttonVariant: 'muted'
+    buttonVariant: 'muted',
   },
 ]
