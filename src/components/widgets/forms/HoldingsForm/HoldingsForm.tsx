@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/Input.tsx"
 import { Button } from '@/components/ui/Button.tsx';
 import { FormCard } from '@/components/widgets/cards/FormCard/FormCard.tsx';
 import { useHoldingsForm } from '@/components/widgets/forms/HoldingsForm/lib.tsx';
+import { DollarSign } from 'lucide-react';
 
 
 export const HoldingsForm = () => {
@@ -86,7 +87,8 @@ export const HoldingsForm = () => {
           )}
         />
         <FormCard/>
-        <Button variant={'accent'} className={'w-full'}>
+        <Button variant={'accent'} className={'w-full gap-2'}>
+          <DollarSign className={'w-4 h-4'}/>
           Invest
         </Button>
       </form>

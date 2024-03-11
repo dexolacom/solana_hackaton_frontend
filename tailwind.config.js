@@ -61,26 +61,16 @@ module.exports = {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          additionalForeground: "hsl(var(--secondary-additional-foreground))"
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
           hovered: "hsl(var(--accent-hovered))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          additionalForeground: "hsl(var(--card-additional-foreground))"
         },
       },
       borderRadius: {

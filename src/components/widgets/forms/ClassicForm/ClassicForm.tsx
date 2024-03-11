@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/Button.tsx';
 import { FormCard } from '@/components/widgets/cards/FormCard/FormCard.tsx';
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
 import { useClassicForm } from '@/components/widgets/forms/ClassicForm/lib.tsx';
+import { DollarSign } from 'lucide-react';
 
 
 export const ClassicForm = () => {
@@ -67,7 +68,8 @@ export const ClassicForm = () => {
         />
         <FormCard/>
         <FormCurrency/>
-        <Button variant={'accent'} className={'w-full'}>
+        <Button variant={'accent'} className={'w-full gap-2'}>
+          <DollarSign className={'w-4 h-4 mt-[3px]'}/>
           Invest
         </Button>
       </form>

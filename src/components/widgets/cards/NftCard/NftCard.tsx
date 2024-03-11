@@ -1,6 +1,8 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 import { Button } from '@/components/ui/Button.tsx';
 import defaultCard from '@/assets/defaultCard.png'
+import { ArrowUpDown } from 'lucide-react';
+import { Flame } from 'lucide-react';
 
 interface NftCardProps {
   title: string
@@ -26,17 +28,23 @@ export const NftCard = (props: NftCardProps) => {
       </CardHeader>
       <CardContent>
           <div className={'flex items-center justify-between'}>
-            <span className={'font-regular text-sm text-gray-500'}>Invested</span>
+            <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
             <span className={'font-roboto font-medium'}>{content?.invested}</span>
           </div>
           <div className={'flex items-center justify-between'}>
-            <span className={'font-regular text-sm text-gray-500'}>Current Price</span>
+            <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
             <span className={'font-roboto font-medium'}>{content.price}</span>
           </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6'}>
-        <Button className={'flex-1'} variant={'accent'}>Transfer</Button>
-        <Button className={'flex-1'} variant={'destructive'}>Burn</Button>
+        <Button className={'flex-1 gap-2'} variant={'accent'}>
+          <ArrowUpDown className={'w-4 h-4'}/>
+          Transfer
+        </Button>
+        <Button className={'flex-1 gap-2'} variant={'destructive'}>
+          <Flame className={'w-4 h-4'}/>
+          Burn
+        </Button>
       </CardFooter>
     </Card>
   )

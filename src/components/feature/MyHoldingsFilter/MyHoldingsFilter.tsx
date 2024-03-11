@@ -4,7 +4,7 @@ import { SelectTrigger } from '@/components/ui/Select.tsx';
 export const MyHoldingsFilter = () => {
   return (
     <div className={'mb-8'}>
-      <Select>
+      <Select defaultValue='all'>
         <SelectTrigger className="w-[300px] text-foreground">
           <SelectValue/>
         </SelectTrigger>

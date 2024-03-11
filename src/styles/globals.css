@@ -6,24 +6,23 @@
 
 @layer base {
   :root {
-    --background: 214, 32%, 91%;
-    --foreground: 215, 25%, 27%; /* slate-700 */
+    --background: 210, 40%, 96%; /* slate-300 */
+    --foreground: 222.2 47.4% 11.2%; /* slate-900 */
  
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 222.2 47.4% 11.2%; /* slate-900 */
+    --primary-foreground: 0, 0%, 100%; /* white */
 
-    --card: 210 40% 98%;
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card: 0, 0%, 100%; /* white */
+    --card-foreground: 222.2 47.4% 11.2%; /* slate-900 */
+    --card-additional-foreground: 215, 16%, 47%; /* slate-500 */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    /*--accent: 217, 100%, 63%;*/
-    /*--accent-hovered: 218, 100%, 71%;*/
+    --secondary: 215, 19%, 35%; /* slate-600 */
+    --secondary-foreground: 0, 0%, 100%; /* white */
+    --secondary-additional-foreground: 213, 27%, 84%; /* slate-300 */
 
     --accent: 217, 91%, 60%;
 
-    --border: 214.3 31.8% 91.4%;
+    --border: 214, 32%, 91%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;

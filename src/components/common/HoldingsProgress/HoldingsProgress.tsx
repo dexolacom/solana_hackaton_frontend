@@ -11,17 +11,17 @@ interface HoldingsProgressProps {
 export const HoldingsProgress = (props: HoldingsProgressProps) => {
   const { holdings } = props
   const progressColors: Record<string, string> = {
-    'BTC': 'bg-blue-900',
-    'SOL': 'bg-blue-800',
-    'ETH': 'bg-blue-700',
-    'JUP': 'bg-blue-600',
+    'BTC': 'bg-blue-700/75',
+    'SOL': 'bg-blue-700/50',
+    'ETH': 'bg-blue-600/75',
+    'JUP': 'bg-blue-600/50',
     'RNDR': 'bg-blue-500',
-    'HNT': 'bg-blue-400',
-    'BONK': 'bg-blue-300',
-    'PYTH': 'bg-blue-200',
-    'RAY': 'bg-sky-900',
-    'JTO': 'bg-sky-800',
-    'WIF': 'bg-sky-700',
+    'HNT': 'bg-blue-500/75',
+    'BONK': 'bg-blue-500/50',
+    'PYTH': 'bg-blue-400',
+    'RAY': 'bg-blue-400/75',
+    'JTO': 'bg-blue-400/50',
+    'WIF': 'bg-blue-300',
   }
 
   return (

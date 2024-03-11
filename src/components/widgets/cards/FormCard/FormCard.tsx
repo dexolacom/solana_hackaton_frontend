@@ -17,26 +17,14 @@ export const FormCard = () => {
   ]
 
   return (
-    <Card className={'border border-gray-500 p-4 bg-slate-500'}>
+    <Card className={'p-4 bg-slate-500'}>
       <CardContent>
         {tempData.map((item, i) => (
           <div key={i} className={'flex items-center justify-between text-sm'}>
-            <span className={'text-slate-300'}>{item?.title}</span>
+            <span className={'text-secondary-additionalForeground'}>{item?.title}</span>
             <span className={'text-primary-foreground font-roboto'}>{item?.number}</span>
           </div>
         ))}
-        {/*<div className={'flex items-center justify-between text-sm'}>*/}
-        {/*  <span className={'text-gray-500'}>Amount in USD</span>*/}
-        {/*  <span className={'text-primary-foreground'}>$</span>*/}
-        {/*</div>*/}
-        {/*<div className={'flex items-center justify-between text-sm'}>*/}
-        {/*  <span className={'text-gray-500'}>Slippage Tolerance</span>*/}
-        {/*  <span className={'text-primary-foreground'}>%</span>*/}
-        {/*</div>*/}
-        {/*<div className={'flex items-center justify-between text-sm'}>*/}
-        {/*  <span className={'text-gray-500'}>Platform Fee, 0.5%</span>*/}
-        {/*  <span className={'text-primary-foreground'}>$</span>*/}
-        {/*</div>*/}
       </CardContent>
     </Card>
   )
