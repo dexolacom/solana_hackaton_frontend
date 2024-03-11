@@ -7,6 +7,7 @@ import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { ClassicForm } from '@/components/widgets/forms/ClassicForm/ClassicForm.tsx';
 import { Badge } from '@/components/ui/Badge.tsx';
+import { ClassicEarnPageTable } from '@/components/feature/ClassicEarnPageTable/ClassicEarnPageTable.tsx';
 
 const tempData = {
   amount: {
@@ -80,7 +81,9 @@ const ClassicEarnPage = () => {
         <DescriptionCard className={'flex-1'} description={tempData.description}/>
       </PageHeader>
       <div className={'flex gap-8'}>
-        <AssetsCard className={'flex-1'}/>
+        <AssetsCard className={'flex-1'}>
+          <ClassicEarnPageTable/>
+        </AssetsCard>
         <InvestCard className={'flex-2'}>
           <ClassicForm/>
         </InvestCard>

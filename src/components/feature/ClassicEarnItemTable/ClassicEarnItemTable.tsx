@@ -1,7 +1,7 @@
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx';
-import { columns } from '@/components/feature/ClassicPageTable/columns.tsx';
+import { columns } from './columns.tsx';
 
-export const ClassicPageTable = () => {
+export const ClassicEarnItemTable = () => {
   type Payment = {
     id: string
     amount: number

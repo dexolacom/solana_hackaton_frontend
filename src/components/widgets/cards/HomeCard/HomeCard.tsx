@@ -27,10 +27,11 @@ export interface HomeCardProps {
     }
   }
   linkPath: string
+  buttonVariant: 'muted' | 'accent'
 }
 
 export const HomeCard = (props: HomeCardProps) => {
-  const {title, badges, content, linkPath} = props
+  const {title, badges, content, linkPath, buttonVariant} = props
   const {amount, holdings, description} = content
 
   return (
@@ -53,7 +54,7 @@ export const HomeCard = (props: HomeCardProps) => {
         <DescriptionCard variant={'bordered'} description={description}/>
       </CardContent>
       <CardFooter>
-        <AppLink to={linkPath} variant={'accent'} className={'w-full'}>
+        <AppLink to={linkPath} variant={buttonVariant} className={'w-full'}>
           Details & Invest
           <ArrowRight className={'w-6 h-6'}/>
         </AppLink>

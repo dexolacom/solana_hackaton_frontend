@@ -5,9 +5,16 @@ export const HomeCardsContainer = () => {
   return (
     <div className={'grid grid-cols-3 gap-8'}>
       {cards.map((card, i) => {
-        const {title, badges, content, linkPath} = card;
+        const {title, badges, content, linkPath, buttonVariant} = card;
         return (
-          <HomeCard key={i} title={title} badges={badges} content={content} linkPath={linkPath}/>
+          <HomeCard
+            key={i}
+            title={title}
+            badges={badges}
+            content={content}
+            linkPath={linkPath}
+            buttonVariant={buttonVariant as 'muted' | 'accent'}
+          />
         )
       })}
     </div>

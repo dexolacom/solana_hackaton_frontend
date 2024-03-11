@@ -1,12 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
-import { ClassicPageTable } from '@/components/feature/ClassicPageTable/ClassicPageTable.tsx';
+import { ReactNode } from 'react';
 
 interface AssetsCardProps {
   className?: string
+  children: ReactNode
 }
 
 export const AssetsCard = (props: AssetsCardProps) => {
-  const { className } = props
+  const {className, children} = props
 
   return (
     <Card className={className}>
@@ -16,7 +17,7 @@ export const AssetsCard = (props: AssetsCardProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ClassicPageTable/>
+        {children}
       </CardContent>
     </Card>
   )

@@ -36,7 +36,7 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead className={'text-center text-card-additionalForeground text-xs'} key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
