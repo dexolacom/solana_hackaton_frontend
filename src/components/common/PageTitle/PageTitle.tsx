@@ -11,7 +11,7 @@ export const PageTitle = (props: PageTitleProps) => {
 
   return (
     <div>
-      <AppLink to={'/'} className={'mb-8 gap-2 normal-case'}>
+      <AppLink to={'/'} variant={'ghost'} className={'mb-8 gap-2 normal-case'}>
         <ChevronLeft className="h-5 w-5 mt-[2px]"/>
         Home page
       </AppLink>
