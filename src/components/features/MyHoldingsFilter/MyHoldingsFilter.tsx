@@ -5,7 +5,7 @@ export const MyHoldingsFilter = () => {
   return (
     <div className={'mb-8'}>
       <Select defaultValue='all'>
-        <SelectTrigger className="w-[300px] text-foreground">
+        <SelectTrigger className={"w-[300px] text-foreground border-transparent"}>
           <SelectValue/>
         </SelectTrigger>
         <SelectContent>

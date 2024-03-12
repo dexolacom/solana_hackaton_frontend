@@ -80,7 +80,7 @@ export const ClassicForm = () => {
             </FormItem>
           )}
         />
-        <InfoCard data={tempInfoData} variant={'dark'}/>
+        <InfoCard data={tempInfoData}/>
         <FormCurrency/>
         <Button variant={'accent'} className={'w-full gap-2'}>
           <DollarSign className={'w-4 h-4'}/>

@@ -11,7 +11,7 @@ export const InvestCard = (props: InvestCardProps) => {
   const { className, children } = props
 
   return (
-    <Card className={cn('bg-secondary text-secondary-foreground w-[400px] font-regular', className)}>
+    <Card className={cn('bg-card text-foreground w-[400px] font-regular', className)}>
       <CardHeader>
         <CardTitle>
           invest

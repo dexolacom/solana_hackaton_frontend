@@ -15,9 +15,9 @@
     --card-foreground: 222.2 47.4% 11.2%; /* slate-900 */
     --card-additional-foreground: 215, 16%, 47%; /* slate-500 */
 
-    --secondary: 215, 19%, 35%; /* slate-600 */
-    --secondary-foreground: 0, 0%, 100%; /* white */
-    --secondary-additional-foreground: 213, 27%, 84%; /* slate-300 */
+    /*--secondary: 215, 19%, 35%; !* slate-600 *!*/
+    /*--secondary-foreground: 0, 0%, 100%; !* white *!*/
+    /*--secondary-additional-foreground: 213, 27%, 84%; !* slate-300 *!*/
 
     --accent: 217, 91%, 60%;
 

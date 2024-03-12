@@ -34,7 +34,7 @@ export const BurnNftModal = () => {
         <p className={'text-sm'}>
           Please, confirm you’re going to burn <span className={'font-medium'}>Solana Ecosystem: #0001</span>. This action cannot be undone.
         </p>
-        <InfoCard data={tempData} variant={'default'}/>
+        <InfoCard data={tempData}/>
       </CardContent>
       <CardFooter className={'gap-4 mt-6'}>
         <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
