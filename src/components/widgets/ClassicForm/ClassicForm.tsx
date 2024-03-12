@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/Input.tsx"
 import { Button } from '@/components/ui/Button.tsx';
 import { FormCard } from '@/components/widgets/cards/FormCard/FormCard.tsx';
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
-import { useClassicForm } from '@/components/widgets/forms/ClassicForm/lib.tsx';
+import { useClassicForm } from '@/components/widgets/ClassicForm/lib.tsx';
 import { DollarSign } from 'lucide-react';
 
 

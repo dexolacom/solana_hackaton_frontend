@@ -5,7 +5,7 @@ import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/Des
 import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx';
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
-import { ClassicForm } from '@/components/widgets/forms/ClassicForm/ClassicForm.tsx';
+import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
 import { ClassicPageTable } from '@/components/feature/ClassicPageTable/ClassicPageTable.tsx';
 
 

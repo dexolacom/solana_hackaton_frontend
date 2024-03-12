@@ -1,9 +1,9 @@
 import logo from '../../../assets/BISCUIT.svg'
 import house from '../../../assets/icons/house.svg'
 import briefcase from '../../../assets/icons/briefCase.svg'
-import { Button } from '@/components/ui/Button.tsx';
 import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
 import { useLocation } from 'react-router-dom';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 
 export const Header = () => {
@@ -22,7 +22,7 @@ export const Header = () => {
           My Holdings
         </AppLink>
       </span>
-      <Button>Connect</Button>
+      <WalletMultiButton className={'button'}/>
     </header>
   )
 }

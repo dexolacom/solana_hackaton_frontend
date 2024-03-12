@@ -1,0 +1,8 @@
+.button {
+  @apply bg-blue-700 text-white p-4 rounded-lg;
+}
+
+.wallet-button:hover {
+  border: 2px solid grey !important;
+  color: white !important;
+}

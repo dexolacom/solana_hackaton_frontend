@@ -2,7 +2,7 @@ import { PageHeader } from '@/components/common/PageHeader/PageHeader';
 import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard';
 import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard';
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard';
-import { HoldingsForm } from '@/components/widgets/forms/HoldingsForm/HoldingsForm.tsx';
+import { HoldingsForm } from '@/components/widgets/HoldingsForm/HoldingsForm.tsx';
 import { NftCardsContainer } from '@/components/common/NftCardsContainer/NftCardsContainer.tsx';
 import { MyHoldingsFilter } from '@/components/feature/MyHoldingsFilter/MyHoldingsFilter.tsx';
 

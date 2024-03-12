@@ -5,7 +5,7 @@ import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCa
 import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/DescriptionCard.tsx';
 import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx';
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
-import { ClassicForm } from '@/components/widgets/forms/ClassicForm/ClassicForm.tsx';
+import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
 import { Badge } from '@/components/ui/Badge.tsx';
 import { ClassicEarnPageTable } from '@/components/feature/ClassicEarnPageTable/ClassicEarnPageTable.tsx';
 

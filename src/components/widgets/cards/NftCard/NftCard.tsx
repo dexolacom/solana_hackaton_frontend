@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button.tsx';
 import defaultCard from '@/assets/defaultCard.png'
 import { ArrowUpDown } from 'lucide-react';
 import { Flame } from 'lucide-react';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 
 interface NftCardProps {
   title: string
@@ -14,6 +15,7 @@ interface NftCardProps {
 
 export const NftCard = (props: NftCardProps) => {
   const {title, content} = props
+  const { setModalName } = useModalsContext()
 
   return (
     <Card>
@@ -41,7 +43,7 @@ export const NftCard = (props: NftCardProps) => {
           <ArrowUpDown className={'w-4 h-4'}/>
           Transfer
         </Button>
-        <Button className={'flex-1 gap-2'} variant={'destructive'}>
+        <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
           <Flame className={'w-4 h-4'}/>
           Burn
         </Button>
