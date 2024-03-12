@@ -6,7 +6,7 @@ import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
 import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
-import { ClassicPageTable } from '@/components/feature/ClassicPageTable/ClassicPageTable.tsx';
+import { ClassicPageTable } from '@/components/features/ClassicPageTable/ClassicPageTable.tsx';
 
 
 const ClassicPage = () => {

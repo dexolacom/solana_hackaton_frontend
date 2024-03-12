@@ -16,13 +16,28 @@ import {
 } from '@/components/ui/Select.tsx';
 import { Input } from "@/components/ui/Input.tsx"
 import { Button } from '@/components/ui/Button.tsx';
-import { FormCard } from '@/components/widgets/cards/FormCard/FormCard.tsx';
+import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
 import { useHoldingsForm } from '@/components/widgets/HoldingsForm/lib.tsx';
 import { DollarSign } from 'lucide-react';
 
 
 export const HoldingsForm = () => {
   const { form, onSubmit } = useHoldingsForm()
+  const tempInfoData = [
+    {
+      title: 'Amount in USD',
+      number: '$ 2'
+    },
+    {
+      title: 'Slippage Tolerance',
+      number: '0.2 %'
+    },
+    {
+      title: 'Platform Fee, 0.5%',
+      number: '$ 0.33'
+    }
+  ]
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
@@ -86,7 +101,10 @@ export const HoldingsForm = () => {
             </FormItem>
           )}
         />
-        <FormCard/>
+        <InfoCard
+          data={tempInfoData}
+          variant={'dark'}
+        />
         <Button variant={'accent'} className={'w-full gap-2'}>
           <DollarSign className={'w-4 h-4'}/>
           Invest

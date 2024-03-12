@@ -4,7 +4,7 @@ import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard';
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard';
 import { HoldingsForm } from '@/components/widgets/HoldingsForm/HoldingsForm.tsx';
 import { NftCardsContainer } from '@/components/common/NftCardsContainer/NftCardsContainer.tsx';
-import { MyHoldingsFilter } from '@/components/feature/MyHoldingsFilter/MyHoldingsFilter.tsx';
+import { MyHoldingsFilter } from '@/components/features/MyHoldingsFilter/MyHoldingsFilter.tsx';
 
 
 const MyHoldingsPage = () => {

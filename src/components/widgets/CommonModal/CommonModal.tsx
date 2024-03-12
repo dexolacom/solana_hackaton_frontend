@@ -25,7 +25,7 @@ const CommonModal = ({ children, handleClose }: CommonModalProps) => {
     }
       onClick={() => handleClose()}
     >
-      <Card className={'relative'} onClick={event => event.stopPropagation()}>
+      <Card className={'relative max-w-[556px] w-full'} onClick={event => event.stopPropagation()}>
         {children}
       </Card>
     </div>

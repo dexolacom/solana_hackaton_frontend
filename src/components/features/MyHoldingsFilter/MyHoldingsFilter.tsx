@@ -1,4 +1,4 @@
-import { Select, SelectContent, SelectGroup, SelectItem, SelectValue } from "@/components/ui/Select"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectValue } from "@/components/ui/Select.tsx"
 import { SelectTrigger } from '@/components/ui/Select.tsx';
 
 export const MyHoldingsFilter = () => {

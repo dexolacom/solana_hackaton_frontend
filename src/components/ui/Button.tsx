@@ -8,9 +8,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        accent: "bg-accent text-primary-foreground hover:bg-blue-500/90",
-        destructive: "bg-rose-500 text-primary-foreground hover:bg-rose-500/90",
+        accent: "bg-accent text-actions-foreground hover:bg-blue-500/90",
+        secondary: "bg-secondary text-actions-foreground hover:bg-slate-600/90",
+        destructive: "bg-rose-500 text-actions-foreground hover:bg-rose-500/90",
         muted: "bg-slate-200 text-foreground",
         ghost: "bg-transparent hover:bg-blue-500/50",
         clear: "bg-transparent"
@@ -23,7 +23,6 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
       size: "default",
     },
   }

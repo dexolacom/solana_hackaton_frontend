@@ -7,7 +7,7 @@ import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
 import { Badge } from '@/components/ui/Badge.tsx';
-import { ClassicEarnPageTable } from '@/components/feature/ClassicEarnPageTable/ClassicEarnPageTable.tsx';
+import { ClassicEarnPageTable } from '@/components/features/ClassicEarnPageTable/ClassicEarnPageTable.tsx';
 
 const tempData = {
   amount: {

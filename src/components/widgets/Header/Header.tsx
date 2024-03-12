@@ -5,7 +5,6 @@ import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
 import { useLocation } from 'react-router-dom';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
-
 export const Header = () => {
   const location = useLocation()
 
