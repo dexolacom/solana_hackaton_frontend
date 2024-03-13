@@ -1,23 +1,37 @@
-import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
-import { ChevronLeft } from 'lucide-react';
 import { ReactNode } from 'react';
+import { Badge } from '@/components/ui/Badge.tsx';
 
 interface PageTitleProps {
-  children: ReactNode
+  title: string
+  children?: ReactNode
+  isBadges?: boolean
 }
 
+const badges = ['landing', 'staking', 'vaults' ]
+
 export const PageTitle = (props: PageTitleProps) => {
-  const { children } = props
+  const { children, title, isBadges = false} = props
 
   return (
-    <div>
-      <AppLink to={'/'} variant={'ghost'} className={'mb-8 gap-2 normal-case'}>
-        <ChevronLeft className="h-5 w-5 mt-[2px]"/>
-        Home page
-      </AppLink>
-      <h3 className={'text-2xl font-semibold mb-8'}>
+    <div className={'flex items-center justify-between mb-8'}>
+      <div className={'flex gap-4 items-center'}>
+        <h3 className={'text-2xl font-semibold uppercase'}>
+          {title}
+        </h3>
+        {isBadges &&
+          <span className={'flex gap-2'}>
+            {badges?.map((badge, i) => (
+              <Badge key={i}>
+                {badge}
+              </Badge>
+            ))}
+          </span>
+        }
+      </div>
+
+      <div>
         {children}
-      </h3>
+      </div>
     </div>
   )
 }

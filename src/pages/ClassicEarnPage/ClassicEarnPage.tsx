@@ -6,8 +6,8 @@ import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/Des
 import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx';
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
-import { Badge } from '@/components/ui/Badge.tsx';
 import { ClassicEarnPageTable } from '@/components/features/tabels/ClassicEarnPageTable/ClassicEarnPageTable.tsx';
+import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
 
 const tempData = {
   amount: {
@@ -57,29 +57,19 @@ const tempData = {
   }
 }
 
-const badges = ['Landing', 'Staking', 'Vaults']
 
 const ClassicEarnPage = () => {
   return (
     <div>
-      <PageTitle>
-        <span className={'flex gap-4 items-center'}>
-          <span>CLASSIC + EARN</span>
-          <span className={'flex gap-2'}>
-            {badges?.map((badge, i) => (
-              <Badge key={i}>
-                {badge}
-              </Badge>
-            ))}
-          </span>
-        </span>
+      <BackLink title={'Home Page'} path={'/'}/>
+      <PageTitle title={'Classic + Earn'} isBadges/>
 
-      </PageTitle>
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount}/>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings}/>
         <DescriptionCard className={'flex-1'} description={tempData.description}/>
       </PageHeader>
+
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>
           <ClassicEarnPageTable/>

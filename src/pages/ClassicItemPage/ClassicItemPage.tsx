@@ -6,10 +6,13 @@ import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
 import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
-import { ClassicPageTable } from '@/components/features/tabels/ClassicPageTable/ClassicPageTable.tsx';
+import { Button } from '@/components/ui/Button.tsx';
+import { ArrowUpDown, Flame } from 'lucide-react';
+import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 
 
-const ClassicPage = () => {
+const ClassicItemPage = () => {
   const tempData = {
     amount: {
       title: 'Total amount invested',
@@ -57,10 +60,23 @@ const ClassicPage = () => {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
     }
   }
+  const { setModalName } = useModalsContext()
 
   return (
     <div>
-      <PageTitle>CLASSIC</PageTitle>
+      <BackLink title={'My holdings'} path={'/my-holdings'}/>
+      <PageTitle title={'CLASSIC item page'}>
+        <div className={'flex gap-4'}>
+          <Button className={'flex-1 gap-2'} variant={'accent'}>
+            <ArrowUpDown className={'w-4 h-4'}/>
+            Transfer
+          </Button>
+          <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
+            <Flame className={'w-4 h-4'}/>
+            Burn
+          </Button>
+        </div>
+      </PageTitle>
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount}/>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings}/>
@@ -68,7 +84,7 @@ const ClassicPage = () => {
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>
-          <ClassicPageTable/>
+          <p>Table</p>
         </AssetsCard>
         <InvestCard className={'flex-2'}>
           <ClassicForm/>
@@ -78,4 +94,4 @@ const ClassicPage = () => {
   )
 }
 
-export default ClassicPage
+export default ClassicItemPage
