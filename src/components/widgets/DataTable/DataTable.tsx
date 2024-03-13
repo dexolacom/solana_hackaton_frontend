@@ -29,11 +29,11 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
   })
 
   return (
-    <div className="">
+    <div>
       <Table>
-        <TableHeader>
+        <TableHeader >
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow key={headerGroup.id} className={'border-none'}>
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead className={'text-center text-card-additionalForeground text-xs'} key={header.id}>
@@ -49,15 +49,16 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody>
+        <TableBody className={'[&>*:nth-child(odd)]:bg-slate-50'}>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className={'border-none'}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
+                  <TableCell className={'text-center'} key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

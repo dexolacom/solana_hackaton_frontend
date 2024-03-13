@@ -3,7 +3,7 @@ import { cards } from '@/components/common/HomeCardsContainer/lib.ts';
 
 export const HomeCardsContainer = () => {
   return (
-    <div className={'grid grid-cols-3 gap-8'}>
+    <div className={'flex gap-8'}>
       {cards.map((card, i) => {
         const {title, badges, content, linkPath, buttonVariant} = card;
         return (

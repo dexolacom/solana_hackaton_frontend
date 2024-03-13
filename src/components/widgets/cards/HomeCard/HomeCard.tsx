@@ -37,7 +37,7 @@ export const HomeCard = (props: HomeCardProps) => {
   return (
     <Card>
       <CardHeader className={'mb-0'}>
-        <CardTitle className={'text-3xl font-semibold'}>
+        <CardTitle className={'text-2xl font-semibold'}>
           {title}
         </CardTitle>
         <span className={'flex gap-2'}>

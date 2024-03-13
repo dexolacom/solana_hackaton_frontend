@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from '@/lib/use-toast.ts';
+import { toast } from '@/lib/hooks/use-toast.ts';
 
 export const useHoldingsForm = () => {
   const FormSchema = z.object({

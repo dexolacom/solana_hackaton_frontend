@@ -1,7 +1,7 @@
 import CommonModal from '@/components/widgets/CommonModal/CommonModal.tsx';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
-import { BurnNftModal } from '@/components/features/BurnNftModal/BurnNftModal.tsx';
-import { InvestModal } from '@/components/features/InvestModal/InvestModal.tsx';
+import { BurnNftModal } from '@/components/features/modals/BurnNftModal/BurnNftModal.tsx';
+import { InvestModal } from '@/components/features/modals/InvestModal/InvestModal.tsx';
 
 export const ModalsFactory = () => {
   const { modalName, setModalName } = useModalsContext()

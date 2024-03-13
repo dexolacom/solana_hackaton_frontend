@@ -30,7 +30,7 @@ export const AmountCard = (props: AmountCardProps) => {
   return (
     <Card className={cn(cardVariants({ variant, className }))}>
       <CardHeader>
-        <CardTitle>
+        <CardTitle className={'font-semibold'}>
           {title}
         </CardTitle>
       </CardHeader>

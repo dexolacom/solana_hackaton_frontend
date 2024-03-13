@@ -33,7 +33,7 @@ export const NftCardsContainer = () => {
   ]
 
   return (
-    <div className={'grid grid-cols-4 gap-8'}>
+    <div className={'grid grid-cols-4 gap-4'}>
       {tempData.map((item, i) => (
         <NftCard key={i} title={item?.title} content={item?.content}/>
       ))}

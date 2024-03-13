@@ -18,7 +18,6 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        kanit: ["Kanit", "sans-serif"],
         roboto: ["Roboto mono", "mono-space"],
       },
       fontWeight: {
@@ -28,26 +27,6 @@ module.exports = {
         semibold: '600',
         bold: '700',
       },
-      // fontSize: {
-      //   // labels
-      //   labelH1: ['24px', '32px'],
-      //   labelH2: ['20px', '30px'],
-      //   labelH3: ['14px', '24px'],
-      //   // buttons
-      //   labelButtonL: ['18px', '24px'],
-      //   labelButtonM: ['14px', '24px'],
-      //   labelButtonS: ['12px', '24px'],
-      //   // body
-      //   bodyRegularL: ['16px', '24px'],
-      //   bodyRegularM: ['14px', '24px'],
-      //   bodyRegularS: ['12px', '16px'],
-      //   bodyLightM: ['14px', '24px'],
-      //   bodyLightS: ['12px', '16px'],
-      //   // numbers
-      //   numbersBoldH1: ['40px', '53px'],
-      //   numbersMediumM: ['14px', '24px'],
-      //   numbersRegularM: ['14px', '24px']
-      // },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

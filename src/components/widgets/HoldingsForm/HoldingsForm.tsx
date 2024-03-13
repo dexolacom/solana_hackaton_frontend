@@ -54,7 +54,7 @@ export const HoldingsForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="classic">Classic</SelectItem>
-                  <SelectItem value="classicEarn">Classic + earn</SelectItem>
+                  <SelectItem value="classicEarn">Classic + Earn</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

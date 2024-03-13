@@ -6,7 +6,7 @@ import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
 import { ClassicForm } from '@/components/widgets/ClassicForm/ClassicForm.tsx';
-import { ClassicPageTable } from '@/components/features/ClassicPageTable/ClassicPageTable.tsx';
+import { ClassicPageTable } from '@/components/features/tabels/ClassicPageTable/ClassicPageTable.tsx';
 
 
 const ClassicPage = () => {
@@ -66,7 +66,7 @@ const ClassicPage = () => {
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings}/>
         <DescriptionCard className={'flex-1'} description={tempData.description}/>
       </PageHeader>
-      <div className={'flex gap-8'}>
+      <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>
           <ClassicPageTable/>
         </AssetsCard>
