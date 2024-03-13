@@ -1,11 +1,11 @@
-import btc from '../../../assets/icons/btc.svg'
-import eth from '../../../assets/icons/eth.svg'
-import sol from '../../../assets/icons/sol.svg'
-import jup from '../../../assets/icons/jup.svg'
-import rndr from '../../../assets/icons/rndr.svg'
-import hnt from '../../../assets/icons/hnt.svg'
-import bonk from '../../../assets/icons/bonk.svg'
-import pyth from '../../../assets/icons/pyth.svg'
+import btc from '../../../assets/icons/currency/btc.svg'
+import eth from '../../../assets/icons/currency/eth.svg'
+import sol from '../../../assets/icons/currency/sol.svg'
+import jup from '../../../assets/icons/currency/jup.svg'
+import rndr from '../../../assets/icons/currency/rndr.svg'
+import hnt from '../../../assets/icons/currency/hnt.svg'
+import bonk from '../../../assets/icons/currency/bonk.svg'
+import pyth from '../../../assets/icons/currency/pyth.svg'
 
 
 export const FormCurrency = () => {
@@ -80,8 +80,6 @@ export const FormCurrency = () => {
           </div>
         ))}
       </div>
-
     </div>
-
   )
 }

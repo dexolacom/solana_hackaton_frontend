@@ -4,6 +4,14 @@ import defaultCard from '@/assets/defaultCard.png'
 import { ArrowUpDown } from 'lucide-react';
 import { Flame } from 'lucide-react';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
+import btc from '@/assets/icons/currency/btc.svg'
+import eth from '@/assets/icons/currency/eth.svg'
+import bonk from '@/assets/icons/currency/bonk.svg'
+import hnt from '@/assets/icons/currency/hnt.svg'
+import jup from '@/assets/icons/currency/jup.svg'
+import pyth from '@/assets/icons/currency/pyth.svg'
+import rndr from '@/assets/icons/currency/rndr.svg'
+import sol from '@/assets/icons/currency/sol.svg'
 
 interface NftCardProps {
   title: string
@@ -26,7 +34,18 @@ export const NftCard = (props: NftCardProps) => {
       />
 
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className={'mb-4'}>{title}</CardTitle>
+        <div className={'flex items-center gap-2'}>
+          {/*temp data*/}
+          <img className={'h-6 w-6 -mt-[3px]'} src={btc}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={bonk}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={eth}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={hnt}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={jup}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={pyth}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={rndr}/>
+          <img className={'h-6 w-6 -mt-[3px]'} src={sol}/>
+        </div>
       </CardHeader>
       <CardContent>
           <div className={'flex items-center justify-between'}>

@@ -7,7 +7,7 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-slate-300",
+        default: "bg-card border-2 border-accent text-accent",
       },
     },
     defaultVariants: {

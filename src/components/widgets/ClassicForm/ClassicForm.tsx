@@ -19,7 +19,6 @@ import { Button } from '@/components/ui/Button.tsx';
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
 import { useClassicForm } from '@/components/widgets/ClassicForm/lib.tsx';
-import { DollarSign } from 'lucide-react';
 
 
 export const ClassicForm = () => {
@@ -83,7 +82,6 @@ export const ClassicForm = () => {
         <InfoCard data={tempInfoData}/>
         <FormCurrency/>
         <Button variant={'accent'} className={'w-full gap-2'}>
-          <DollarSign className={'w-4 h-4'}/>
           Invest
         </Button>
       </form>

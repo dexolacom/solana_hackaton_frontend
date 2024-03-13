@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.t
 import { HoldingsProgress } from '@/components/common/HoldingsProgress/HoldingsProgress.tsx';
 import { cn } from '@/lib/utils.ts';
 import { cva } from 'class-variance-authority';
+import holdingsIcon from '@/assets/icons/holdings.svg';
 
 interface HoldingsCardProps {
   holdings: {
@@ -13,10 +14,11 @@ interface HoldingsCardProps {
   }
   variant?: 'bordered'
   className?: string
+  withIcon?: boolean
 }
 
 export const HoldingsCard = (props: HoldingsCardProps) => {
-  const { holdings, className, variant } = props
+  const { holdings, className, variant, withIcon = true } = props
   const { title, items } = holdings
 
   const cardVariants = cva('', {
@@ -31,7 +33,10 @@ export const HoldingsCard = (props: HoldingsCardProps) => {
   return (
     <Card className={cn(cardVariants({ variant, className }))}>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className={'flex gap-2'}>
+          {withIcon && <img src={holdingsIcon} className={'w-4 h-4'}/>}
+          {title}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <HoldingsProgress holdings={items}/>

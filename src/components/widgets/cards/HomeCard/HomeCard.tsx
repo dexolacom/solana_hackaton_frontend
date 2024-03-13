@@ -50,8 +50,8 @@ export const HomeCard = (props: HomeCardProps) => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 py-6'}>
         <AmountCard variant={'bordered'} amount={amount}/>
-        <HoldingsCard variant={'bordered'} holdings={holdings}/>
-        <DescriptionCard variant={'bordered'} description={description}/>
+        <HoldingsCard variant={'bordered'} holdings={holdings} withIcon={false}/>
+        <DescriptionCard variant={'bordered'} description={description} withIcon={false}/>
       </CardContent>
       <CardFooter>
         <AppLink to={linkPath} variant={buttonVariant} className={'w-full self-end'}>

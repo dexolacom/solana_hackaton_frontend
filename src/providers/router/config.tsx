@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
-import { HomePage } from '@/pages/HomePage.tsx';
+import { PortfoliosPage } from '@/pages/PortfoliosPage.tsx';
 const LazyClassicPage = lazy(() => import('@/pages/ClassicPage'));
 const LazyClassicEarnPage = lazy(() => import('@/pages/ClassicEarnPage'))
 const LazyMyHoldingsPage = lazy(() => import('@/pages/MyHoldingsPage'))
@@ -16,7 +16,7 @@ export const enum commonRoutes {
 export const routesConfig: Record<commonRoutes, RouteProps> = {
   [commonRoutes.HOME]: {
     path: commonRoutes.HOME,
-    element: <HomePage/>
+    element: <PortfoliosPage/>
   },
   [commonRoutes.MY_HOLDINGS]: {
     path: commonRoutes.MY_HOLDINGS,
