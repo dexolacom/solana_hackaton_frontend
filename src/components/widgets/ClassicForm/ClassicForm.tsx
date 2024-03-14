@@ -59,6 +59,27 @@ export const ClassicForm = () => {
         />
         <FormField
           control={form.control}
+          name="amountCurrency"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Amount Currency</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={'USDC'}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue/>
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="USDC">USDC</SelectItem>
+                  <SelectItem value="SOL">SOL</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="withdrawal"
           render={({ field }) => (
             <FormItem>
@@ -70,9 +91,9 @@ export const ClassicForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="btc">BTC</SelectItem>
-                  <SelectItem value="eth">ETH</SelectItem>
-                  <SelectItem value="sol">SOL</SelectItem>
+                  <SelectItem value="BTC">BTC</SelectItem>
+                  <SelectItem value="ETH">ETH</SelectItem>
+                  <SelectItem value="SOL">SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

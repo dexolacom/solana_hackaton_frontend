@@ -6,22 +6,26 @@ import { toast } from '@/lib/hooks/use-toast.ts';
 export const useHoldingsForm = () => {
   const FormSchema = z.object({
     amount: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+      message: 'Username must be at least 2 characters.',
+    }),
+    amountCurrency: z.string().min(2, {
+      message: 'Username must be at least 2 characters.',
     }),
     withdrawal: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+      message: 'Username must be at least 2 characters.',
     }),
     portfolio: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+      message: 'Username must be at least 2 characters.',
     })
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      amount: "",
-      withdrawal: "",
-      portfolio: ""
+      amount: '',
+      amountCurrency: '',
+      withdrawal: '',
+      portfolio: ''
     },
   })
 
