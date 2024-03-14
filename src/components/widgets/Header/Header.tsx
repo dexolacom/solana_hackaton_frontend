@@ -12,19 +12,11 @@ export const Header = () => {
     <header className={'py-4 px-10 flex items-center justify-between'}>
       <img src={logo} />
       <span className={'flex gap-10'}>
-        <AppLink
-          variant={'ghost'}
-          to={'/'}
-          isActive={location?.pathname === '/'}
-        >
+        <AppLink variant={'ghost'} to={'/'} isActive={location?.pathname === '/'}>
           <img src={house} className={'-mt-[2px]'} />
           Portfolios
         </AppLink>
-        <AppLink
-          variant={'ghost'}
-          to={'/my-holdings'}
-          isActive={location?.pathname === '/my-holdings'}
-        >
+        <AppLink variant={'ghost'} to={'/my-holdings'} isActive={location?.pathname === '/my-holdings'}>
           <img src={briefcase} className={'-mt-[2px]'} />
           My Holdings
         </AppLink>

@@ -16,11 +16,7 @@ export const PageTitle = (props: PageTitleProps) => {
     <div className={'flex items-center justify-between mb-8'}>
       <div className={'flex gap-4 items-center'}>
         <h3 className={'text-2xl font-semibold uppercase'}>{title}</h3>
-        {isBadges && (
-          <span className={'flex gap-2'}>
-            {badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}
-          </span>
-        )}
+        {isBadges && <span className={'flex gap-2'}>{badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}</span>}
       </div>
 
       <div>{children}</div>

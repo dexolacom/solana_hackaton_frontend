@@ -65,10 +65,7 @@ const ClassicPage = () => {
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount} />
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} />
-        <DescriptionCard
-          className={'flex-1'}
-          description={tempData.description}
-        />
+        <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>

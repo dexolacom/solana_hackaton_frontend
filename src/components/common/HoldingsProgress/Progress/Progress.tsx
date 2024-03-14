@@ -8,11 +8,5 @@ interface ProgressProps {
 export const Progress = (props: ProgressProps) => {
   const { percent, className } = props
 
-  return (
-    <div
-      role={'progressbar'}
-      className={cn(`h-full grow`, className)}
-      style={{ flexBasis: `${percent}%` }}
-    />
-  )
+  return <div role={'progressbar'} className={cn(`h-full grow`, className)} style={{ flexBasis: `${percent}%` }} />
 }

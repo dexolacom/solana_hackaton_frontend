@@ -8,11 +8,7 @@ export const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
 
   const contextValue = useMemo(() => ({ modalName, setModalName }), [modalName])
 
-  return (
-    <ModalsContext.Provider value={contextValue}>
-      {children}
-    </ModalsContext.Provider>
-  )
+  return <ModalsContext.Provider value={contextValue}>{children}</ModalsContext.Provider>
 }
 
 export const useModalsContext = (): ContextProps => {

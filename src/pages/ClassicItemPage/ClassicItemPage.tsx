@@ -71,11 +71,7 @@ const ClassicItemPage = () => {
             <ArrowUpDown className={'w-4 h-4'} />
             Transfer
           </Button>
-          <Button
-            className={'flex-1 gap-2'}
-            variant={'destructive'}
-            onClick={() => setModalName('BURN_NFT')}
-          >
+          <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
             <Flame className={'w-4 h-4'} />
             Burn
           </Button>
@@ -84,10 +80,7 @@ const ClassicItemPage = () => {
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount} />
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} />
-        <DescriptionCard
-          className={'flex-1'}
-          description={tempData.description}
-        />
+        <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>

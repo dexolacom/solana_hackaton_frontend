@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/Card.tsx'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
 import { HoldingsProgress } from '@/components/common/HoldingsProgress/HoldingsProgress.tsx'
 import { cn } from '@/lib/utils.ts'
 import { cva } from 'class-variance-authority'

@@ -7,13 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/Form.tsx'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/Select.tsx'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
 import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
@@ -39,10 +33,7 @@ export const ClassicForm = () => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className={'flex flex-col gap-4'}
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
         <FormField
           control={form.control}
           name="amount"
@@ -52,9 +43,7 @@ export const ClassicForm = () => {
               <FormControl>
                 <Input placeholder="Enter amount of investment" {...field} />
               </FormControl>
-              <FormDescription>
-                MIN sum invested should be ≥ $100
-              </FormDescription>
+              <FormDescription>MIN sum invested should be ≥ $100</FormDescription>
               <FormMessage />
             </FormItem>
           )}

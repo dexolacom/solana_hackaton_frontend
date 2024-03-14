@@ -63,13 +63,7 @@ const MyHoldingsPage = () => {
           <PageHeader>
             <AmountCard className={'w-[35%]'} amount={tempData.amount}>
               <div className={'mt-4 flex flex-col gap-1'}>
-                <span
-                  className={
-                    'font-regular text-sm text-card-additionalForeground'
-                  }
-                >
-                  Invested
-                </span>
+                <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
                 <span className={'font-roboto font-medium'}>100000000</span>
               </div>
             </AmountCard>

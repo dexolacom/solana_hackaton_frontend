@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/Card.tsx'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import defaultCard from '@/assets/defaultCard.png'
 import { ArrowUpDown } from 'lucide-react'
@@ -55,19 +49,11 @@ export const NftCard = (props: NftCardProps) => {
       </CardHeader>
       <CardContent>
         <div className={'flex items-center justify-between'}>
-          <span
-            className={'font-regular text-sm text-card-additionalForeground'}
-          >
-            Invested
-          </span>
+          <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
           <span className={'font-roboto font-medium'}>{content?.invested}</span>
         </div>
         <div className={'flex items-center justify-between'}>
-          <span
-            className={'font-regular text-sm text-card-additionalForeground'}
-          >
-            Current Price
-          </span>
+          <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
           <span className={'font-roboto font-medium'}>{content.price}</span>
         </div>
       </CardContent>
@@ -76,11 +62,7 @@ export const NftCard = (props: NftCardProps) => {
           <ArrowUpDown className={'w-4 h-4'} />
           Transfer
         </Button>
-        <Button
-          className={'flex-1 gap-2'}
-          variant={'destructive'}
-          onClick={() => setModalName('BURN_NFT')}
-        >
+        <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
           <Flame className={'w-4 h-4'} />
           Burn
         </Button>

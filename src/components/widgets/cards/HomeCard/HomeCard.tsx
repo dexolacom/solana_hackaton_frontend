@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/Card.tsx'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
 import { Badge } from '@/components/ui/Badge.tsx'
 import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx'
 import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx'
@@ -44,29 +38,15 @@ export const HomeCard = (props: HomeCardProps) => {
     <Card>
       <CardHeader className={'mb-0'}>
         <CardTitle className={'text-2xl font-semibold'}>{title}</CardTitle>
-        <span className={'flex gap-2'}>
-          {badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}
-        </span>
+        <span className={'flex gap-2'}>{badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}</span>
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 py-6'}>
         <AmountCard variant={'bordered'} amount={amount} />
-        <HoldingsCard
-          variant={'bordered'}
-          holdings={holdings}
-          withIcon={false}
-        />
-        <DescriptionCard
-          variant={'bordered'}
-          description={description}
-          withIcon={false}
-        />
+        <HoldingsCard variant={'bordered'} holdings={holdings} withIcon={false} />
+        <DescriptionCard variant={'bordered'} description={description} withIcon={false} />
       </CardContent>
       <CardFooter>
-        <AppLink
-          to={linkPath}
-          variant={buttonVariant}
-          className={'w-full self-end'}
-        >
+        <AppLink to={linkPath} variant={buttonVariant} className={'w-full self-end'}>
           Details & Invest
           <ArrowRight className={'w-6 h-6'} />
         </AppLink>

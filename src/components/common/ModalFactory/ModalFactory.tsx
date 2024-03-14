@@ -15,9 +15,5 @@ export const ModalsFactory = () => {
     INVEST: <InvestModal />,
   }
 
-  return (
-    <CommonModal handleClose={handleClose}>
-      {modals[modalName as keyof typeof modals] ?? null}
-    </CommonModal>
-  )
+  return <CommonModal handleClose={handleClose}>{modals[modalName as keyof typeof modals] ?? null}</CommonModal>
 }

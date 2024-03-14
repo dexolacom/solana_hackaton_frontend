@@ -15,9 +15,7 @@ export const InfoCard = (props: InfoCardProps) => {
       <CardContent className={'flex flex-col gap-1'}>
         {data.map((item, i) => (
           <div key={i} className={'flex items-center justify-between text-sm'}>
-            <span className={'text-card-additionalForeground'}>
-              {item?.title}
-            </span>
+            <span className={'text-card-additionalForeground'}>{item?.title}</span>
             <span>{item?.number}</span>
           </div>
         ))}

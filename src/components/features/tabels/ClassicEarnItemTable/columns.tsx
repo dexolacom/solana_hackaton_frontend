@@ -21,9 +21,7 @@ export const columns: ColumnDef<TableData>[] = [
           <img className={'h-6 w-6'} src={currencyIcons[title]} alt="" />
           <div className={'flex flex-col'}>
             <span className={'font-medium'}>{title}</span>
-            <span className={'text-xs text-card-additionalForeground'}>
-              {fullTitle}
-            </span>
+            <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
           </div>
         </div>
       )

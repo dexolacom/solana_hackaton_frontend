@@ -1,8 +1,5 @@
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
-import {
-  columns,
-  TableData,
-} from '@/components/features/tabels/ClassicPageTable/columns.tsx'
+import { columns, TableData } from '@/components/features/tabels/ClassicPageTable/columns.tsx'
 
 export const ClassicPageTable = () => {
   const data: TableData[] = [

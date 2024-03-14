@@ -3,15 +3,9 @@ import { RouteProps } from 'react-router-dom'
 import { PortfoliosPage } from '@/pages/PortfoliosPage/PortfoliosPage.tsx'
 import ClassicItemPage from '@/pages/ClassicItemPage/ClassicItemPage.tsx'
 import ClassicEarnItemPage from '@/pages/ClassiEarnItemPage/ClassicEarnItemPage.tsx'
-const LazyClassicPage = lazy(
-  () => import('@/pages/ClassicPage/ClassicPage.tsx')
-)
-const LazyClassicEarnPage = lazy(
-  () => import('@/pages/ClassicEarnPage/ClassicEarnPage.tsx')
-)
-const LazyMyHoldingsPage = lazy(
-  () => import('@/pages/MyHoldingsPage/MyHoldingsPage.tsx')
-)
+const LazyClassicPage = lazy(() => import('@/pages/ClassicPage/ClassicPage.tsx'))
+const LazyClassicEarnPage = lazy(() => import('@/pages/ClassicEarnPage/ClassicEarnPage.tsx'))
+const LazyMyHoldingsPage = lazy(() => import('@/pages/MyHoldingsPage/MyHoldingsPage.tsx'))
 
 export const enum commonRoutes {
   HOME = '/',

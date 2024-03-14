@@ -40,15 +40,9 @@ export const FormCurrency = () => {
     <div className={'flex gap-10'}>
       <div className={'flex flex-col gap-2 flex-1'}>
         {tempData.slice(0, 4).map((item) => (
-          <div
-            key={item.title}
-            className={'flex items-center justify-between text-sm'}
-          >
+          <div key={item.title} className={'flex items-center justify-between text-sm'}>
             <span className={'flex gap-2'}>
-              <img
-                className={'h-6 w-6 -mt-[3px]'}
-                src={currencyIcons[item.title]}
-              />
+              <img className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[item.title]} />
               {item.title}
             </span>
             <span>$ {item.number}</span>
@@ -58,15 +52,9 @@ export const FormCurrency = () => {
 
       <div className={'flex flex-col gap-2 flex-1'}>
         {tempData.slice(4, tempData.length).map((item) => (
-          <div
-            key={item.title}
-            className={'flex items-center justify-between text-sm'}
-          >
+          <div key={item.title} className={'flex items-center justify-between text-sm'}>
             <span className={'flex gap-2'}>
-              <img
-                className={'h-6 w-6 -mt-[3px]'}
-                src={currencyIcons[item.title]}
-              />
+              <img className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[item.title]} />
               {item.title}
             </span>
             <span>$ {item.number}</span>

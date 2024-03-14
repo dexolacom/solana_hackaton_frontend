@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/Card.tsx'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
 import { ReactNode } from 'react'
 import assetsIcon from '@/assets/icons/assets.svg'
 
