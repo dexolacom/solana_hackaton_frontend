@@ -1,26 +1,63 @@
+import { columns, TableData } from './columns.tsx';
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx';
-import { columns } from './columns.tsx';
 
 export const ClassicItemTable = () => {
-  type Payment = {
-    id: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-    email: string
-  }
-
-  const data: Payment[] = [
+  const data: TableData[] = [
     {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
+      token: {
+        title: 'BTC',
+        fullTitle: 'Bitcoin'
+      },
+      riskType: 'low',
     },
     {
-      id: "489e1d42",
-      amount: 125,
-      status: "processing",
-      email: "example@gmail.com",
+      token: {
+        title: 'SOL',
+        fullTitle: 'Solana'
+      },
+      riskType: 'medium',
+    },
+    {
+      token: {
+        title: 'ETH',
+        fullTitle: 'Ethereum'
+      },
+      riskType: 'high',
+    },
+    {
+      token: {
+        title: 'JUP',
+        fullTitle: 'Jupiter'
+      },
+      riskType: 'medium',
+    },
+    {
+      token: {
+        title: 'RNDR',
+        fullTitle: 'Render'
+      },
+      riskType: 'low',
+    },
+    {
+      token: {
+        title: 'HNT',
+        fullTitle: 'Helium'
+      },
+      riskType: 'low'
+    },
+    {
+      token: {
+        title: 'BONK',
+        fullTitle: 'Bonk'
+      },
+      riskType: 'medium'
+    },
+    {
+      token: {
+        title: 'PYTH',
+        fullTitle: 'Pyth Network'
+      },
+      riskType: 'high'
     }
   ]
 

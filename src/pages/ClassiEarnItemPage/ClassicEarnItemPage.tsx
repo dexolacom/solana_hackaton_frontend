@@ -10,6 +10,7 @@ import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
 import { Button } from '@/components/ui/Button.tsx';
 import { ArrowUpDown, Flame } from 'lucide-react';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
+import { ClassicEarnItemTable } from '@/components/features/tabels/ClassicEarnItemTable/ClassicEarnItemTable.tsx';
 
 const tempData = {
   amount: {
@@ -66,7 +67,7 @@ const ClassicEarnItemPage = () => {
   return (
     <div>
       <BackLink title={'Home Page'} path={'/'}/>
-      <PageTitle title={'Classic + Earn'} isBadges>
+      <PageTitle title={'Classic + Earn item'} isBadges>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'}>
             <ArrowUpDown className={'w-4 h-4'}/>
@@ -87,7 +88,7 @@ const ClassicEarnItemPage = () => {
 
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>
-          table
+          <ClassicEarnItemTable/>
         </AssetsCard>
         <InvestCard className={'flex-2'}>
           <ClassicForm/>

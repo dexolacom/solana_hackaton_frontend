@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button.tsx';
 import { ArrowUpDown, Flame } from 'lucide-react';
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
+import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/ClassicItemTable.tsx';
 
 
 const ClassicItemPage = () => {
@@ -65,7 +66,7 @@ const ClassicItemPage = () => {
   return (
     <div>
       <BackLink title={'My holdings'} path={'/my-holdings'}/>
-      <PageTitle title={'CLASSIC item page'}>
+      <PageTitle title={'CLASSIC item'}>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'}>
             <ArrowUpDown className={'w-4 h-4'}/>
@@ -84,7 +85,7 @@ const ClassicItemPage = () => {
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>
-          <p>Table</p>
+          <ClassicItemTable/>
         </AssetsCard>
         <InvestCard className={'flex-2'}>
           <ClassicForm/>

@@ -1,23 +1,46 @@
 import { ColumnDef } from "@tanstack/react-table"
+import { currencyIcons } from '@/lib/constants.tsx';
+import { Badge } from '@/components/ui/Badge.tsx';
 
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+export type TableData = {
+  token: {
+    title: string
+    fullTitle: string
+  }
+  riskType: 'low' | 'medium' | 'high'
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<TableData>[] = [
   {
     accessorKey: "token",
     header: () => <div className="text-left">Token</div>,
+    cell: ({ row }) => {
+      const { title, fullTitle } = row.original.token
+      return (
+        <div className={'flex gap-2 text-left items-center'}>
+          <img className={'h-6 w-6'} src={currencyIcons[title]} alt=''/>
+          <div className={'flex flex-col'}>
+            <span className={'font-medium'}>{title}</span>
+            <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
+          </div>
+        </div>
+      )
+    }
   },
   {
     accessorKey: "riskType",
-    header: 'Risk Type'
+    header: 'Risk Type',
+    cell: ({ row }) => {
+      const { riskType } = row.original
+      return (
+        <Badge variant={riskType}>
+          {riskType}
+        </Badge>
+      )
+    }
   },
   {
-    accessorKey: 'coinAmount',
+    accessorKey: "coinAmount",
     header: 'Coin Amount'
   },
   {
@@ -33,7 +56,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: 'Reward'
   },
   {
-    accessorKey: "currentPrice",
+    accessorKey: "currentCoinPrice",
     header: 'Current Coin Price'
   },
   {
@@ -41,7 +64,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: '24h Change'
   },
   {
-    accessorKey: "earned",
+    accessorKey: "Earned",
     header: () => <div className="text-right">Earned</div>,
   },
 ]
