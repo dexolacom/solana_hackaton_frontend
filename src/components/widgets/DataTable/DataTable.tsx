@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from '@tanstack/react-table'
 
 import {
   Table,
@@ -14,14 +14,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/Table.tsx"
+} from '@/components/ui/Table.tsx'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
@@ -31,18 +34,23 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
   return (
     <div>
       <Table>
-        <TableHeader >
+        <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className={'border-none'}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className={'text-center text-card-additionalForeground text-xs'} key={header.id}>
+                  <TableHead
+                    className={
+                      'text-center text-card-additionalForeground text-xs'
+                    }
+                    key={header.id}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                   </TableHead>
                 )
               })}
@@ -54,7 +62,7 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                data-state={row.getIsSelected() && "selected"}
+                data-state={row.getIsSelected() && 'selected'}
                 className={'border-none'}
               >
                 {row.getVisibleCells().map((cell) => (

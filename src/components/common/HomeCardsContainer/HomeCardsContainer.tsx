@@ -1,11 +1,11 @@
-import { HomeCard } from '@/components/widgets/cards/HomeCard/HomeCard.tsx';
-import { cards } from '@/components/common/HomeCardsContainer/lib.ts';
+import { HomeCard } from '@/components/widgets/cards/HomeCard/HomeCard.tsx'
+import { cards } from '@/components/common/HomeCardsContainer/lib.ts'
 
 export const HomeCardsContainer = () => {
   return (
     <div className={'flex gap-4'}>
       {cards.map((card, i) => {
-        const {title, badges, content, linkPath, buttonVariant} = card;
+        const { title, badges, content, linkPath, buttonVariant } = card
         return (
           <HomeCard
             key={i}

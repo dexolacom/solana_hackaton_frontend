@@ -1,12 +1,15 @@
-import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx';
-import { columns, TableData } from '@/components/features/tabels/ClassicPageTable/columns.tsx';
+import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
+import {
+  columns,
+  TableData,
+} from '@/components/features/tabels/ClassicPageTable/columns.tsx'
 
 export const ClassicPageTable = () => {
   const data: TableData[] = [
     {
       token: {
         title: 'BTC',
-        fullTitle: 'Bitcoin'
+        fullTitle: 'Bitcoin',
       },
       riskType: 'low',
       distribution: '30%',
@@ -14,7 +17,7 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'SOL',
-        fullTitle: 'Solana'
+        fullTitle: 'Solana',
       },
       riskType: 'medium',
       distribution: '20%',
@@ -22,7 +25,7 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'ETH',
-        fullTitle: 'Ethereum'
+        fullTitle: 'Ethereum',
       },
       riskType: 'high',
       distribution: '15%',
@@ -30,7 +33,7 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'JUP',
-        fullTitle: 'Jupiter'
+        fullTitle: 'Jupiter',
       },
       riskType: 'medium',
       distribution: '10%',
@@ -38,7 +41,7 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'RNDR',
-        fullTitle: 'Render'
+        fullTitle: 'Render',
       },
       riskType: 'low',
       distribution: '10%',
@@ -46,7 +49,7 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'HNT',
-        fullTitle: 'Helium'
+        fullTitle: 'Helium',
       },
       riskType: 'low',
       distribution: '5%',
@@ -54,7 +57,7 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'BONK',
-        fullTitle: 'Bonk'
+        fullTitle: 'Bonk',
       },
       riskType: 'medium',
       distribution: '5%',
@@ -62,16 +65,16 @@ export const ClassicPageTable = () => {
     {
       token: {
         title: 'PYTH',
-        fullTitle: 'Pyth Network'
+        fullTitle: 'Pyth Network',
       },
       riskType: 'high',
       distribution: '5%',
-    }
+    },
   ]
 
   return (
     <div>
-      <DataTable columns={columns} data={data}/>
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }

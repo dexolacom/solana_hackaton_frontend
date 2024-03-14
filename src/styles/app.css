@@ -12,6 +12,8 @@
   margin: 48px auto;
 }
 
+/*styles for wallets adapter*/
+
 .wallet-adapter-button-trigger {
   background-color: hsl(217, 91%, 60%) !important;
   padding: 0.5rem 1rem !important;
@@ -47,7 +49,7 @@
 }
 
 .wallet-adapter-modal-title {
-  font-family: Lufga ,sans-serif;
+  font-family: Lufga, sans-serif;
   /*color: hsl(222, 47%, 11%) !important;*/
   color: #ffffff;
   padding: 24px !important;
@@ -57,7 +59,7 @@
 
 .wallet-adapter-modal-list-more {
   color: #ffffff;
-  font-family: Lufga ,sans-serif;
+  font-family: Lufga, sans-serif;
 }
 
 .wallet-adapter-modal-list-more svg {

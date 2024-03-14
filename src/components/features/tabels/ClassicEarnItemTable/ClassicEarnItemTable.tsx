@@ -1,70 +1,69 @@
-import { columns, TableData } from './columns.tsx';
-import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx';
-
+import { columns, TableData } from './columns.tsx'
+import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
 
 export const ClassicEarnItemTable = () => {
   const data: TableData[] = [
     {
       token: {
         title: 'BTC',
-        fullTitle: 'Bitcoin'
+        fullTitle: 'Bitcoin',
       },
       riskType: 'low',
     },
     {
       token: {
         title: 'SOL',
-        fullTitle: 'Solana'
+        fullTitle: 'Solana',
       },
       riskType: 'medium',
     },
     {
       token: {
         title: 'ETH',
-        fullTitle: 'Ethereum'
+        fullTitle: 'Ethereum',
       },
       riskType: 'high',
     },
     {
       token: {
         title: 'JUP',
-        fullTitle: 'Jupiter'
+        fullTitle: 'Jupiter',
       },
       riskType: 'medium',
     },
     {
       token: {
         title: 'RNDR',
-        fullTitle: 'Render'
+        fullTitle: 'Render',
       },
       riskType: 'low',
     },
     {
       token: {
         title: 'HNT',
-        fullTitle: 'Helium'
+        fullTitle: 'Helium',
       },
-      riskType: 'low'
+      riskType: 'low',
     },
     {
       token: {
         title: 'BONK',
-        fullTitle: 'Bonk'
+        fullTitle: 'Bonk',
       },
-      riskType: 'medium'
+      riskType: 'medium',
     },
     {
       token: {
         title: 'PYTH',
-        fullTitle: 'Pyth Network'
+        fullTitle: 'Pyth Network',
       },
-      riskType: 'high'
-    }
+      riskType: 'high',
+    },
   ]
 
   return (
     <div>
-      <DataTable columns={columns} data={data}/>
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }
