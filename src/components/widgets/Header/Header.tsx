@@ -21,7 +21,7 @@ export const Header = () => {
           My Holdings
         </AppLink>
       </span>
-      <WalletMultiButton className={'button'}/>
+      <WalletMultiButton/>
     </header>
   )
 }
