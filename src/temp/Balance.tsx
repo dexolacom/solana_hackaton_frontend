@@ -1,4 +1,4 @@
-import { useConnection, useWallet} from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from 'react';
 import { PublicKey } from '@solana/web3.js';
 
@@ -13,6 +13,7 @@ export const Balance = () => {
 
   useEffect(() => {
     if (publicKey) {
+      // const walletAddress = publicKey.toBase58();
       getBalance().then(res => setBalance(res));
     }
   }, [publicKey, connection]);

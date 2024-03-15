@@ -5,19 +5,21 @@ import { Footer } from '@/components/widgets/Footer/Footer.tsx';
 import { Toaster } from '@/components/ui/Toaster.tsx';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 import { ModalsFactory } from '@/components/common/ModalFactory/ModalFactory.tsx';
+import { SendTransaction } from './temp/SendTransaction';
 
 function App() {
   const { modalName } = useModalsContext()
 
   return (
     <div className='wrapper'>
-      <Header/>
+      <Header />
       <main className='content'>
-        <AppRouter/>
+        <SendTransaction />
+        <AppRouter />
       </main>
-      {modalName && <ModalsFactory/>}
-      <Toaster/>
-      <Footer/>
+      {modalName && <ModalsFactory />}
+      <Toaster />
+      <Footer />
     </div>
   )
 }
