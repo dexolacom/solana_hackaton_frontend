@@ -29,12 +29,8 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         actions: {
+          DEFAULT: 'hsl(var(--actions))',
           foreground: 'hsl(var(--actions-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-          additionalForeground: 'hsl(var(--secondary-additional-foreground))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -42,7 +38,9 @@ module.exports = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
-          hovered: 'hsl(var(--accent-hovered))',
+          foreground: 'hsl(var(--accent-foreground))',
+          accentTeal: 'hsl(var(--accent-teal))',
+          accentGray: 'hsl(var(--accent-gray))',
         },
         card: {
           DEFAULT: 'hsl(var(--card))',

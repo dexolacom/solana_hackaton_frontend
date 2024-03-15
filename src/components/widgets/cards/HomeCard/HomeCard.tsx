@@ -28,10 +28,12 @@ export interface HomeCardProps {
   }
   linkPath: string
   buttonVariant: 'muted' | 'accent'
+  amountCardVariant: 'accent' | 'accentTeal' | 'accentGray'
+  progressVariant: 'classic' | 'classicEarn' | 'solana'
 }
 
 export const HomeCard = (props: HomeCardProps) => {
-  const { title, badges, content, linkPath, buttonVariant } = props
+  const { title, badges, content, linkPath, buttonVariant, amountCardVariant, progressVariant } = props
   const { amount, holdings, description } = content
 
   return (
@@ -41,8 +43,8 @@ export const HomeCard = (props: HomeCardProps) => {
         <span className={'flex gap-2'}>{badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}</span>
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 py-6'}>
-        <AmountCard variant={'bordered'} amount={amount} />
-        <HoldingsCard variant={'bordered'} holdings={holdings} withIcon={false} />
+        <AmountCard amount={amount} variant={amountCardVariant} />
+        <HoldingsCard variant={'bordered'} holdings={holdings} withIcon={false} progressVariant={progressVariant} />
         <DescriptionCard variant={'bordered'} description={description} withIcon={false} />
       </CardContent>
       <CardFooter>

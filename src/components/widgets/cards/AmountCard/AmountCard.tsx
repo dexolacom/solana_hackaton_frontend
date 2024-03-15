@@ -8,7 +8,7 @@ interface AmountCardProps {
     title: string
     number: string
   }
-  variant?: 'accent' | 'bordered'
+  variant?: 'accent' | 'bordered' | 'accentTeal' | 'accentGray'
   className?: string
   children?: ReactNode
 }
@@ -17,11 +17,13 @@ export const AmountCard = (props: AmountCardProps) => {
   const { amount, variant, className, children } = props
   const { title, number } = amount
 
-  const cardVariants = cva('', {
+  const cardVariants = cva('border-none', {
     variants: {
       variant: {
         bordered: 'border',
-        accent: 'bg-accent text-primary-foreground border-none',
+        accent: 'bg-accent text-accent-foreground',
+        accentTeal: 'bg-accent-accentTeal text-accent-foreground',
+        accentGray: 'bg-accent-accentGray text-accent-foreground',
       },
     },
   })

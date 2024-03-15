@@ -15,10 +15,11 @@ interface HoldingsCardProps {
   variant?: 'bordered'
   className?: string
   withIcon?: boolean
+  progressVariant?: 'classic' | 'classicEarn' | 'solana'
 }
 
 export const HoldingsCard = (props: HoldingsCardProps) => {
-  const { holdings, className, variant, withIcon = true } = props
+  const { holdings, className, variant, withIcon = true, progressVariant } = props
   const { title, items } = holdings
 
   const cardVariants = cva('', {
@@ -38,7 +39,7 @@ export const HoldingsCard = (props: HoldingsCardProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <HoldingsProgress holdings={items} />
+        <HoldingsProgress holdings={items} progressVariant={progressVariant} />
       </CardContent>
     </Card>
   )

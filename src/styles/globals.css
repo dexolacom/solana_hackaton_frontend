@@ -29,13 +29,18 @@
     --background: 210, 40%, 96%; /* slate-300 */
     --foreground: 222.2 47.4% 11.2%; /* slate-900 */
 
+    --actions: 222, 47%, 11%; /* slate-900 */
     --actions-foreground: 0, 0%, 100%; /* white */
 
     --card: 0, 0%, 100%; /* white */
     --card-foreground: 222.2 47.4% 11.2%; /* slate-900 */
     --card-additional-foreground: 215, 16%, 47%; /* slate-500 */
 
-    --accent: 217, 91%, 60%; /* blue-500 */
+    /*--accent: 217, 91%, 60%; !* blue-500 *!*/
+    --accent: 221, 83%, 53%; /* blue-600 */
+    --accent-foreground: 0, 0%, 100%; /* white */
+    --accent-teal: 175, 84%, 32%; /* teal-600 */
+    --accent-gray: 215, 14%, 34%; /* gray-600 */
 
     --muted: 214, 32%, 91%; /* slate-200 */
     --muted-foreground: 215, 20%, 65%; /*slate-400*/

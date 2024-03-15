@@ -1,28 +1,18 @@
 import { Progress } from '@/components/common/HoldingsProgress/Progress/Progress.tsx'
 import { Holding } from '@/components/common/HoldingsProgress/Holding/Holding.tsx'
+import { colors } from '@/components/common/HoldingsProgress/colors.ts'
 
 interface HoldingsProgressProps {
   holdings: {
     name: string
     percent: number | string
   }[]
+  progressVariant?: 'classic' | 'classicEarn' | 'solana'
 }
 
 export const HoldingsProgress = (props: HoldingsProgressProps) => {
-  const { holdings } = props
-  const progressColors: Record<string, string> = {
-    BTC: 'bg-blue-700/90',
-    SOL: 'bg-blue-700/75',
-    ETH: 'bg-blue-700/50',
-    JUP: 'bg-blue-600',
-    RNDR: 'bg-blue-600/90',
-    HNT: 'bg-blue-600/75',
-    BONK: 'bg-blue-600/50',
-    PYTH: 'bg-blue-500',
-    RAY: 'bg-blue-500/90',
-    JTO: 'bg-blue-500/75',
-    WIF: 'bg-blue-500/50',
-  }
+  const { holdings, progressVariant = 'classic' } = props
+  const progressColors = colors[progressVariant]
 
   return (
     <div>
