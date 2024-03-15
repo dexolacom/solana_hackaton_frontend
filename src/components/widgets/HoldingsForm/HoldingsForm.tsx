@@ -6,35 +6,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form.tsx"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/Select.tsx';
-import { Input } from "@/components/ui/Input.tsx"
-import { Button } from '@/components/ui/Button.tsx';
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
-import { useHoldingsForm } from '@/components/widgets/HoldingsForm/lib.tsx';
-
+} from '@/components/ui/Form.tsx'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
+import { Input } from '@/components/ui/Input.tsx'
+import { Button } from '@/components/ui/Button.tsx'
+import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
+import { useHoldingsForm } from '@/components/widgets/HoldingsForm/lib.tsx'
 
 export const HoldingsForm = () => {
   const { form, onSubmit } = useHoldingsForm()
   const tempInfoData = [
     {
       title: 'Amount in USD',
-      number: '$ 2'
+      number: '$ 2',
     },
     {
       title: 'Slippage Tolerance',
-      number: '0.2 %'
+      number: '0.2 %',
     },
     {
       title: 'Platform Fee, 0.5%',
-      number: '$ 0.33'
-    }
+      number: '$ 0.33',
+    },
   ]
 
   return (
@@ -54,7 +47,7 @@ export const HoldingsForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="classic">Classic</SelectItem>
-                  <SelectItem value="classicEarn">Classic + earn</SelectItem>
+                  <SelectItem value="classicEarn">Classic + Earn</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -71,13 +64,34 @@ export const HoldingsForm = () => {
               <FormControl>
                 <Input placeholder="Enter amount of investment" {...field} />
               </FormControl>
-              <FormDescription>
-                MIN sum invested should be ≥ $100
-              </FormDescription>
+              <FormDescription>MIN sum invested should be ≥ $100</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="amountCurrency"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Amount Currency</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={'USDC'}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="USDC">USDC</SelectItem>
+                  <SelectItem value="SOL">SOL</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="withdrawal"
@@ -100,7 +114,7 @@ export const HoldingsForm = () => {
             </FormItem>
           )}
         />
-        <InfoCard data={tempInfoData}/>
+        <InfoCard data={tempInfoData} />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
         </Button>

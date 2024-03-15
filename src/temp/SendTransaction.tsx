@@ -20,10 +20,10 @@ export function SendTransaction() {
         toPubkey: toPublicKey,
         lamports: LAMPORTS_PER_SOL * 0.1,
       })
-    );
+    )
 
-    await sendTransaction(transaction, connection);
-  };
+    await sendTransaction(transaction, connection)
+  }
 
   return (
     <div>
@@ -31,5 +31,5 @@ export function SendTransaction() {
         Send transaction
       </button>
     </div>
-  );
+  )
 }

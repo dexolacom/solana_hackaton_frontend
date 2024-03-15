@@ -1,5 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap');
+
+@font-face {
+  font-family: 'Lufga';
+  src: url('../../public/fonts/Lufga-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lufga Medium';
+  src: url('../../public/fonts/Lufga-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lufga Light';
+  src: url('../../public/fonts/Lufga-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lufga SemiBold';
+  src: url('../../public/fonts/Lufga-SemiBold.woff2') format('woff2');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,11 +35,7 @@
     --card-foreground: 222.2 47.4% 11.2%; /* slate-900 */
     --card-additional-foreground: 215, 16%, 47%; /* slate-500 */
 
-    /*--secondary: 215, 19%, 35%; !* slate-600 *!*/
-    /*--secondary-foreground: 0, 0%, 100%; !* white *!*/
-    /*--secondary-additional-foreground: 213, 27%, 84%; !* slate-300 *!*/
-
-    --accent: 217, 91%, 60%;
+    --accent: 217, 91%, 60%; /* blue-500 */
 
     --muted: 214, 32%, 91%; /* slate-200 */
     --muted-foreground: 215, 20%, 65%; /*slate-400*/
@@ -30,14 +46,14 @@
     --radius: 0.5rem;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Kanit", "sans-serif";
+    font-family: 'Lufga', 'sans-serif';
   }
 
   *,
@@ -50,7 +66,9 @@
     margin: 0;
   }
 
-  html, body, #root {
+  html,
+  body,
+  #root {
     height: 100%;
   }
 }

@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/components/ui/Card.tsx';
+import { Card, CardContent } from '@/components/ui/Card.tsx'
 
 interface InfoCardProps {
   data: {
