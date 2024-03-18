@@ -78,9 +78,8 @@ export const ClassicForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="BTC">BTC</SelectItem>
-                  <SelectItem value="ETH">ETH</SelectItem>
-                  <SelectItem value="SOL">SOL</SelectItem>
+                  <SelectItem value="tokens">Tokens</SelectItem>
+                  <SelectItem value={form.getValues().amountCurrency}>Hello</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

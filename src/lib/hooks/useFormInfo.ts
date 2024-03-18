@@ -13,7 +13,6 @@ const numbersFormatter = (number: number) => {
 export const useFormInfo = (formData: FormData) => {
   const amount = formData.amount
   const amountCurrency = formData.amountCurrency
-  const tolerance = '1'
   const solanaCourse = 199.84 // need to get from backend
   const [amountUSD, setAmountUSD] = useState('0')
   const [fee, setFee] = useState('')
@@ -41,7 +40,7 @@ export const useFormInfo = (formData: FormData) => {
     },
     {
       title: 'Slippage Tolerance',
-      value: `${tolerance} %`,
+      value: `1 %`,
     },
     {
       title: 'Platform Fee, 0.5%',
