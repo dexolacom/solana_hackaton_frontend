@@ -13,25 +13,11 @@ import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
 import { useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
+import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
 
 export const ClassicForm = () => {
   const { form, onSubmit } = useClassicForm()
-  // const amount = form.getValues().amount
-
-  const infoCardData = [
-    {
-      title: '',
-      number: '$',
-    },
-    {
-      title: '',
-      number: '1%',
-    },
-    {
-      title: '',
-      number: '$',
-    },
-  ]
+  const infoCardData = useFormInfo(form.watch())
 
   return (
     <Form {...form}>
@@ -43,7 +29,15 @@ export const ClassicForm = () => {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="Enter amount of investment" {...field} />
+                <Input
+                  type="number"
+                  pattern="/^-?\d+\.?\d*$/"
+                  onInput={(e) =>
+                    ((e.target as HTMLInputElement).value = (e.target as HTMLInputElement).value.slice(0, 10))
+                  }
+                  placeholder="Enter amount of investment"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>MIN sum invested should be ≥ $100</FormDescription>
               <FormMessage />
@@ -56,14 +50,14 @@ export const ClassicForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Amount Currency</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={'USDC'}>
+              <Select onValueChange={field.onChange} defaultValue={'USDT'}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="USDC">USDC</SelectItem>
+                  <SelectItem value="USDT">USDT</SelectItem>
                   <SelectItem value="SOL">SOL</SelectItem>
                 </SelectContent>
               </Select>
@@ -80,7 +74,7 @@ export const ClassicForm = () => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select thye currency of withdraw" />
+                    <SelectValue placeholder="Select the currency of withdrawal" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

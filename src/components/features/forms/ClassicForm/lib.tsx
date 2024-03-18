@@ -1,28 +1,31 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/lib/hooks/use-toast.ts'
+import { toast } from '@/lib/hooks/useToast.ts'
+
+// TODO: add debounce for amount field
 
 export const useClassicForm = () => {
   const FormSchema = z.object({
-    amount: z.string().min(2, {
-      message: 'Username must be at least 2 characters.',
-    }),
-    amountCurrency: z.string().min(2, {
-      message: 'Choose currency',
-    }),
-    withdrawal: z.string().min(2, {
-      message: 'Username must be at least 2 characters.',
-    }),
+    amount: z
+      .string({
+        required_error: 'Amount is empty',
+      })
+      .min(3, {
+        message: 'should be ≥ $100',
+      }),
+    amountCurrency: z.string({ required_error: 'Amount currency is required' }),
+    withdrawal: z.string({ required_error: 'Withdrawal currency is required' }),
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       amount: '',
-      amountCurrency: '',
+      amountCurrency: 'USDT',
       withdrawal: '',
     },
+    // mode: 'onChange',
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -38,5 +41,3 @@ export const useClassicForm = () => {
 
   return { form, onSubmit }
 }
-
-export const useFormInfo = () => {}
