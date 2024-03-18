@@ -13,23 +13,11 @@ import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
 import { useClassicForm } from '@/components/widgets/ClassicForm/lib.tsx'
+import { useEffect, useState } from 'react'
 
 export const ClassicForm = () => {
   const { form, onSubmit } = useClassicForm()
-  const tempInfoData = [
-    {
-      title: 'Amount in USD',
-      number: '$ 2',
-    },
-    {
-      title: 'Slippage Tolerance',
-      number: '0.2 %',
-    },
-    {
-      title: 'Platform Fee, 0.5%',
-      number: '$ 0.33',
-    },
-  ]
+  const amount = form.getValues().amount
 
   return (
     <Form {...form}>
@@ -91,7 +79,7 @@ export const ClassicForm = () => {
             </FormItem>
           )}
         />
-        <InfoCard data={tempInfoData} />
+        <InfoCard amount={amount} />
         <FormCurrency />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
