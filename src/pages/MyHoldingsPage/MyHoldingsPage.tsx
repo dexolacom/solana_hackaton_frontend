@@ -61,13 +61,13 @@ const MyHoldingsPage = () => {
       <div className={'flex gap-8'}>
         <div>
           <PageHeader>
-            <AmountCard className={'w-[35%]'} amount={tempData.amount}>
+            <AmountCard className={'w-[35%]'} amount={tempData.amount} variant={'accentGray'}>
               <div className={'mt-4 flex flex-col gap-1'}>
-                <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
+                <span className={'font-regular text-sm'}>Invested</span>
                 <span className={'font-roboto font-medium'}>100000000</span>
               </div>
             </AmountCard>
-            <HoldingsCard className={'w-[65%]'} holdings={tempData.holdings} />
+            <HoldingsCard className={'w-[65%]'} holdings={tempData.holdings} progressVariant={'solana'} />
           </PageHeader>
 
           <h3 className={'text-2xl font-semibold mb-8'}>NFT</h3>

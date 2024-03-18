@@ -51,6 +51,8 @@ export const cards = [
     },
     linkPath: '/classic',
     buttonVariant: 'accent',
+    amountCardVariant: 'accent',
+    progressVariant: 'classic',
   },
   {
     title: 'classic + earn',
@@ -104,6 +106,8 @@ export const cards = [
     },
     linkPath: '/classic-earn',
     buttonVariant: 'accent',
+    amountCardVariant: 'accentTeal',
+    progressVariant: 'classicEarn',
   },
   {
     title: 'solana ecosystem',
@@ -161,5 +165,7 @@ export const cards = [
     },
     linkPath: '/solana',
     buttonVariant: 'muted',
+    amountCardVariant: 'accentGray',
+    progressVariant: 'solana',
   },
 ]

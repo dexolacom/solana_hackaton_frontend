@@ -63,8 +63,8 @@ const ClassicPage = () => {
       <BackLink title={'Home Page'} path={'/'} />
       <PageTitle title={'classic'} />
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} />
-        <HoldingsCard className={'flex-1'} holdings={tempData.holdings} />
+        <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accent'} />
+        <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classic'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
