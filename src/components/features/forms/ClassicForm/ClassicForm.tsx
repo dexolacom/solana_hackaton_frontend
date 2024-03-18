@@ -11,50 +11,31 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { useHoldingsForm } from '@/components/widgets/HoldingsForm/lib.tsx'
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
+import { useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
 
-export const HoldingsForm = () => {
-  const { form, onSubmit } = useHoldingsForm()
-  const tempInfoData = [
+export const ClassicForm = () => {
+  const { form, onSubmit } = useClassicForm()
+  // const amount = form.getValues().amount
+
+  const infoCardData = [
     {
-      title: 'Amount in USD',
-      number: '$ 2',
+      title: '',
+      number: '$',
     },
     {
-      title: 'Slippage Tolerance',
-      number: '0.2 %',
+      title: '',
+      number: '1%',
     },
     {
-      title: 'Platform Fee, 0.5%',
-      number: '$ 0.33',
+      title: '',
+      number: '$',
     },
   ]
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
-        <FormField
-          control={form.control}
-          name="portfolio"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Portfolio</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select portfolio from the list" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="classic">Classic</SelectItem>
-                  <SelectItem value="classicEarn">Classic + Earn</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="amount"
@@ -69,7 +50,6 @@ export const HoldingsForm = () => {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name="amountCurrency"
@@ -91,7 +71,6 @@ export const HoldingsForm = () => {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name="withdrawal"
@@ -105,16 +84,17 @@ export const HoldingsForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="btc">BTC</SelectItem>
-                  <SelectItem value="eth">ETH</SelectItem>
-                  <SelectItem value="sol">SOL</SelectItem>
+                  <SelectItem value="BTC">BTC</SelectItem>
+                  <SelectItem value="ETH">ETH</SelectItem>
+                  <SelectItem value="SOL">SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <InfoCard data={tempInfoData} />
+        <InfoCard data={infoCardData} />
+        <FormCurrency />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
         </Button>

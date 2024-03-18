@@ -38,3 +38,5 @@ export const useClassicForm = () => {
 
   return { form, onSubmit }
 }
+
+export const useFormInfo = () => {}

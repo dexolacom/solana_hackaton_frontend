@@ -11,17 +11,50 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
-import { useClassicForm } from '@/components/widgets/ClassicForm/lib.tsx'
-import { useEffect, useState } from 'react'
+import { useHoldingsForm } from '@/components/features/forms/HoldingsForm/lib.tsx'
 
-export const ClassicForm = () => {
-  const { form, onSubmit } = useClassicForm()
-  const amount = form.getValues().amount
+export const HoldingsForm = () => {
+  const { form, onSubmit } = useHoldingsForm()
+  const tempInfoData = [
+    {
+      title: 'Amount in USD',
+      number: '$ 2',
+    },
+    {
+      title: 'Slippage Tolerance',
+      number: '0.2 %',
+    },
+    {
+      title: 'Platform Fee, 0.5%',
+      number: '$ 0.33',
+    },
+  ]
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
+        <FormField
+          control={form.control}
+          name="portfolio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Portfolio</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select portfolio from the list" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="classic">Classic</SelectItem>
+                  <SelectItem value="classicEarn">Classic + Earn</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="amount"
@@ -36,6 +69,7 @@ export const ClassicForm = () => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="amountCurrency"
@@ -57,6 +91,7 @@ export const ClassicForm = () => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="withdrawal"
@@ -70,17 +105,16 @@ export const ClassicForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="BTC">BTC</SelectItem>
-                  <SelectItem value="ETH">ETH</SelectItem>
-                  <SelectItem value="SOL">SOL</SelectItem>
+                  <SelectItem value="btc">BTC</SelectItem>
+                  <SelectItem value="eth">ETH</SelectItem>
+                  <SelectItem value="sol">SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <InfoCard amount={amount} />
-        <FormCurrency />
+        <InfoCard data={tempInfoData} />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
         </Button>
