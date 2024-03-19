@@ -11,8 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { FormCurrency } from '@/components/features/FormCurrency/FormCurrency.tsx'
-import { useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
+import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
 import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
 import { useEffect } from 'react'
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
@@ -21,6 +21,7 @@ export const ClassicForm = () => {
   const { form, onSubmit } = useClassicForm()
   const infoCardData = useFormInfo(form.watch())
   const amount = form.watch('amount')
+  const formCurrencyData = getFormCurrencyValues(amount)
   // const [withdrawalOptions, setWithdrawalOptions] = useState<string[]>([])
   // // console.log(infoCardData)
   const amountCurrency = form.watch('amountCurrency')
@@ -52,7 +53,7 @@ export const ClassicForm = () => {
                 <Input
                   data-value={'numericInput'}
                   type="text"
-                  maxLength={11}
+                  maxLength={10}
                   placeholder="Enter amount of investment"
                   {...field}
                 />
@@ -105,7 +106,7 @@ export const ClassicForm = () => {
           )}
         />
         <InfoCard data={infoCardData} />
-        <FormCurrency amount={amount} />
+        <FormCurrency data={formCurrencyData} />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
         </Button>
