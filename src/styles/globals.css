@@ -2,22 +2,22 @@
 
 @font-face {
   font-family: 'Lufga';
-  src: url('../../public/fonts/Lufga-Regular.woff2') format('woff2');
+  src: url('../assets/fonts/Lufga-Regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Lufga Medium';
-  src: url('../../public/fonts/Lufga-Medium.woff2') format('woff2');
+  src: url('../assets/fonts/Lufga-Medium.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Lufga Light';
-  src: url('../../public/fonts/Lufga-Light.woff2') format('woff2');
+  src: url('../assets/fonts/Lufga-Light.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Lufga SemiBold';
-  src: url('../../public/fonts/Lufga-SemiBold.woff2') format('woff2');
+  src: url('../assets/fonts/Lufga-SemiBold.woff2') format('woff2');
 }
 
 @tailwind base;

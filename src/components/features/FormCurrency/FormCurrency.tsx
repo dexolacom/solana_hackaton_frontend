@@ -1,6 +1,7 @@
 import { currencyIcons } from '@/lib/constants.tsx'
 
-export const FormCurrency = () => {
+export const FormCurrency = ({ amount }: { amount: number | string }) => {
+  console.log(amount)
   const tempData = [
     {
       title: 'BTC',

@@ -1,5 +1,4 @@
 import { Card, CardContent } from '@/components/ui/Card.tsx'
-import { currencyFormatter } from '@/lib/utils.ts'
 
 interface InfoCardProps {
   data: {
@@ -17,7 +16,7 @@ export const InfoCard = (props: InfoCardProps) => {
       {data.map((item, i) => (
         <div key={i} className={'flex items-center justify-between text-sm'}>
           <span className={'text-card-additionalForeground'}>{item?.title}</span>
-          <span>{currencyFormatter(item?.value)}</span>
+          <span>{item?.value}</span>
         </div>
       ))}
     </Card>
