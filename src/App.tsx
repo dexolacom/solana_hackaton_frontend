@@ -7,6 +7,8 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ModalsFactory } from '@/components/common/ModalFactory/ModalFactory.tsx'
 import { Stake } from './temp/marinade/Stake'
 
+// import NativeStaking from './temp/marinade-native/NativeStake'
+
 function App() {
   const { modalName } = useModalsContext()
 
@@ -18,8 +20,8 @@ function App() {
       </main>
       {modalName && <ModalsFactory />}
       <Toaster />
-      <Stake />
       <Footer />
+      <Stake />
     </div>
   )
 }
