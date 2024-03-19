@@ -5,6 +5,7 @@ import { Footer } from '@/components/widgets/Footer/Footer.tsx'
 import { Toaster } from '@/components/ui/Toaster.tsx'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ModalsFactory } from '@/components/common/ModalFactory/ModalFactory.tsx'
+import { Stake } from './temp/marinade/Stake'
 
 function App() {
   const { modalName } = useModalsContext()
@@ -17,6 +18,7 @@ function App() {
       </main>
       {modalName && <ModalsFactory />}
       <Toaster />
+      <Stake />
       <Footer />
     </div>
   )
