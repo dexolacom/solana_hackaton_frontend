@@ -18,15 +18,15 @@ export const HoldingsForm = () => {
   const tempInfoData = [
     {
       title: 'Amount in USD',
-      number: '$ 2',
+      value: '$ 2',
     },
     {
       title: 'Slippage Tolerance',
-      number: '0.2 %',
+      value: '0.2 %',
     },
     {
       title: 'Platform Fee, 0.5%',
-      number: '$ 0.33',
+      value: '$ 0.33',
     },
   ]
 
@@ -62,7 +62,15 @@ export const HoldingsForm = () => {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="Enter amount of investment" {...field} />
+                <Input
+                  type="number"
+                  pattern="/^-?\d+\.?\d*$/"
+                  onInput={(e) =>
+                    ((e.target as HTMLInputElement).value = (e.target as HTMLInputElement).value.slice(0, 10))
+                  }
+                  placeholder="Enter amount of investment"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>MIN sum invested should be ≥ $100</FormDescription>
               <FormMessage />
@@ -101,7 +109,7 @@ export const HoldingsForm = () => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select thye currency of withdraw" />
+                    <SelectValue placeholder="Select the currency of withdrawal" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
