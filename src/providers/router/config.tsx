@@ -4,6 +4,7 @@ import { PortfoliosPage } from '@/pages/PortfoliosPage/PortfoliosPage.tsx'
 import ClassicItemPage from '@/pages/ClassicItemPage/ClassicItemPage.tsx'
 const LazyClassicPage = lazy(() => import('@/pages/ClassicPage/ClassicPage.tsx'))
 const LazyMyHoldingsPage = lazy(() => import('@/pages/MyHoldingsPage/MyHoldingsPage.tsx'))
+const LazySolanaPage = lazy(() => import('@/pages/SolanaPage/SolanaPage.tsx'))
 
 export const enum commonRoutes {
   HOME = '/',
@@ -12,6 +13,7 @@ export const enum commonRoutes {
   // CLASSIC_EARN = '/classic-earn',
   CLASSIC_ITEM = '/classic/:item',
   // CLASSIC_EARN_ITEM = '/classic-earn/:item',
+  SOLANA = '/solana',
 }
 
 export const routesConfig: Record<commonRoutes, RouteProps> = {
@@ -39,4 +41,8 @@ export const routesConfig: Record<commonRoutes, RouteProps> = {
   //   path: commonRoutes.CLASSIC_EARN_ITEM,
   //   element: <ClassicEarnItemPage />,
   // },
+  [commonRoutes.SOLANA]: {
+    path: commonRoutes.SOLANA,
+    element: <LazySolanaPage />,
+  },
 }
