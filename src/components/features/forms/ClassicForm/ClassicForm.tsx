@@ -14,7 +14,7 @@ import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
 import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
 import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
 
 export const ClassicForm = () => {
@@ -22,19 +22,19 @@ export const ClassicForm = () => {
   const infoCardData = useFormInfo(form.watch())
   const amount = form.watch('amount')
   const formCurrencyData = getFormCurrencyValues(amount)
-  // const [withdrawalOptions, setWithdrawalOptions] = useState<string[]>([])
+  const [withdrawalOptions, setWithdrawalOptions] = useState<string[]>([])
   // // console.log(infoCardData)
   const amountCurrency = form.watch('amountCurrency')
   //
-  // useEffect(() => {
-  //   if (amountCurrency === 'USDT') {
-  //     setWithdrawalOptions(['Tokens', 'USDT'])
-  //     form.setValue('withdrawal', 'USDT')
-  //   } else {
-  //     setWithdrawalOptions(['Tokens', 'SOL'])
-  //     form.setValue('withdrawal', 'SOL')
-  //   }
-  // }, [amountCurrency])
+  useEffect(() => {
+    if (amountCurrency === 'USDT') {
+      setWithdrawalOptions(['Tokens', 'USDT'])
+      form.setValue('withdrawal', 'USDT')
+    } else {
+      setWithdrawalOptions(['Tokens', 'SOL'])
+      form.setValue('withdrawal', 'SOL')
+    }
+  }, [amountCurrency])
 
   useEffect(() => {
     onlyIntegersInputValidator()
@@ -97,8 +97,15 @@ export const ClassicForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="tokens">Tokens</SelectItem>
-                  <SelectItem value={amountCurrency}>Hello</SelectItem>
+                  {withdrawalOptions.map((option, i) => {
+                    return (
+                      <SelectItem key={i} value={option}>
+                        {option}
+                      </SelectItem>
+                    )
+                  })}
+                  {/*<SelectItem value="tokens">Tokens</SelectItem>*/}
+                  {/*<SelectItem value={amountCurrency}>Hello</SelectItem>*/}
                 </SelectContent>
               </Select>
               <FormMessage />

@@ -1,4 +1,5 @@
 import { currencyIcons } from '@/lib/constants.tsx'
+import { formatCurrencyNumber } from '@/components/common/FormCurrency/lib.ts'
 
 interface Currency {
   title: string
@@ -21,7 +22,7 @@ export const FormCurrency = (props: FormCurrencyProps) => {
               <img className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[item.title]} />
               {item.title}
             </span>
-            <span>$ {item.value}</span>
+            <span>$ {formatCurrencyNumber(item.value)}</span>
           </div>
         ))}
       </div>
@@ -33,7 +34,7 @@ export const FormCurrency = (props: FormCurrencyProps) => {
               <img className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[item.title]} />
               {item.title}
             </span>
-            <span>$ {item.value}</span>
+            <span>$ {formatCurrencyNumber(item.value)}</span>
           </div>
         ))}
       </div>
