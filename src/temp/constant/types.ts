@@ -1,161 +1,161 @@
 export type ProgramType = {
-  "version": "0.1.0",
-  "name": "solana_hello_world",
-  "instructions": [
+  version: '0.1.0'
+  name: 'solana_hello_world'
+  instructions: [
     {
-      "name": "createMessage",
-      "accounts": [
+      name: 'createMessage'
+      accounts: [
         {
-          "name": "message",
-          "isMut": true,
-          "isSigner": true
+          name: 'message'
+          isMut: true
+          isSigner: true
         },
         {
-          "name": "author",
-          "isMut": true,
-          "isSigner": true
+          name: 'author'
+          isMut: true
+          isSigner: true
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
+          name: 'systemProgram'
+          isMut: false
+          isSigner: false
+        },
+      ]
+      args: [
         {
-          "name": "content",
-          "type": "string"
-        }
+          name: 'content'
+          type: 'string'
+        },
       ]
     },
     {
-      "name": "updateMessage",
-      "accounts": [
+      name: 'updateMessage'
+      accounts: [
         {
-          "name": "message",
-          "isMut": true,
-          "isSigner": false
+          name: 'message'
+          isMut: true
+          isSigner: false
         },
         {
-          "name": "author",
-          "isMut": true,
-          "isSigner": true
+          name: 'author'
+          isMut: true
+          isSigner: true
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "content",
-          "type": "string"
-        }
+          name: 'systemProgram'
+          isMut: false
+          isSigner: false
+        },
       ]
-    }
-  ],
-  "accounts": [
+      args: [
+        {
+          name: 'content'
+          type: 'string'
+        },
+      ]
+    },
+  ]
+  accounts: [
     {
-      "name": "message",
-      "type": {
-        "kind": "struct",
-        "fields": [
+      name: 'message'
+      type: {
+        kind: 'struct'
+        fields: [
           {
-            "name": "author",
-            "type": "publicKey"
+            name: 'author'
+            type: 'publicKey'
           },
           {
-            "name": "timestamp",
-            "type": "i64"
+            name: 'timestamp'
+            type: 'i64'
           },
           {
-            "name": "content",
-            "type": "string"
-          }
+            name: 'content'
+            type: 'string'
+          },
         ]
       }
-    }
+    },
   ]
-};
+}
 
 export const IDL: ProgramType = {
-  "version": "0.1.0",
-  "name": "solana_hello_world",
-  "instructions": [
+  version: '0.1.0',
+  name: 'solana_hello_world',
+  instructions: [
     {
-      "name": "createMessage",
-      "accounts": [
+      name: 'createMessage',
+      accounts: [
         {
-          "name": "message",
-          "isMut": true,
-          "isSigner": true
+          name: 'message',
+          isMut: true,
+          isSigner: true,
         },
         {
-          "name": "author",
-          "isMut": true,
-          "isSigner": true
+          name: 'author',
+          isMut: true,
+          isSigner: true,
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
+          name: 'systemProgram',
+          isMut: false,
+          isSigner: false,
+        },
       ],
-      "args": [
+      args: [
         {
-          "name": "content",
-          "type": "string"
-        }
-      ]
+          name: 'content',
+          type: 'string',
+        },
+      ],
     },
     {
-      "name": "updateMessage",
-      "accounts": [
+      name: 'updateMessage',
+      accounts: [
         {
-          "name": "message",
-          "isMut": true,
-          "isSigner": false
+          name: 'message',
+          isMut: true,
+          isSigner: false,
         },
         {
-          "name": "author",
-          "isMut": true,
-          "isSigner": true
+          name: 'author',
+          isMut: true,
+          isSigner: true,
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
+          name: 'systemProgram',
+          isMut: false,
+          isSigner: false,
+        },
       ],
-      "args": [
+      args: [
         {
-          "name": "content",
-          "type": "string"
-        }
-      ]
-    }
+          name: 'content',
+          type: 'string',
+        },
+      ],
+    },
   ],
-  "accounts": [
+  accounts: [
     {
-      "name": "message",
-      "type": {
-        "kind": "struct",
-        "fields": [
+      name: 'message',
+      type: {
+        kind: 'struct',
+        fields: [
           {
-            "name": "author",
-            "type": "publicKey"
+            name: 'author',
+            type: 'publicKey',
           },
           {
-            "name": "timestamp",
-            "type": "i64"
+            name: 'timestamp',
+            type: 'i64',
           },
           {
-            "name": "content",
-            "type": "string"
-          }
-        ]
-      }
-    }
-  ]
-};
+            name: 'content',
+            type: 'string',
+          },
+        ],
+      },
+    },
+  ],
+}

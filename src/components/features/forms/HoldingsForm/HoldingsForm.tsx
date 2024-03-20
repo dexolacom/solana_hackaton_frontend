@@ -35,19 +35,19 @@ export const HoldingsForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
         <FormField
           control={form.control}
-          name="portfolio"
+          name='portfolio'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Portfolio</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select portfolio from the list" />
+                    <SelectValue placeholder='Select portfolio from the list' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="classic">Classic</SelectItem>
-                  <SelectItem value="classicEarn">Classic + Earn</SelectItem>
+                  <SelectItem value='classic'>Classic</SelectItem>
+                  <SelectItem value='classicEarn'>Classic + Earn</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -57,18 +57,18 @@ export const HoldingsForm = () => {
 
         <FormField
           control={form.control}
-          name="amount"
+          name='amount'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
                 <Input
-                  type="number"
-                  pattern="/^-?\d+\.?\d*$/"
+                  type='number'
+                  pattern='/^-?\d+\.?\d*$/'
                   onInput={(e) =>
                     ((e.target as HTMLInputElement).value = (e.target as HTMLInputElement).value.slice(0, 10))
                   }
-                  placeholder="Enter amount of investment"
+                  placeholder='Enter amount of investment'
                   {...field}
                 />
               </FormControl>
@@ -80,7 +80,7 @@ export const HoldingsForm = () => {
 
         <FormField
           control={form.control}
-          name="amountCurrency"
+          name='amountCurrency'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Amount Currency</FormLabel>
@@ -91,8 +91,8 @@ export const HoldingsForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="USDC">USDC</SelectItem>
-                  <SelectItem value="SOL">SOL</SelectItem>
+                  <SelectItem value='USDC'>USDC</SelectItem>
+                  <SelectItem value='SOL'>SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -102,20 +102,20 @@ export const HoldingsForm = () => {
 
         <FormField
           control={form.control}
-          name="withdrawal"
+          name='withdrawal'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Withdrawal Currency</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select the currency of withdrawal" />
+                    <SelectValue placeholder='Select the currency of withdrawal' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="btc">BTC</SelectItem>
-                  <SelectItem value="eth">ETH</SelectItem>
-                  <SelectItem value="sol">SOL</SelectItem>
+                  <SelectItem value='btc'>BTC</SelectItem>
+                  <SelectItem value='eth'>ETH</SelectItem>
+                  <SelectItem value='sol'>SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

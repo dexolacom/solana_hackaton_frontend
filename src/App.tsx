@@ -10,9 +10,9 @@ function App() {
   const { modalName } = useModalsContext()
 
   return (
-    <div className="wrapper">
+    <div className='wrapper'>
       <Header />
-      <main className="content">
+      <main className='content'>
         <AppRouter />
       </main>
       {modalName && <ModalsFactory />}

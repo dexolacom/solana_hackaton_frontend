@@ -1902,10 +1902,7 @@
           {
             "name": "positionBitmap",
             "type": {
-              "array": [
-                "u8",
-                32
-              ]
+              "array": ["u8", 32]
             }
           }
         ]
@@ -2005,10 +2002,7 @@
           {
             "name": "whirlpoolBump",
             "type": {
-              "array": [
-                "u8",
-                1
-              ]
+              "array": ["u8", 1]
             }
           },
           {
@@ -2018,10 +2012,7 @@
           {
             "name": "tickSpacingSeed",
             "type": {
-              "array": [
-                "u8",
-                2
-              ]
+              "array": ["u8", 2]
             }
           },
           {
@@ -2168,10 +2159,7 @@
           {
             "name": "rewardGrowthsOutside",
             "type": {
-              "array": [
-                "u128",
-                3
-              ]
+              "array": ["u128", 3]
             }
           }
         ]
@@ -2190,30 +2178,22 @@
         "fields": [
           {
             "name": "mint",
-            "docs": [
-              "Reward token mint."
-            ],
+            "docs": ["Reward token mint."],
             "type": "publicKey"
           },
           {
             "name": "vault",
-            "docs": [
-              "Reward vault token account."
-            ],
+            "docs": ["Reward vault token account."],
             "type": "publicKey"
           },
           {
             "name": "authority",
-            "docs": [
-              "Authority account that has permission to initialize the reward and set emissions."
-            ],
+            "docs": ["Authority account that has permission to initialize the reward and set emissions."],
             "type": "publicKey"
           },
           {
             "name": "emissionsPerSecondX64",
-            "docs": [
-              "Q64.64 number that indicates how many tokens per second are earned per unit of liquidity."
-            ],
+            "docs": ["Q64.64 number that indicates how many tokens per second are earned per unit of liquidity."],
             "type": "u128"
           },
           {

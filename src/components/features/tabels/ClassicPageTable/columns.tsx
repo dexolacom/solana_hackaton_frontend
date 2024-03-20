@@ -14,12 +14,12 @@ export type TableData = {
 export const columns: ColumnDef<TableData>[] = [
   {
     accessorKey: 'token',
-    header: () => <div className="text-left">Token</div>,
+    header: () => <div className='text-left'>Token</div>,
     cell: ({ row }) => {
       const { title, fullTitle } = row.original.token
       return (
         <div className={'flex gap-2 text-left items-center'}>
-          <img className={'h-6 w-6'} src={currencyIcons[title]} alt="" />
+          <img className={'h-6 w-6'} src={currencyIcons[title]} alt='' />
           <div className={'flex flex-col'}>
             <span className={'font-medium'}>{title}</span>
             <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
@@ -50,6 +50,6 @@ export const columns: ColumnDef<TableData>[] = [
   },
   {
     accessorKey: 'marketCap',
-    header: () => <div className="text-right">Market Cup</div>,
+    header: () => <div className='text-right'>Market Cup</div>,
   },
 ]
