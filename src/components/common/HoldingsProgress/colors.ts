@@ -9,17 +9,18 @@ export const colors: Record<string, Record<string, string>> = {
     BONK: 'bg-blue-200',
     PYTH: 'bg-blue-100',
   },
-  classicEarn: {
-    BTC: 'bg-teal-600',
+  solana: {
     SOL: 'bg-teal-400',
-    ETH: 'bg-teal-300',
     JUP: 'bg-teal-200',
     RNDR: 'bg-teal-400',
     HNT: 'bg-teal-300',
     BONK: 'bg-teal-200',
     PYTH: 'bg-teal-100',
+    RAY: 'bg-teal-300',
+    JTO: 'bg-teal-200',
+    WIF: 'bg-teal-100',
   },
-  solana: {
+  classicEarn: {
     BTC: 'bg-gray-600',
     SOL: 'bg-gray-400',
     ETH: 'bg-gray-300',
@@ -28,8 +29,5 @@ export const colors: Record<string, Record<string, string>> = {
     HNT: 'bg-gray-300',
     BONK: 'bg-gray-200',
     PYTH: 'bg-gray-100',
-    RAY: 'bg-gray-400',
-    JTO: 'bg-gray-300',
-    WIF: 'bg-gray-200',
   },
 }

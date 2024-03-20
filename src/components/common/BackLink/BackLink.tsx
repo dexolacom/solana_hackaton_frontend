@@ -11,7 +11,7 @@ export const BackLink = (props: BackLinkProps) => {
 
   return (
     <AppLink to={path} variant={'ghost'} className={'mb-8 gap-2 normal-case'}>
-      <ChevronLeft className="h-5 w-5 mt-[2px]" />
+      <ChevronLeft className='h-5 w-5 mt-[2px]' />
       {title}
     </AppLink>
   )

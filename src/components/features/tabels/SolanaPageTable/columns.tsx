@@ -19,13 +19,13 @@ export const columns: ColumnDef<TableData>[] = [
       const { title, fullTitle } = row.original.token
       return (
         <div className={'flex gap-2 text-left items-center'}>
-          <img className={'h-6 w-6'} src={currencyIcons[title]} alt='' />
-          <div className={'flex flex-col'}>
-            <span className={'font-medium'}>{title}</span>
-            <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
-          </div>
+        <img className={'h-6 w-6'} src={currencyIcons[title]} alt='' />
+      <div className={'flex flex-col'}>
+      <span className={'font-medium'}>{title}</span>
+        <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
         </div>
-      )
+        </div>
+    )
     },
   },
   {

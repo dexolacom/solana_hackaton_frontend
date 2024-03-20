@@ -1,12 +1,7 @@
-import { Program, AnchorProvider, web3 } from "@project-serum/anchor";
-import { ProgramType } from "../constant/types";
-import {
-  connection,
-  commitmentLevel,
-  ProgramId,
-  ProgramInterface,
-} from "../constant/constant";
-import { AnchorWallet } from "@solana/wallet-adapter-react";
+import { Program, AnchorProvider, web3 } from '@project-serum/anchor'
+import { ProgramType } from '../constant/types'
+import { connection, commitmentLevel, ProgramId, ProgramInterface } from '../constant/constant'
+import { AnchorWallet } from '@solana/wallet-adapter-react'
 
 export default async function updateMessage(
   inputtedMessage: string,
@@ -15,16 +10,12 @@ export default async function updateMessage(
 ) {
   const provider = new AnchorProvider(connection, wallet, {
     preflightCommitment: commitmentLevel,
-  });
+  })
 
-  if (!provider) return;
+  if (!provider) return
 
   /* create the program interface combining the idl, program Id, and provider */
-  const program = new Program(
-    ProgramInterface,
-    ProgramId,
-    provider
-  ) as Program<ProgramType>;
+  const program = new Program(ProgramInterface, ProgramId, provider) as Program<ProgramType>
 
   try {
     /* interact with the program via rpc */
@@ -34,16 +25,14 @@ export default async function updateMessage(
         author: provider.wallet.publicKey,
         systemProgram: web3.SystemProgram.programId,
       },
-    });
-    console.log(txn);
+    })
+    console.log(txn)
 
-    const message = await program.account.message.fetch(
-      messageAccount.publicKey
-    );
-    console.log("updated messageAccount Data: ", message);
-    return message;
+    const message = await program.account.message.fetch(messageAccount.publicKey)
+    console.log('updated messageAccount Data: ', message)
+    return message
   } catch (err) {
-    console.log("Transaction error: ", err);
-    return;
+    console.log('Transaction error: ', err)
+    return
   }
 }

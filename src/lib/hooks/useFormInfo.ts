@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 type FormData = {
   amount: string | number
   amountCurrency: string
-  withdrawal: string
+  withdrawal: string | string[]
 }
 
 export const useFormInfo = (formData: FormData) => {

@@ -1,12 +1,12 @@
-import idl from "./idl.json";
-import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
+import idl from './idl.json'
+import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js'
 
 /* Constants for RPC Connection the Solana Blockchain */
-export const commitmentLevel = "processed";
+export const commitmentLevel = 'processed'
 export const endpoint =
-"https://solana-devnet.g.alchemy.com/v2/VERaxcMMFR84w2yCPfcC3zncSv4Nwegn" || clusterApiUrl("devnet");
-export const connection = new Connection(endpoint, commitmentLevel);
+  'https://solana-devnet.g.alchemy.com/v2/VERaxcMMFR84w2yCPfcC3zncSv4Nwegn' || clusterApiUrl('devnet')
+export const connection = new Connection(endpoint, commitmentLevel)
 
 /* Constants for the Deployed */
-export const ProgramId = new PublicKey(idl.metadata.address);
-export const ProgramInterface = JSON.parse(JSON.stringify(idl));
+export const ProgramId = new PublicKey(idl.metadata.address)
+export const ProgramInterface = JSON.parse(JSON.stringify(idl))
