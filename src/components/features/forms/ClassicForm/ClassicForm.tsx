@@ -36,8 +36,6 @@ export const ClassicForm = () => {
     onlyIntegersInputValidator()
   }, [])
 
-  // console.log(form.watch().amountCurrency)
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
