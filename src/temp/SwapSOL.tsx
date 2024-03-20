@@ -1,5 +1,7 @@
 import { PublicKey, Transaction, TransactionInstruction, SystemProgram } from "@solana/web3.js";
-import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from "@solana/spl-token";
+//@ts-ignore
+import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync  } from "@solana/spl-token";
+
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 import {
   connection,

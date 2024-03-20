@@ -9,7 +9,6 @@ const NativeStaking = () => {
   const { sendTransaction, signTransaction, publicKey } = useWallet()
 
   const [amount, setAmount] = useState(0)
-  const [rewards, setRewards] = useState(0)
 
   useEffect(() => {
     if (publicKey) {
