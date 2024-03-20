@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { SolanaWalletProvider } from '@/providers/WalletProvider/config.tsx'
 import { ToastProvider } from '@/components/ui/Toast.tsx'
 import { ModalsProvider } from '@/providers/ModalProvider/ModalProvider.tsx'
+import { AppProvider } from './providers/AppProvider/AppProvider'
 
 const queryClient = new QueryClient()
 
@@ -13,11 +14,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <SolanaWalletProvider>
       <QueryClientProvider client={queryClient}>
-        <ModalsProvider>
-          <ToastProvider>
-            <App />
-          </ToastProvider>
-        </ModalsProvider>
+        <AppProvider>
+          <ModalsProvider>
+            <ToastProvider>
+              <App />
+            </ToastProvider>
+          </ModalsProvider>
+        </AppProvider>
       </QueryClientProvider>
     </SolanaWalletProvider>
   </BrowserRouter>
