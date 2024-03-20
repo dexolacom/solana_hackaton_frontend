@@ -3,7 +3,8 @@ import house from '@/assets/icons/house.svg'
 import briefcase from '../../../assets/icons/briefCase.svg'
 import { AppLink } from '@/components/common/AppLink/AppLink.tsx'
 import { useLocation } from 'react-router-dom'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { WalletButton } from '@/temp/WalletButton/WalletButton'
+import { WalletButtonContent } from '@/temp/WalletButtonContent/WalletButtonContent'
 
 export const Header = () => {
   const location = useLocation()
@@ -21,7 +22,9 @@ export const Header = () => {
           My Holdings
         </AppLink>
       </span>
-      <WalletMultiButton />
+      <WalletButton>
+        <WalletButtonContent />
+      </WalletButton>
     </header>
   )
 }

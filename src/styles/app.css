@@ -1,75 +1,46 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
 }
 
 .content {
-  flex: 1;
-  width: 100%;
-  max-width: 1760px;
-  padding: 0 1rem 0 1rem;
-  margin: 48px auto;
+	flex: 1;
+	width: 100%;
+	max-width: 1760px;
+	padding: 0 1rem 0 1rem;
+	margin: 48px auto;
 }
 
 /*styles for wallets adapter*/
 
 .wallet-adapter-button-trigger {
-  background-color: hsl(217, 91%, 60%) !important;
-  padding: 0.5rem 1rem !important;
-  transition: background-color 0.3s;
+	border-radius: 24px;
+	border: 2px solid #0f1729;
+	background-color: transparent !important;
+	padding: 4px 12px;
+	transition: all 0.1s ease;
 }
 
 .wallet-adapter-button-trigger:hover {
-  background-color: hsl(217, 91%, 60%, 0.9) !important;
+	border: 2px solid hsl(222, 46%, 11%, 0.8) !important;
 }
 
-.wallet-adapter-button {
-  color: #ffffff;
-  font-family: Lufga, sans-serif !important;
-}
-
-.wallet-adapter-button:hover {
-  /*background-color: hsl(217, 91%, 60%, 0.9) !important;*/
-  background-color: hsl(213, 94%, 68%) !important;
-  transition: background-color 0.3s;
-}
-
-.wallet-adapter-modal-overlay {
-  background: hsl(215.29, 19.32%, 34.51%, 0.5) !important;
-}
-
-.wallet-adapter-modal-wrapper {
-  background-color: hsl(217, 91%, 60%) !important;
-  box-shadow: none !important;
-}
-
-.wallet-adapter-modal-button-close {
-  display: none !important;
-}
-
-.wallet-adapter-modal-title {
-  font-family: Lufga, sans-serif;
-  /*color: hsl(222, 47%, 11%) !important;*/
-  color: #ffffff;
-  padding: 24px !important;
-  width: 100%;
-  max-width: 300px;
-}
-
-.wallet-adapter-modal-list-more {
-  color: #ffffff;
-  font-family: Lufga, sans-serif;
-}
-
-.wallet-adapter-modal-list-more svg {
-  fill: #ffffff;
+.wallet-adapter-button:not([disabled]):hover {
+	border: 2px solid hsl(222, 46%, 11%, 0.8) !important;
 }
 
 .wallet-adapter-dropdown-list {
-  background-color: hsl(217, 91%, 60%) !important;
+	background: hsl(222, 46%, 11%) !important;
+	font-family: Lufga, sans-serif !important;
 }
 
-.wallet-adapter-dropdown-list-item:hover {
-  background-color: hsl(213, 94%, 68%) !important;
+.wallet-adapter-dropdown-list-item:not([disabled]):hover {
+	background-color: hsl(0, 0%, 100%, 0.1) !important;
+}
+
+.wallet-adapter-modal-wrapper {
+	background: initial !important;
+	background-color: #070b14 !important;
+	font-family: Lufga, sans-serif !important;
 }

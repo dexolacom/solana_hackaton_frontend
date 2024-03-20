@@ -3,9 +3,11 @@ import { MarinadeUtils, Marinade, MarinadeConfig } from '@marinade.finance/marin
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletError } from '@solana/wallet-adapter-base'
 import { PublicKey } from '@solana/web3.js'
+import { useBalance } from '../WalletButtonContent/lib/useBalance'
 
 
 export const Stake = () => {
+  const { updateBalance } = useBalance();
 
   const [amount, setAmount] = useState(0)
   const [processingTransaction, setProcessingTransaction] = useState(false)
@@ -29,19 +31,21 @@ export const Stake = () => {
         return console.error('Not provider')
       }
       setProcessingTransaction(true)
-      
+
       const test = await marinade.getUsersVoteRecord(publicKey!);
 
 
       const { transaction } = await marinade.deposit(MarinadeUtils.solToLamports(amount))
       const transactionSignature = await sendTransaction(transaction, connection)
       onTransaction?.(transactionSignature)
+      await updateBalance;
     } catch (err) {
       if (err instanceof Error && !(err instanceof WalletError)) {
         onError?.(err)
       }
     } finally {
       setProcessingTransaction(false)
+
     }
   };
 
