@@ -17,7 +17,7 @@ export const WalletButtonContent = () => {
   const ButtonContent = () => {
     return <div
       className={`px-3 py-1 ${publicKey ? 'bg-actions' : 'bg-inherit'} 
-      rounded-xl ${publicKey ? 'text-white' : 'text-card-foreground '}`}
+      rounded-md ${publicKey ? 'text-white' : 'text-card-foreground '}`}
     >
       {getButtonContent()}
     </div>
