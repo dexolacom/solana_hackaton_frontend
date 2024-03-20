@@ -3,8 +3,8 @@ import house from '@/assets/icons/house.svg'
 import briefcase from '../../../assets/icons/briefCase.svg'
 import { AppLink } from '@/components/common/AppLink/AppLink.tsx'
 import { useLocation } from 'react-router-dom'
-import { WalletButton } from '@/temp/WalletButton/WalletButton'
-import { WalletButtonContent } from '@/temp/WalletButtonContent/WalletButtonContent'
+import { WalletButton } from '@/components/features/WalletButton/WalletButton'
+import { WalletButtonContent } from '@/components/features/WalletButtonContent/WalletButtonContent'
 
 export const Header = () => {
   const location = useLocation()

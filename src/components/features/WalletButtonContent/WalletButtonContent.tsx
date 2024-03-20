@@ -1,9 +1,10 @@
-import { useBalance } from "./lib/useBalance";
+import { useAppContext } from '@/providers/AppProvider/AppProvider';
+import { useWallet } from '@solana/wallet-adapter-react'
 
 export const WalletButtonContent = () => {
 
-  const { balance, publicKey } = useBalance();
-  console.log("🚀 ~ WalletButtonContent ~ balance:", balance)
+  const { publicKey } = useWallet();
+  const { balance } = useAppContext();
 
   const getButtonContent = () => {
     if (publicKey) {
@@ -15,7 +16,8 @@ export const WalletButtonContent = () => {
 
   const ButtonContent = () => {
     return <div
-      className={`px-3 py-1 ${publicKey ? 'bg-actions' : 'bg-inherit'} rounded-xl ${publicKey ? 'text-white' : 'text-card-foreground '}`}
+      className={`px-3 py-1 ${publicKey ? 'bg-actions' : 'bg-inherit'} 
+      rounded-xl ${publicKey ? 'text-white' : 'text-card-foreground '}`}
     >
       {getButtonContent()}
     </div>

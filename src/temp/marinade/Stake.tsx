@@ -2,13 +2,10 @@ import { useState } from 'react'
 import { MarinadeUtils, Marinade, MarinadeConfig } from '@marinade.finance/marinade-ts-sdk'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletError } from '@solana/wallet-adapter-base'
-import { PublicKey } from '@solana/web3.js'
-import { useBalance } from '../WalletButtonContent/lib/useBalance'
-
+import { useAppContext } from '@/providers/AppProvider/AppProvider'
 
 export const Stake = () => {
-  const { updateBalance } = useBalance();
-
+  const {getBalance} = useAppContext();
   const [amount, setAmount] = useState(0)
   const [processingTransaction, setProcessingTransaction] = useState(false)
 
@@ -32,13 +29,10 @@ export const Stake = () => {
       }
       setProcessingTransaction(true)
 
-      const test = await marinade.getUsersVoteRecord(publicKey!);
-
-
       const { transaction } = await marinade.deposit(MarinadeUtils.solToLamports(amount))
       const transactionSignature = await sendTransaction(transaction, connection)
       onTransaction?.(transactionSignature)
-      await updateBalance;
+      await getBalance();
     } catch (err) {
       if (err instanceof Error && !(err instanceof WalletError)) {
         onError?.(err)

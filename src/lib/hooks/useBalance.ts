@@ -17,5 +17,5 @@ export const useBalance = () => {
     getBalance();
   }, [getBalance]);
 
-  return { balance, publicKey, getBalance };
+  return { balance, getBalance };
 }
