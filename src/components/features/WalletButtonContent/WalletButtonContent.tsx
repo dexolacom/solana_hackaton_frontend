@@ -1,5 +1,6 @@
 import { useAppContext } from '@/providers/AppProvider/AppProvider';
 import { useWallet } from '@solana/wallet-adapter-react'
+import { currencyIcons } from '@/lib/constants'
 
 export const WalletButtonContent = () => {
 
@@ -24,12 +25,13 @@ export const WalletButtonContent = () => {
   }
 
   return (
-    <div className='flex gap-3 text-sm'>
+    <div className='flex gap-2 text-sm'>
       {publicKey ?
         <>
           <ButtonContent />
-          <div className='px-3 py-1 text-card-foreground font-roboto'>
-            {balance ? (balance / 1000000000).toFixed(3) : 0.000}
+          <div className='px-3 py-1 text-card-foreground font-roboto flex gap-1'>
+            <img src={currencyIcons['SOL']} alt="Coin image" width={16} height={16} />
+            <div>{balance ? (balance / 1000000000).toFixed(3) : 0.000}</div>
           </div>
         </> : <ButtonContent />
       }
