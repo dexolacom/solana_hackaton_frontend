@@ -1,9 +1,19 @@
-import { TableData } from './columns';
-import { useProjectById } from '../../../../../lib/api/hooks/useProjectById';
-import { classicTemplate } from '@/lib/constants';
+import { TableData } from '../../components/features/tabels/ClassicPageTable/lib/columns';
+import { useProjectById } from '../api/hooks/useProjectById';
 import { currencyFormatter } from '@/lib/utils';
 
-export const useTableData = (id?: string) => {
+interface TemplateType {
+  symbol: string,
+  icon: string,
+  distribution: string
+}
+
+interface UseTableData {
+  id?: string,
+  template: TemplateType[]
+}
+
+export const useTableData = ({ id, template }: UseTableData) => {
 
   const { projectById } = useProjectById(id);
 
@@ -18,7 +28,7 @@ export const useTableData = (id?: string) => {
     marketCap: ''
   }
 
-  const dataTable: TableData[] = classicTemplate.map(item => {
+  const dataTable: TableData[] = template.map(item => {
     const match = projectById?.find(dataItem => dataItem.symbol === item.symbol);
     if (match) {
       return {

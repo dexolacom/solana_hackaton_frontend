@@ -63,3 +63,15 @@ export const classicTemplate = [
   { symbol: 'BONK', icon: bonk, distribution: '5%' },
   { symbol: 'PYTH', icon: pyth, distribution: '5%' },
 ]
+
+export const ecosystemTemplate = [
+  { symbol: 'SOL', icon: sol, distribution: '30%' },
+  { symbol: 'JUP', icon: jup, distribution: '15 %' },
+  { symbol: 'RNDR', icon: rndr, distribution: '15%' },
+  { symbol: 'HNT', icon: hnt, distribution: '15%' },
+  { symbol: 'BONK', icon: bonk, distribution: '10%' },
+  { symbol: 'PYTH', icon: pyth, distribution: '5%' },
+  { symbol: 'RAY', icon: btc, distribution: '5%' },
+  { symbol: 'JTO', icon: eth, distribution: '5%' },
+  { symbol: 'WIF', icon: rndr, distribution: '5%' },
+]
