@@ -8,7 +8,6 @@ import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx'
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx'
 import { ClassicPageTable } from '@/components/features/tabels/ClassicPageTable/ClassicPageTable.tsx'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
-import { Skeleton } from '@/components/common/Skeleton/Skeleton.tsx'
 
 const ClassicPage = () => {
   const tempData = {
