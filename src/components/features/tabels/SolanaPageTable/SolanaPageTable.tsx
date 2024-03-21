@@ -8,7 +8,7 @@ export const SolanaPageTable = () => {
         title: 'BTC',
         fullTitle: 'Bitcoin',
       },
-      riskType: 'low',
+      riskType: 'Low',
       distribution: '30%',
     },
     {
@@ -16,7 +16,7 @@ export const SolanaPageTable = () => {
         title: 'SOL',
         fullTitle: 'Solana',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
       distribution: '20%',
     },
     {
@@ -24,7 +24,7 @@ export const SolanaPageTable = () => {
         title: 'ETH',
         fullTitle: 'Ethereum',
       },
-      riskType: 'high',
+      riskType: 'High',
       distribution: '15%',
     },
     {
@@ -32,7 +32,7 @@ export const SolanaPageTable = () => {
         title: 'JUP',
         fullTitle: 'Jupiter',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
       distribution: '10%',
     },
     {
@@ -40,7 +40,7 @@ export const SolanaPageTable = () => {
         title: 'RNDR',
         fullTitle: 'Render',
       },
-      riskType: 'low',
+      riskType: 'Low',
       distribution: '10%',
     },
     {
@@ -48,7 +48,7 @@ export const SolanaPageTable = () => {
         title: 'HNT',
         fullTitle: 'Helium',
       },
-      riskType: 'low',
+      riskType: 'Low',
       distribution: '5%',
     },
     {
@@ -56,7 +56,7 @@ export const SolanaPageTable = () => {
         title: 'BONK',
         fullTitle: 'Bonk',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
       distribution: '5%',
     },
     {
@@ -64,7 +64,7 @@ export const SolanaPageTable = () => {
         title: 'PYTH',
         fullTitle: 'Pyth Network',
       },
-      riskType: 'high',
+      riskType: 'High',
       distribution: '5%',
     },
   ]

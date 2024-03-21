@@ -8,56 +8,56 @@ export const ClassicItemTable = () => {
         title: 'BTC',
         fullTitle: 'Bitcoin',
       },
-      riskType: 'low',
+      riskType: 'Low',
     },
     {
       token: {
         title: 'SOL',
         fullTitle: 'Solana',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
     },
     {
       token: {
         title: 'ETH',
         fullTitle: 'Ethereum',
       },
-      riskType: 'high',
+      riskType: 'High',
     },
     {
       token: {
         title: 'JUP',
         fullTitle: 'Jupiter',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
     },
     {
       token: {
         title: 'RNDR',
         fullTitle: 'Render',
       },
-      riskType: 'low',
+      riskType: 'Low',
     },
     {
       token: {
         title: 'HNT',
         fullTitle: 'Helium',
       },
-      riskType: 'low',
+      riskType: 'Low',
     },
     {
       token: {
         title: 'BONK',
         fullTitle: 'Bonk',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
     },
     {
       token: {
         title: 'PYTH',
         fullTitle: 'Pyth Network',
       },
-      riskType: 'high',
+      riskType: 'High',
     },
   ]
 

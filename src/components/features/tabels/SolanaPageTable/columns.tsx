@@ -7,7 +7,7 @@ export type TableData = {
     title: string
     fullTitle: string
   }
-  riskType: 'low' | 'medium' | 'high'
+  riskType: 'Low' | 'Medium' | 'High'
   distribution: string
 }
 

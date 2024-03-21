@@ -7,7 +7,9 @@ export type TableData = {
   distribution: string
   name: string
   riskType: 'Low' | 'Medium' | 'High'
-  coinmarketcapId: number
+  coinPrice: string,
+  change24h: string,
+  marketCap: string
 }
 
 export const columns: ColumnDef<TableData>[] = [
@@ -44,11 +46,12 @@ export const columns: ColumnDef<TableData>[] = [
     header: 'Coin Price',
   },
   {
-    accessorKey: '24hChange',
+    accessorKey: 'change24h',
     header: '24h Change',
   },
   {
     accessorKey: 'marketCap',
     header: () => <div className='text-right'>Market Cup</div>,
+    cell: ({ row }) => <div className='text-right'>{row.original.marketCap}</div>
   },
 ]

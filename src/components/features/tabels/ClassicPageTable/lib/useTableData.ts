@@ -1,9 +1,11 @@
-import { TableData } from '../columns';
-import { useTokenList } from './useTokenList';
+import { TableData } from './columns';
+import { useProjectById } from '../../../../../lib/api/hooks/useProjectById';
 import { classicTemplate } from '@/lib/constants';
+import { currencyFormatter } from '@/lib/utils';
 
-export const useTableData = () => {
-  const { tokenList } = useTokenList();
+export const useTableData = (id?: string) => {
+
+  const { projectById } = useProjectById(id);
 
   const stub: TableData = {
     symbol: '',
@@ -11,17 +13,21 @@ export const useTableData = () => {
     distribution: '',
     name: '',
     riskType: 'Low',
-    coinmarketcapId: 0,
+    coinPrice: '',
+    change24h: '',
+    marketCap: ''
   }
 
   const dataTable: TableData[] = classicTemplate.map(item => {
-    const match = tokenList?.find(dataItem => dataItem.symbol === item.symbol);
+    const match = projectById?.find(dataItem => dataItem.symbol === item.symbol);
     if (match) {
       return {
         ...item,
         name: match.name,
         riskType: match.riskType,
-        coinmarketcapId: match.coinmarketcapId
+        coinPrice: currencyFormatter(match.coinPrice),
+        change24h: `${match.change24h?.toFixed(2)}%`,
+        marketCap: currencyFormatter(match.marketCap)
       };
     } else {
       return stub;
