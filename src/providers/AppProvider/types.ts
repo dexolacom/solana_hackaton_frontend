@@ -5,6 +5,7 @@ export interface AppContextProps {
   getBalance: () => Promise<void>
   classicId?: string 
   ecoSystemId?: string
+  isLoadingId: boolean
 }
 
 export interface AppProviderProps {

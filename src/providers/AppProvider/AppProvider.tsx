@@ -7,12 +7,12 @@ const AppContext = createContext<AppContextProps | undefined>(undefined)
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const { balance, getBalance } = useBalance();
-  const {projectList} = useProjectList();
+  const {projectList, isLoading: isLoadingId} = useProjectList();
   const classicId = projectList?.find(item => item.name === 'Classic')?.id
   const ecoSystemId = projectList?.find(item => item.name === 'Solana Ecosystem')?.id
 
-  const contextValue = useMemo(() => ({ balance, getBalance, classicId, ecoSystemId }), 
-  [balance, getBalance, classicId, ecoSystemId]);
+  const contextValue = useMemo(() => ({ balance, getBalance, classicId, ecoSystemId, isLoadingId }), 
+  [balance, getBalance, classicId, ecoSystemId, isLoadingId]);
 
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
 }
