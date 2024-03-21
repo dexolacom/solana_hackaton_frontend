@@ -3,6 +3,7 @@ import { HoldingsProgress } from '@/components/common/HoldingsProgress/HoldingsP
 import { cn } from '@/lib/utils.ts'
 import { cva } from 'class-variance-authority'
 import holdingsIcon from '@/assets/icons/holdings.svg'
+import { HoldingCurrencies } from '@/components/common/HoldingsCurrencies/HoldingCurrencies.tsx'
 
 interface HoldingsCardProps {
   holdings: {
@@ -16,10 +17,12 @@ interface HoldingsCardProps {
   className?: string
   withIcon?: boolean
   progressVariant?: 'classic' | 'classicEarn' | 'solana'
+  withCurrencies?: boolean
 }
 
 export const HoldingsCard = (props: HoldingsCardProps) => {
-  const { holdings, className, variant, withIcon = true, progressVariant } = props
+  const { holdings, className, variant, withIcon = true, progressVariant, withCurrencies = false } = props
+
   const { title, items } = holdings
 
   const cardVariants = cva('', {
@@ -39,7 +42,11 @@ export const HoldingsCard = (props: HoldingsCardProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <HoldingsProgress holdings={items} progressVariant={progressVariant} />
+        {withCurrencies ? (
+          <HoldingCurrencies />
+        ) : (
+          <HoldingsProgress holdings={items} progressVariant={progressVariant} />
+        )}
       </CardContent>
     </Card>
   )

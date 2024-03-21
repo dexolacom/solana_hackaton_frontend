@@ -56,7 +56,7 @@ export const cards = [
   },
   {
     title: 'solana ecosystem',
-    badges: ['Landing', 'Staking', 'Vaults'],
+    badges: [],
     content: {
       amount: {
         title: 'Total amount invested',
@@ -115,7 +115,7 @@ export const cards = [
   },
   {
     title: 'classic + earn',
-    badges: [],
+    badges: ['Landing', 'Staking', 'Vaults'],
     content: {
       amount: {
         title: 'Total amount invested',
