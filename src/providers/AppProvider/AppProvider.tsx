@@ -1,13 +1,18 @@
 import { createContext, useContext, useMemo } from 'react'
 import { AppContextProps, AppProviderProps } from './types.ts'
 import { useBalance } from '@/lib/hooks/useBalance.ts'
+import { useProjectList } from '@/lib/api/hooks/useProjectList.ts'
 
 const AppContext = createContext<AppContextProps | undefined>(undefined)
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const { balance, getBalance } = useBalance();
+  const {projectList} = useProjectList();
+  const classicId = projectList?.find(item => item.name === 'Classic')?.id
+  const ecoSystemId = projectList?.find(item => item.name === 'Solana Ecosystem')?.id
 
-  const contextValue = useMemo(() => ({ balance, getBalance }), [balance, getBalance])
+  const contextValue = useMemo(() => ({ balance, getBalance, classicId, ecoSystemId }), 
+  [balance, getBalance, classicId, ecoSystemId]);
 
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
 }
