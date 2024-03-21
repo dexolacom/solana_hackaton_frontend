@@ -15,7 +15,7 @@ interface UseTableData {
 
 export const useTableData = ({ id, template }: UseTableData) => {
 
-  const { projectById } = useSolanaProjectById(id);
+  const { projectById, isLoading } = useSolanaProjectById(id);
 
   const stub: TableData = {
     symbol: '',
@@ -44,5 +44,5 @@ export const useTableData = ({ id, template }: UseTableData) => {
     }
   });
 
-  return { dataTable };
+  return { dataTable, isLoading };
 }

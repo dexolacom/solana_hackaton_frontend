@@ -1,3 +1,4 @@
+import { Skeleton } from '@/components/common/Skeleton/Skeleton'
 import { columns } from '@/components/features/tabels/SolanaPageTable/lib/columns'
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
 import { ecosystemTemplate } from '@/lib/constants'
@@ -7,12 +8,13 @@ import { useAppContext } from '@/providers/AppProvider/AppProvider'
 
 export const SolanaPageTable = () => {
 
-  const { ecoSystemId } = useAppContext();
-  const { dataTable } = useTableData({ id: ecoSystemId, template: ecosystemTemplate });
+  const { ecoSystemId, isLoadingId } = useAppContext();
+  const { dataTable, isLoading: isLoadingDataTable } = useTableData({ id: ecoSystemId, template: ecosystemTemplate });
+  const isLoading = isLoadingId || isLoadingDataTable;
 
   return (
     <div>
-      <DataTable columns={columns} data={dataTable} />
+      {isLoading ? <Skeleton height={660} /> : <DataTable columns={columns} data={dataTable} />}
     </div>
   )
 }
