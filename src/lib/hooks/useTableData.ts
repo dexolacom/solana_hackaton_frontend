@@ -1,5 +1,5 @@
 import { TableData } from '../../components/features/tabels/ClassicPageTable/lib/columns';
-import { useProjectById } from '../api/hooks/useProjectById';
+import { useSolanaProjectById } from '../api/hooks/useSolanaProjectById';
 import { currencyFormatter } from '@/lib/utils';
 
 interface TemplateType {
@@ -15,7 +15,7 @@ interface UseTableData {
 
 export const useTableData = ({ id, template }: UseTableData) => {
 
-  const { projectById } = useProjectById(id);
+  const { projectById } = useSolanaProjectById(id);
 
   const stub: TableData = {
     symbol: '',

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProjectById } from '@/lib/api/api';
 
-export const useProjectById = (id?: string) => {
+export const useSolanaProjectById = (id?: string) => {
   const { data, isLoading } = useQuery({
     queryKey: ['projectById'],
-    queryFn: id ? () => getProjectById(id) : undefined,
+    queryFn: () => getProjectById(id || ''),
+    enabled: !!id
   })
 
   const projectById = data?.data?.tokens;
