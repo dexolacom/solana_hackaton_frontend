@@ -18,7 +18,7 @@ export const currencyIcons: Record<string, string> = {
   PYTH: pyth,
 }
 
-export const currencyInfo = [
+export const classicCurrencyInfo = [
   {
     title: 'BTC',
     percent: 0.3,

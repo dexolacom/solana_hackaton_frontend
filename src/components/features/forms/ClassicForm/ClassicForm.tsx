@@ -22,7 +22,9 @@ export const ClassicForm = () => {
   const infoCardData = useFormInfo(form.watch())
   const amount = form.watch('amount')
   const formCurrencyData = getFormCurrencyValues(amount)
-  const amountCurrency = form.watch('amountCurrency')
+  // const amountCurrency = form.watch('amountCurrency')
+
+  // const currencys = ['USDT', 'SOL']
 
   // useEffect(() => {
   //   if (amountCurrency === 'USDT') {
@@ -30,6 +32,20 @@ export const ClassicForm = () => {
   //   } else {
   //     form.setValue('withdrawal', 'SOL')
   //   }
+  // }, [amountCurrency])
+
+  // let selectOptions: string[] = []
+  //
+  // if (amountCurrency === 'USDT') {
+  //   selectOptions = ['Tokens', 'USDT']
+  // } else if (amountCurrency === 'SOL') {
+  //   selectOptions = ['Tokens', 'SOL']
+  // } else {
+  //   selectOptions = []
+  // }
+
+  // useEffect(() => {
+  //   form.resetField('withdrawal')
   // }, [amountCurrency])
 
   useEffect(() => {
@@ -94,7 +110,8 @@ export const ClassicForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='Tokens'>Tokens</SelectItem>
-                  <SelectItem value='USDT'>{amountCurrency}</SelectItem>
+                  <SelectItem value='USDT'>USDT</SelectItem>
+                  <SelectItem value='SOL'>SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

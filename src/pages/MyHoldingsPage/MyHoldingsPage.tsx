@@ -67,7 +67,12 @@ const MyHoldingsPage = () => {
                 <span className={'font-roboto font-medium'}>100000000</span>
               </div>
             </AmountCard>
-            <HoldingsCard className={'w-[65%]'} holdings={tempData.holdings} progressVariant={'solana'} />
+            <HoldingsCard
+              className={'w-[65%]'}
+              holdings={tempData.holdings}
+              progressVariant={'solana'}
+              withCurrencies
+            />
           </PageHeader>
 
           <h3 className={'text-2xl font-semibold mb-8'}>NFT</h3>
