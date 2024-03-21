@@ -16,12 +16,22 @@ import { getFormCurrencyValues, useClassicForm } from '@/components/features/for
 import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
 import { useEffect } from 'react'
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
+import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx'
 
-export const ClassicForm = () => {
+interface ClassicFormProps {
+  currenciesVariant?: 'classic' | 'solana'
+}
+
+export const ClassicForm = (props: ClassicFormProps) => {
+  const { currenciesVariant = 'classic' } = props
+
   const { form, onSubmit } = useClassicForm()
   const infoCardData = useFormInfo(form.watch())
   const amount = form.watch('amount')
-  const formCurrencyData = getFormCurrencyValues(amount)
+
+  const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo
+  const formCurrencyData = getFormCurrencyValues(amount, currencyInfo)
+
   // const amountCurrency = form.watch('amountCurrency')
 
   // const currencys = ['USDT', 'SOL']

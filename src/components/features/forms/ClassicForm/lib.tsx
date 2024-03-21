@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from '@/lib/hooks/useToast.ts'
-import { classicCurrencyInfo } from '@/lib/constants.tsx'
 
 // TODO: add debounce for amount field
 
@@ -43,8 +42,8 @@ export const useClassicForm = () => {
   return { form, onSubmit }
 }
 
-export const getFormCurrencyValues = (amount: string | number) => {
-  return classicCurrencyInfo.map((currency) => ({
+export const getFormCurrencyValues = (amount: string | number, currencyInfo: { title: string; percent: number }[]) => {
+  return currencyInfo.map((currency) => ({
     title: currency.title,
     value: currency.percent * +amount,
   }))

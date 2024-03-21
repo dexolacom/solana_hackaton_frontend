@@ -6,6 +6,9 @@ import rndr from '@/assets/icons/currency/rndr.svg'
 import hnt from '@/assets/icons/currency/hnt.svg'
 import bonk from '@/assets/icons/currency/bonk.svg'
 import pyth from '@/assets/icons/currency/pyth.svg'
+import wif from '@/assets/icons/currency/wif.svg'
+import ray from '@/assets/icons/currency/ray.svg'
+import jto from '@/assets/icons/currency/jto.svg'
 
 export const currencyIcons: Record<string, string> = {
   BTC: btc,
@@ -16,6 +19,9 @@ export const currencyIcons: Record<string, string> = {
   HNT: hnt,
   BONK: bonk,
   PYTH: pyth,
+  WIF: wif,
+  RAY: ray,
+  JTO: jto,
 }
 
 export const classicCurrencyInfo = [
@@ -53,6 +59,45 @@ export const classicCurrencyInfo = [
   },
 ]
 
+export const solanaCurrencyInfo = [
+  {
+    title: 'SOL',
+    percent: 0.3,
+  },
+  {
+    title: 'JUP',
+    percent: 0.15,
+  },
+  {
+    title: 'RNDR',
+    percent: 0.15,
+  },
+  {
+    title: 'HNT',
+    percent: 0.15,
+  },
+  {
+    title: 'BONK',
+    percent: 0.1,
+  },
+  {
+    title: 'PYTH',
+    percent: 0.05,
+  },
+  {
+    title: 'RAY',
+    percent: 0.05,
+  },
+  {
+    title: 'JTO',
+    percent: 0.05,
+  },
+  {
+    title: 'WIF',
+    percent: 0.05,
+  },
+]
+
 export const classicTemplate = [
   { symbol: 'BTC', icon: btc, distribution: '30%' },
   { symbol: 'SOL', icon: sol, distribution: '20%' },
@@ -71,7 +116,7 @@ export const ecosystemTemplate = [
   { symbol: 'HNT', icon: hnt, distribution: '15%' },
   { symbol: 'BONK', icon: bonk, distribution: '10%' },
   { symbol: 'PYTH', icon: pyth, distribution: '5%' },
-  { symbol: 'RAY', icon: btc, distribution: '5%' },
-  { symbol: 'JTO', icon: eth, distribution: '5%' },
-  { symbol: 'WIF', icon: rndr, distribution: '5%' },
+  { symbol: 'RAY', icon: ray, distribution: '5%' },
+  { symbol: 'JTO', icon: jto, distribution: '5%' },
+  { symbol: 'WIF', icon: wif, distribution: '5%' },
 ]
