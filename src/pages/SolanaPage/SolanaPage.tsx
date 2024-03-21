@@ -76,7 +76,7 @@ const SolanaPage = () => {
           <SolanaPageTable />
         </AssetsCard>
         <InvestCard className={'flex-2'}>
-          <ClassicForm />
+          <ClassicForm currenciesVariant={'solana'} />
         </InvestCard>
       </div>
     </div>
