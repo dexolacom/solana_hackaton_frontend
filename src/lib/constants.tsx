@@ -52,3 +52,14 @@ export const currencyInfo = [
     percent: 0.05,
   },
 ]
+
+export const classicTemplate = [
+  { symbol: 'BTC', icon: btc, distribution: '30%' },
+  { symbol: 'SOL', icon: sol, distribution: '20%' },
+  { symbol: 'ETH', icon: eth, distribution: '15%' },
+  { symbol: 'JUP', icon: jup, distribution: '10%' },
+  { symbol: 'RNDR', icon: rndr, distribution: '10%' },
+  { symbol: 'HNT', icon: hnt, distribution: '5%' },
+  { symbol: 'BONK', icon: bonk, distribution: '5%' },
+  { symbol: 'PYTH', icon: pyth, distribution: '5%' },
+]

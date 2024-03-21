@@ -1,14 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { currencyIcons } from '@/lib/constants.tsx'
 import { Badge } from '@/components/ui/Badge.tsx'
 
 export type TableData = {
-  token: {
-    title: string
-    fullTitle: string
-  }
-  riskType: 'low' | 'medium' | 'high'
+  symbol: string
+  icon: string
   distribution: string
+  name: string
+  riskType: 'Low' | 'Medium' | 'High'
+  coinmarketcapId: number
 }
 
 export const columns: ColumnDef<TableData>[] = [
@@ -16,13 +15,13 @@ export const columns: ColumnDef<TableData>[] = [
     accessorKey: 'token',
     header: () => <div className='text-left'>Token</div>,
     cell: ({ row }) => {
-      const { title, fullTitle } = row.original.token
+      const { icon, symbol, name } = row.original
       return (
         <div className={'flex gap-2 text-left items-center'}>
-          <img className={'h-6 w-6'} src={currencyIcons[title]} alt='' />
+          <img className={'h-6 w-6'} src={icon} alt='Coin icon' />
           <div className={'flex flex-col'}>
-            <span className={'font-medium'}>{title}</span>
-            <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
+            <span className={'font-medium'}>{symbol}</span>
+            <span className={'text-xs text-card-additionalForeground'}>{name}</span>
           </div>
         </div>
       )
