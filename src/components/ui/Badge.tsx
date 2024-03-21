@@ -12,9 +12,9 @@ const badgeVariants = cva(
         // medium: 'bg-yellow-100 border-none',
         // high: 'bg-rose-100 border-none',
         default: 'bg-gray-600',
-        low: 'bg-teal-600',
-        medium: 'bg-gray-600',
-        high: 'bg-red-600',
+        Low: 'bg-teal-600',
+        Medium: 'bg-gray-600',
+        High: 'bg-red-600',
       },
     },
     defaultVariants: {

@@ -1,6 +1,14 @@
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
 import { columns } from './columns.tsx'
-import { TableData } from '@/components/features/tabels/ClassicPageTable/columns.tsx'
+
+ type TableData = {
+  token: {
+    title: string
+    fullTitle: string
+  }
+  riskType: 'Low' | 'Medium' | 'High'
+  distribution: string
+}
 
 export const ClassicEarnPageTable = () => {
   const data: TableData[] = [
@@ -9,7 +17,7 @@ export const ClassicEarnPageTable = () => {
         title: 'BTC',
         fullTitle: 'Bitcoin',
       },
-      riskType: 'low',
+      riskType: 'Low',
       distribution: '30%',
     },
     {
@@ -17,7 +25,7 @@ export const ClassicEarnPageTable = () => {
         title: 'SOL',
         fullTitle: 'Solana',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
       distribution: '20%',
     },
     {
@@ -25,7 +33,7 @@ export const ClassicEarnPageTable = () => {
         title: 'ETH',
         fullTitle: 'Ethereum',
       },
-      riskType: 'high',
+      riskType: 'High',
       distribution: '15%',
     },
     {
@@ -33,7 +41,7 @@ export const ClassicEarnPageTable = () => {
         title: 'JUP',
         fullTitle: 'Jupiter',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
       distribution: '10%',
     },
     {
@@ -41,7 +49,7 @@ export const ClassicEarnPageTable = () => {
         title: 'RNDR',
         fullTitle: 'Render',
       },
-      riskType: 'low',
+      riskType: 'Low',
       distribution: '10%',
     },
     {
@@ -49,7 +57,7 @@ export const ClassicEarnPageTable = () => {
         title: 'HNT',
         fullTitle: 'Helium',
       },
-      riskType: 'low',
+      riskType: 'Low',
       distribution: '5%',
     },
     {
@@ -57,7 +65,7 @@ export const ClassicEarnPageTable = () => {
         title: 'BONK',
         fullTitle: 'Bonk',
       },
-      riskType: 'medium',
+      riskType: 'Medium',
       distribution: '5%',
     },
     {
@@ -65,7 +73,7 @@ export const ClassicEarnPageTable = () => {
         title: 'PYTH',
         fullTitle: 'Pyth Network',
       },
-      riskType: 'high',
+      riskType: 'High',
       distribution: '5%',
     },
   ]
