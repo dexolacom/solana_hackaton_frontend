@@ -50,11 +50,11 @@ export const NftCard = (props: NftCardProps) => {
       <CardContent>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
-          <span className={'font-roboto font-medium'}>{content?.invested}</span>
+          <span className={'font-roboto text-sm font-medium'}>{content?.invested}</span>
         </div>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
-          <span className={'font-roboto font-medium'}>{content.price}</span>
+          <span className={'font-roboto text-sm font-medium'}>{content.price}</span>
         </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6'}>

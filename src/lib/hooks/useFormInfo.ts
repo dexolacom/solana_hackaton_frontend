@@ -32,15 +32,15 @@ export const useFormInfo = (formData: FormData) => {
   return [
     {
       title: 'Amount in USD',
-      value: `$ ${amountUSD}`,
+      value: `$${amountUSD}`,
     },
     {
       title: 'Slippage Tolerance',
-      value: `1 %`,
+      value: `1%`,
     },
     {
       title: 'Platform Fee, 0.5%',
-      value: `$ ${fee}`,
+      value: `$${fee}`,
     },
   ]
 }

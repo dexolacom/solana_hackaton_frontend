@@ -14,6 +14,7 @@ module.exports = {
     extend: {
       fontFamily: {
         roboto: ['Roboto mono', 'mono-space'],
+        lufga: ['Lufga', 'sans-serif'],
       },
       fontWeight: {
         light: '300',

@@ -3,7 +3,8 @@ import { HoldingsProgress } from '@/components/common/HoldingsProgress/HoldingsP
 import { cn } from '@/lib/utils.ts'
 import { cva } from 'class-variance-authority'
 import holdingsIcon from '@/assets/icons/holdings.svg'
-import { HoldingCurrencies } from '@/components/common/HoldingsCurrencies/HoldingCurrencies.tsx'
+import { Holding } from '@/components/common/HoldingsProgress/Holding/Holding.tsx'
+import { classicCurrencyInfo } from '@/lib/constants.tsx'
 
 interface HoldingsCardProps {
   holdings: {
@@ -43,7 +44,11 @@ export const HoldingsCard = (props: HoldingsCardProps) => {
       </CardHeader>
       <CardContent>
         {withCurrencies ? (
-          <HoldingCurrencies />
+          <div className={'flex gap-6 flex-wrap'}>
+            {classicCurrencyInfo.map((item, i) => (
+              <Holding key={i} title={item?.title} percent={item?.percent} withIcons />
+            ))}
+          </div>
         ) : (
           <HoldingsProgress holdings={items} progressVariant={progressVariant} />
         )}

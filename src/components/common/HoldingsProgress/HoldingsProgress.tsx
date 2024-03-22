@@ -23,7 +23,7 @@ export const HoldingsProgress = (props: HoldingsProgressProps) => {
       </div>
       <div className={'flex items-center gap-4 flex-wrap'}>
         {holdings.map((item, i) => (
-          <Holding key={i} name={item?.name} percent={item?.percent} className={progressColors[item?.name]} />
+          <Holding key={i} title={item?.name} percent={item?.percent} className={progressColors[item?.name]} />
         ))}
       </div>
     </div>

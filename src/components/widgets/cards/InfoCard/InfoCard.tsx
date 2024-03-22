@@ -16,7 +16,7 @@ export const InfoCard = (props: InfoCardProps) => {
       {data.map((item, i) => (
         <div key={i} className={'flex items-center justify-between text-sm'}>
           <span className={'text-card-additionalForeground'}>{item?.title}</span>
-          <span>{item?.value}</span>
+          <span className={'font-roboto'}>{item?.value}</span>
         </div>
       ))}
     </Card>
