@@ -9,7 +9,7 @@ type FormData = {
 export const useFormInfo = (formData: FormData) => {
   const amount = formData.amount
   const amountCurrency = formData.amountCurrency
-  const solanaCourse = 199.84 // need to get from backend
+  const solanaRate = 199.84 // need to get from backend
   const [amountUSD, setAmountUSD] = useState(0)
   const [fee, setFee] = useState(0)
 
@@ -21,7 +21,7 @@ export const useFormInfo = (formData: FormData) => {
     }
 
     if (formData.amountCurrency === 'SOL') {
-      setAmountUSD(+amount * solanaCourse)
+      setAmountUSD(+amount * solanaRate)
       setFee(+(amountUSD * 0.005))
     } else {
       setAmountUSD(+amount)
