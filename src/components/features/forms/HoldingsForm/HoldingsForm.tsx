@@ -12,23 +12,17 @@ import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { useHoldingsForm } from '@/components/features/forms/HoldingsForm/lib.tsx'
+import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
+import { useEffect } from 'react'
+import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
 
 export const HoldingsForm = () => {
   const { form, onSubmit } = useHoldingsForm()
-  const tempInfoData = [
-    {
-      title: 'Amount in USD',
-      value: '$ 2',
-    },
-    {
-      title: 'Slippage Tolerance',
-      value: '0.2 %',
-    },
-    {
-      title: 'Platform Fee, 0.5%',
-      value: '$ 0.33',
-    },
-  ]
+  const infoCardData = useFormInfo(form.watch())
+
+  useEffect(() => {
+    onlyIntegersInputValidator()
+  }, [])
 
   return (
     <Form {...form}>
@@ -63,11 +57,9 @@ export const HoldingsForm = () => {
               <FormLabel>Amount</FormLabel>
               <FormControl>
                 <Input
-                  type='number'
-                  pattern='/^-?\d+\.?\d*$/'
-                  onInput={(e) =>
-                    ((e.target as HTMLInputElement).value = (e.target as HTMLInputElement).value.slice(0, 10))
-                  }
+                  data-value={'numericInput'}
+                  type='text'
+                  maxLength={10}
                   placeholder='Enter amount of investment'
                   {...field}
                 />
@@ -106,23 +98,23 @@ export const HoldingsForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Withdrawal Currency</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder='Select the currency of withdrawal' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='btc'>BTC</SelectItem>
-                  <SelectItem value='eth'>ETH</SelectItem>
-                  <SelectItem value='sol'>SOL</SelectItem>
+                  <SelectItem value='Tokens'>Tokens</SelectItem>
+                  <SelectItem value='USDT'>USDT</SelectItem>
+                  <SelectItem value='SOL'>SOL</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <InfoCard data={tempInfoData} />
+        <InfoCard data={infoCardData} />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
         </Button>

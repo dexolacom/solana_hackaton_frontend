@@ -7,20 +7,21 @@ import { toast } from '@/lib/hooks/useToast.ts'
 
 export const useClassicForm = () => {
   const FormSchema = z.object({
-    amount: z
-      .string({
-        required_error: 'Amount is empty',
-      })
-      .min(3, {
-        message: 'should be ≥ $100',
-      }),
-    amountCurrency: z.string({ required_error: 'Amount currency is required' }),
-    withdrawal: z.string({ required_error: 'Withdrawal currency is required' }),
+    amount: z.coerce.number().gte(100, {
+      message: 'Should be at least $100',
+    }),
+    amountCurrency: z.string().min(1, {
+      message: 'This field cannot be blank',
+    }),
+    withdrawal: z.string().min(1, {
+      message: 'This field cannot be blank',
+    }),
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
+      // @ts-ignore
       amount: '',
       amountCurrency: 'USDT',
       withdrawal: '',

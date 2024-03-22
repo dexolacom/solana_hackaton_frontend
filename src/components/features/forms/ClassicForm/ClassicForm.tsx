@@ -14,9 +14,9 @@ import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
 import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
 import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
+import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx'
 import { useEffect } from 'react'
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
-import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx'
 
 interface ClassicFormProps {
   currenciesVariant?: 'classic' | 'solana'
@@ -31,6 +31,10 @@ export const ClassicForm = (props: ClassicFormProps) => {
 
   const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo
   const formCurrencyData = getFormCurrencyValues(amount, currencyInfo)
+
+  useEffect(() => {
+    onlyIntegersInputValidator()
+  }, [])
 
   // const amountCurrency = form.watch('amountCurrency')
 
@@ -57,10 +61,6 @@ export const ClassicForm = (props: ClassicFormProps) => {
   // useEffect(() => {
   //   form.resetField('withdrawal')
   // }, [amountCurrency])
-
-  useEffect(() => {
-    onlyIntegersInputValidator()
-  }, [])
 
   return (
     <Form {...form}>
