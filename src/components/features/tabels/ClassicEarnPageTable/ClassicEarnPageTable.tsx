@@ -1,7 +1,7 @@
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
 import { columns } from './columns.tsx'
 
- type TableData = {
+type TableData = {
   token: {
     title: string
     fullTitle: string

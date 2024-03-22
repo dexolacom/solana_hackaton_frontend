@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 export interface AppContextProps {
   balance: number
   getBalance: () => Promise<void>
-  classicId?: string 
+  classicId?: string
   ecoSystemId?: string
   isLoadingId: boolean
 }

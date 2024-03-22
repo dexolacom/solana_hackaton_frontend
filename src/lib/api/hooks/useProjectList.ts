@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { getProjectList } from '@/lib/api/api';
+import { useQuery } from '@tanstack/react-query'
+import { getProjectList } from '@/lib/api/api'
 
 export const useProjectList = () => {
   const { data, isLoading } = useQuery({
@@ -7,7 +7,7 @@ export const useProjectList = () => {
     queryFn: () => getProjectList(),
   })
 
-  const projectList = data?.data;
+  const projectList = data?.data
 
   return { projectList, isLoading }
 }

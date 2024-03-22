@@ -1,12 +1,12 @@
 interface BaseData {
-  id: string,
-  created_at: string,
+  id: string
+  created_at: string
   updated_at: string
 }
 interface InfoCoin {
-  name: string,
-  symbol: string,
-  riskType: 'Low' | 'Medium' | 'High',
+  name: string
+  symbol: string
+  riskType: 'Low' | 'Medium' | 'High'
 }
 
 export interface ProjectType extends BaseData {
@@ -18,8 +18,8 @@ export interface ResponseProjectTypeItem {
   tokens: ProjectTypeItem[]
 }
 export interface ProjectTypeItem extends InfoCoin {
-  coinPrice: number,
-  change24h: number,
+  coinPrice: number
+  change24h: number
   marketCap: number
 }
 

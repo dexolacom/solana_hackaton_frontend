@@ -5,7 +5,7 @@ import { WalletError } from '@solana/wallet-adapter-base'
 import { useAppContext } from '@/providers/AppProvider/AppProvider'
 
 export const Stake = () => {
-  const {getBalance} = useAppContext();
+  const { getBalance } = useAppContext()
   const [amount, setAmount] = useState(0)
   const [processingTransaction, setProcessingTransaction] = useState(false)
 
@@ -15,8 +15,8 @@ export const Stake = () => {
   const config = new MarinadeConfig({ connection, publicKey })
   const marinade = new Marinade(config)
 
-  const onTransaction = (tx: string) => alert(tx);
-  const onError = (error: Error) => alert(error);
+  const onTransaction = (tx: string) => alert(tx)
+  const onError = (error: Error) => alert(error)
 
   if (processingTransaction) {
     return <div>Loading...</div>
@@ -32,16 +32,15 @@ export const Stake = () => {
       const { transaction } = await marinade.deposit(MarinadeUtils.solToLamports(amount))
       const transactionSignature = await sendTransaction(transaction, connection)
       onTransaction?.(transactionSignature)
-      await getBalance();
+      await getBalance()
     } catch (err) {
       if (err instanceof Error && !(err instanceof WalletError)) {
         onError?.(err)
       }
     } finally {
       setProcessingTransaction(false)
-
     }
-  };
+  }
 
   const handleClickUnStake = async () => {
     try {
@@ -58,20 +57,27 @@ export const Stake = () => {
     }
   }
 
-  return (<div style={{ display: 'flex', gap: '20px', width: '500px' }}>
-    <div>
-      <input style={{ padding: '4px' }}
-        onChange={(e) => setAmount(Number(e.target.value) || 0)}
-        placeholder='SOL amount to stake'
-      />
+  return (
+    <div style={{ display: 'flex', gap: '20px', width: '500px' }}>
+      <div>
+        <input
+          style={{ padding: '4px' }}
+          onChange={(e) => setAmount(Number(e.target.value) || 0)}
+          placeholder='SOL amount to stake'
+        />
+      </div>
+      <button
+        style={{ backgroundColor: 'aqua', border: '1px solid black', padding: '4px' }}
+        onClick={() => handleClickStake()}
+      >
+        Stake SOL
+      </button>
+      <button
+        style={{ backgroundColor: 'aqua', border: '1px solid black', padding: '4px' }}
+        onClick={() => handleClickUnStake()}
+      >
+        UnStake SOL
+      </button>
     </div>
-    <button style={{ backgroundColor: 'aqua', border: '1px solid black', padding: '4px' }}
-      onClick={() => handleClickStake()}>
-      Stake SOL
-    </button>
-    <button style={{ backgroundColor: 'aqua', border: '1px solid black', padding: '4px' }}
-      onClick={() => handleClickUnStake()}>
-      UnStake SOL
-    </button>
-  </div>)
+  )
 }
