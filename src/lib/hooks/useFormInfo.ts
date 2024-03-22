@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate.ts'
 
 type FormData = {
   amount: string | number
@@ -7,9 +8,9 @@ type FormData = {
 }
 
 export const useFormInfo = (formData: FormData) => {
+  const { solanaRate } = useSolanaRate()
   const amount = formData.amount
   const amountCurrency = formData.amountCurrency
-  const solanaRate = 199.84 // need to get from backend
   const [amountUSD, setAmountUSD] = useState(0)
   const [fee, setFee] = useState(0)
 
@@ -21,11 +22,13 @@ export const useFormInfo = (formData: FormData) => {
     }
 
     if (formData.amountCurrency === 'SOL') {
-      setAmountUSD(+amount * solanaRate)
-      setFee(+(amountUSD * 0.005))
+      if (solanaRate) {
+        setAmountUSD(+(+amount * solanaRate).toFixed(2))
+      }
+      setFee(+(amountUSD * 0.005).toFixed(2))
     } else {
       setAmountUSD(+amount)
-      setFee(+(+amount * 0.005).toPrecision(2))
+      setFee(+(+amount * 0.005).toFixed(2))
     }
   }, [amount, amountCurrency, amountUSD])
 

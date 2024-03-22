@@ -1,6 +1,7 @@
 import { TableData } from '../../components/features/tabels/ClassicPageTable/lib/columns'
 import { useSolanaProjectById } from '../api/hooks/useSolanaProjectById'
 import { currencyFormatter } from '@/lib/utils'
+import { useProjectList } from '@/lib/api/hooks/useProjectList.ts'
 
 interface TemplateType {
   symbol: string
@@ -9,12 +10,13 @@ interface TemplateType {
 }
 
 interface UseTableData {
-  id?: string
+  projectName: string
   template: TemplateType[]
 }
 
-export const useTableData = ({ id, template }: UseTableData) => {
-  const { projectById, isLoading } = useSolanaProjectById(id)
+export const useTableData = ({ projectName, template }: UseTableData) => {
+  const { projectId } = useProjectList(projectName)
+  const { projectById, isLoading } = useSolanaProjectById(projectId)
 
   const stub: TableData = {
     symbol: '',
