@@ -10,9 +10,11 @@ export const Header = () => {
   const location = useLocation()
 
   return (
-    <header className={'py-4 px-10 flex items-center justify-between'}>
-      <img src={logo} />
-      <span className={'flex gap-10'}>
+    <header className={'py-4 px-10 flex justify-center items-center'}>
+      <div className='flex-1'>
+        <img src={logo} />
+      </div>
+      <div className={'flex gap-10 '}>
         <AppLink variant={'ghost'} to={'/'} isActive={location?.pathname === '/'}>
           <img src={house} className={'-mt-[2px]'} />
           Portfolios
@@ -21,10 +23,12 @@ export const Header = () => {
           <img src={briefcase} className={'-mt-[2px]'} />
           My Holdings
         </AppLink>
-      </span>
-      <WalletButton>
-        <WalletButtonContent />
-      </WalletButton>
+      </div>
+      <div className='flex-1 flex justify-end'>
+        <WalletButton>
+          <WalletButtonContent />
+        </WalletButton>
+      </div>
     </header>
   )
 }
