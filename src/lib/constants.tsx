@@ -24,6 +24,20 @@ export const currencyIcons: Record<string, string> = {
   JTO: jto,
 }
 
+export const currencyLinks = [
+  { symbol: 'BTC', link: 'https://bitcoin.org/en/' },
+  { symbol: 'ETH', link: 'https://ethereum.org/en/' },
+  { symbol: 'SOL', link: 'https://solana.com/' },
+  { symbol: 'JUP', link: 'https://station.jup.ag/' },
+  { symbol: 'RNDR', link: 'https://rendernetwork.com/' },
+  { symbol: 'HNT', link: 'https://www.helium.com/' },
+  { symbol: 'BONK', link: 'https://bonkcoin.com/' },
+  { symbol: 'PYTH', link: 'https://pyth.network/' },
+  { symbol: 'WIF', link: 'https://dogwifcoin.org/' },
+  { symbol: 'RAY', link: 'https://raydium.io/' },
+  { symbol: 'JTO', link: 'https://www.jito.network/' },
+]
+
 export const classicCurrencyInfo = [
   {
     title: 'BTC',
