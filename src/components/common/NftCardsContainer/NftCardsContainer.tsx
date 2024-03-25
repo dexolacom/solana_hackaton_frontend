@@ -3,28 +3,32 @@ import { NftCard } from '@/components/widgets/cards/NftCard/NftCard.tsx'
 export const NftCardsContainer = () => {
   const tempData = [
     {
-      title: 'Classic',
+      id: 1,
+      title: 'classic',
       content: {
         price: '$52,000.70',
         invested: '$51,009.79',
       },
     },
     {
-      title: 'Classic',
+      id: 2,
+      title: 'classic',
       content: {
         price: '$52,000.70',
         invested: '$51,009.79',
       },
     },
     {
-      title: 'Classic',
+      id: 1,
+      title: 'solana',
       content: {
         price: '$52,000.70',
         invested: '$51,009.79',
       },
     },
     {
-      title: 'Classic',
+      id: 2,
+      title: 'solana',
       content: {
         price: '$52,000.70',
         invested: '$51,009.79',
@@ -33,9 +37,9 @@ export const NftCardsContainer = () => {
   ]
 
   return (
-    <div className={'grid grid-cols-4 gap-4'}>
+    <div className={'grid grid-cols-3 gap-4'}>
       {tempData.map((item, i) => (
-        <NftCard key={i} title={item?.title} content={item?.content} />
+        <NftCard key={i} title={item?.title} content={item?.content} id={item?.id} />
       ))}
     </div>
   )

@@ -11,9 +11,10 @@ export const enum commonRoutes {
   MY_HOLDINGS = '/my-holdings',
   CLASSIC = '/classic',
   // CLASSIC_EARN = '/classic-earn',
-  CLASSIC_ITEM = '/classic/:item',
+  CLASSIC_ITEM = 'my-holdings/classic/:item',
   // CLASSIC_EARN_ITEM = '/classic-earn/:item',
   SOLANA = '/solana',
+  SOLANA_ITEM = 'my-holdings/solana/:item',
 }
 
 export const routesConfig: Record<commonRoutes, RouteProps> = {
@@ -42,6 +43,10 @@ export const routesConfig: Record<commonRoutes, RouteProps> = {
   //   element: <ClassicEarnItemPage />,
   // },
   [commonRoutes.SOLANA]: {
+    path: commonRoutes.SOLANA,
+    element: <LazySolanaPage />,
+  },
+  [commonRoutes.SOLANA_ITEM]: {
     path: commonRoutes.SOLANA,
     element: <LazySolanaPage />,
   },
