@@ -8,7 +8,13 @@ import { ToastProvider } from '@/components/ui/Toast.tsx'
 import { ModalsProvider } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { AppProvider } from './providers/AppProvider/AppProvider'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
