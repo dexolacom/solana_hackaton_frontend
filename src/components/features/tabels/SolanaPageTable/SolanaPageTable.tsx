@@ -5,7 +5,7 @@ import { ecosystemTemplate } from '@/lib/constants'
 import { useTableData } from '@/lib/hooks/useTableData'
 
 export const SolanaPageTable = () => {
-  const { dataTable, isLoading } = useTableData({ projectName: 'Solana Ecosystem', template: ecosystemTemplate })
+  const { dataTable, isLoading } = useTableData({template: ecosystemTemplate })
 
   return <div>{isLoading ? <Skeleton height={660} /> : <DataTable columns={columns} data={dataTable} />}</div>
 }

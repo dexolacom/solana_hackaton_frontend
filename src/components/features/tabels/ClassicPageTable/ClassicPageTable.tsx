@@ -5,7 +5,7 @@ import { useTableData } from '@/lib/hooks/useTableData.ts'
 import { classicTemplate } from '@/lib/constants'
 
 export const ClassicPageTable = () => {
-  const { dataTable, isLoading } = useTableData({ projectName: 'Classic', template: classicTemplate })
+  const { dataTable, isLoading } = useTableData({template: classicTemplate })
 
   return <div>{isLoading ? <Skeleton height={590} /> : <DataTable columns={columns} data={dataTable} />}</div>
 }
