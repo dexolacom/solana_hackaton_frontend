@@ -1,4 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table'
+import { currencyLinks } from '@/lib/constants'
 import { Badge } from '@/components/ui/Badge.tsx'
 
 export type TableData = {
@@ -22,7 +23,12 @@ export const columns: ColumnDef<TableData>[] = [
         <div className={'flex gap-2 text-left items-center'}>
           <img className={'h-6 w-6'} src={icon} alt='Coin icon' />
           <div className={'flex flex-col'}>
-            <span className={'font-medium'}>{symbol}</span>
+          <a href={currencyLinks[symbol]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={'font-medium underline underline-offset-2'}>
+              {symbol}
+            </a>
             <span className={'text-xs text-card-additionalForeground'}>{name}</span>
           </div>
         </div>
