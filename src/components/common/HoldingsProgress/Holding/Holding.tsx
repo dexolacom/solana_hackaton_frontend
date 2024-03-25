@@ -20,7 +20,7 @@ export const Holding = (props: HoldingProps) => {
       )}
       <span className={'flex items-baseline gap-2'}>
         <span>{title}</span>
-        <span className={'font-roboto'}>{percent}%</span>
+        <span className={'font-roboto'}>{withIcons ? +percent * 100 : percent}%</span>
       </span>
     </div>
   )
