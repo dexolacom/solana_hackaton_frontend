@@ -31,36 +31,14 @@ export const ClassicForm = (props: ClassicFormProps) => {
 
   const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo
   const formCurrencyData = getFormCurrencyValues(amount, currencyInfo)
+  const currencyColumns =
+    currenciesVariant === 'classic'
+      ? { firstColumn: [0, 4], secondColumn: [4, formCurrencyData.length] }
+      : { firstColumn: [0, 5], secondColumn: [5, formCurrencyData.length] }
 
   useEffect(() => {
     onlyIntegersInputValidator()
   }, [])
-
-  // const amountCurrency = form.watch('amountCurrency')
-
-  // const currencys = ['USDT', 'SOL']
-
-  // useEffect(() => {
-  //   if (amountCurrency === 'USDT') {
-  //     form.setValue('withdrawal', 'USDT')
-  //   } else {
-  //     form.setValue('withdrawal', 'SOL')
-  //   }
-  // }, [amountCurrency])
-
-  // let selectOptions: string[] = []
-  //
-  // if (amountCurrency === 'USDT') {
-  //   selectOptions = ['Tokens', 'USDT']
-  // } else if (amountCurrency === 'SOL') {
-  //   selectOptions = ['Tokens', 'SOL']
-  // } else {
-  //   selectOptions = []
-  // }
-
-  // useEffect(() => {
-  //   form.resetField('withdrawal')
-  // }, [amountCurrency])
 
   return (
     <Form {...form}>
@@ -129,7 +107,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
           )}
         />
         <InfoCard data={infoCardData} />
-        <FormCurrency data={formCurrencyData} />
+        <FormCurrency data={formCurrencyData} columns={currencyColumns} />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest
         </Button>
