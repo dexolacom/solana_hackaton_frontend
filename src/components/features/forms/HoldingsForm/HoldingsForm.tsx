@@ -41,7 +41,7 @@ export const HoldingsForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='classic'>Classic</SelectItem>
-                  <SelectItem value='classicEarn'>Classic + Earn</SelectItem>
+                  <SelectItem value='classicEarn'>Solana Ecosystem</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
