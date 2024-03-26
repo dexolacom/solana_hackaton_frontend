@@ -1,4 +1,4 @@
-import { columns, TableData } from './columns.tsx'
+import { columns, TableData } from './lib/columns.tsx'
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
 
 export const ClassicItemTable = () => {

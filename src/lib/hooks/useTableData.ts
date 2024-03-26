@@ -1,7 +1,7 @@
 import { TableData } from '../../components/features/tabels/ClassicPageTable/lib/columns'
 import { useSolanaProjectById } from '../api/hooks/useSolanaProjectById'
 import { currencyFormatter } from '@/lib/utils'
-import { useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
 interface TemplateType {
   symbol: string
@@ -14,9 +14,8 @@ interface UseTableData {
 }
 
 export const useTableData = ({ template }: UseTableData) => {
-  const [searchParams] = useSearchParams();
-  const projectId = searchParams.get('prjId');
-  const { projectById, isLoading } = useSolanaProjectById(projectId)
+   const { id } = useParams();
+  const { projectById, isLoading } = useSolanaProjectById(id ?? '')
 
   const stub: TableData = {
     symbol: '',

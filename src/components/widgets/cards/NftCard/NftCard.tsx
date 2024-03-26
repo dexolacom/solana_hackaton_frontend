@@ -24,7 +24,7 @@ export const NftCard = (props: NftCardProps) => {
 
   return (
     <Card className={'relative'}>
-      <Link to={`${title}/${id}`} className={'z-10 absolute w-full h-full top-0 left-0'} />
+      <Link to={`${title}/${id}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => e.stopPropagation()} />
       <img
         src={defaultCard}
         style={{ width: 'calc(100% + 48px)', maxWidth: 'none' }}
@@ -54,11 +54,11 @@ export const NftCard = (props: NftCardProps) => {
           <ArrowUpDown className={'w-4 h-4'} />
           Transfer
         </Button>
-        <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
+        <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => { setModalName('BURN_NFT') }}>
           <Flame className={'w-4 h-4'} />
           Burn
         </Button>
       </CardFooter>
-    </Card>
+    </Card >
   )
 }
