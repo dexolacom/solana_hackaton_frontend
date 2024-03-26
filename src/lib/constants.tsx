@@ -125,7 +125,7 @@ export const classicTemplate = [
 
 export const ecosystemTemplate = [
   { symbol: 'SOL', icon: sol, distribution: '30%' },
-  { symbol: 'JUP', icon: jup, distribution: '15 %' },
+  { symbol: 'JUP', icon: jup, distribution: '15%' },
   { symbol: 'RNDR', icon: rndr, distribution: '15%' },
   { symbol: 'HNT', icon: hnt, distribution: '15%' },
   { symbol: 'BONK', icon: bonk, distribution: '10%' },

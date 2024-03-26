@@ -10,7 +10,8 @@ import { Button } from '@/components/ui/Button.tsx'
 import { ArrowUpDown, Flame } from 'lucide-react'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
-import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/ClassicItemTable.tsx'
+import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/SolanaItemTable'
+
 
 const SolanaItemPage = () => {
   const tempData = {
@@ -88,7 +89,7 @@ const SolanaItemPage = () => {
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
         <AssetsCard className={'flex-1'}>
-          <SolanaPageTable />
+          <SolanaItemTable />
         </AssetsCard>
         <InvestCard className={'flex-2'}>
           <ClassicForm currenciesVariant={'solana'} />
