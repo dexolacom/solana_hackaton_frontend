@@ -1,7 +1,7 @@
-import { ColumnDef } from '@tanstack/react-table'
-import { currencyIcons } from '@/lib/constants.tsx'
+import info from '@/assets/icons/info.svg'
 import { Badge } from '@/components/ui/Badge.tsx'
-import { currencyLinks } from '@/lib/constants.tsx'
+import { currencyIcons, currencyLinks } from '@/lib/constants.tsx'
+import { ColumnDef } from '@tanstack/react-table'
 
 export type TableData = {
   token: {
@@ -21,7 +21,7 @@ export const columns: ColumnDef<TableData>[] = [
         <div className={'flex gap-2 text-left items-center'}>
           <img className={'h-6 w-6'} src={currencyIcons[title]} alt='' />
           <div className={'flex flex-col'}>
-          <a href={currencyLinks[title]}
+            <a href={currencyLinks[title]}
               target="_blank"
               rel="noopener noreferrer"
               className={'font-medium underline underline-offset-2'}>
@@ -55,6 +55,9 @@ export const columns: ColumnDef<TableData>[] = [
   },
   {
     accessorKey: 'Earned',
-    header: () => <div className='text-right'>Earned</div>,
+    header: () => <div className='flex justify-end gap-[4px] items-center'>
+      <div>Earned</div>
+      <img src={info} alt="info icon" width={20} height={20} />
+    </div>,
   },
 ]

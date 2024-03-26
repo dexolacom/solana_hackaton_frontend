@@ -1,7 +1,7 @@
-import { ColumnDef } from '@tanstack/react-table'
-import { currencyIcons } from '@/lib/constants.tsx'
+import info from '@/assets/icons/info.svg'
 import { Badge } from '@/components/ui/Badge.tsx'
-import { currencyLinks } from '@/lib/constants.tsx'
+import { currencyIcons, currencyLinks } from '@/lib/constants.tsx'
+import { ColumnDef } from '@tanstack/react-table'
 
 export type TableData = {
   token: {
@@ -47,15 +47,18 @@ export const columns: ColumnDef<TableData>[] = [
     header: 'Distribution',
   },
   {
-    accessorKey: 'coinPrice',
-    header: 'Coin Price',
+    accessorKey: 'currentCoinPrice',
+    header: 'Current Coin Price',
   },
   {
     accessorKey: '24hChange',
     header: '24h Change',
   },
   {
-    accessorKey: 'marketCap',
-    header: () => <div className='text-right'>Market Cup</div>,
+    accessorKey: 'Earned',
+    header: () => <div className='flex justify-end gap-[4px] items-center'>
+      <div>Earned</div>
+      <img src={info} alt="info icon" width={20} height={20} />
+    </div>,
   },
 ]
