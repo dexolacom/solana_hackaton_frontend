@@ -44,11 +44,11 @@ export const classicCurrencyInfo = [
     percent: 0.3,
   },
   {
-    title: 'ETH',
+    title: 'SOL',
     percent: 0.2,
   },
   {
-    title: 'SOL',
+    title: 'ETH',
     percent: 0.15,
   },
   {

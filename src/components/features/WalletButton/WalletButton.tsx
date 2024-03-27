@@ -1,6 +1,6 @@
 import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui'
 import { ReactNode, useEffect, useRef, useState } from 'react'
-import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import { useWalletModal,  } from '@solana/wallet-adapter-react-ui'
 
 interface WalletButtonProps {
   children?: ReactNode

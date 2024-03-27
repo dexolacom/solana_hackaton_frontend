@@ -9,7 +9,6 @@ export type TableData = {
     fullTitle: string
   }
   riskType: 'Low' | 'Medium' | 'High'
-  distribution: string
 }
 
 export const columns: ColumnDef<TableData>[] = [
@@ -43,8 +42,8 @@ export const columns: ColumnDef<TableData>[] = [
     },
   },
   {
-    accessorKey: 'distribution',
-    header: 'Distribution',
+    accessorKey: 'coinAmount',
+    header: 'Coin Amount',
   },
   {
     accessorKey: 'currentCoinPrice',

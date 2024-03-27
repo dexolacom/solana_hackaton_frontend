@@ -70,7 +70,7 @@ const SolanaItemPage = () => {
   return (
     <div>
       <BackLink title={'My holdings'} path={'/my-holdings'} />
-      <PageTitle title={'ECOSYSTEM item'}>
+      <PageTitle title={'SOLANA ECOSYSTEM item'}>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'}>
             <ArrowUpDown className={'w-4 h-4'} />

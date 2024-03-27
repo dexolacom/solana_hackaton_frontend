@@ -9,7 +9,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Solana',
       },
       riskType: 'Medium',
-      distribution: '20%',
     },
     {
       token: {
@@ -17,7 +16,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Jupiter',
       },
       riskType: 'Medium',
-      distribution: '15%',
     },
     {
       token: {
@@ -25,7 +23,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Render',
       },
       riskType: 'Low',
-      distribution: '15%',
     },
     {
       token: {
@@ -33,7 +30,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Helium',
       },
       riskType: 'Low',
-      distribution: '15%',
     },
     {
       token: {
@@ -41,7 +37,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Bonk',
       },
       riskType: 'Medium',
-      distribution: '10%',
     },
     {
       token: {
@@ -49,7 +44,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Pyth Network',
       },
       riskType: 'High',
-      distribution: '5%',
     },
     {
       token: {
@@ -57,7 +51,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Raydium',
       },
       riskType: 'High',
-      distribution: '5%',
     },
 
     {
@@ -66,7 +59,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'Jito',
       },
       riskType: 'High',
-      distribution: '5%',
     },
 
     {
@@ -75,7 +67,6 @@ export const SolanaItemTable = () => {
         fullTitle: 'dogwifhat',
       },
       riskType: 'High',
-      distribution: '5%',
     },
 
   ]
