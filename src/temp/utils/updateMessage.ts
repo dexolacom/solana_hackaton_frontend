@@ -1,4 +1,4 @@
-import { Program, AnchorProvider, web3 } from '@project-serum/anchor'
+import { Program, AnchorProvider, web3 } from '@coral-xyz/anchor'
 import { ProgramType } from '../constant/types'
 import { connection, commitmentLevel, ProgramId, ProgramInterface } from '../constant/constant'
 import { AnchorWallet } from '@solana/wallet-adapter-react'
