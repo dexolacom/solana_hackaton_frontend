@@ -1,34 +1,32 @@
-
+import { useState } from 'react';
 import {
-  Account,
-  createAssociatedTokenAccountInstruction,
-  TokenInvalidAccountOwnerError,
-  TokenAccountNotFoundError,
-  getAccount,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   NATIVE_MINT, getAssociatedTokenAddress
 } from "@solana/spl-token";
-import { AnchorProvider, Program, web3 } from "@coral-xyz/anchor";
-import { Transaction, PublicKey, ComputeBudgetProgram } from '@solana/web3.js';
-import { useWallet, useAnchorWallet } from '@solana/wallet-adapter-react'
+import { web3 } from "@coral-xyz/anchor";
+import { ComputeBudgetProgram } from '@solana/web3.js';
+import { useWallet, useConnection } from '@solana/wallet-adapter-react'
 import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
-import { ProgramType } from "../programData/types";
-import { connection, commitmentLevel, ProgramId, ProgramInterface } from '@/lib/blockchain/constant'
+import { ProgramId } from '@/lib/blockchain/constant'
 import { getOrCreateATA } from "../helpers/getOrCreateATA";
+import { useToast } from "@/lib/hooks/useToast";
+import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
+import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
+import { getNftAddresses } from "../helpers/getNftAddresses";
+import { BuyNftArgs } from "./useBuyNftByToken";
+import { BN } from '@project-serum/anchor';
+
 
 export const useBuyNftByNative = () => {
-  const wallet = useAnchorWallet();
 
-  const { signTransaction, publicKey } = useWallet();
+  const { publicKey, signTransaction } = useWallet();
+  const { connection } = useConnection();
+  const { program } = useProgramContext();
+  const { toast } = useToast();
 
-  if (!wallet || !publicKey || !signTransaction) return { buyNft: () => { } };
-
-  //вынести в контекст
-  const provider = new AnchorProvider(connection, wallet, {
-    preflightCommitment: commitmentLevel,
-  })
-
-  const program = new Program(ProgramInterface, ProgramId, provider) as Program<ProgramType>
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const collection_data = {
     title: "Portfolio#3",
@@ -36,205 +34,79 @@ export const useBuyNftByNative = () => {
     uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
   }
 
-  async function getCollectionAddresses() {
-    const associatedTokenAccount = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("collection")
-      ],
-      program.programId
-    )[0]
-
-    const metadataAccountAddress = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("metadata"),
-        TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-        associatedTokenAccount.toBuffer(),
-      ],
-      TOKEN_METADATA_PROGRAM_ID
-    )[0]
-
-    const masterEditionAccountAddress = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("metadata"),
-        TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-        associatedTokenAccount.toBuffer(),
-        Buffer.from("edition")
-      ],
-      TOKEN_METADATA_PROGRAM_ID
-    )[0]
-
-    const onchainDataAddress = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("onchain-data"),
-        metadataAccountAddress.toBuffer(),
-      ],
-      program.programId
-    )[0]
-
-    return {
-      tokenAccount: associatedTokenAccount,
-      metadataAccountAddress,
-      masterEditionAccountAddress,
-      onchainDataAddress
+  const buyNftByNative = async ({ inputValue, nftId }: BuyNftArgs) => {
+    if (!publicKey || !program || !signTransaction) {
+      toast({
+        title: 'Error!',
+        description: 'Please, connect wallet'
+      });
+      return;
     }
-  }
 
-  async function getNftAddresses(collection: PublicKey, id: number) {
-    const associatedTokenAccount = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("token"),
-        collection.toBuffer(),
-        Buffer.from([id])
-      ],
-      program.programId
-    )[0]
+    try {
+      setIsError(false);
+      setIsSuccess(false);
+      setIsLoading(true);
 
-    const metadataAccountAddress = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("metadata"),
-        TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-        associatedTokenAccount.toBuffer(),
-      ],
-      TOKEN_METADATA_PROGRAM_ID
-    )[0]
+      const portfolioCollection = await getCollectionAddresses();
+      // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", portfolioCollection.masterEditionAccountAddress.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", portfolioCollection.metadataAccountAddress.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ onchainDataAddress:", portfolioCollection.onchainDataAddress.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ tokenAccount:", portfolioCollection.tokenAccount.toBase58());
 
-    const masterEditionAccountAddress = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("metadata"),
-        TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-        associatedTokenAccount.toBuffer(),
-        Buffer.from("edition")
-      ],
-      TOKEN_METADATA_PROGRAM_ID
-    )[0]
+      // const balance = await connection.getBalance(new PublicKey(
+      //   "EVuFDMrBNHujcNtWyv8tsuHjSxdMbp78jPERTqhB4wxp"
+      // ))
+      // console.log("🚀 ~ buyNft ~ balance:", balance)
 
-    const onchainDataAddress = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("onchain-data"),
-        metadataAccountAddress.toBuffer(),
-      ],
-      program.programId
-    )[0]
+      const programATA = await getOrCreateATA({ owner: ProgramId, mint: NATIVE_MINT, payer: publicKey, signTransaction });
+      console.log("🚀 ~ buyNft ~ programATA:", programATA.address.toBase58())
+      const userATA = await getOrCreateATA({ owner: publicKey, mint: NATIVE_MINT, payer: publicKey, signTransaction });
+      console.log("🚀 ~ buyNft ~ userATA:", userATA.address.toBase58())
 
-    const nftATA = await getAssociatedTokenAddress(
-      associatedTokenAccount,
-      publicKey
-    )
+      const solbalance = await connection.getBalance(publicKey);
 
-    const nftRecord = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("metadata"),
-        TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-        associatedTokenAccount.toBuffer(),
-        Buffer.from("token_record"),
-        nftATA.toBuffer()
-      ],
-      TOKEN_METADATA_PROGRAM_ID
-    )[0]
+      if (!solbalance || (solbalance / 10e8 < inputValue)) {
+        toast({
+          title: 'Error!',
+          description: 'Your SOL account balance is not enough.'
+        })
+        return;
+      }
 
-    return {
-      tokenAccount: associatedTokenAccount,
-      metadataAccountAddress,
-      masterEditionAccountAddress,
-      onchainDataAddress,
-      nftATA,
-      nftRecord
-    }
-  }
-  // const feePayer = Keypair.fromSecretKey(
-  //   bs58.decode("mLLd2nBYkZL2gLVmQvtzn6v61FM6bFPqnFBqvZsSSeDbUkerH5eSDeToCLJ1JTQa32qJ3siCw7xfq5sW6dApmmW")
-  // );
+      const getWSolbalance = await connection.getTokenAccountBalance(userATA.address);
+      const wSolBalance = getWSolbalance?.value.uiAmount;
+
+      const instruction = [];
+      
+      const solbalance = await connection.getBalance(publicKey);
+
+      if (!wSolBalance || wSolBalance < inputValue) {
+        toast({
+          title: 'Error!',
+          description: 'Your SOL account balance is not enough.'
+        })
+        return;
+      }
 
 
-  // const getOrCreateATA = async (id: PublicKey) => {
-  //   const associatedToken = await getAssociatedTokenAddress(
-  //     NATIVE_MINT,
-  //     id,
-  //     false
-  //   );
-
-  //   //associatedToken program: Gqrq7voWqp9MWMQ9mR8UcW17LPRR9rmAwS5UufiHR3Cp
-  //   //associatedToken user: EVuFDMrBNHujcNtWyv8tsuHjSxdMbp78jPERTqhB4wxp
-
-  //   let account: Account;
-  //   try {
-  //     account = await getAccount(connection, associatedToken, commitmentLevel);
-  //   } catch (error: unknown) {
-  //     if (error instanceof TokenAccountNotFoundError || error instanceof TokenInvalidAccountOwnerError) {
-  //       try {
-  //         const transaction = new Transaction().add(
-  //           createAssociatedTokenAccountInstruction(
-  //             publicKey,
-  //             associatedToken,
-  //             id,
-  //             NATIVE_MINT,
-  //           )
-  //         )
-
-  //         const blockHash = await connection.getLatestBlockhash()
-  //         transaction.feePayer = publicKey
-  //         transaction.recentBlockhash = blockHash.blockhash
-  //         const signed = await signTransaction(transaction)
-
-  //         const signature = await connection.sendRawTransaction(signed.serialize())
-
-  //         await connection.confirmTransaction({
-  //           blockhash: blockHash.blockhash,
-  //           lastValidBlockHeight: blockHash.lastValidBlockHeight,
-  //           signature,
-  //         })
-  //         console.log("🚀 ~ getOrCreateATA ~ signature:", signature)
-  //       } catch (error: unknown) {
-  //         console.log(error);
-  //       }
-  //       account = await getAccount(connection, associatedToken, commitmentLevel);
-  //     } else {
-  //       throw error;
-  //     }
-  //   }
-  //   return account;
-  // }
-
-  const buyNft = async () => {
-
-    const portfolioCollection = await getCollectionAddresses();
-    // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", portfolioCollection.masterEditionAccountAddress.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", portfolioCollection.metadataAccountAddress.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ onchainDataAddress:", portfolioCollection.onchainDataAddress.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ tokenAccount:", portfolioCollection.tokenAccount.toBase58());
-
-    // const balance = await connection.getBalance(new PublicKey(
-    //   "EVuFDMrBNHujcNtWyv8tsuHjSxdMbp78jPERTqhB4wxp"
-    // ))
-    // console.log("🚀 ~ buyNft ~ balance:", balance)
-
-    const programATA = await getOrCreateATA(ProgramId, NATIVE_MINT, publicKey, signTransaction);
-    console.log("🚀 ~ buyNft ~ programATA:", programATA.address.toBase58())
-    const userATA = await getOrCreateATA(publicKey, NATIVE_MINT, publicKey, signTransaction);
-    console.log("🚀 ~ buyNft ~ userATA:", userATA.address.toBase58())
-    const balance = await connection.getBalance(userATA.address);
-    console.log("🚀 ~ buyNft ~ balance:", balance)
-    const nft_id = 2;
-
-    const nft = await getNftAddresses(portfolioCollection.tokenAccount, nft_id);
-    // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", nft.metadataAccountAddress.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ nftRecord:", nft.nftRecord.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ onchainDataAddress:", nft.onchainDataAddress.toBase58());
-    // console.log("🚀 ~ buyNftByToken ~ tokenAccount:", nft.tokenAccount.toBase58());
+      const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
+      // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", nft.metadataAccountAddress.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ nftRecord:", nft.nftRecord.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ onchainDataAddress:", nft.onchainDataAddress.toBase58());
+      // console.log("🚀 ~ buyNftByToken ~ tokenAccount:", nft.tokenAccount.toBase58());
 
       const additionalComputeBudgetInstruction =
         ComputeBudgetProgram.setComputeUnitLimit({
           units: 400000,
         });
 
-        
-
-       await program.methods.buyPortfolio(
-        nft_id,
+      await program.methods.buyPortfolio(
+        nftId,
         collection_data.uri,
-        100000n,
+        new BN(inputValue * 10e8),
       )
         .accounts({
           payer: publicKey,
@@ -253,8 +125,15 @@ export const useBuyNftByNative = () => {
           paymentProgramTokenAccount: programATA.address,
           splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
         }).preInstructions([additionalComputeBudgetInstruction])
-        .rpc().catch(e => console.error(e));
+        .rpc()
+      setIsSuccess(true);
+      setIsLoading(false);
     }
-
-    return { buyNft }
+    catch {
+      setIsError(true);
+      setIsLoading(false);
+      setIsSuccess(false);
+    }
   }
+  return { buyNftByNative, isLoading, isError, isSuccess }
+}
