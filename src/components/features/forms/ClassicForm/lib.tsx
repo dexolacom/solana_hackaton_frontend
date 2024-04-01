@@ -23,7 +23,7 @@ export const useClassicForm = () => {
     defaultValues: {
       // @ts-ignore
       amount: '',
-      amountCurrency: 'USDT',
+      amountCurrency: 'USDC',
       withdrawal: '',
     },
     // mode: 'onChange',
