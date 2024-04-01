@@ -15,3 +15,7 @@ export const ProgramInterface = JSON.parse(JSON.stringify(idl))
 
 export const addressNftCollection = 'zr24szrS9LJs37gx1rZJDiCRunsA5Cstk9yV69VbDpU';
 
+export const TOKEN_METADATA_PROGRAM_ID = new PublicKey(
+  "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+);
+
