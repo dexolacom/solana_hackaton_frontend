@@ -13,7 +13,7 @@ export const InvestModal = () => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4'}>
         <p className={'text-sm'}>
-          You have successfully invested <span className={'font-medium'}>101 USDT</span> in{' '}
+          You have successfully invested <span className={'font-medium'}>101 USDC</span> in{' '}
           <span className={'font-medium'}>Classical: #0001</span> NFT with following assets distribution:
         </p>
         <ModalCurrency />

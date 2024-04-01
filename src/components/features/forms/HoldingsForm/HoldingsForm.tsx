@@ -106,7 +106,7 @@ export const HoldingsForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='Tokens'>Tokens</SelectItem>
-                  <SelectItem value='USDT'>USDT</SelectItem>
+                  <SelectItem value='USDC'>USDC</SelectItem>
                   <SelectItem value='SOL'>SOL</SelectItem>
                 </SelectContent>
               </Select>

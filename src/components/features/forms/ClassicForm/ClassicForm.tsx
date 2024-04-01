@@ -69,14 +69,14 @@ export const ClassicForm = (props: ClassicFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Amount Currency</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={'USDT'}>
+              <Select onValueChange={field.onChange} defaultValue={'USDC'}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='USDT'>USDT</SelectItem>
+                  <SelectItem value='USDC'>USDC</SelectItem>
                   <SelectItem value='SOL'>SOL</SelectItem>
                 </SelectContent>
               </Select>
@@ -98,7 +98,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='Tokens'>Tokens</SelectItem>
-                  <SelectItem value='USDT'>USDT</SelectItem>
+                  <SelectItem value='USDC'>USDC</SelectItem>
                   <SelectItem value='SOL'>SOL</SelectItem>
                 </SelectContent>
               </Select>

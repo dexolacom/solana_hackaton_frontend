@@ -25,7 +25,7 @@ export const useHoldingsForm = () => {
       portfolio: '',
       // @ts-ignore
       amount: '',
-      amountCurrency: 'USDT',
+      amountCurrency: 'USDC',
       withdrawal: '',
     },
   })
