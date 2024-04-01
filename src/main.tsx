@@ -7,6 +7,7 @@ import { SolanaWalletProvider } from '@/providers/WalletProvider/config.tsx'
 import { ToastProvider } from '@/components/ui/Toast.tsx'
 import { ModalsProvider } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { AppProvider } from './providers/AppProvider/AppProvider'
+import { ProgramContextProvider } from './providers/ProgramProvider/ProgramProvider'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,13 +21,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <SolanaWalletProvider>
       <QueryClientProvider client={queryClient}>
-        <AppProvider>
-          <ModalsProvider>
-            <ToastProvider>
-              <App />
-            </ToastProvider>
-          </ModalsProvider>
-        </AppProvider>
+        <ProgramContextProvider>
+          <AppProvider>
+            <ModalsProvider>
+              <ToastProvider>
+                <App />
+              </ToastProvider>
+            </ModalsProvider>
+          </AppProvider>
+        </ProgramContextProvider>
       </QueryClientProvider>
     </SolanaWalletProvider>
   </BrowserRouter>

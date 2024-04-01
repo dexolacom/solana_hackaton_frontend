@@ -8,7 +8,7 @@ import { ModalsFactory } from '@/components/common/ModalFactory/ModalFactory.tsx
 
 function App() {
   const { modalName } = useModalsContext()
-
+ 
   return (
     <div className='wrapper'>
       <Header />
