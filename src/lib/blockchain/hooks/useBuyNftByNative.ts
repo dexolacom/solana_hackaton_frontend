@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
-  NATIVE_MINT, getAssociatedTokenAddress
+  NATIVE_MINT,
+  createSyncNativeInstruction,
+
 } from "@solana/spl-token";
 import { web3 } from "@coral-xyz/anchor";
-import { ComputeBudgetProgram } from '@solana/web3.js';
+import { ComputeBudgetProgram, SystemProgram, LAMPORTS_PER_SOL, Transaction } from '@solana/web3.js';
 import { useWallet, useConnection } from '@solana/wallet-adapter-react'
 import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
 import { ProgramId } from '@/lib/blockchain/constant'
@@ -16,10 +18,9 @@ import { getNftAddresses } from "../helpers/getNftAddresses";
 import { BuyNftArgs } from "./useBuyNftByToken";
 import { BN } from '@project-serum/anchor';
 
-
 export const useBuyNftByNative = () => {
 
-  const { publicKey, signTransaction } = useWallet();
+  const { publicKey, signTransaction, sendTransaction } = useWallet();
   const { connection } = useConnection();
   const { program } = useProgramContext();
   const { toast } = useToast();
@@ -74,22 +75,6 @@ export const useBuyNftByNative = () => {
         return;
       }
 
-      const getWSolbalance = await connection.getTokenAccountBalance(userATA.address);
-      const wSolBalance = getWSolbalance?.value.uiAmount;
-
-      const instruction = [];
-      
-      const solbalance = await connection.getBalance(publicKey);
-
-      if (!wSolBalance || wSolBalance < inputValue) {
-        toast({
-          title: 'Error!',
-          description: 'Your SOL account balance is not enough.'
-        })
-        return;
-      }
-
-
       const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
       // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
       // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
@@ -102,6 +87,27 @@ export const useBuyNftByNative = () => {
         ComputeBudgetProgram.setComputeUnitLimit({
           units: 400000,
         });
+      // const feePayer = Keypair.fromSecretKey(
+      //   bs58.decode("mLLd2nBYkZL2gLVmQvtzn6v61FM6bFPqnFBqvZsSSeDbUkerH5eSDeToCLJ1JTQa32qJ3siCw7xfq5sW6dApmmW")
+      // );
+
+
+      const getWSolbalance = await connection.getTokenAccountBalance(userATA.address);
+      const wSolBalance = getWSolbalance?.value.uiAmount;
+
+
+      if (wSolBalance && wSolBalance < inputValue) {
+        const transaction = new Transaction()
+        transaction.add(SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: userATA.address,
+          lamports: (inputValue - wSolBalance) * LAMPORTS_PER_SOL,
+        }),
+          createSyncNativeInstruction(userATA.address)
+        );
+        sendTransaction(transaction, connection);
+        // instructions.push(refillUserATA);
+      }
 
       await program.methods.buyPortfolio(
         nftId,
@@ -126,6 +132,7 @@ export const useBuyNftByNative = () => {
           splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
         }).preInstructions([additionalComputeBudgetInstruction])
         .rpc()
+
       setIsSuccess(true);
       setIsLoading(false);
     }
