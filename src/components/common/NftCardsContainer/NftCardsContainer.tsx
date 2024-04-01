@@ -13,8 +13,8 @@ export const NftCardsContainer = () => {
   return (
     <div className={'grid grid-cols-3 gap-4'}>
       {cardsData.map((item, i) => {
-        const data = item?.data?.data;
-        return <NftCard key={`${data?.name}#${i}`} title={data.name} content={item?.content} uri={data?.uri} />
+        const data = item?.metadata;
+        return <NftCard key={`${data?.name}#${i}`} title={data.name} content={item?.content} uri={data?.uri} mint={data?.mint} />
       })}
     </div>
   )

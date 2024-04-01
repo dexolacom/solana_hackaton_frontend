@@ -1,4 +1,5 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
+// import { PublicKey } from '@solana/web3.js'
 import { Button } from '@/components/ui/Button.tsx'
 import defaultCard from '@/assets/defaultCard.png'
 import { ArrowUpDown } from 'lucide-react'
@@ -7,10 +8,12 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { Link } from 'react-router-dom'
 import { currencyIcons } from '@/lib/constants.tsx'
 import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg'
+// import { useTransferNft } from '@/lib/blockchain/hooks/useTransferNft'
 
 interface NftCardProps {
   title: string
   uri: string
+  mint: string
   // id: number
   content: {
     price: string
@@ -21,6 +24,10 @@ interface NftCardProps {
 export const NftCard = (props: NftCardProps) => {
   const { title, content, uri } = props
   const { nftImg } = useGetNftImg(uri);
+  // const { transferNft } = useTransferNft({
+  //   destinationAddress: new PublicKey("2mxosq2T98t7dvigPcZENkjNK93JfZhU9MZzMAfD5XWN"),
+  //   mintPubkey: new PublicKey(mint)
+  // });
   const { setModalName } = useModalsContext()
   const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
   const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']

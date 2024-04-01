@@ -1,10 +1,12 @@
 import { useWallet } from '@solana/wallet-adapter-react';
-import { PublicKey, ParsedAccountData } from '@solana/web3.js';
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
+import { ParsedAccountData } from '@solana/web3.js';
+import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
+import { publicKey as createPubKey } from '@metaplex-foundation/umi';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { connection } from '../constant';
 import { useEffect, useState } from 'react';
 import { addressNftCollection } from '../constant';
+import { umi } from '../constant';
 
 
 export const useGetNfts = () => {
@@ -29,8 +31,6 @@ export const useGetNfts = () => {
 
     fetchData();
   }, [publicKey])
-
-
 
   const getTheTokensOfOwner = async () => {
     if (!publicKey) return;
@@ -73,16 +73,16 @@ export const useGetNfts = () => {
 
     const nftsData = await fetchAllMetadata(tokensInWallet) || [];
 
-    const filteredNfts = nftsData.filter(nft => nft.data.collection.key === addressNftCollection);
+    const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressNftCollection);
 
     return filteredNfts;
 
   }
 
   const fetchMetadata = async (mintAddress: string) => {
-    const mintPubkey = new PublicKey(mintAddress);
-    const tokenmetaPubkey = await Metadata.getPDA(mintPubkey);
-    return Metadata.load(connection, tokenmetaPubkey);
+    const mintPubkey = createPubKey(mintAddress);
+    const asset = await fetchDigitalAssetWithTokenByMint(umi, mintPubkey)
+    return asset;
   };
 
   const fetchAllMetadata = async (tokens: any) => {
