@@ -6,10 +6,12 @@ import { Flame } from 'lucide-react'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { Link } from 'react-router-dom'
 import { currencyIcons } from '@/lib/constants.tsx'
+import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg'
 
 interface NftCardProps {
   title: string
-  id: number
+  uri: string
+  // id: number
   content: {
     price: string
     invested: string
@@ -17,16 +19,20 @@ interface NftCardProps {
 }
 
 export const NftCard = (props: NftCardProps) => {
-  const { title, content, id } = props
+  const { title, content, uri } = props
+  const { nftImg } = useGetNftImg(uri);
   const { setModalName } = useModalsContext()
   const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
   const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
 
   return (
     <Card className={'relative'}>
-      <Link to={`${title}/${id}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => e.stopPropagation()} />
+      <Link to={`Classic/${title}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => e.stopPropagation()} />
       <img
-        src={defaultCard}
+        src={nftImg || defaultCard}
+        width={312}
+        height={312}
+        alt={'Portfolio image'}
         style={{ width: 'calc(100% + 48px)', maxWidth: 'none' }}
         className={'rounded-md mb-6 -ml-[24px] -mt-[24px] rounded-b-none'}
       />
