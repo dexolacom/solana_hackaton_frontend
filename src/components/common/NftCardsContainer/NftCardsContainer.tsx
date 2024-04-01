@@ -1,46 +1,21 @@
 import { NftCard } from '@/components/widgets/cards/NftCard/NftCard.tsx'
+import { useGetNfts } from '@/lib/blockchain/hooks/useGetNfts'
 
 export const NftCardsContainer = () => {
-  const tempData = [
-    {
-      id: 1,
-      title: 'classic',
-      content: {
-        price: '$52,000.70',
-        invested: '$51,009.79',
-      },
-    },
-    {
-      id: 2,
-      title: 'classic',
-      content: {
-        price: '$52,000.70',
-        invested: '$51,009.79',
-      },
-    },
-    {
-      id: 1,
-      title: 'solana',
-      content: {
-        price: '$52,000.70',
-        invested: '$51,009.79',
-      },
-    },
-    {
-      id: 2,
-      title: 'solana',
-      content: {
-        price: '$52,000.70',
-        invested: '$51,009.79',
-      },
-    },
-  ]
+
+  const { tokens } = useGetNfts();
+  const content = {
+    price: '$52,000.70',
+    invested: '$51,009.79',
+  }
+  const cardsData = tokens?.map((token: any) => { return { ...token, content } });
 
   return (
     <div className={'grid grid-cols-3 gap-4'}>
-      {tempData.map((item, i) => (
-        <NftCard key={i} title={item?.title} content={item?.content} id={item?.id} />
-      ))}
+      {cardsData.map((item, i) => {
+        const data = item?.metadata;
+        return <NftCard key={`${data?.name}#${i}`} title={data.name} content={item?.content} uri={data?.uri} mint={data?.mint} />
+      })}
     </div>
   )
 }

@@ -21,3 +21,7 @@ export const getProjectById = async (id: string) => {
 export const getTokenById = async (id: string) => {
   return await API.get<TokenType[]>(`/token/${id}`)
 }
+
+export const getNftImg = async (uri: string) => {
+  return await axios.get<any>(uri);
+}
