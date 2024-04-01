@@ -60,7 +60,7 @@ const tempData = {
 const ClassicEarnPage = () => {
   return (
     <div>
-      <BackLink title={'Home Page'} path={'/'} />
+      <BackLink title={'Portfolios'} path={'/'} />
       <PageTitle title={'Classic + Earn'} isBadges />
 
       <PageHeader>
