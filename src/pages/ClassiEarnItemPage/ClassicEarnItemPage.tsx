@@ -65,7 +65,7 @@ const ClassicEarnItemPage = () => {
 
   return (
     <div>
-      <BackLink title={'Home Page'} path={'/'} />
+      <BackLink title={'Portfolios'} path={'/'} />
       <PageTitle title={'Classic + Earn item'} isBadges>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'}>

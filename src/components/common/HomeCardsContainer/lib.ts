@@ -49,7 +49,7 @@ export const getCardsData = (projectList?: ProjectType[]) => {
         },
         description: {
           title: 'Description',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.',
         },
       },
       linkPath: `/classic/${projectList?.find((item) => item.name === 'Classic')?.id ?? ''}`,
@@ -108,7 +108,7 @@ export const getCardsData = (projectList?: ProjectType[]) => {
         },
         description: {
           title: 'Description',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`,
         },
       },
       linkPath: `/solana/${projectList?.find((item) => item.name === 'Solana Ecosystem')?.id ?? ''}`,
@@ -163,7 +163,7 @@ export const getCardsData = (projectList?: ProjectType[]) => {
         },
         description: {
           title: 'Description',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          text: 'The Classic + Earn portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. It channels these assets into staking/landing/vaults for additional earning opportunities while aiming to optimize returns.',
         },
       },
       linkPath: '/classic-earn',

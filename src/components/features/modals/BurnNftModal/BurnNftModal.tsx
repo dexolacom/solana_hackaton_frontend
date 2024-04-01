@@ -33,7 +33,7 @@ export const BurnNftModal = () => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4'}>
         <p className={'text-sm'}>
-          Please, confirm you’re going to burn <span className={'font-medium'}>Solana Ecosystem: #0001</span>. This
+          Please, confirm you’re going to burn <span className={'font-bold'}>Solana Ecosystem: #0001</span>. This
           action cannot be undone.
         </p>
         <InfoCard data={tempData} />

@@ -58,6 +58,6 @@ export const columns: ColumnDef<TableData>[] = [
   },
   {
     accessorKey: 'marketCap',
-    header: () => <div className='text-right'>Market Cup</div>,
+    header: () => <div className='text-right'>Market Cap</div>,
   },
 ]

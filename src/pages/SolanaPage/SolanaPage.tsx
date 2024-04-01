@@ -64,7 +64,7 @@ const SolanaPage = () => {
 
   return (
     <div>
-      <BackLink title={'Home Page'} path={'/'} />
+      <BackLink title={'Portfolios'} path={'/'} />
       <PageTitle title={'solana ecosystem'} />
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accentTeal'} />

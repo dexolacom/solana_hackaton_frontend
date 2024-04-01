@@ -10,7 +10,7 @@ export const Header = () => {
   const location = useLocation()
 
   return (
-    <header className={'py-4 px-10 flex justify-center items-center'}>
+    <header className={'py-4 px-4 flex justify-center items-center'}>
       <div className='flex-1'>
         <img src={logo} />
       </div>
