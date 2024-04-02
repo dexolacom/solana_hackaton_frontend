@@ -62,7 +62,7 @@ const SolanaItemPage = () => {
     },
     description: {
       title: 'Description',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`,
     },
   }
   const { setModalName } = useModalsContext()

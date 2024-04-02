@@ -57,7 +57,7 @@ const ClassicItemPage = () => {
     },
     description: {
       title: 'Description',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.',
     },
   }
   const { setModalName } = useModalsContext()
