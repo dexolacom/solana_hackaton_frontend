@@ -9,7 +9,14 @@ import {
 import { Transaction, PublicKey } from '@solana/web3.js';
 import { connection, commitmentLevel } from '@/lib/blockchain/constant'
 
-export const getOrCreateATA = async (owner: PublicKey, mint: PublicKey, payer: PublicKey, signTransaction: (<T extends Transaction >(transaction: T) => Promise<T>)) => {
+interface GetOrCreateATA {
+  owner: PublicKey, 
+  mint: PublicKey, 
+  payer: PublicKey, 
+  signTransaction: (<T extends Transaction >(transaction: T) => Promise<T>)
+}
+
+export const getOrCreateATA = async ({owner, mint, payer, signTransaction}: GetOrCreateATA) => {
   const associatedToken = await getAssociatedTokenAddress(
     mint,
     owner,
