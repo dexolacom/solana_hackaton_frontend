@@ -6,6 +6,7 @@ import { toast } from '@/lib/hooks/useToast.ts'
 import { generateRandomNumber } from '@/temp/utils/generateRandomNumber'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
+import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
 
 // TODO: add debounce for amount field
 
@@ -13,6 +14,7 @@ export const useClassicForm = () => {
 
   const { buyNftByToken, isError: isErrorToken, isSuccess: isSuccessToken } = useBuyNftByToken();
   const { buyNftByNative, isError: isErrorNative, isSuccess: isSuccessNative } = useBuyNftByNative();
+  const { solanaRate } = useSolanaRate();
 
   useEffect(() => {
     if (isSuccessToken || isSuccessNative) {
@@ -30,16 +32,26 @@ export const useClassicForm = () => {
   }, [isSuccessToken, isErrorToken, isSuccessNative, isErrorNative])
 
   const FormSchema = z.object({
-    amount: z.coerce.number().gte(1, {   //!change to 100
-      message: 'Should be at least $1',
-    }),
+    amount: z.coerce.number(),
     amountCurrency: z.string().min(1, {
       message: 'This field cannot be blank',
     }),
     withdrawal: z.string().min(1, {
       message: 'This field cannot be blank',
     }),
-  })
+  }).refine((data) => {
+    if (data.amountCurrency === 'USDC') {
+      return data.amount >= 2;
+    } else if (data.amountCurrency === 'SOL') {
+      return solanaRate && (data.amount >= 2 / solanaRate);
+    }
+
+    return true;
+  }, {
+    message: 'Should be at least $100',
+    path: ['amount'],
+  });
+
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
