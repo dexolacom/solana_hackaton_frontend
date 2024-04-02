@@ -72,7 +72,7 @@ const SolanaItemPage = () => {
       <BackLink title={'My holdings'} path={'/my-holdings'} />
       <PageTitle title={'SOLANA ECOSYSTEM item'}>
         <div className={'flex gap-4'}>
-          <Button className={'flex-1 gap-2'} variant={'accent'}>
+          <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
             {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
