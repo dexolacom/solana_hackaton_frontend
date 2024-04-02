@@ -5,6 +5,8 @@ export const useGetNftImg = (uri: string) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['getNftImg'],
     queryFn: () => getNftImg(uri),
+    staleTime: 60000,
+    enabled: !!uri
   })
 
   const nftImg = data?.data?.image;

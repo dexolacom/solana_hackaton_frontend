@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ProgramId, TOKEN_METADATA_PROGRAM_ID, usdcPublicKey } from "@/lib/blockchain/constant";
 import { useToast } from "@/lib/hooks/useToast";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
@@ -7,6 +6,7 @@ import { BN } from '@project-serum/anchor';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, } from "@solana/spl-token";
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { ComputeBudgetProgram } from '@solana/web3.js';
+import { useState } from 'react';
 import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
 import { getOrCreateATA } from "../helpers/getOrCreateATA";
@@ -35,8 +35,6 @@ export const useBuyNftByToken = () => {
 
 
   const buyNftByToken = async ({ inputValue, nftId }: BuyNftArgs) => {
-    console.log("🚀 ~ buyNftByToken ~ nftId:", nftId)
-    console.log("🚀 ~ buyNftByToken ~ inputValue:", inputValue)
 
     if (!publicKey || !program || !signTransaction) {
       toast({
