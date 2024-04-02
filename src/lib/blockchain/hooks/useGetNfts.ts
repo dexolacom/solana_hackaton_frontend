@@ -4,38 +4,19 @@ import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token
 import { publicKey as createPubKey } from '@metaplex-foundation/umi';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { connection } from '../constant';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { addressNftCollection } from '../constant';
 import { umi } from '../constant';
 
 
 export const useGetNfts = () => {
-  const [tokens, setTokens] = useState<any[]>([]);
+
   const { publicKey } = useWallet();
-
-
-  useEffect(() => {
-    if (!publicKey) return;
-
-    const fetchData = async () => {
-
-      try {
-        const walletTokens = await getTheTokensOfOwner();
-        if (walletTokens) {
-          setTokens(walletTokens);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [publicKey])
 
   const getTheTokensOfOwner = async () => {
     if (!publicKey) return;
     const tokensInWallet: any = [];
-
+    console.log('Work owner')
     const accounts = await connection.getParsedProgramAccounts(
       TOKEN_PROGRAM_ID,
       {
@@ -70,25 +51,35 @@ export const useGetNfts = () => {
         }
       }
     });
-
-    const nftsData = await fetchAllMetadata(tokensInWallet) || [];
-
-    const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressNftCollection);
-
-    return filteredNfts;
-
+    return tokensInWallet;
   }
 
   const fetchMetadata = async (mintAddress: string) => {
+    console.log('fetch metadata');
     const mintPubkey = createPubKey(mintAddress);
     const asset = await fetchDigitalAssetWithTokenByMint(umi, mintPubkey)
     return asset;
   };
 
   const fetchAllMetadata = async (tokens: any) => {
+    console.log('fetch Allmetadata');
     const promises = tokens.map((token: any) => fetchMetadata(token.mint));
     return Promise.all(promises);
   };
 
-  return { tokens }
+  const fetchNfts = async () => {
+    const walletTokens = await getTheTokensOfOwner();
+    const nftsData = await fetchAllMetadata(walletTokens) || [];
+    const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressNftCollection);
+    return filteredNfts;
+  };
+
+  const { data: tokens = [], isLoading, isError } = useQuery({
+    queryKey: ['getNfts'],
+    queryFn: () => fetchNfts(),
+    staleTime: 60000,
+    enabled: !!publicKey
+  })
+
+  return { tokens, isLoading, isError }
 };
