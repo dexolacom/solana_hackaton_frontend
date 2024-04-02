@@ -17,7 +17,7 @@ export const Header = () => {
       <div className={'flex gap-10 '}>
         <AppLink variant={'ghost'} to={'/'} isActive={location?.pathname === '/'}>
           <img src={house} className={'-mt-[2px]'} />
-          Portfolios
+          Home
         </AppLink>
         <AppLink variant={'ghost'} to={'/my-holdings'} isActive={location?.pathname === '/my-holdings'}>
           <img src={briefcase} className={'-mt-[2px]'} />

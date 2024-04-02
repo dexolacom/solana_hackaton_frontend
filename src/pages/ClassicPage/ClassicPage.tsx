@@ -60,7 +60,7 @@ const ClassicPage = () => {
 
   return (
     <div>
-      <BackLink title={'Portfolios'} path={'/'} />
+      <BackLink title={'Home'} path={'/'} />
       <PageTitle title={'classic'} />
       <PageHeader>
         <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accent'} />

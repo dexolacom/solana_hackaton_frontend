@@ -16,7 +16,6 @@ export const useGetNfts = () => {
   const getTheTokensOfOwner = async () => {
     if (!publicKey) return;
     const tokensInWallet: any = [];
-    console.log('Work owner')
     const accounts = await connection.getParsedProgramAccounts(
       TOKEN_PROGRAM_ID,
       {
@@ -40,29 +39,22 @@ export const useGetNfts = () => {
       const mintS = parsedData["parsed"]["info"]["mint"]
 
       if (amountI === 1) {
-
-        try {
           const objT: any = {};
           objT.mint = mintS;
           objT.amount = amountI
           tokensInWallet.push(objT)
-        } catch (error) {
-          console.error(error);
-        }
       }
     });
     return tokensInWallet;
   }
 
   const fetchMetadata = async (mintAddress: string) => {
-    console.log('fetch metadata');
     const mintPubkey = createPubKey(mintAddress);
     const asset = await fetchDigitalAssetWithTokenByMint(umi, mintPubkey)
     return asset;
   };
 
   const fetchAllMetadata = async (tokens: any) => {
-    console.log('fetch Allmetadata');
     const promises = tokens.map((token: any) => fetchMetadata(token.mint));
     return Promise.all(promises);
   };
