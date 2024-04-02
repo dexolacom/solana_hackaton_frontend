@@ -5,8 +5,9 @@ const ModalsContext = createContext<ContextProps | undefined>(undefined)
 
 export const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [modalName, setModalName] = useState<string>('')
+  const [mint, setMint] = useState<string>('')
 
-  const contextValue = useMemo(() => ({ modalName, setModalName }), [modalName])
+  const contextValue = useMemo(() => ({ modalName, setModalName, mint, setMint }), [modalName, mint])
 
   return <ModalsContext.Provider value={contextValue}>{children}</ModalsContext.Provider>
 }

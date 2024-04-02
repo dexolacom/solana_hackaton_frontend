@@ -9,7 +9,7 @@ import { MyHoldingsFilter } from '@/components/features/MyHoldingsFilter/MyHoldi
 const MyHoldingsPage = () => {
   const tempData = {
     amount: {
-      title: 'Total amount invested',
+      title: 'Current Portfolio Price',
       number: '$1,013,724.41',
     },
     holdings: {

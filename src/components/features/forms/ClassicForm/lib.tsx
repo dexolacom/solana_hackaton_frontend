@@ -48,7 +48,7 @@ export const useClassicForm = () => {
 
     return true;
   }, {
-    message: 'Should be at least $100',
+    message: 'Should be at least $2',
     path: ['amount'],
   });
 

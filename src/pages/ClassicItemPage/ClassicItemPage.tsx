@@ -7,7 +7,7 @@ import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx
 import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx'
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx'
 import { Button } from '@/components/ui/Button.tsx'
-import { ArrowUpDown, Flame } from 'lucide-react'
+// import { ArrowUpDown, Flame } from 'lucide-react'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/ClassicItemTable.tsx'
@@ -15,7 +15,7 @@ import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/
 const ClassicItemPage = () => {
   const tempData = {
     amount: {
-      title: 'Total amount invested',
+      title: 'Current Portfolio Price',
       number: '$1,013,724.41',
     },
     holdings: {
@@ -68,17 +68,22 @@ const ClassicItemPage = () => {
       <PageTitle title={'CLASSIC item'}>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'}>
-            <ArrowUpDown className={'w-4 h-4'} />
+            {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
           <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
-            <Flame className={'w-4 h-4'} />
+            {/* <Flame className={'w-4 h-4'} /> */}
             Burn
           </Button>
         </div>
       </PageTitle>
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accent'} />
+        <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accent'} >
+          <div className={'mt-4 flex flex-col gap-1'}>
+            <span className={'font-regular text-sm'}>Invested</span>
+            <span className={'font-roboto font-medium'}>100000000</span>
+          </div>
+        </AmountCard>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classic'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>

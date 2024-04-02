@@ -8,7 +8,7 @@ import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { Button } from '@/components/ui/Button.tsx'
-import { ArrowUpDown, Flame } from 'lucide-react'
+// import { ArrowUpDown, Flame } from 'lucide-react'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ClassicEarnItemTable } from '@/components/features/tabels/ClassicEarnItemTable/ClassicEarnItemTable.tsx'
 
@@ -69,11 +69,11 @@ const ClassicEarnItemPage = () => {
       <PageTitle title={'Classic + Earn item'} isBadges>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'}>
-            <ArrowUpDown className={'w-4 h-4'} />
+            {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
           <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
-            <Flame className={'w-4 h-4'} />
+            {/* <Flame className={'w-4 h-4'} /> */}
             Burn
           </Button>
         </div>

@@ -67,7 +67,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
           control={form.control}
           name='amountCurrency'
           render={({ field }) => (
-            <FormItem>
+            <FormItem >
               <FormLabel>Amount Currency</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={'USDC'}>
                 <FormControl>
@@ -88,7 +88,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
           control={form.control}
           name='withdrawal'
           render={({ field }) => (
-            <FormItem>
+            <FormItem >
               <FormLabel>Withdrawal Currency</FormLabel>
               <Select onValueChange={field.onChange}>
                 <FormControl>
