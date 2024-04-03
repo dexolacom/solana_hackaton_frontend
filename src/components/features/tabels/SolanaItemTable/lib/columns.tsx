@@ -1,6 +1,6 @@
 import info from '@/assets/icons/info.svg'
 import { Badge } from '@/components/ui/Badge.tsx'
-import { currencyIcons, currencyLinks } from '@/lib/constants.tsx'
+import { currencyLinks } from '@/lib/constants.tsx'
 import { ColumnDef } from '@tanstack/react-table'
 
 export type TableData = {

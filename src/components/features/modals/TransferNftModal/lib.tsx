@@ -5,12 +5,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from '@/lib/hooks/useToast.ts'
 import { PublicKey } from '@solana/web3.js';
 import { useTransferNft } from '@/lib/blockchain/hooks/useTransferNft';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 // TODO: add debounce for amount field
 
 export const useTransferForm = (mint: string) => {
 
-  const { transferNft, isError, isSuccess } = useTransferNft();
+  const { transfer: transferNft, isError, isSuccess } = useTransferNft();
+  const { publicKey } = useWallet();
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,10 +31,9 @@ export const useTransferForm = (mint: string) => {
 
   const FormSchema = z.object({
     address: z.string().refine(value => {
-      console.log("🚀 ~ address:z.string ~ value:", value)
       try {
+        if (value === publicKey?.toBase58()) return false
         const pubkey = new PublicKey(value);
-        console.log("🚀 ~ address:z.string ~ pubkey:", pubkey)
         return pubkey.toBase58() === value;
       } catch (error) {
         return false;
@@ -41,7 +42,6 @@ export const useTransferForm = (mint: string) => {
       message: 'Invalid wallet address',
     })
   });
-
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

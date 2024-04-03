@@ -12,8 +12,8 @@ import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
 
 export const useClassicForm = () => {
 
-  const { buyNftByToken, isError: isErrorToken, isSuccess: isSuccessToken } = useBuyNftByToken();
-  const { buyNftByNative, isError: isErrorNative, isSuccess: isSuccessNative } = useBuyNftByNative();
+  const { buy: buyNftByToken, isError: isErrorToken, isSuccess: isSuccessToken, isLoading: isLoadingToken } = useBuyNftByToken();
+  const { buy: buyNftByNative, isError: isErrorNative, isSuccess: isSuccessNative, isLoading: isLoadingNative } = useBuyNftByNative();
   const { solanaRate } = useSolanaRate();
 
   useEffect(() => {
@@ -30,6 +30,8 @@ export const useClassicForm = () => {
       })
     }
   }, [isSuccessToken, isErrorToken, isSuccessNative, isErrorNative])
+
+  const isLoading = isLoadingToken || isLoadingNative
 
   const FormSchema = z.object({
     amount: z.coerce.number(),
@@ -79,7 +81,7 @@ export const useClassicForm = () => {
     //   ),
     // })
   }
-  return { form, onSubmit, solanaRate }
+  return { form, onSubmit, solanaRate, isLoading }
 }
 
 export const getFormCurrencyValues = (amount: string | number, currencyInfo: { title: string; percent: number }[]) => {

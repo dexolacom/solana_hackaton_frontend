@@ -25,7 +25,7 @@ interface ClassicFormProps {
 export const ClassicForm = (props: ClassicFormProps) => {
   const { currenciesVariant = 'classic' } = props
 
-  const { form, onSubmit, solanaRate } = useClassicForm()
+  const { form, onSubmit, solanaRate, isLoading } = useClassicForm()
   const infoCardData = useFormInfo(form.watch())
   const amount = form.watch('amount')
   const currency = form.watch('amountCurrency')
@@ -110,7 +110,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
         /> */}
         <InfoCard data={infoCardData} />
         <FormCurrency data={formCurrencyData} columns={currencyColumns} />
-        <Button variant={'accent'} className={'w-full gap-2'}>
+        <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
           Invest
         </Button>
       </form>

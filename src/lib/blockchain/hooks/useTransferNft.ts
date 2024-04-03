@@ -1,14 +1,13 @@
-import { useState } from 'react';
-import { PublicKey } from "@solana/web3.js";
+import { useToast } from "@/lib/hooks/useToast";
 import {
   createTransferCheckedInstruction,
   getAssociatedTokenAddress
 } from "@solana/spl-token";
-import { getOrCreateATA } from "../helpers/getOrCreateATA";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Transaction } from '@solana/web3.js';
+import { PublicKey, Transaction } from "@solana/web3.js";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { connection } from "../constant";
-import { useToast } from "@/lib/hooks/useToast";
+import { getOrCreateATA } from "../helpers/getOrCreateATA";
 interface TransferNftProps {
   destinationAddress: PublicKey;
   mintPubkey: PublicKey;
@@ -19,9 +18,7 @@ export const useTransferNft = () => {
   const { toast } = useToast();
   const { publicKey, signTransaction } = wallet;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const queryClient = useQueryClient();
 
   const transferNft = async ({ destinationAddress, mintPubkey }: TransferNftProps) => {
 
@@ -33,49 +30,46 @@ export const useTransferNft = () => {
       return;
     }
 
-    try {
-      setIsError(false);
-      setIsSuccess(false);
-      setIsLoading(true);
+    const nftATA = await getAssociatedTokenAddress(
+      mintPubkey,
+      publicKey
+    );
 
-      const nftATA = await getAssociatedTokenAddress(
+    const destinationATA = await getOrCreateATA({ owner: destinationAddress, mint: mintPubkey, payer: publicKey, signTransaction });
+
+    const transaction = new Transaction();
+    transaction.add(
+      createTransferCheckedInstruction(
+        nftATA,
         mintPubkey,
-        publicKey
-      );
+        destinationATA.address,
+        publicKey,
+        1,
+        0
+      )
+    );
+    const blockHash = await connection.getLatestBlockhash()
+    transaction.feePayer = publicKey
+    transaction.recentBlockhash = blockHash.blockhash
+    const signed = await signTransaction(transaction)
 
-      const destinationATA = await getOrCreateATA({ owner: destinationAddress, mint: mintPubkey, payer: publicKey, signTransaction });
+    const signature = await connection.sendRawTransaction(signed.serialize())
 
-      const transaction = new Transaction();
-      transaction.add(
-        createTransferCheckedInstruction(
-          nftATA,
-          mintPubkey,
-          destinationATA.address,
-          publicKey,
-          1,
-          0
-        )
-      );
-      const blockHash = await connection.getLatestBlockhash()
-      transaction.feePayer = publicKey
-      transaction.recentBlockhash = blockHash.blockhash
-      const signed = await signTransaction(transaction)
-
-      const signature = await connection.sendRawTransaction(signed.serialize())
-
-      await connection.confirmTransaction({
-        blockhash: blockHash.blockhash,
-        lastValidBlockHeight: blockHash.lastValidBlockHeight,
-        signature,
-      })
-    }
-    catch {
-      setIsError(true);
-      setIsLoading(false);
-      setIsSuccess(false);
-    }
+    await connection.confirmTransaction({
+      blockhash: blockHash.blockhash,
+      lastValidBlockHeight: blockHash.lastValidBlockHeight,
+      signature,
+    })
   }
-  return { transferNft, isLoading, isSuccess, isError };
+
+  const { mutate: transfer, isError, isSuccess, isPending: isLoading } = useMutation({
+    mutationFn: transferNft,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getNfts'] })
+    },
+  })
+
+  return { transfer, isLoading, isSuccess, isError };
 }
 
 
