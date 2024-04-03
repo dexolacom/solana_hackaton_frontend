@@ -1,69 +1,13 @@
-import { columns, TableData } from './lib/columns.tsx'
+import { useItemTableData } from '@/lib/hooks/useItemTableData.ts'
+import { columns } from './lib/columns.tsx'
 import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
+import { classicTemplate } from '@/lib/constants.tsx'
+import { Skeleton } from '@/components/common/Skeleton/Skeleton.tsx'
 
 export const ClassicItemTable = () => {
-  const data: TableData[] = [
-    {
-      token: {
-        title: 'BTC',
-        fullTitle: 'Bitcoin',
-      },
-      riskType: 'Low',
-    },
-    {
-      token: {
-        title: 'SOL',
-        fullTitle: 'Solana',
-      },
-      riskType: 'Medium',
-    },
-    {
-      token: {
-        title: 'ETH',
-        fullTitle: 'Ethereum',
-      },
-      riskType: 'High',
-    },
-    {
-      token: {
-        title: 'JUP',
-        fullTitle: 'Jupiter',
-      },
-      riskType: 'Medium',
-    },
-    {
-      token: {
-        title: 'RNDR',
-        fullTitle: 'Render',
-      },
-      riskType: 'Low',
-    },
-    {
-      token: {
-        title: 'HNT',
-        fullTitle: 'Helium',
-      },
-      riskType: 'Low',
-    },
-    {
-      token: {
-        title: 'BONK',
-        fullTitle: 'Bonk',
-      },
-      riskType: 'Medium',
-    },
-    {
-      token: {
-        title: 'PYTH',
-        fullTitle: 'Pyth Network',
-      },
-      riskType: 'High',
-    },
-  ]
 
-  return (
-    <div>
-      <DataTable columns={columns} data={data} />
-    </div>
-  )
+  const { dataTable, isLoading } = useItemTableData({ template: classicTemplate })
+
+  return <div>{isLoading ? <Skeleton height={590} /> : <DataTable columns={columns} data={dataTable} />}</div>
+
 }

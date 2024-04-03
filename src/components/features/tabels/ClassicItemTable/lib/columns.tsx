@@ -4,11 +4,14 @@ import { currencyIcons, currencyLinks } from '@/lib/constants.tsx'
 import { ColumnDef } from '@tanstack/react-table'
 
 export type TableData = {
-  token: {
-    title: string
-    fullTitle: string
-  }
+  symbol: string
+  icon: string
+  distribution: string
+  name: string
   riskType: 'Low' | 'Medium' | 'High'
+  coinPrice: string
+  change24h: string
+  marketCap: string
 }
 
 export const columns: ColumnDef<TableData>[] = [
@@ -16,18 +19,18 @@ export const columns: ColumnDef<TableData>[] = [
     accessorKey: 'token',
     header: () => <div className='text-left'>Token</div>,
     cell: ({ row }) => {
-      const { title, fullTitle } = row.original.token
+      const { icon, symbol, name } = row.original
       return (
         <div className={'flex gap-2 text-left items-center'}>
-          <img className={'h-6 w-6'} src={currencyIcons[title]} alt='' />
+          <img className={'h-6 w-6'} src={icon} alt='Coin icon' />
           <div className={'flex flex-col'}>
-            <a href={currencyLinks[title]}
+            <a href={currencyLinks[symbol]}
               target="_blank"
               rel="noopener noreferrer"
               className={'font-medium underline underline-offset-2'}>
-              {title}
+              {symbol}
             </a>
-            <span className={'text-xs text-card-additionalForeground'}>{fullTitle}</span>
+            <span className={'text-xs text-card-additionalForeground'}>{name}</span>
           </div>
         </div>
       )
@@ -46,11 +49,11 @@ export const columns: ColumnDef<TableData>[] = [
     header: 'Coin Amount',
   },
   {
-    accessorKey: 'currentCoinPrice',
+    accessorKey: 'coinPrice',
     header: 'Current Coin Price',
   },
   {
-    accessorKey: '24hChange',
+    accessorKey: 'change24h',
     header: '24h Change',
   },
   {
