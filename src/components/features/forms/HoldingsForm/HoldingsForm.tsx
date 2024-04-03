@@ -92,7 +92,7 @@ export const HoldingsForm = () => {
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name='withdrawal'
           render={({ field }) => (
@@ -113,7 +113,7 @@ export const HoldingsForm = () => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <InfoCard data={infoCardData} />
         <Button variant={'accent'} className={'w-full gap-2'}>
           Invest

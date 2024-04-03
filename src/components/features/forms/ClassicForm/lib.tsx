@@ -36,9 +36,9 @@ export const useClassicForm = () => {
     amountCurrency: z.string().min(1, {
       message: 'This field cannot be blank',
     }),
-    withdrawal: z.string().min(1, {
-      message: 'This field cannot be blank',
-    }),
+    // withdrawal: z.string().min(1, {
+    //   message: 'This field cannot be blank',
+    // }),
   }).refine((data) => {
     if (data.amountCurrency === 'USDC') {
       return data.amount >= 2;
@@ -59,7 +59,7 @@ export const useClassicForm = () => {
       // @ts-ignore
       amount: '',
       amountCurrency: 'USDC',
-      withdrawal: '',
+      // withdrawal: '',
     },
     // mode: 'onChange',
   })

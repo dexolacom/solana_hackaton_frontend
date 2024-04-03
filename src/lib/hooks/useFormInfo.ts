@@ -4,7 +4,7 @@ import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate.ts'
 type FormData = {
   amount: string | number
   amountCurrency: string
-  withdrawal: string | string[]
+  // withdrawal: string | string[]
 }
 
 export const useFormInfo = (formData: FormData) => {

@@ -14,9 +14,9 @@ export const useHoldingsForm = () => {
     amountCurrency: z.string().min(1, {
       message: 'This field cannot be blank',
     }),
-    withdrawal: z.string().min(1, {
-      message: 'This field cannot be blank',
-    }),
+    // withdrawal: z.string().min(1, {
+    //   message: 'This field cannot be blank',
+    // }),
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -26,7 +26,7 @@ export const useHoldingsForm = () => {
       // @ts-ignore
       amount: '',
       amountCurrency: 'USDC',
-      withdrawal: '',
+      // withdrawal: '',
     },
   })
 

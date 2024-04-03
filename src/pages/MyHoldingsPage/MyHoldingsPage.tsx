@@ -75,7 +75,7 @@ const MyHoldingsPage = () => {
             />
           </PageHeader>
 
-          <h3 className={'text-2xl font-semibold mb-8'}>NFT</h3>
+          <h3 className={'text-2xl font-semibold mb-8'}>NFTs</h3>
 
           <NftCardsContainer />
         </div>

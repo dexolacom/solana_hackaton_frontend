@@ -84,7 +84,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name='withdrawal'
           render={({ field }) => (
@@ -105,7 +105,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <InfoCard data={infoCardData} />
         <FormCurrency data={formCurrencyData} columns={currencyColumns} />
         <Button variant={'accent'} className={'w-full gap-2'}>
