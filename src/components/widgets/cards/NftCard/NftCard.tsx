@@ -22,10 +22,8 @@ interface NftCardProps {
 
 export const NftCard = (props: NftCardProps) => {
   const { title, content, uri, mint } = props
-  // console.log("🚀 ~ NftCard ~ uri:", uri)
   const { img } = useGetNftImg(uri);
-  console.log("🚀 ~ NftCard ~ img:", img)
-  // console.log("🚀 ~ NftCard ~ nftImg:", nftImg)
+
 
   const { setModalName, setMint } = useModalsContext()
   const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']

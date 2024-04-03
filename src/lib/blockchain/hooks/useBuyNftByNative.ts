@@ -77,7 +77,7 @@ export const useBuyNftByNative = () => {
       }
 
       const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
-      console.log("🚀 ~ buyNftByNative ~ nft:", nft)
+
       // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
       // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
       // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", nft.metadataAccountAddress.toBase58());
@@ -97,8 +97,8 @@ export const useBuyNftByNative = () => {
       const getWSolbalance = await connection.getTokenAccountBalance(userATA.address);
       const wSolBalance = getWSolbalance?.value.uiAmount;
 
-
-      if (wSolBalance && wSolBalance < inputValue) {
+      if (wSolBalance !== null && wSolBalance < inputValue) {
+        console.log('Work');
         const transaction = new Transaction()
         transaction.add(SystemProgram.transfer({
           fromPubkey: publicKey,
@@ -107,7 +107,7 @@ export const useBuyNftByNative = () => {
         }),
           createSyncNativeInstruction(userATA.address)
         );
-        sendTransaction(transaction, connection);
+        await sendTransaction(transaction, connection);
         // instructions.push(refillUserATA);
       }
 

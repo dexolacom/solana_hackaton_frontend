@@ -35,7 +35,6 @@ export const useBuyNftByToken = () => {
   // }
 
   const collectionData = generateColectionData('classic', 3)
-  console.log("🚀 ~ useBuyNftByToken ~ collectionData:", collectionData)
   const buyNftByToken = async ({ inputValue, nftId }: BuyNftArgs) => {
 
     if (!publicKey || !program || !signTransaction) {
