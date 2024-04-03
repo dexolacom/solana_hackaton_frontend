@@ -8,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 import { addressNftCollection } from '../constant';
 import { umi } from '../constant';
 
-
 export const useGetNfts = () => {
 
   const { publicKey } = useWallet();

@@ -79,7 +79,7 @@ export const useClassicForm = () => {
     //   ),
     // })
   }
-  return { form, onSubmit }
+  return { form, onSubmit, solanaRate }
 }
 
 export const getFormCurrencyValues = (amount: string | number, currencyInfo: { title: string; percent: number }[]) => {

@@ -25,12 +25,14 @@ interface ClassicFormProps {
 export const ClassicForm = (props: ClassicFormProps) => {
   const { currenciesVariant = 'classic' } = props
 
-  const { form, onSubmit } = useClassicForm()
+  const { form, onSubmit, solanaRate } = useClassicForm()
   const infoCardData = useFormInfo(form.watch())
   const amount = form.watch('amount')
+  const currency = form.watch('amountCurrency')
+  const amountWithCurrency = currency === 'USDC' ? amount : amount * (solanaRate ?? 0)
 
   const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo
-  const formCurrencyData = getFormCurrencyValues(amount, currencyInfo)
+  const formCurrencyData = getFormCurrencyValues(amountWithCurrency, currencyInfo)
   const currencyColumns =
     currenciesVariant === 'classic'
       ? { firstColumn: [0, 4], secondColumn: [4, formCurrencyData.length] }
