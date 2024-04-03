@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
 import { getOrCreateATA } from "../helpers/getOrCreateATA";
+import { generateColectionData } from "../helpers/generateColectionData";
 
 export interface BuyNftArgs {
   inputValue: number;
@@ -27,13 +28,14 @@ export const useBuyNftByToken = () => {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const collection_data = {
-    title: "Portfolio#1",
-    symbol: "PRT1",
-    uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
-  }
+  // constD =  = generateColectionData('classic', 3){
+  //   title: "Portfolio#1",
+  //   symbol: "PRT1",
+  //   uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
+  // }
 
-
+  const collectionData = generateColectionData('classic', 3)
+  console.log("🚀 ~ useBuyNftByToken ~ collectionData:", collectionData)
   const buyNftByToken = async ({ inputValue, nftId }: BuyNftArgs) => {
 
     if (!publicKey || !program || !signTransaction) {
@@ -74,7 +76,7 @@ export const useBuyNftByToken = () => {
 
       await program.methods.buyPortfolio(
         nftId,
-        collection_data.uri,
+        collectionData.uri,
         new BN(inputValue * 10e5),
       )
         .accounts({

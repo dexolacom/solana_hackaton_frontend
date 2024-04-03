@@ -11,13 +11,14 @@ export const NftCardsContainer = () => {
       <div className='h-[340px] flex justify-center items-center text-[20px]'>Please, connect wallet.</div>
     )
   }
-
+  // 75bTjt7gdbe2bEbxRes623UXzJAeWBqULVwTah9rsNzb
   const content = {
     price: '$52,000.70',
     invested: '$51,009.79',
   }
   const cardsData = tokens?.map((token: any) => { return { ...token, content } });
-
+  // const card = cardsData?.filter(card => card.publicKey === '75bTjt7gdbe2bEbxRes623UXzJAeWBqULVwTah9rsNzb');
+  // console.log("🚀 ~ NftCardsContainer ~ card:", card)
   return (
     <>
       {cardsData.length === 0 ?

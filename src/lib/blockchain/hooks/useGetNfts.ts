@@ -39,10 +39,10 @@ export const useGetNfts = () => {
       const mintS = parsedData["parsed"]["info"]["mint"]
 
       if (amountI === 1) {
-          const objT: any = {};
-          objT.mint = mintS;
-          objT.amount = amountI
-          tokensInWallet.push(objT)
+        const objT: any = {};
+        objT.mint = mintS;
+        objT.amount = amountI
+        tokensInWallet.push(objT)
       }
     });
     return tokensInWallet;
@@ -63,6 +63,7 @@ export const useGetNfts = () => {
     const walletTokens = await getTheTokensOfOwner();
     const nftsData = await fetchAllMetadata(walletTokens) || [];
     const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressNftCollection);
+    console.log("🚀 ~ fetchNfts ~ filteredNfts:", filteredNfts)
     return filteredNfts;
   };
 

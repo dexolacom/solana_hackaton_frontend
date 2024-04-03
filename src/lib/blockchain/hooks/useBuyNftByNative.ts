@@ -17,6 +17,7 @@ import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
 import { BuyNftArgs } from "./useBuyNftByToken";
 import { BN } from '@project-serum/anchor';
+import { generateColectionData } from "../helpers/generateColectionData";
 
 export const useBuyNftByNative = () => {
 
@@ -29,12 +30,12 @@ export const useBuyNftByNative = () => {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const collection_data = {
-    title: "Portfolio#3",
-    symbol: "PRT",
-    uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
-  }
-
+  // const collection_data = {
+  //   title: "Portfolio#3",
+  //   symbol: "PRT",
+  //   uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
+  // }
+  const collectionData = generateColectionData('classic', 3)
   const buyNftByNative = async ({ inputValue, nftId }: BuyNftArgs) => {
     if (!publicKey || !program || !signTransaction) {
       toast({
@@ -76,6 +77,7 @@ export const useBuyNftByNative = () => {
       }
 
       const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
+      console.log("🚀 ~ buyNftByNative ~ nft:", nft)
       // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
       // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
       // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", nft.metadataAccountAddress.toBase58());
@@ -111,7 +113,7 @@ export const useBuyNftByNative = () => {
 
       await program.methods.buyPortfolio(
         nftId,
-        collection_data.uri,
+        collectionData.uri,
         new BN(inputValue * 10e8),
       )
         .accounts({

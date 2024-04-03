@@ -22,7 +22,10 @@ interface NftCardProps {
 
 export const NftCard = (props: NftCardProps) => {
   const { title, content, uri, mint } = props
-  const { nftImg } = useGetNftImg(uri);
+  // console.log("🚀 ~ NftCard ~ uri:", uri)
+  const { img } = useGetNftImg(uri);
+  console.log("🚀 ~ NftCard ~ img:", img)
+  // console.log("🚀 ~ NftCard ~ nftImg:", nftImg)
 
   const { setModalName, setMint } = useModalsContext()
   const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
@@ -30,9 +33,9 @@ export const NftCard = (props: NftCardProps) => {
 
   return (
     <Card className={'relative'}>
-      <Link to={`Classic/${title}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => {e.stopPropagation(); setMint(mint)}} />
+      <Link to={`Classic/${title}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => { e.stopPropagation(); setMint(mint) }} />
       <img
-        src={nftImg || defaultCard}
+        src={img || defaultCard}
         width={312}
         height={312}
         alt={'Portfolio image'}

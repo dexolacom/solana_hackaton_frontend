@@ -1,15 +1,49 @@
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
 import { getNftImg } from '@/lib/api/api'
+import { useEffect, useState } from 'react'
 
 export const useGetNftImg = (uri: string) => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['getNftImg'],
-    queryFn: () => getNftImg(uri),
-    staleTime: 60000,
-    enabled: !!uri
-  })
+  const [img, setImg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const nftImg = data?.data?.image;
+  const fetch = async (uri: string) => {
+    try {
+      setIsLoading(true);
+      setIsSuccess(false);
+      setIsError(false);
+      const data = await getNftImg(uri);
+      if (data) {
+        setImg(data.data?.image);
+      }
+      setIsLoading(false);
+      setIsSuccess(true);
+    }
+    catch {
+      setIsLoading(false);
+      setIsError(true);
+    }
+  }
 
-  return { nftImg, isLoading, isError }
+  useEffect(() => {
+    if (uri) {
+      fetch(uri)
+    }
+  }, [uri])
+
+  return { img, isError, isLoading, isSuccess }
+  
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ['getNftImg'],
+  //   queryFn: () => getNftImg(uri),
+  //   staleTime: 0,
+  // enabled: !!uri
+  // });
+
+
+  // const img = data?.data?.image;
+
+  // return { img, isLoading, isError }
+
 }
