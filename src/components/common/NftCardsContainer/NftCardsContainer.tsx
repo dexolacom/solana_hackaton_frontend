@@ -1,10 +1,10 @@
 import { NftCard } from '@/components/widgets/cards/NftCard/NftCard.tsx'
-import { useGetNfts } from '@/lib/blockchain/hooks/useGetNfts'
+import { useNftData } from '@/lib/blockchain/hooks/useNftData';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 export const NftCardsContainer = () => {
   const { publicKey } = useWallet();
-  const { tokens } = useGetNfts();
+  const { cards } = useNftData();
 
   if (!publicKey) {
     return (
@@ -14,17 +14,20 @@ export const NftCardsContainer = () => {
 
   return (
     <>
-      {tokens.length === 0 ?
+      {cards.length === 0 ?
         <div className='h-[340px] flex justify-center items-center text-[20px]'>We have just checked, but there are no portfolios in your wallet.</div>
         :
         <div className='grid grid-cols-3 gap-4'>
-          {tokens.map((item, i) => {
+          {cards.map((item, i) => {
             const data = item?.metadata;
             return <NftCard
               key={`${data?.name}#${i}`}
               title={data.name}
-              uri={data?.uri} mint={data?.mint}
-              collection={data?.collection?.value?.key} />;
+              uri={data?.uri}
+              investedPrice={item.content.investedPrice}
+              collection={data?.collection?.value?.key}
+              mint={data?.mint}
+            />;
           })}
         </div>
       }

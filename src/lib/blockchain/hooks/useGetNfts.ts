@@ -62,14 +62,13 @@ export const useGetNfts = () => {
     const walletTokens = await getTheTokensOfOwner();
     const nftsData = await fetchAllMetadata(walletTokens) || [];
     const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressClassicCollection);
-    console.log("🚀 ~ fetchNfts ~ filteredNfts:", filteredNfts)
     return filteredNfts;
   };
 
   const { data: tokens = [], isLoading, isError } = useQuery({
     queryKey: ['getNfts'],
     queryFn: () => fetchNfts(),
-    staleTime: 60000,
+    staleTime: 300000,
     enabled: !!publicKey
   })
 

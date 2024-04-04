@@ -1,11 +1,11 @@
 export const generateColectionData = (type: 'Solana Ecosystem' | 'Classic') => {
   if (type === 'Solana Ecosystem') {
     return {
-      uri: "https://ipfs.io/ipfs/QmQxiv3DwgtvTex6qwoLv7xyrWLcrcFU8NRznhiVzakXur"
+      uri: "https://ipfs.io/ipfs/QmWb9hihVBZ3Qi7UjwfBxgKmtNwXCVcPTT9RppRkZ9kjuA"
 
     }
   }
   return {
-    uri: "https://ipfs.io/ipfs/QmSU9egqywDVxXhdozRUgBf7iAP95ZJJ2stecoA8UsU934"
+    uri: "https://ipfs.io/ipfs/QmV3FeU8j8FTBbQgqiMhsGqFJt7WcQ5J17N7oJ15yXk1en"
   }
 }

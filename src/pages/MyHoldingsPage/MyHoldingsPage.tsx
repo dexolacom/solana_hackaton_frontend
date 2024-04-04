@@ -5,8 +5,11 @@ import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx
 import { HoldingsForm } from '@/components/features/forms/HoldingsForm/HoldingsForm.tsx'
 import { NftCardsContainer } from '@/components/common/NftCardsContainer/NftCardsContainer.tsx'
 import { MyHoldingsFilter } from '@/components/features/MyHoldingsFilter/MyHoldingsFilter.tsx'
+import { useAppContext } from '@/providers/AppProvider/AppProvider'
+import { currencyFormatter } from '@/lib/utils'
 
 const MyHoldingsPage = () => {
+  const { invested } = useAppContext();
   const tempData = {
     amount: {
       title: 'Current Portfolio Price',
@@ -64,7 +67,7 @@ const MyHoldingsPage = () => {
             <AmountCard className={'w-[35%]'} amount={tempData.amount} variant={'accentTeal'}>
               <div className={'mt-4 flex flex-col gap-1'}>
                 <span className={'font-regular text-sm'}>Invested</span>
-                <span className={'font-roboto font-medium'}>100000000</span>
+                <span className={'font-roboto font-medium'}>{currencyFormatter(invested)}</span>
               </div>
             </AmountCard>
             <HoldingsCard
