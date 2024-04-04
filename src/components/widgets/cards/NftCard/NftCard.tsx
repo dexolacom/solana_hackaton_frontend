@@ -1,28 +1,35 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
 // import { PublicKey } from '@solana/web3.js'
-import { Button } from '@/components/ui/Button.tsx'
 import defaultCard from '@/assets/defaultCard.png'
+import { Button } from '@/components/ui/Button.tsx'
 // import { ArrowUpDown } from 'lucide-react'
 // import { Flame } from 'lucide-react'
+import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg'
+import { CollectionType } from '@/lib/api/hooks/useSolanaRate'
+import { useNftInvestedPrice } from '@/lib/blockchain/hooks/useNftInvestedPrice'
+import { currencyIcons } from '@/lib/constants.tsx'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { Link } from 'react-router-dom'
-import { currencyIcons } from '@/lib/constants.tsx'
-import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg'
+import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice'
+import { addressClassicCollection } from '@/lib/blockchain/constant'
+import { PublicKey } from '@solana/web3.js'
 
 interface NftCardProps {
   title: string
   uri: string
   mint: string
+  collection: string
   // id: number
-  content: {
-    price: string
-    invested: string
-  }
 }
 
 export const NftCard = (props: NftCardProps) => {
-  const { title, content, uri, mint } = props
+  const { title, uri, mint, collection } = props
   const { img } = useGetNftImg(uri);
+  const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
+  const mintToPubKey = new PublicKey(mint)
+
+  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection });
+  const { investedPrice } = useNftInvestedPrice({ collection: currentCollection, mint: mintToPubKey })
 
 
   const { setModalName, setMint } = useModalsContext()
@@ -52,11 +59,11 @@ export const NftCard = (props: NftCardProps) => {
         </div>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
-          <span className={'font-roboto text-sm font-medium'}>{content?.invested}</span>
+          <span className={'font-roboto text-sm font-medium'}>{investedPrice ?? '0'}</span>
         </div>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
-          <span className={'font-roboto text-sm font-medium'}>{content.price}</span>
+          <span className={'font-roboto text-sm font-medium'}>{currentPrice}</span>
         </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6 relative z-20'}>

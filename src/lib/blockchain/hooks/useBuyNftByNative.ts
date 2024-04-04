@@ -67,6 +67,7 @@ export const useBuyNftByNative = () => {
 
     const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
 
+
     // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
     // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
     // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", nft.metadataAccountAddress.toBase58());

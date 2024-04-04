@@ -5,7 +5,7 @@ import { publicKey as createPubKey } from '@metaplex-foundation/umi';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { connection } from '../constant';
 import { useQuery } from '@tanstack/react-query';
-import { addressNftCollection } from '../constant';
+import { addressClassicCollection } from '../constant';
 import { umi } from '../constant';
 
 export const useGetNfts = () => {
@@ -61,7 +61,7 @@ export const useGetNfts = () => {
   const fetchNfts = async () => {
     const walletTokens = await getTheTokensOfOwner();
     const nftsData = await fetchAllMetadata(walletTokens) || [];
-    const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressNftCollection);
+    const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressClassicCollection);
     console.log("🚀 ~ fetchNfts ~ filteredNfts:", filteredNfts)
     return filteredNfts;
   };
