@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/Button.tsx'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/SolanaItemTable'
+import { useSearchParams, useParams } from 'react-router-dom'
+import { currencyFormatter } from '@/lib/utils'
 
 
 const SolanaItemPage = () => {
@@ -65,12 +67,16 @@ const SolanaItemPage = () => {
       text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`,
     },
   }
+
+  const [searchParams] = useSearchParams();
   const { setModalName } = useModalsContext()
+  const { item } = useParams();
+  const invested = searchParams.get('invested');
 
   return (
     <div>
       <BackLink title={'My holdings'} path={'/my-holdings'} />
-      <PageTitle title={'SOLANA ECOSYSTEM item'}>
+      <PageTitle title={item ?? 'SOLANA ECOSYSTEM item'}>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
             {/* <ArrowUpDown className={'w-4 h-4'} /> */}
@@ -86,7 +92,7 @@ const SolanaItemPage = () => {
         <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accentTeal'} >
           <div className={'mt-4 flex flex-col gap-1'}>
             <span className={'font-regular text-sm'}>Invested</span>
-            <span className={'font-roboto font-medium'}>100000000</span>
+            <span className={'font-roboto font-medium'}>{currencyFormatter(invested ? +invested : 0)}</span>
           </div>
         </AmountCard>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'solana'} />

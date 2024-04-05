@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/Button.tsx'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/ClassicItemTable.tsx'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { currencyFormatter } from '@/lib/utils'
 
 const ClassicItemPage = () => {
   const tempData = {
@@ -60,12 +62,15 @@ const ClassicItemPage = () => {
       text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.',
     },
   }
+  const [searchParams] = useSearchParams();
+  const {item} = useParams();
   const { setModalName } = useModalsContext()
+  const invested = searchParams.get('invested');
 
   return (
     <div>
       <BackLink title={'My holdings'} path={'/my-holdings'} />
-      <PageTitle title={'CLASSIC item'}>
+      <PageTitle title={item ?? 'CLASSIC item'}>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
             {/* <ArrowUpDown className={'w-4 h-4'} /> */}
@@ -81,7 +86,7 @@ const ClassicItemPage = () => {
         <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accent'} >
           <div className={'mt-4 flex flex-col gap-1'}>
             <span className={'font-regular text-sm'}>Invested</span>
-            <span className={'font-roboto font-medium'}>100000000</span>
+            <span className={'font-roboto font-medium'}>{currencyFormatter(invested ? +invested : 0)}</span>
           </div>
         </AmountCard>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classic'} />
