@@ -11,6 +11,7 @@ import { generateColectionData } from "../helpers/generateColectionData";
 import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
 import { getOrCreateATA } from "../helpers/getOrCreateATA";
+import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
 
 export interface BuyNftArgs {
   inputValue: number;
@@ -24,7 +25,7 @@ export const useBuyNftByToken = () => {
   const { connection } = useConnection();
   const { program } = useProgramContext();
   const { toast } = useToast();
-
+  const { setModalName, setNftPrice } = useModalsContext();
   const queryClient = useQueryClient();
 
   
@@ -83,13 +84,22 @@ export const useBuyNftByToken = () => {
         paymentProgramTokenAccount: programATA.address,
         splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
       }).preInstructions([additionalComputeBudgetInstruction]).rpc()
+
+      setNftPrice(`${inputValue} USDC`);
   }
 
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: buyNftByToken,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+      setModalName('INVEST');
     },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Unsuccessful operation',
+      })
+    }
   })
 
   return { buy, isError, isSuccess, isLoading }

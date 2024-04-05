@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/lib/hooks/useToast.ts'
 import { generateRandomNumber } from '@/temp/utils/generateRandomNumber'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
@@ -12,24 +10,9 @@ import { addressClassicCollection, addressEcosystemCollection } from '@/lib/bloc
 
 export const useHoldingsForm = () => {
 
-  const { buy: buyNftByToken, isError: isErrorToken, isSuccess: isSuccessToken, isLoading: isLoadingToken } = useBuyNftByToken();
-  const { buy: buyNftByNative, isError: isErrorNative, isSuccess: isSuccessNative, isLoading: isLoadingNative } = useBuyNftByNative();
+  const { buy: buyNftByToken,  isLoading: isLoadingToken } = useBuyNftByToken();
+  const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
   const { solanaRate } = useSolanaRate();
-
-  useEffect(() => {
-    if (isSuccessToken || isSuccessNative) {
-      toast({
-        title: 'Info',
-        description: 'Operation is successful',
-      })
-    }
-    if (isErrorToken || isErrorNative) {
-      toast({
-        title: 'Error',
-        description: 'Unsuccessful operation',
-      })
-    }
-  }, [isSuccessToken, isErrorToken, isSuccessNative, isErrorNative])
 
   const isLoading = isLoadingToken || isLoadingNative
 

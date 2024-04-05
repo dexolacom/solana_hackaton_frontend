@@ -2,9 +2,11 @@ import { ReactNode } from 'react'
 
 export interface ContextProps {
   modalName: string
-  setModalName: (s: string) => void
+  setModalName: React.Dispatch<React.SetStateAction<string>>
   mint: string
-  setMint: (s: string) => void
+  setMint: React.Dispatch<React.SetStateAction<string>>
+  nftPrice: string
+  setNftPrice: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface ModalsProviderProps {
