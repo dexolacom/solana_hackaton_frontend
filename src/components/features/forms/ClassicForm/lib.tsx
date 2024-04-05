@@ -7,6 +7,7 @@ import { generateRandomNumber } from '@/temp/utils/generateRandomNumber'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
+import { addressClassicCollection } from '@/lib/blockchain/constant';
 
 // TODO: add debounce for amount field
 
@@ -68,10 +69,10 @@ export const useClassicForm = () => {
 
   async function onSubmit(data: z.infer<typeof FormSchema>,) {
     if (data.amountCurrency === 'USDC') {
-      await buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber() })
+      await buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection: addressClassicCollection })
       return;
     }
-    await buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber() })
+    await buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection: addressClassicCollection })
     // toast({
     //   title: 'You submitted the following values:',
     //   description: (

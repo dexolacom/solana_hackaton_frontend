@@ -35,7 +35,7 @@ export const NftCard = (props: NftCardProps) => {
 
   return (
     <Card className={'relative'}>
-      <Link to={`Classic/${title}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => { e.stopPropagation(); setMint(mint) }} />
+      <Link to={`Classic/${title}?invested=${investedPrice}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => { e.stopPropagation(); setMint(mint) }} />
       <img
         src={img || defaultCard}
         width={312}

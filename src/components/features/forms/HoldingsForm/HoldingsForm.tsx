@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from '@/components/ui/Form.tsx'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
+import { Loader2 } from 'lucide-react'
 import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
@@ -17,7 +18,7 @@ import { useEffect } from 'react'
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
 
 export const HoldingsForm = () => {
-  const { form, onSubmit } = useHoldingsForm()
+  const { form, onSubmit, isLoading } = useHoldingsForm()
   const infoCardData = useFormInfo(form.watch())
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export const HoldingsForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='classic'>Classic</SelectItem>
-                  <SelectItem value='classicEarn'>Solana Ecosystem</SelectItem>
+                  <SelectItem value='ecosystem'>Solana Ecosystem</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -115,8 +116,9 @@ export const HoldingsForm = () => {
           )}
         /> */}
         <InfoCard data={infoCardData} />
-        <Button variant={'accent'} className={'w-full gap-2'}>
-          Invest
+        <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
+          {isLoading && <Loader2 className='animate-spin'/>}
+          <span>Invest</span>
         </Button>
       </form>
     </Form>

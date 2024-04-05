@@ -10,6 +10,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
 import { Input } from '@/components/ui/Input.tsx'
 import { Button } from '@/components/ui/Button.tsx'
+import { Loader2 } from 'lucide-react'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
 import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
@@ -111,6 +112,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
         <InfoCard data={infoCardData} />
         <FormCurrency data={formCurrencyData} columns={currencyColumns} />
         <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
+          {isLoading && <Loader2 className='animate-spin' />}
           Invest
         </Button>
       </form>

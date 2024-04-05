@@ -24,7 +24,7 @@ const MyHoldingsPage = () => {
     <div>
       <MyHoldingsFilter setFilter={setHoldingsFilter} />
       <div className={'flex gap-8'}>
-        <div>
+        <div className='flex-1'>
           <PageHeader>
             <AmountCard className={'w-[35%]'} amount={data.amount} variant={data.amountCardVariant}>
               <div className={'mt-4 flex flex-col gap-1'}>

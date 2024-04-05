@@ -1,4 +1,4 @@
-import { ProgramId, TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
+import { ProgramId, TOKEN_METADATA_PROGRAM_ID, decimalsToken } from "@/lib/blockchain/constant";
 import { useToast } from "@/lib/hooks/useToast";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 import { web3 } from "@coral-xyz/anchor";
@@ -31,8 +31,9 @@ export const useBuyNftByNative = () => {
   //   symbol: "PRT",
   //   uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
   // }
-  const collectionData = generateColectionData('Classic')
-  const buyNftByNative = async ({ inputValue, nftId }: BuyNftArgs) => {
+
+  const buyNftByNative = async ({ inputValue, nftId, mintCollection }: BuyNftArgs) => {
+    const collectionData = generateColectionData(mintCollection)
     if (!publicKey || !program || !signTransaction) {
       toast({
         title: 'Error!',
@@ -57,7 +58,7 @@ export const useBuyNftByNative = () => {
 
     const solbalance = await connection.getBalance(publicKey);
 
-    if (!solbalance || (solbalance / 10e8 < inputValue)) {
+    if (!solbalance || (solbalance / decimalsToken['SOL'] < inputValue)) {
       toast({
         title: 'Error!',
         description: 'Your SOL account balance is not enough.'
@@ -88,7 +89,6 @@ export const useBuyNftByNative = () => {
     const wSolBalance = getWSolbalance?.value.uiAmount;
 
     if (wSolBalance !== null && wSolBalance < inputValue) {
-      console.log('Work');
       const transaction = new Transaction()
       transaction.add(SystemProgram.transfer({
         fromPubkey: publicKey,
@@ -104,7 +104,7 @@ export const useBuyNftByNative = () => {
     await program.methods.buyPortfolio(
       nftId,
       collectionData.uri,
-      new BN(inputValue * 10e8),
+      new BN(inputValue * decimalsToken['SOL']),
     )
       .accounts({
         payer: publicKey,
@@ -129,7 +129,7 @@ export const useBuyNftByNative = () => {
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: buyNftByNative,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getNfts'] })
+      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
     },
   })
 
