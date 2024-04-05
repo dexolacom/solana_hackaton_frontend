@@ -9,7 +9,7 @@ interface MyHoldingsFilterProps {
 export const MyHoldingsFilter = ({ setFilter }: MyHoldingsFilterProps) => {
   return (
     <div className={'mb-8'}>
-      <Select defaultValue='all' onValueChange={(value) => setFilter(value)}>
+      <Select defaultValue='all' onValueChange={(value: HoldingsFilterType) => setFilter(value)}>
         <SelectTrigger className={'w-[300px] text-foreground border-transparent'}>
           <SelectValue />
         </SelectTrigger>
