@@ -9,7 +9,7 @@ import { useAppContext } from '@/providers/AppProvider/AppProvider';
 
 export const useNftData = () => {
   const [cards, setCards] = useState<any[]>([]);
-  const { tokens } = useGetNfts();
+  const { tokens, isLoading: isLoadingTokens } = useGetNfts();
   const { solanaRate } = useSolanaRate();
   const {setInvested} = useAppContext();
  
@@ -60,5 +60,7 @@ export const useNftData = () => {
     return { investedPrice, formattedDate, mint };
   }
 
-  return {cards}
+  const isLoading = isLoadingTokens || data.pending
+
+  return {cards, isLoading}
 }

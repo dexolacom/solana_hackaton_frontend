@@ -14,7 +14,6 @@ import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/So
 import { useSearchParams, useParams } from 'react-router-dom'
 import { currencyFormatter } from '@/lib/utils'
 
-
 const SolanaItemPage = () => {
   const tempData = {
     amount: {

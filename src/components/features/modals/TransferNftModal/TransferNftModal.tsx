@@ -1,5 +1,6 @@
 import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
 import { Button } from '@/components/ui/Button.tsx'
+import { Loader2 } from 'lucide-react'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import {
   Form,
@@ -17,7 +18,7 @@ import { useTransferForm } from './lib'
 export const TransferNftModal = () => {
 
   const { setModalName, mint } = useModalsContext()
-  const { onSubmit, form } = useTransferForm(mint);
+  const { onSubmit, form, isLoading } = useTransferForm(mint);
 
   return (
     <>
@@ -51,6 +52,7 @@ export const TransferNftModal = () => {
                 Cancel
               </Button>
               <Button variant={'accent'} className={'flex-1'} type='submit' >
+              {isLoading && <Loader2 className='animate-spin' />}
                 Confirm
               </Button>
             </CardFooter>

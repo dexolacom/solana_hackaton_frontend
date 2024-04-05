@@ -11,7 +11,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 
 export const useTransferForm = (mint: string) => {
 
-  const { transfer: transferNft, isError, isSuccess } = useTransferNft();
+  const { transfer: transferNft, isError, isSuccess, isLoading } = useTransferNft();
   const { publicKey } = useWallet();
 
   useEffect(() => {
@@ -57,5 +57,5 @@ export const useTransferForm = (mint: string) => {
       mintPubkey: new PublicKey(mint)
     })
   }
-  return { form, onSubmit }
+  return { form, onSubmit, isLoading }
 }

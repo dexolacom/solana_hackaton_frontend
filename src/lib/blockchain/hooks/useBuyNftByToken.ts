@@ -1,4 +1,4 @@
-import { ProgramId, TOKEN_METADATA_PROGRAM_ID, usdcPublicKey } from "@/lib/blockchain/constant";
+import { ProgramId, TOKEN_METADATA_PROGRAM_ID, decimalsToken, usdcPublicKey } from "@/lib/blockchain/constant";
 import { useToast } from "@/lib/hooks/useToast";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 import { web3 } from "@coral-xyz/anchor";
@@ -15,6 +15,7 @@ import { getOrCreateATA } from "../helpers/getOrCreateATA";
 export interface BuyNftArgs {
   inputValue: number;
   nftId: number;
+  mintCollection: string;
 }
 
 export const useBuyNftByToken = () => {
@@ -26,9 +27,9 @@ export const useBuyNftByToken = () => {
 
   const queryClient = useQueryClient();
 
-  const collectionData = generateColectionData('Classic')
-  const buyNftByToken = async ({ inputValue, nftId }: BuyNftArgs) => {
-
+  
+  const buyNftByToken = async ({ inputValue, nftId, mintCollection }: BuyNftArgs) => {
+    const collectionData = generateColectionData(mintCollection)
     if (!publicKey || !program || !signTransaction) {
       toast({
         title: 'Error!',
@@ -63,7 +64,7 @@ export const useBuyNftByToken = () => {
     await program.methods.buyPortfolio(
       nftId,
       collectionData.uri,
-      new BN(inputValue * 10e5),
+      new BN(inputValue * decimalsToken['USDC']),
     )
       .accounts({
         payer: publicKey,
@@ -87,7 +88,7 @@ export const useBuyNftByToken = () => {
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: buyNftByToken,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getNfts'] })
+      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
     },
   })
 
