@@ -50,7 +50,7 @@ export const NftCard = (props: NftCardProps) => {
       </CardHeader>
       <CardContent>
         <div className={'flex items-center gap-2 mb-4'}>
-          {title === 'classic'
+          {currentCollection ===  CollectionType.CLASSIC
             ? classicIcons.map((icon) => <img key={icon} className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[icon]} />)
             : solanaIcons.map((icon) => <img key={icon} className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[icon]} />)}
         </div>
