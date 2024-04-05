@@ -44,7 +44,7 @@ export const HomeCard = (props: HomeCardProps) => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 py-6'}>
         <AmountCard amount={amount} variant={amountCardVariant} />
-        <HoldingsCard variant={'bordered'} holdings={holdings} withIcon={false} progressVariant={progressVariant} />
+        <HoldingsCard variant={'bordered'} holdings={holdings} progressVariant={progressVariant} />
         <DescriptionCard variant={'bordered'} description={description} withIcon={false} />
       </CardContent>
       <CardFooter>

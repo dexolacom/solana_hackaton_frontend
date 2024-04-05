@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { PageHeader } from '@/components/common/PageHeader/PageHeader.tsx'
 import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx'
 import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx'
@@ -7,75 +8,31 @@ import { NftCardsContainer } from '@/components/common/NftCardsContainer/NftCard
 import { MyHoldingsFilter } from '@/components/features/MyHoldingsFilter/MyHoldingsFilter.tsx'
 import { useAppContext } from '@/providers/AppProvider/AppProvider'
 import { currencyFormatter } from '@/lib/utils'
+import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib'
+import { getHoldingPageData } from './lib/lib'
+
+export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
+
 
 const MyHoldingsPage = () => {
+  const [holdingsFilter, setHoldingsFilter] = useState<HoldingsFilterType>('all');
   const { invested } = useAppContext();
-  const tempData = {
-    amount: {
-      title: 'Current Portfolio Price',
-      number: '$1,013,724.41',
-    },
-    holdings: {
-      title: 'Holdings',
-      items: [
-        {
-          name: 'SOL',
-          percent: 30,
-        },
-        {
-          name: 'JUP',
-          percent: 15,
-        },
-        {
-          name: 'RNDR',
-          percent: 15,
-        },
-        {
-          name: 'HNT',
-          percent: 15,
-        },
-        {
-          name: 'BONK',
-          percent: 10,
-        },
-        {
-          name: 'PYTH',
-          percent: 5,
-        },
-        {
-          name: 'RAY',
-          percent: 5,
-        },
-        {
-          name: 'JTO',
-          percent: 5,
-        },
-        {
-          name: 'WIF',
-          percent: 5,
-        },
-      ],
-    },
-  }
+
+  const data = getHoldingPageData(holdingsFilter);
 
   return (
     <div>
-      <MyHoldingsFilter />
+      <MyHoldingsFilter setFilter={setHoldingsFilter} />
       <div className={'flex gap-8'}>
         <div>
           <PageHeader>
-            <AmountCard className={'w-[35%]'} amount={tempData.amount} variant={'accentTeal'}>
+            <AmountCard className={'w-[35%]'} amount={data.amount} variant={data.amountCardVariant}>
               <div className={'mt-4 flex flex-col gap-1'}>
                 <span className={'font-regular text-sm'}>Invested</span>
                 <span className={'font-roboto font-medium'}>{currencyFormatter(invested)}</span>
               </div>
             </AmountCard>
-            <HoldingsCard
-              className={'w-[65%]'}
-              holdings={tempData.holdings}
-              progressVariant={'solana'}
-              withCurrencies
-            />
+            <HoldingsCard className={'flex-1'} holdings={data.holdings} progressVariant={data.progressVariant} withPercent={false} />
           </PageHeader>
 
           <h3 className={'text-2xl font-semibold mb-8'}>NFTs</h3>

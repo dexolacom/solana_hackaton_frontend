@@ -7,11 +7,12 @@ interface HoldingsProgressProps {
     name: string
     percent: number | string
   }[]
-  progressVariant?: 'classic' | 'classicEarn' | 'solana'
+  progressVariant?: 'classic' | 'classicEarn' | 'solana' | 'all'
+  withPercent?: boolean
 }
 
 export const HoldingsProgress = (props: HoldingsProgressProps) => {
-  const { holdings, progressVariant = 'classic' } = props
+  const { holdings, progressVariant = 'classic', withPercent } = props
   const progressColors = colors[progressVariant]
 
   return (
@@ -23,7 +24,7 @@ export const HoldingsProgress = (props: HoldingsProgressProps) => {
       </div>
       <div className={'flex items-center gap-4 flex-wrap'}>
         {holdings.map((item, i) => (
-          <Holding key={i} title={item?.name} percent={item?.percent} className={progressColors[item?.name]} />
+          <Holding key={i} title={item?.name} percent={item?.percent} className={progressColors[item?.name]} withPercent={withPercent}/>
         ))}
       </div>
     </div>
