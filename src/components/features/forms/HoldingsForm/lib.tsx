@@ -52,7 +52,6 @@ export const useHoldingsForm = () => {
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("🚀 ~ onSubmit ~ data:", data)
     const mintCollection = data.portfolio === 'classic' ? addressClassicCollection : addressEcosystemCollection
     if (data.amountCurrency === 'USDC') {
       await buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })

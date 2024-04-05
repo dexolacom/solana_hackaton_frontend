@@ -1,4 +1,5 @@
-import idl from '@/lib/blockchain/programData/idl.json'
+import classicIdl from '@/lib/blockchain/programData/classicIdl.json'
+import ecosystemIdl from '@/lib/blockchain/programData/ecosystemIdl.json'
 import {clusterApiUrl, PublicKey, Connection} from '@solana/web3.js'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
@@ -10,8 +11,11 @@ export const connection = new Connection(endpoint, commitmentLevel)
 
 export const umi = createUmi(endpoint).use(mplTokenMetadata())
 
-export const ProgramId = new PublicKey(idl.metadata.address)
-export const ProgramInterface = JSON.parse(JSON.stringify(idl))
+export const classicProgramId = new PublicKey(classicIdl.metadata.address)
+export const classicProgramInterface = JSON.parse(JSON.stringify(classicIdl))
+
+export const ecosystemProgramId = new PublicKey(ecosystemIdl.metadata.address)
+export const ecosystemProgramInterface = JSON.parse(JSON.stringify(ecosystemIdl))
 
 export const addressClassicCollection = 'zr24szrS9LJs37gx1rZJDiCRunsA5Cstk9yV69VbDpU'
 export const addressEcosystemCollection = 'zr24szrS9LJs37gx1rZJDiCRunsA5Cstk9yV69VbgTy'

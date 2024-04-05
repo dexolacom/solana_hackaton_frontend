@@ -1,41 +1,52 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import {  useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
-import { AnchorProvider, Program} from "@coral-xyz/anchor";
-import { ProgramType } from '@/lib/blockchain/programData/types';
-import { commitmentLevel, ProgramId, ProgramInterface } from '@/lib/blockchain/constant';
+import { createContext, useContext, useEffect, useState, useMemo } from 'react';
+import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
+import { AnchorProvider, Program } from "@coral-xyz/anchor";
+import { ClassicProgramType } from '@/lib/blockchain/programData/classicTypes';
+import { EcosystemProgramType } from '@/lib/blockchain/programData/ecosystemTypes';
+import {
+  commitmentLevel,
+  classicProgramId,
+  classicProgramInterface,
+  ecosystemProgramId,
+  ecosystemProgramInterface
+} from '@/lib/blockchain/constant';
+import { ProgramContextProviderProps, ProgramContextType } from './types';
 
-
-interface ProgramContextType {
-  program: Program<ProgramType> | null;
-}
-
-const ProgramContext = createContext<ProgramContextType | undefined>({ program: null });
-
-interface ProgramContextProviderProps {
-  children: ReactNode;
-}
+const ProgramContext = createContext<ProgramContextType | undefined>(undefined);
 
 export const ProgramContextProvider = ({ children }: ProgramContextProviderProps) => {
   const wallet = useAnchorWallet();
   const { connection } = useConnection();
-  const [program, setProgram] = useState<Program<ProgramType>| null>(null);
+  const [classicProgram, setClassicProgram] = useState<Program<ClassicProgramType> | null>(null);
+  const [ecosystemProgram, setEcosystemProgram] = useState<Program<EcosystemProgramType> | null>(null);
 
   useEffect(() => {
     if (!wallet) {
-      setProgram(null);
+      setClassicProgram(null);
+      setEcosystemProgram(null);
       return;
     }
     const provider = new AnchorProvider(connection, wallet, {
       preflightCommitment: commitmentLevel,
     });
-    const newProgram = new Program(ProgramInterface, ProgramId, provider) as Program<ProgramType>;
-    setProgram(newProgram);
+
+    const newClassicProgram = new Program(classicProgramInterface, classicProgramId, provider) as Program<ClassicProgramType>;
+    const newEcosystemProgram = new Program(ecosystemProgramInterface, ecosystemProgramId, provider) as Program<EcosystemProgramType>;
+    setClassicProgram(newClassicProgram);
+    setEcosystemProgram(newEcosystemProgram);
 
 
   }, [connection, wallet]);
 
+  const contextValue = useMemo(() => ({
+    classicProgram,
+    setClassicProgram,
+    ecosystemProgram,
+    setEcosystemProgram
+  }), [classicProgram, ecosystemProgram])
+
   return (
-    <ProgramContext.Provider value={{ program }}>
+    <ProgramContext.Provider value={contextValue}>
       {children}
     </ProgramContext.Provider>
   );

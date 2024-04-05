@@ -1,4 +1,10 @@
-import { ProgramId, TOKEN_METADATA_PROGRAM_ID, decimalsToken } from "@/lib/blockchain/constant";
+import {
+  classicProgramId,
+  ecosystemProgramId,
+  TOKEN_METADATA_PROGRAM_ID,
+  decimalsToken,
+  addressClassicCollection
+} from "@/lib/blockchain/constant";
 import { useToast } from "@/lib/hooks/useToast";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 import { web3 } from "@coral-xyz/anchor";
@@ -22,28 +28,25 @@ export const useBuyNftByNative = () => {
 
   const { publicKey, signTransaction, sendTransaction } = useWallet();
   const { connection } = useConnection();
-  const { program } = useProgramContext();
+  const { classicProgram, ecosystemProgram } = useProgramContext();
   const { toast } = useToast();
   const { setModalName, setNftPrice } = useModalsContext();
   const queryClient = useQueryClient();
 
-  // const collection_data = {
-  //   title: "Portfolio#3",
-  //   symbol: "PRT",
-  //   uri: "https://raw.githubusercontent.com/Coding-and-Crypto/Solana-NFT-Marketplace/master/assets/example.json"
-  // }
-
-  const buyNftByNative = async ({ inputValue, nftId, mintCollection }: BuyNftArgs) => {
+  const buyNftByNative =  async ({ inputValue, nftId, mintCollection }: BuyNftArgs) => {
+    console.log("🚀 ~ buyNftByNative ~ mintCollection:", mintCollection)
     const collectionData = generateColectionData(mintCollection)
-    if (!publicKey || !program || !signTransaction) {
+    const isClassicColection = mintCollection === addressClassicCollection;
+    if (!publicKey || !classicProgram || !ecosystemProgram || !signTransaction) {
       toast({
         title: 'Error!',
         description: 'Please, connect wallet'
       });
       return;
     }
-
-    const portfolioCollection = await getCollectionAddresses();
+    const selectProgramId = isClassicColection ? classicProgramId : ecosystemProgramId;
+    console.log("🚀 ~ buyNftByNative ~ selectProgramId:", selectProgramId)
+    const portfolioCollection = await getCollectionAddresses(selectProgramId);
     // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", portfolioCollection.masterEditionAccountAddress.toBase58());
     // console.log("🚀 ~ buyNftByToken ~ metadataAccountAddress:", portfolioCollection.metadataAccountAddress.toBase58());
     // console.log("🚀 ~ buyNftByToken ~ onchainDataAddress:", portfolioCollection.onchainDataAddress.toBase58());
@@ -54,7 +57,7 @@ export const useBuyNftByNative = () => {
     // ))
     // console.log("🚀 ~ buyNft ~ balance:", balance)
 
-    const programATA = await getOrCreateATA({ owner: ProgramId, mint: NATIVE_MINT, payer: publicKey, signTransaction });
+    const programATA = await getOrCreateATA({ owner: selectProgramId, mint: NATIVE_MINT, payer: publicKey, signTransaction });
     const userATA = await getOrCreateATA({ owner: publicKey, mint: NATIVE_MINT, payer: publicKey, signTransaction });
 
     const solbalance = await connection.getBalance(publicKey);
@@ -67,8 +70,12 @@ export const useBuyNftByNative = () => {
       return;
     }
 
-    const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
-
+    const nft = await getNftAddresses({
+      collection: portfolioCollection.tokenAccount,
+      nftId,
+      owner: publicKey,
+      programId: selectProgramId
+    });
 
     // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
     // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());
@@ -85,7 +92,6 @@ export const useBuyNftByNative = () => {
     //   bs58.decode("mLLd2nBYkZL2gLVmQvtzn6v61FM6bFPqnFBqvZsSSeDbUkerH5eSDeToCLJ1JTQa32qJ3siCw7xfq5sW6dApmmW")
     // );
 
-
     const getWSolbalance = await connection.getTokenAccountBalance(userATA.address);
     const wSolBalance = getWSolbalance?.value.uiAmount;
 
@@ -101,8 +107,8 @@ export const useBuyNftByNative = () => {
       await sendTransaction(transaction, connection);
       // instructions.push(refillUserATA);
     }
-
-    await program.methods.buyPortfolio(
+    const selectProgram = isClassicColection ? classicProgram : ecosystemProgram;
+    await selectProgram.methods.buyPortfolio(
       nftId,
       collectionData.uri,
       new BN(inputValue * decimalsToken['SOL']),
@@ -125,7 +131,7 @@ export const useBuyNftByNative = () => {
         splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
       }).preInstructions([additionalComputeBudgetInstruction])
       .rpc()
-      setNftPrice(`${inputValue} SOL`);
+    setNftPrice(`${inputValue} SOL`);
   }
 
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({

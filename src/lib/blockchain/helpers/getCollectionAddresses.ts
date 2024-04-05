@@ -1,13 +1,12 @@
 import { PublicKey} from '@solana/web3.js';
 import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
-import { ProgramId } from "@/lib/blockchain/constant";
 
-export const getCollectionAddresses = async () => {
+export const getCollectionAddresses = async (programId: PublicKey) => {
   const associatedTokenAccount = PublicKey.findProgramAddressSync(
     [
       Buffer.from("collection")
     ],
-    ProgramId
+    programId
   )[0]
 
   const metadataAccountAddress = PublicKey.findProgramAddressSync(
@@ -34,7 +33,7 @@ export const getCollectionAddresses = async () => {
       Buffer.from("onchain-data"),
       metadataAccountAddress.toBuffer(),
     ],
-    ProgramId
+    programId
   )[0]
 
   return {

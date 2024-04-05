@@ -1,4 +1,11 @@
-import { ProgramId, TOKEN_METADATA_PROGRAM_ID, decimalsToken, usdcPublicKey } from "@/lib/blockchain/constant";
+import {
+  classicProgramId,
+  ecosystemProgramId,
+  TOKEN_METADATA_PROGRAM_ID,
+  addressClassicCollection,
+  decimalsToken,
+  usdcPublicKey
+} from "@/lib/blockchain/constant";
 import { useToast } from "@/lib/hooks/useToast";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 import { web3 } from "@coral-xyz/anchor";
@@ -23,15 +30,16 @@ export const useBuyNftByToken = () => {
 
   const { publicKey, signTransaction } = useWallet();
   const { connection } = useConnection();
-  const { program } = useProgramContext();
+  const { ecosystemProgram, classicProgram } = useProgramContext();
   const { toast } = useToast();
   const { setModalName, setNftPrice } = useModalsContext();
   const queryClient = useQueryClient();
 
-  
+
   const buyNftByToken = async ({ inputValue, nftId, mintCollection }: BuyNftArgs) => {
     const collectionData = generateColectionData(mintCollection)
-    if (!publicKey || !program || !signTransaction) {
+    const isClassicCollection = mintCollection === addressClassicCollection;
+    if (!publicKey || !ecosystemProgram || !classicProgram || !signTransaction) {
       toast({
         title: 'Error!',
         description: 'Please, connect wallet'
@@ -39,10 +47,10 @@ export const useBuyNftByToken = () => {
       return;
     }
 
-    const portfolioCollection = await getCollectionAddresses();
-
+    const selectProgramId = isClassicCollection ? classicProgramId : ecosystemProgramId;
+    const portfolioCollection = await getCollectionAddresses(selectProgramId);
     const userATA = await getOrCreateATA({ owner: publicKey, mint: usdcPublicKey, payer: publicKey, signTransaction });
-    const programATA = await getOrCreateATA({ owner: ProgramId, mint: usdcPublicKey, payer: publicKey, signTransaction });
+    const programATA = await getOrCreateATA({ owner: selectProgramId, mint: usdcPublicKey, payer: publicKey, signTransaction });
 
     const getBalance = await connection.getTokenAccountBalance(userATA.address);
     const usdcBalance = getBalance?.value.uiAmount;
@@ -55,14 +63,21 @@ export const useBuyNftByToken = () => {
       return;
     }
 
-    const nft = await getNftAddresses({ collection: portfolioCollection.tokenAccount, nftId, owner: publicKey });
+    const nft = await getNftAddresses({
+      collection: portfolioCollection.tokenAccount,
+      nftId,
+      owner: publicKey,
+      programId: selectProgramId
+    });
 
     const additionalComputeBudgetInstruction =
       ComputeBudgetProgram.setComputeUnitLimit({
         units: 400000,
       });
 
-    await program.methods.buyPortfolio(
+    const selectProgram = mintCollection === addressClassicCollection ? classicProgram : ecosystemProgram
+
+    await selectProgram.methods.buyPortfolio(
       nftId,
       collectionData.uri,
       new BN(inputValue * decimalsToken['USDC']),
@@ -85,7 +100,7 @@ export const useBuyNftByToken = () => {
         splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
       }).preInstructions([additionalComputeBudgetInstruction]).rpc()
 
-      setNftPrice(`${inputValue} USDC`);
+    setNftPrice(`${inputValue} USDC`);
   }
 
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
