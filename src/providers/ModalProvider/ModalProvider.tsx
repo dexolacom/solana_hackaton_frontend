@@ -6,9 +6,19 @@ const ModalsContext = createContext<ContextProps | undefined>(undefined)
 export const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [modalName, setModalName] = useState<string>('')
   const [mint, setMint] = useState<string>('')
-  const [nftPrice, setNftPrice] = useState('');
+  const [nftPrice, setNftPrice] = useState('')
+  const [nftTitle, setNftTitle] = useState('')
 
-  const contextValue = useMemo(() => ({ modalName, setModalName, mint, setMint, nftPrice, setNftPrice }), [modalName, mint, nftPrice])
+  const contextValue = useMemo(() => ({ 
+    modalName, 
+    setModalName, 
+    mint, 
+    setMint, 
+    nftPrice, 
+    setNftPrice,
+    nftTitle, 
+    setNftTitle
+  }), [modalName, mint, nftPrice, nftTitle])
 
   return <ModalsContext.Provider value={contextValue}>{children}</ModalsContext.Provider>
 }

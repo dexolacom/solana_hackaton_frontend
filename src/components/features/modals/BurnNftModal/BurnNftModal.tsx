@@ -4,24 +4,33 @@ import { Button } from '@/components/ui/Button.tsx'
 import { Loader2 } from 'lucide-react'
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { currencyFormatter, shortAddress } from '@/lib/utils'
 
 export const BurnNftModal = () => {
+  const {publicKey}= useWallet();
+  const {nftPrice, nftTitle} = useModalsContext();
+
+  const nftPriceToNumber = +nftPrice;
+  const fee = nftPriceToNumber * 0.005;
+  const get = nftPriceToNumber - fee;
+
   const tempData = [
     {
       title: 'Current NFT Price',
-      value: '$226,960.94',
+      value: currencyFormatter(nftPriceToNumber),
     },
     {
       title: 'Transaction Fee, 0.5%',
-      value: '$4,539.22',
+      value: currencyFormatter(fee),
     },
     {
       title: 'You will get',
-      value: '$222,421.72',
+      value: currencyFormatter(get),
     },
     {
       title: 'Wallet Address',
-      value: '0x63E4...950fe8',
+      value: shortAddress(publicKey),
     },
   ]
 
@@ -34,7 +43,7 @@ export const BurnNftModal = () => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4'}>
         <p className={'text-sm'}>
-          Please, confirm you’re going to burn <span className={'font-black'}>Solana Ecosystem: #0001</span>. This
+          Please, confirm you’re going to burn <span className={'font-black'}>{nftTitle}</span>. This
           action cannot be undone.
         </p>
         <InfoCard data={tempData} />

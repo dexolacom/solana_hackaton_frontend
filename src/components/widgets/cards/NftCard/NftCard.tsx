@@ -12,7 +12,6 @@ import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice'
 import { addressClassicCollection } from '@/lib/blockchain/constant'
 import { currencyFormatter } from '@/lib/utils'
 
-
 interface NftCardProps {
   title: string
   uri: string
@@ -22,20 +21,28 @@ interface NftCardProps {
 }
 
 export const NftCard = (props: NftCardProps) => {
+  
   const { title, uri, collection, investedPrice, mint } = props
   const { img } = useGetNftImg(uri);
+  const { setModalName, setMint, setNftPrice, setNftTitle } = useModalsContext()
+
+  const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
+  const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
   const { currentPrice } = useNftCurrentPrice({ collection: currentCollection });
 
-  const { setModalName, setMint } = useModalsContext()
-  const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
-  const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
-
   return (
     <Card className={'relative'}>
-      <Link to={`Classic/${title}?invested=${investedPrice}`} className={'z-10 absolute w-full h-full top-0 left-0'} onClick={(e) => { e.stopPropagation(); setMint(mint) }} />
+      <Link
+        to={`Classic/${title}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
+        className={'z-10 absolute w-full h-full top-0 left-0'}
+        onClick={(e) => {
+          e.stopPropagation();
+          setMint(mint);
+
+        }} />
       <img
         src={img || defaultCard}
         width={312}
@@ -50,7 +57,7 @@ export const NftCard = (props: NftCardProps) => {
       </CardHeader>
       <CardContent>
         <div className={'flex items-center gap-2 mb-4'}>
-          {currentCollection ===  CollectionType.CLASSIC
+          {currentCollection === CollectionType.CLASSIC
             ? classicIcons.map((icon) => <img key={icon} className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[icon]} />)
             : solanaIcons.map((icon) => <img key={icon} className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[icon]} />)}
         </div>
@@ -60,7 +67,7 @@ export const NftCard = (props: NftCardProps) => {
         </div>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
-          <span className={'font-roboto text-sm font-medium'}>{currentPrice}</span>
+          <span className={'font-roboto text-sm font-medium'}>{currencyFormatter(currentPrice ?? 0)}</span>
         </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6 relative z-20'}>
@@ -68,7 +75,13 @@ export const NftCard = (props: NftCardProps) => {
           {/* <ArrowUpDown className={'w-4 h-4'} /> */}
           Transfer
         </Button>
-        <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => { setModalName('BURN_NFT') }}>
+        <Button className={'flex-1 gap-2'} variant={'destructive'}
+          onClick={() => {
+            setModalName('BURN_NFT');
+            setNftPrice(currentPrice ? currentPrice.toString() : '0')
+            setNftTitle(title)
+          }}
+        >
           {/* <Flame className={'w-4 h-4'} /> */}
           Burn
         </Button>

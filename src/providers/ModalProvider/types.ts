@@ -7,6 +7,8 @@ export interface ContextProps {
   setMint: React.Dispatch<React.SetStateAction<string>>
   nftPrice: string
   setNftPrice: React.Dispatch<React.SetStateAction<string>>
+  nftTitle: string 
+  setNftTitle: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface ModalsProviderProps {

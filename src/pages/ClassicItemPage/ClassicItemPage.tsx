@@ -63,9 +63,10 @@ const ClassicItemPage = () => {
     },
   }
   const [searchParams] = useSearchParams();
-  const {item} = useParams();
-  const { setModalName } = useModalsContext()
+  const { item } = useParams();
+  const { setModalName, setNftPrice, setNftTitle } = useModalsContext()
   const invested = searchParams.get('invested');
+  const currentPrice = searchParams.get('currentPrice');
 
   return (
     <div>
@@ -76,7 +77,12 @@ const ClassicItemPage = () => {
             {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
-          <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
+          <Button className={'flex-1 gap-2'} variant={'destructive'}
+            onClick={() => {
+              setModalName('BURN_NFT');
+              setNftPrice(currentPrice ? currentPrice.toString() : '0');
+              setNftTitle(item ?? '');
+            }}>
             {/* <Flame className={'w-4 h-4'} /> */}
             Burn
           </Button>
