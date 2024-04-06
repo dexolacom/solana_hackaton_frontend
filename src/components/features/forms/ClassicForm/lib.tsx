@@ -1,24 +1,27 @@
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 // import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
-import { addressClassicCollection, addressEcosystemCollection } from '@/lib/blockchain/constant';
+import { 
+  addressClassicCollection,
+  //  addressEcosystemCollection 
+  } from '@/lib/blockchain/constant';
 
 // TODO: add debounce for amount field
 
 export const useClassicForm = () => {
 
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
   const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
   // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
   const { solanaRate } = useSolanaRate();
 
-  const isClassicColection = pathname.includes('classic');
-  const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
-  console.log("🚀 ~ useClassicForm ~ mintCollection:", mintCollection)
+  // const isClassicColection = pathname.includes('classic');
+  // const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
+
   const isLoading = isLoadingToken 
   // || isLoadingNative
 

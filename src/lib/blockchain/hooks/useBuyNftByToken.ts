@@ -73,7 +73,7 @@ export const useBuyNftByToken = () => {
       collectionMetadata,
       collectionMasterEdition,
       onchainCollectionData
-    } = await getCollectionAddresses(programId, selectPortfolioId);
+    } = await getCollectionAddresses(selectPortfolioId);
       // console.log("🚀 ~ buyNftByToken ~ onchainCollectionData:", onchainCollectionData.toBase58())
       // console.log("🚀 ~ buyNftByToken ~ collectionMasterEdition:", collectionMasterEdition.toBase58())
       // console.log("🚀 ~ buyNftByToken ~ collectionMetadata:", collectionMetadata.toBase58())
@@ -122,7 +122,6 @@ export const useBuyNftByToken = () => {
       collection: collectionMint,
       nftId,
       owner: publicKey,
-      programId
     });
 
     const wrpool = await getPortfolioSwapData(publicKey, new BN(inputValue), usdcPublicKey, classicPortfolioTokens, nftMint);

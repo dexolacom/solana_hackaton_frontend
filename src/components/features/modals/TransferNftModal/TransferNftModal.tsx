@@ -17,8 +17,8 @@ import { useTransferForm } from './lib'
 
 export const TransferNftModal = () => {
 
-  const { setModalName, mint } = useModalsContext()
-  const { onSubmit, form, isLoading } = useTransferForm(mint);
+  const { setModalName } = useModalsContext()
+  const { onSubmit, form, isLoading } = useTransferForm();
 
   return (
     <>

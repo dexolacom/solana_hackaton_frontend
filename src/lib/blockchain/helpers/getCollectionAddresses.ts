@@ -1,7 +1,8 @@
 import { PublicKey} from '@solana/web3.js';
 import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
+import { programId } from '@/lib/blockchain/constant';
 
-export const getCollectionAddresses = async (programId: PublicKey, portfolioId: number) => {
+export const getCollectionAddresses = async (portfolioId: number) => {
   const collectionMint = PublicKey.findProgramAddressSync(
     [
       Buffer.from("collection"),

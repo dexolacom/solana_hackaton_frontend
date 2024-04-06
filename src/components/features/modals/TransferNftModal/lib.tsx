@@ -9,7 +9,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 
 // TODO: add debounce for amount field
 
-export const useTransferForm = (mint: string) => {
+export const useTransferForm = () => {
 
   const { transfer: transferNft, isError, isSuccess, isLoading } = useTransferNft();
   const { publicKey } = useWallet();
@@ -51,10 +51,11 @@ export const useTransferForm = (mint: string) => {
     },
   })
 
-  async function onSubmit(data: z.infer<typeof FormSchema>,) {
-    await transferNft({
+  function onSubmit(data: z.infer<typeof FormSchema>,) {
+    transferNft({
       destinationAddress: new PublicKey(data.address),
-      mintPubkey: new PublicKey(mint)
+      nftId: 1,
+      portfolioId: 1
     })
   }
   return { form, onSubmit, isLoading }

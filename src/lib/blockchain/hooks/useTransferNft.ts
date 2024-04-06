@@ -1,26 +1,31 @@
 import { useToast } from "@/lib/hooks/useToast";
 import {
-  createTransferCheckedInstruction,
-  getAssociatedTokenAddress
+  createTransferInstruction,
 } from "@solana/spl-token";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey, Transaction } from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { connection } from "../constant";
 import { getOrCreateATA } from "../helpers/getOrCreateATA";
+import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
+import { getNftAddresses } from "../helpers/getNftAddresses";
+import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
+
 interface TransferNftProps {
   destinationAddress: PublicKey;
-  mintPubkey: PublicKey;
+  // mintPubkey: PublicKey;
+  portfolioId: number;
+  nftId: number;
 }
 
 export const useTransferNft = () => {
   const wallet = useWallet();
   const { toast } = useToast();
+  const { createAndSendV0Tx } = useCreateAndSendV0Tx();
   const { publicKey, signTransaction } = wallet;
 
   const queryClient = useQueryClient();
 
-  const transferNft = async ({ destinationAddress, mintPubkey }: TransferNftProps) => {
+  const transferNft = async ({ destinationAddress, portfolioId, nftId }: TransferNftProps) => {
 
     if (!publicKey || !signTransaction) {
       toast({
@@ -30,36 +35,56 @@ export const useTransferNft = () => {
       return;
     }
 
-    const nftATA = await getAssociatedTokenAddress(
-      mintPubkey,
-      publicKey
+    const { collectionMint } = await getCollectionAddresses(portfolioId);
+    const { nftMint, nftATA } = await getNftAddresses({ collection: collectionMint, nftId, owner: publicKey });
+
+    const destinationAddressATA = await getOrCreateATA(
+      {
+        owner: destinationAddress,
+        mint: nftMint,
+        payer: publicKey,
+        signTransaction
+      })
+
+    const instruction = createTransferInstruction(
+      nftATA,
+      destinationAddressATA.address,
+      publicKey,
+      1
     );
 
-    const destinationATA = await getOrCreateATA({ owner: destinationAddress, mint: mintPubkey, payer: publicKey, signTransaction });
+    await createAndSendV0Tx([instruction]);
+    
+    // const nftATA = await getAssociatedTokenAddress(
+    //   mintPubkey,
+    //   publicKey
+    // );
 
-    const transaction = new Transaction();
-    transaction.add(
-      createTransferCheckedInstruction(
-        nftATA,
-        mintPubkey,
-        destinationATA.address,
-        publicKey,
-        1,
-        0
-      )
-    );
-    const blockHash = await connection.getLatestBlockhash()
-    transaction.feePayer = publicKey
-    transaction.recentBlockhash = blockHash.blockhash
-    const signed = await signTransaction(transaction)
+    // const destinationATA = await getOrCreateATA({ owner: destinationAddress, mint: mintPubkey, payer: publicKey, signTransaction });
 
-    const signature = await connection.sendRawTransaction(signed.serialize())
+    // const transaction = new Transaction();
+    // transaction.add(
+    //   createTransferCheckedInstruction(
+    //     nftATA,
+    //     mintPubkey,
+    //     destinationATA.address,
+    //     publicKey,
+    //     1,
+    //     0
+    //   )
+    // );
+    // const blockHash = await connection.getLatestBlockhash()
+    // transaction.feePayer = publicKey
+    // transaction.recentBlockhash = blockHash.blockhash
+    // const signed = await signTransaction(transaction)
 
-    await connection.confirmTransaction({
-      blockhash: blockHash.blockhash,
-      lastValidBlockHeight: blockHash.lastValidBlockHeight,
-      signature,
-    })
+    // const signature = await connection.sendRawTransaction(signed.serialize())
+
+    // await connection.confirmTransaction({
+    //   blockhash: blockHash.blockhash,
+    //   lastValidBlockHeight: blockHash.lastValidBlockHeight,
+    //   signature,
+    // })
   }
 
   const { mutate: transfer, isError, isSuccess, isPending: isLoading } = useMutation({

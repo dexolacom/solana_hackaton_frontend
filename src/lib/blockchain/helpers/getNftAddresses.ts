@@ -1,15 +1,15 @@
 import { PublicKey } from '@solana/web3.js';
 import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
 import { getAssociatedTokenAddress } from "@solana/spl-token";
+import { programId } from '@/lib/blockchain/constant';
 
 interface GetNftAddressesArgs {
   collection: PublicKey; 
   nftId: number;
   owner: PublicKey;
-  programId: PublicKey;
 }
 
-export const getNftAddresses = async ({collection, nftId, owner, programId}: GetNftAddressesArgs) => {
+export const getNftAddresses = async ({collection, nftId, owner}: GetNftAddressesArgs) => {
   const nftMint = PublicKey.findProgramAddressSync(
     [
       Buffer.from("token"),
