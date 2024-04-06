@@ -68,7 +68,7 @@ export const useGetNfts = () => {
   const { data: tokens = [], isLoading, isError } = useQuery({
     queryKey: ['getNfts'],
     queryFn: () => fetchNfts(),
-    staleTime: 300000,
+    staleTime: 30000,
     enabled: !!publicKey
   })
 

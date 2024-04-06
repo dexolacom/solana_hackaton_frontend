@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PageHeader } from '@/components/common/PageHeader/PageHeader.tsx'
 import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx'
 import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx'
@@ -10,6 +10,8 @@ import { useAppContext } from '@/providers/AppProvider/AppProvider'
 import { currencyFormatter } from '@/lib/utils'
 import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib'
 import { getHoldingPageData } from './lib/lib'
+import { useQueryClient } from '@tanstack/react-query'
+import { useWallet } from '@solana/wallet-adapter-react'
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
 
@@ -17,6 +19,12 @@ export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
 const MyHoldingsPage = () => {
   const [holdingsFilter, setHoldingsFilter] = useState<HoldingsFilterType>('all');
   const { invested } = useAppContext();
+  const queryClient = useQueryClient();
+  const { publicKey } = useWallet();
+
+  useEffect(() => {
+      queryClient.invalidateQueries({ queryKey: ['getNfts']  });
+  },[publicKey])
 
   const data = getHoldingPageData(holdingsFilter);
 
