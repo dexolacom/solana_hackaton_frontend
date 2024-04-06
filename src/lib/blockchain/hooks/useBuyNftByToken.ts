@@ -40,11 +40,12 @@ export const useBuyNftByToken = () => {
     const collectionData = generateColectionData(mintCollection)
     const isClassicCollection = mintCollection === addressClassicCollection;
     if (!publicKey || !ecosystemProgram || !classicProgram || !signTransaction) {
+      const error = new Error('Please, connect wallet.');
       toast({
         title: 'Error!',
-        description: 'Please, connect wallet'
+        description: error.message
       });
-      return;
+      return
     }
 
     const selectProgramId = isClassicCollection ? classicProgramId : ecosystemProgramId;
@@ -56,11 +57,12 @@ export const useBuyNftByToken = () => {
     const usdcBalance = getBalance?.value.uiAmount;
 
     if (!usdcBalance || usdcBalance < inputValue) {
+      const error = new Error('Your USDC account balance is not enough.');
       toast({
         title: 'Error!',
-        description: 'Your USDC account balance is not enough.'
-      })
-      return;
+        description: error.message
+      });
+      throw error;
     }
 
     const nft = await getNftAddresses({
@@ -111,12 +113,18 @@ export const useBuyNftByToken = () => {
         setModalName('INVEST');
       }, 3000);
     },
-    onError: () => {
-      toast({
-        title: 'Error',
-        description: 'Unsuccessful operation',
-      })
-    }
+    onError: (error) => { 
+       (error instanceof Error) ?
+        toast({
+          title: 'Error',
+          description: error.message,
+        })
+      :
+        toast({
+          title: 'Error',
+          description: 'Unsuccessful operation',
+        });
+      }
   })
 
   return { buy, isError, isSuccess, isLoading }

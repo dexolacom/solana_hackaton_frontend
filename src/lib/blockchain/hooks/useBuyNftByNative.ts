@@ -63,11 +63,12 @@ export const useBuyNftByNative = () => {
     const solbalance = await connection.getBalance(publicKey);
 
     if (!solbalance || (solbalance / decimalsToken['SOL'] < inputValue)) {
+      const error = new Error('Your USDC account balance is not enough.');
       toast({
         title: 'Error!',
-        description: 'Your SOL account balance is not enough.'
-      })
-      return;
+        description: error.message
+      });
+      throw error;
     }
 
     const nft = await getNftAddresses({
@@ -142,11 +143,17 @@ export const useBuyNftByNative = () => {
         setModalName('INVEST');
       }, 3000);
     },
-    onError: () => {
+    onError: (error) => {
+      (error instanceof Error) ?
+      toast({
+        title: 'Error',
+        description: error.message,
+      })
+    :
       toast({
         title: 'Error',
         description: 'Unsuccessful operation',
-      })
+      });
     }
   })
 

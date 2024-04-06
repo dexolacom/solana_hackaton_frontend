@@ -11,70 +11,62 @@ import { addressClassicCollection, addressEcosystemCollection } from '@/lib/bloc
 // TODO: add debounce for amount field
 
 export const useClassicForm = () => {
-  
-    const { pathname } = useLocation();
-    const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
-    const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
-    const { solanaRate } = useSolanaRate();
 
-    const isClassicColection = pathname.includes('classic');
-    const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
-    const isLoading = isLoadingToken || isLoadingNative
+  const { pathname } = useLocation();
+  const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
+  const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
+  const { solanaRate } = useSolanaRate();
 
-    const FormSchema = z.object({
-      amount: z.coerce.number(),
-      amountCurrency: z.string().min(1, {
-        message: 'This field cannot be blank',
-      }),
-      // withdrawal: z.string().min(1, {
-      //   message: 'This field cannot be blank',
-      // }),
-    }).refine((data) => {
-      if (data.amountCurrency === 'USDC') {
-        return data.amount >= 2;
-      } else if (data.amountCurrency === 'SOL') {
-        return solanaRate && (data.amount >= 2 / solanaRate);
-      }
+  const isClassicColection = pathname.includes('classic');
+  const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
+  const isLoading = isLoadingToken || isLoadingNative
 
-      return true;
-    }, {
-      message: 'Should be at least $2',
-      path: ['amount'],
-    });
-
-
-    const form = useForm<z.infer<typeof FormSchema>>({
-      resolver: zodResolver(FormSchema),
-      defaultValues: {
-        // @ts-ignore
-        amount: '',
-        amountCurrency: 'USDC',
-        // withdrawal: '',
-      },
-      // mode: 'onChange',
-    })
-
-    async function onSubmit(data: z.infer<typeof FormSchema>,) {
-      if (data.amountCurrency === 'USDC') {
-        await buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
-        return;
-      }
-      await buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
-      // toast({
-      //   title: 'You submitted the following values:',
-      //   description: (
-      //     <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-      //       <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-      //     </pre>
-      //   ),
-      // })
+  const FormSchema = z.object({
+    amount: z.coerce.number(),
+    amountCurrency: z.string().min(1, {
+      message: 'This field cannot be blank',
+    }),
+    // withdrawal: z.string().min(1, {
+    //   message: 'This field cannot be blank',
+    // }),
+  }).refine((data) => {
+    if (data.amountCurrency === 'USDC') {
+      return data.amount >= 2;
+    } else if (data.amountCurrency === 'SOL') {
+      return solanaRate && (data.amount >= 2 / solanaRate);
     }
-    return { form, onSubmit, solanaRate, isLoading }
-  }
 
-  export const getFormCurrencyValues = (amount: string | number, currencyInfo: { title: string; percent: number }[]) => {
-    return currencyInfo.map((currency) => ({
-      title: currency.title,
-      value: currency.percent * +amount,
-    }))
+    return true;
+  }, {
+    message: 'Should be at least $2',
+    path: ['amount'],
+  });
+
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      // @ts-ignore
+      amount: '',
+      amountCurrency: 'USDC',
+      // withdrawal: '',
+    },
+    // mode: 'onChange',
+  })
+
+  function onSubmit(data: z.infer<typeof FormSchema>,) {
+    if (data.amountCurrency === 'USDC') {
+      buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
+      return;
+    }
+    buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
   }
+  return { form, onSubmit, solanaRate, isLoading }
+}
+
+export const getFormCurrencyValues = (amount: string | number, currencyInfo: { title: string; percent: number }[]) => {
+  return currencyInfo.map((currency) => ({
+    title: currency.title,
+    value: currency.percent * +amount,
+  }))
+}
