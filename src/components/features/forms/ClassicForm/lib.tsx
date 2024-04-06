@@ -2,9 +2,8 @@ import { useLocation } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { generateRandomNumber } from '@/temp/utils/generateRandomNumber'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
-import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
+// import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
 import { addressClassicCollection, addressEcosystemCollection } from '@/lib/blockchain/constant';
 
@@ -14,12 +13,14 @@ export const useClassicForm = () => {
 
   const { pathname } = useLocation();
   const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
-  const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
+  // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
   const { solanaRate } = useSolanaRate();
 
   const isClassicColection = pathname.includes('classic');
   const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
-  const isLoading = isLoadingToken || isLoadingNative
+  console.log("🚀 ~ useClassicForm ~ mintCollection:", mintCollection)
+  const isLoading = isLoadingToken 
+  // || isLoadingNative
 
   const FormSchema = z.object({
     amount: z.coerce.number(),
@@ -56,10 +57,10 @@ export const useClassicForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>,) {
     if (data.amountCurrency === 'USDC') {
-      buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
+      buyNftByToken({ inputValue: +data.amount, nftId: 1, mintCollection: addressClassicCollection })
       return;
     }
-    buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
+    // buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
   }
   return { form, onSubmit, solanaRate, isLoading }
 }

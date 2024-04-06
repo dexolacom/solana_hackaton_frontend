@@ -1,17 +1,20 @@
 import { useGetNfts } from '@/lib/blockchain/hooks/useGetNfts'
 import { useQueries } from '@tanstack/react-query';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
-import { decimalsToken, usdcAddress } from '@/lib/blockchain/constant';
 import { PublicKey } from '@solana/web3.js';
 import { connection } from '@/lib/blockchain/constant';
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/providers/AppProvider/AppProvider';
+import { getCoinData } from '../helpers/getCoinData';
 
 export const useNftData = () => {
   const [cards, setCards] = useState<any[]>([]);
   const { tokens, isLoading: isLoadingTokens } = useGetNfts();
   const { solanaRate } = useSolanaRate();
   const {setInvested} = useAppContext();
+
+  const usdcData = getCoinData('USDT');
+  const solData = getCoinData('SOL');
  
   const data = useQueries({
     queries: tokens?.map((token) => ({
@@ -48,10 +51,10 @@ export const useNftData = () => {
 
     const parsedTransaction = await connection.getParsedTransaction(firstSignarure);
     const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
-    const isUsdcToken = tokenAddress === usdcAddress;
+    const isUsdcToken = tokenAddress === usdcData.mint;
     //@ts-ignore
     const amount = parsedTransaction?.meta?.innerInstructions?.[0].instructions.find(item => item.parsed.type === 'transfer').parsed.info.amount;
-    const convertAmount = isUsdcToken ? amount / decimalsToken['USDC'] : amount / decimalsToken['SOL'];
+    const convertAmount = isUsdcToken ? amount / usdcData.decimals : amount / solData.decimals;
 
     const date = new Date(parsedTransaction!.blockTime! * 1000);
     const formattedDate = date.toLocaleString();

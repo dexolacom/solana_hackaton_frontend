@@ -10,7 +10,7 @@ interface GetNftAddressesArgs {
 }
 
 export const getNftAddresses = async ({collection, nftId, owner, programId}: GetNftAddressesArgs) => {
-  const associatedTokenAccount = PublicKey.findProgramAddressSync(
+  const nftMint = PublicKey.findProgramAddressSync(
     [
       Buffer.from("token"),
       collection.toBuffer(),
@@ -19,35 +19,35 @@ export const getNftAddresses = async ({collection, nftId, owner, programId}: Get
     programId
   )[0]
 
-  const metadataAccountAddress = PublicKey.findProgramAddressSync(
+  const nftMetaData = PublicKey.findProgramAddressSync(
     [
       Buffer.from("metadata"),
       TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      associatedTokenAccount.toBuffer(),
+      nftMint.toBuffer(),
     ],
     TOKEN_METADATA_PROGRAM_ID
   )[0]
 
-  const masterEditionAccountAddress = PublicKey.findProgramAddressSync(
+  const nftMasterEdition = PublicKey.findProgramAddressSync(
     [
       Buffer.from("metadata"),
       TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      associatedTokenAccount.toBuffer(),
+      nftMint.toBuffer(),
       Buffer.from("edition")
     ],
     TOKEN_METADATA_PROGRAM_ID
   )[0]
 
-  const onchainDataAddress = PublicKey.findProgramAddressSync(
+  const onchainNftData = PublicKey.findProgramAddressSync(
     [
       Buffer.from("onchain-data"),
-      metadataAccountAddress.toBuffer(),
+      nftMetaData.toBuffer(),
     ],
     programId
   )[0]
 
   const nftATA = await getAssociatedTokenAddress(
-    associatedTokenAccount,
+    nftMint,
     owner
   )
 
@@ -55,7 +55,7 @@ export const getNftAddresses = async ({collection, nftId, owner, programId}: Get
     [
       Buffer.from("metadata"),
       TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      associatedTokenAccount.toBuffer(),
+      nftMint.toBuffer(),
       Buffer.from("token_record"),
       nftATA.toBuffer()
     ],
@@ -63,10 +63,10 @@ export const getNftAddresses = async ({collection, nftId, owner, programId}: Get
   )[0]
 
   return {
-    tokenAccount: associatedTokenAccount,
-    metadataAccountAddress,
-    masterEditionAccountAddress,
-    onchainDataAddress,
+    nftMint,
+    nftMetaData,
+    nftMasterEdition,
+    onchainNftData,
     nftATA,
     nftRecord
   }

@@ -1,13 +1,14 @@
 import { ReactNode } from 'react'
 import { Program } from '@coral-xyz/anchor';
-import { ClassicProgramType } from '@/lib/blockchain/programData/classicTypes';
-import { EcosystemProgramType } from '@/lib/blockchain/programData/ecosystemTypes';
+import { ProgramType } from '@/lib/blockchain/programData/types';
+import {
+  WhirlpoolContext,
+} from "@orca-so/whirlpools-sdk"
 
 export interface ProgramContextType {
-  classicProgram: Program<ClassicProgramType> | null
-  setClassicProgram: React.Dispatch<React.SetStateAction<Program<ClassicProgramType> | null>>
-  ecosystemProgram: Program<EcosystemProgramType> | null
-  setEcosystemProgram: React.Dispatch<React.SetStateAction<Program<EcosystemProgramType> | null>>
+  program: Program<ProgramType> | null
+  setProgram: React.Dispatch<React.SetStateAction<Program<ProgramType> | null>>
+  whirlpool: WhirlpoolContext | null
 }
 
 export interface ProgramContextProviderProps {
