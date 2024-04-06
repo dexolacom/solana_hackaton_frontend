@@ -106,8 +106,10 @@ export const useBuyNftByToken = () => {
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: buyNftByToken,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
-      setModalName('INVEST');
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+        setModalName('INVEST');
+      }, 3000);
     },
     onError: () => {
       toast({
