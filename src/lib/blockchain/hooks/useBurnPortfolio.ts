@@ -23,19 +23,23 @@ import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
 import { getOrCreateATA } from "../helpers/getOrCreateATA";
 import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
 
-interface UseBurnPortfolioArgs {
+interface BurnPortfolioArgs {
   portfolioId: number;
   nftId: number;
 }
 
-export const useBurnPortfolio = ({ portfolioId, nftId }: UseBurnPortfolioArgs) => {
+export const useBurnPortfolio = () => {
   const { program } = useProgramContext();
   const { publicKey, signTransaction } = useWallet();
   const { createAndSendV0Tx } = useCreateAndSendV0Tx();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const { setModalName } = useModalsContext();
 
-  const burn = async () => {
+  const burnNft = async ({ portfolioId, nftId }: BurnPortfolioArgs) => {
 
     if (!publicKey || !program || !signTransaction) {
       const error = new Error('Please, connect wallet.');
@@ -127,7 +131,7 @@ export const useBurnPortfolio = ({ portfolioId, nftId }: UseBurnPortfolioArgs) =
     // }
 
     const instruction = await program.methods.burnPortfolio(nftId).accounts({
-      treasuryAta: treasuryATA.address,
+      treasuryAta: treasuryATA.address,  //!!!!!!!
       config: configAddress,
       payer: publicKey,
       collection: collectionMint,
@@ -170,5 +174,30 @@ export const useBurnPortfolio = ({ portfolioId, nftId }: UseBurnPortfolioArgs) =
     // // deser.de
     // console.log(deser.deserialize(d2.data)[0].collectionDetails)
   }
-  return {burn}
+  const { mutate: burn, isError, isSuccess, isPending: isLoading } = useMutation({
+    mutationFn: burnNft,
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+        setModalName('');
+        toast({
+          title: 'Error',
+          description: 'Burn success',
+        });
+    },
+    onError: (error) => {
+      console.log(error);
+      (error instanceof Error) ?
+        toast({
+          title: 'Error',
+          description: error.message,
+        })
+        :
+        toast({
+          title: 'Error',
+          description: 'Unsuccessful operation',
+        });
+    }
+  })
+
+  return {burn, isError, isLoading, isSuccess};
 }

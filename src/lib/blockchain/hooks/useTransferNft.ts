@@ -9,6 +9,7 @@ import { getOrCreateATA } from "../helpers/getOrCreateATA";
 import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
 import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
+import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
 
 interface TransferNftProps {
   destinationAddress: PublicKey;
@@ -22,6 +23,7 @@ export const useTransferNft = () => {
   const { toast } = useToast();
   const { createAndSendV0Tx } = useCreateAndSendV0Tx();
   const { publicKey, signTransaction } = wallet;
+  const { setModalName } = useModalsContext();
 
   const queryClient = useQueryClient();
 
@@ -90,8 +92,26 @@ export const useTransferNft = () => {
   const { mutate: transfer, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: transferNft,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getNfts'] })
+        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+        setModalName('');
+        toast({
+          title: 'Error',
+          description: 'Transfer success',
+        });
     },
+    onError: (error) => {
+      console.log(error);
+      (error instanceof Error) ?
+        toast({
+          title: 'Error',
+          description: error.message,
+        })
+        :
+        toast({
+          title: 'Error',
+          description: 'Unsuccessful operation',
+        });
+    }
   })
 
   return { transfer, isLoading, isSuccess, isError };
