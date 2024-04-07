@@ -1,132 +1,174 @@
-// import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
-// import { classicProgramId } from "../constant";
-// import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
-// import { useWallet } from "@solana/wallet-adapter-react";
-// import { useToast } from "@/lib/hooks/useToast";
+import { useToast } from "@/lib/hooks/useToast";
+import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
+import { web3 } from "@coral-xyz/anchor";
+import { getMetadataAccountDataSerializer } from "@metaplex-foundation/mpl-token-metadata";
+import {
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+  TOKEN_PROGRAM_ID,
+  createAssociatedTokenAccountInstruction,
+  getAssociatedTokenAddressSync,
+} from "@solana/spl-token";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { ComputeBudgetProgram, PublicKey } from "@solana/web3.js";
+import { 
+  TOKEN_METADATA_PROGRAM_ID, 
+  classicPortfolioTokens, 
+  programId, 
+  treasury, 
+  portfolioLookupTable,
+  // connection 
+} from "@/lib/blockchain/constant";
+import { getCoinData } from "../helpers/getCoinData";
+import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
+import { getNftAddresses } from "../helpers/getNftAddresses";
+import { getOrCreateATA } from "../helpers/getOrCreateATA";
+import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
 
-// interface UseBurnPortfolioArgs {
-//   portfolioId: number;
-//   nftId: number;
-// }
+interface UseBurnPortfolioArgs {
+  portfolioId: number;
+  nftId: number;
+}
 
-// export const useBurnPortfolio = ({portfolioId, nftId}: UseBurnPortfolioArgs) => {
-//   const { classicProgram, ecosystemProgram } = useProgramContext();
-//   const { publicKey, signTransaction } = useWallet();
-//   const { toast } = useToast();
+export const useBurnPortfolio = ({ portfolioId, nftId }: UseBurnPortfolioArgs) => {
+  const { program } = useProgramContext();
+  const { publicKey, signTransaction } = useWallet();
+  const { createAndSendV0Tx } = useCreateAndSendV0Tx();
+  const { toast } = useToast();
 
-//   const burn = async() => {
+  const burn = async () => {
 
-//     if (!publicKey || !ecosystemProgram || !classicProgram || !signTransaction) {
-//       const error = new Error('Please, connect wallet.');
-//       toast({
-//         title: 'Error!',
-//         description: error.message
-//       });
-//       return
-//     }
+    if (!publicKey || !program || !signTransaction) {
+      const error = new Error('Please, connect wallet.');
+      toast({
+        title: 'Error!',
+        description: error.message
+      });
+      return
+    }
 
-//     const portfolioCollection = getCollectionAddresses(classicProgramId, portfolioId);
-//   }
+    const {
+      collectionMint,
+      collectionMetadata,
+      collectionMasterEdition,
+      onchainCollectionData
+    } = await getCollectionAddresses(portfolioId);
 
-//     const nft = getNftAddresses(portfolio_collection.collection_mint, nft_id, users[1].publicKey);
-//     const deser = getMetadataAccountDataSerializer();
-//     const atasInstructions = []
-//     const atas = []
+    const {
+      nftMint,
+      nftMetaData,
+      nftMasterEdition,
+      // onchainNftData,
+      nftATA,
+      nftRecord
+    } = await getNftAddresses({ collection: collectionMint, nftId, owner: publicKey });
 
-//     for (const token of portfolioTokens) {
-//       const userAta = getAssociatedTokenAddressSync(
-//         token.key,
-//         users[1].publicKey,
-//         true,
-//         TOKEN_PROGRAM_ID,
-//         ASSOCIATED_TOKEN_PROGRAM_ID
-//       );
+    const usdcData = getCoinData('USDC');
+    const usdcPublicKey = new PublicKey(usdcData.mint);
 
-//       const portfolioAta = getAssociatedTokenAddressSync(
-//         token.key,
-//         nft.nft_mint,
-//         true,
-//         TOKEN_PROGRAM_ID,
-//         ASSOCIATED_TOKEN_PROGRAM_ID
-//       );
+    const treasuryATA = await getOrCreateATA({ owner: treasury, mint: usdcPublicKey, payer: publicKey, signTransaction });
+    const deser = getMetadataAccountDataSerializer();
+    console.log("🚀 ~ burn ~ deser:", deser)
 
-//       atasInstructions.push(
-//         createAssociatedTokenAccountInstruction(
-//           users[1].publicKey,
-//           userAta,
-//           users[1].publicKey,
-//           token.key,
-//           TOKEN_PROGRAM_ID,
-//           ASSOCIATED_TOKEN_PROGRAM_ID
-//         )
-//       );
-//       atas.push(portfolioAta);
-//       atas.push(userAta);
-//     }
+    const atasInstructions = []
+    const atas = []
 
-//     const additionalComputeBudgetInstruction =
-//       ComputeBudgetProgram.setComputeUnitLimit({
-//         units: 200000,
-//       });
-//     await createAndSendV0Tx(atasInstructions, users[1])
+    const configAddress = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from("config"),
+      ],
+      programId
+    )[0];
 
+    for (const token of classicPortfolioTokens) {
+      const userATA = getAssociatedTokenAddressSync(
+        token.key,
+        publicKey,
+        true,
+        TOKEN_PROGRAM_ID,
+        ASSOCIATED_TOKEN_PROGRAM_ID
+      );
 
-//     console.log(await provider.connection.getAccountInfo(nft.nft_metadata));
-//     console.log(await provider.connection.getAccountInfo(nft.nft_mint));
-//     console.log(await provider.connection.getAccountInfo(nft.nft_ata));
-//     console.log(await provider.connection.getAccountInfo(nft.nft_record));
-//     console.log(await provider.connection.getAccountInfo(nft.nft_master_edition));
+      const portfolioATA = getAssociatedTokenAddressSync(
+        token.key,
+        nftMint,
+        true,
+        TOKEN_PROGRAM_ID,
+        ASSOCIATED_TOKEN_PROGRAM_ID
+      );
 
+      atasInstructions.push(
+        createAssociatedTokenAccountInstruction(
+          publicKey,
+          userATA,
+          publicKey,
+          token.key,
+          TOKEN_PROGRAM_ID,
+          ASSOCIATED_TOKEN_PROGRAM_ID
+        )
+      );
+      atas.push(portfolioATA);
+      atas.push(userATA);
+    }
 
-//     // for (const acc of accs) {
-//     //   console.log(await provider.connection.getAccountInfo(acc))
-//     // }
+    const additionalComputeBudgetInstruction =
+      ComputeBudgetProgram.setComputeUnitLimit({
+        units: 200000,
+      });
+    await createAndSendV0Tx(atasInstructions)
 
-//     const instruction = await program.methods.burnPortfolio(nft_id).accounts({
-//       treasuryAta: treasury_ata_sol,
-//       config: config_address,
-//       payer: users[1].publicKey,
-//       collection: portfolio_collection.collection_mint,
-//       collectionMetadata: portfolio_collection.collection_metadata,
-//       collectionMasterEdition: portfolio_collection.collection_master_edition,
-//       collectionOnchaindata: portfolio_collection.collection_onchain_data,
-//       tokenMint: nft.nft_mint,
-//       nftUserTokenAccount: nft.nft_ata,
-//       nftRecord: nft.nft_record,
-//       metadataAccount: nft.nft_metadata,
-//       masterEditionAccount: nft.nft_master_edition,
-//       mplProgram: TOKEN_METADATA_PROGRAM_ID,
-//       sysvarInstructions: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-//       splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
-//     }).signers([users[1]])
-//       .remainingAccounts(atas.map(e => {
-//         return { pubkey: e, isSigner: false, isWritable: true };
-//       })).instruction()
+    // console.log(await connection.getAccountInfo(nftMetaData));
+    // console.log(await connection.getAccountInfo(nftMint));
+    // console.log(await connection.getAccountInfo(nftATA));
+    // console.log(await connection.getAccountInfo(nftRecord));
+    // console.log(await connection.getAccountInfo(nftMasterEdition));
 
-//     await createAndSendV0Tx(
-//       [
-//         additionalComputeBudgetInstruction,
-//         instruction
-//       ],
-//       users[1],
-//       portfolio_lookup_table
-//     )
+    // for (const acc of accs) {
+    //   console.log(await provider.connection.getAccountInfo(acc))
+    // }
 
-//     for (const ata of atas) {
-//       // console.log()
-//       try {
-//         await provider.connection.getTokenAccountBalance(ata);
-//         assert.fail('shoud faild bcs ata doesnt exists');
-//       } catch (e) {
-//         const error = e as Error;
-//         assert.match(error.message, /could not find account/); // SqrtPriceOutOfBounds
-//       }
-//     }
+    const instruction = await program.methods.burnPortfolio(nftId).accounts({
+      treasuryAta: treasuryATA.address,
+      config: configAddress,
+      payer: publicKey,
+      collection: collectionMint,
+      collectionMetadata: collectionMetadata,
+      collectionMasterEdition: collectionMasterEdition,
+      collectionOnchaindata: onchainCollectionData,
+      tokenMint: nftMint,
+      nftUserTokenAccount: nftATA,
+      nftRecord: nftRecord,
+      metadataAccount: nftMetaData,
+      masterEditionAccount: nftMasterEdition,
+      mplProgram: TOKEN_METADATA_PROGRAM_ID,
+      sysvarInstructions: web3.SYSVAR_INSTRUCTIONS_PUBKEY,
+      splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
+    }).remainingAccounts(atas.map(e => {
+      return { pubkey: e, isSigner: false, isWritable: true };
+    })).instruction()
 
-//     const d2 = await provider.connection.getAccountInfo(portfolio_collection.collection_metadata);
+    await createAndSendV0Tx(
+      [
+        additionalComputeBudgetInstruction,
+        instruction
+      ],
+      [portfolioLookupTable]
+    )
 
-//     // deser.de
-//     console.log(deser.deserialize(d2.data)[0].collectionDetails)
+    // for (const ata of atas) {
+    //   // console.log()
+    //   try {
+    //     await provider.connection.getTokenAccountBalance(ata);
+    //     assert.fail('shoud faild bcs ata doesnt exists');
+    //   } catch (e) {
+    //     const error = e as Error;
+    //     assert.match(error.message, /could not find account/); // SqrtPriceOutOfBounds
+    //   }
+    // }
 
-//   })
-// }
+    // const d2 = await connection.getAccountInfo(collectionMetadata);
+
+    // // deser.de
+    // console.log(deser.deserialize(d2.data)[0].collectionDetails)
+  }
+  return {burn}
+}
