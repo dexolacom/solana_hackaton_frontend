@@ -37,7 +37,7 @@ export const HomeCard = (props: HomeCardProps) => {
   const { amount, holdings, description } = content
 
   return (
-    <Card>
+    <Card className='flex-1'>
       <CardHeader className={'mb-0'}>
         <CardTitle className={'text-2xl font-semibold'}>{title}</CardTitle>
         <span className={'flex gap-2'}>{badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}</span>
@@ -45,7 +45,7 @@ export const HomeCard = (props: HomeCardProps) => {
       <CardContent className={'flex flex-col gap-4 py-6'}>
         <AmountCard amount={amount} variant={amountCardVariant} />
         <HoldingsCard variant={'bordered'} holdings={holdings} progressVariant={progressVariant} />
-        <DescriptionCard variant={'bordered'} description={description} withIcon={false} />
+        <DescriptionCard variant={'bordered'} description={description} withIcon={false} className=' lg:h-[182px]'/>
       </CardContent>
       <CardFooter>
         <AppLink to={linkPath} variant={buttonVariant} className={'w-full self-end'}>
