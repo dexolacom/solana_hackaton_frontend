@@ -57,47 +57,19 @@ export const useTransferNft = () => {
 
     await createAndSendV0Tx([instruction]);
     
-    // const nftATA = await getAssociatedTokenAddress(
-    //   mintPubkey,
-    //   publicKey
-    // );
-
-    // const destinationATA = await getOrCreateATA({ owner: destinationAddress, mint: mintPubkey, payer: publicKey, signTransaction });
-
-    // const transaction = new Transaction();
-    // transaction.add(
-    //   createTransferCheckedInstruction(
-    //     nftATA,
-    //     mintPubkey,
-    //     destinationATA.address,
-    //     publicKey,
-    //     1,
-    //     0
-    //   )
-    // );
-    // const blockHash = await connection.getLatestBlockhash()
-    // transaction.feePayer = publicKey
-    // transaction.recentBlockhash = blockHash.blockhash
-    // const signed = await signTransaction(transaction)
-
-    // const signature = await connection.sendRawTransaction(signed.serialize())
-
-    // await connection.confirmTransaction({
-    //   blockhash: blockHash.blockhash,
-    //   lastValidBlockHeight: blockHash.lastValidBlockHeight,
-    //   signature,
-    // })
   }
 
   const { mutate: transfer, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: transferNft,
     onSuccess: () => {
+      setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('');
         toast({
           title: 'Error',
           description: 'Transfer success',
         });
+      }, 3000);
     },
     onError: (error) => {
       console.log(error);

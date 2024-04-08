@@ -54,7 +54,7 @@ export const useTransferForm = () => {
   function onSubmit(data: z.infer<typeof FormSchema>,) {
     transferNft({
       destinationAddress: new PublicKey(data.address),
-      nftId: 2,
+      nftId: 241,
       portfolioId: 3
     })
   }

@@ -26,8 +26,10 @@ export const NftCard = (props: NftCardProps) => {
   const { img } = useGetNftImg(uri);
   const { setModalName, setMint, setNftPrice, setNftTitle } = useModalsContext()
 
-  const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
-  const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
+  // const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
+  // const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
+  const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP']
+  const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT']
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 

@@ -20,8 +20,6 @@ export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
 const MyHoldingsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { invested } = useNftData();
-  // console.log("🚀 ~ MyHoldingsPage ~ invested:", invested)
-
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
 
@@ -30,7 +28,6 @@ const MyHoldingsPage = () => {
   }, [])
 
   const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
-  console.log("🚀 ~ MyHoldingsPage ~ classicInvested:", classicInvested)
 
   const ecosystemInvested = 0;
   const isLoadingEcosystem = false;

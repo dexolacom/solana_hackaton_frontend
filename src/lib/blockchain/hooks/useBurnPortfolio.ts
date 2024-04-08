@@ -131,7 +131,7 @@ export const useBurnPortfolio = () => {
     // }
 
     const instruction = await program.methods.burnPortfolio(nftId).accounts({
-      // treasuryAta: treasuryATA.address,  //!!!!!!!
+      // treasuryAta: treasuryATA.address, 
       // config: configAddress,
       payer: publicKey,
       collection: collectionMint,
@@ -177,12 +177,14 @@ export const useBurnPortfolio = () => {
   const { mutate: burn, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: burnNft,
     onSuccess: () => {
+      setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('');
         toast({
           title: 'Error',
           description: 'Burn success',
         });
+      }, 3000);
     },
     onError: (error) => {
       console.log(error);
