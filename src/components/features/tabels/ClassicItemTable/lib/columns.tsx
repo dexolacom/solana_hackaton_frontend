@@ -1,4 +1,4 @@
-import info from '@/assets/icons/info.svg'
+// import info from '@/assets/icons/info.svg'
 import { Badge } from '@/components/ui/Badge.tsx'
 import { currencyLinks } from '@/lib/constants.tsx'
 import { ColumnDef } from '@tanstack/react-table'
@@ -56,11 +56,11 @@ export const columns: ColumnDef<TableData>[] = [
     accessorKey: 'change24h',
     header: '24h Change',
   },
-  {
-    accessorKey: 'Earned',
-    header: () => <div className='flex justify-end gap-[4px] items-center'>
-      <div>Earned</div>
-      <img src={info} alt="info icon" width={20} height={20} />
-    </div>,
-  },
+  // {
+  //   accessorKey: 'Earned',
+  //   header: () => <div className='flex justify-end gap-[4px] items-center'>
+  //     <div>Earned</div>
+  //     <img src={info} alt="info icon" width={20} height={20} />
+  //   </div>,
+  // },
 ]
