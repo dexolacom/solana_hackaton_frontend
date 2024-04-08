@@ -60,9 +60,7 @@ export const useGetNfts = () => {
 
   const fetchNfts = async () => {
     const walletTokens = await getTheTokensOfOwner();
-    console.log("🚀 ~ fetchNfts ~ walletTokens:", walletTokens)
     const nftsData = await fetchAllMetadata(walletTokens) || [];
-    console.log("🚀 ~ fetchNfts ~ nftsData:", nftsData)
     const filteredNfts = nftsData.filter(nft => nft.metadata.collection.value.key === addressClassicCollection);
     return filteredNfts;
   };

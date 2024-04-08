@@ -39,6 +39,7 @@ export const useNftData = () => {
       const invested = data?.data.reduce((accumulator, item) => {
         return accumulator + (item?.investedPrice ?? 0);
       }, 0);
+
       setCards(newNftData);
       setInvested(invested);
     }
@@ -46,11 +47,14 @@ export const useNftData = () => {
 
   const getTransaction = async (mint: string) => {
     const signatures = await connection.getSignaturesForAddress(new PublicKey(mint))
-    const signaturesLength = signatures.length;
-    const firstSignarure = signatures[signaturesLength - 1].signature;
+    // const signaturesLength = signatures.length;
+    const firstSignarure = signatures[0].signature;
+    console.log("🚀 ~ getTransaction ~ firstSignarure:", firstSignarure)
 
-    const parsedTransaction = await connection.getParsedTransaction(firstSignarure);
+    const parsedTransaction = await connection.getParsedTransaction('67pFUeMGZ9kvvaba9KHzpy4ZDuavCqZ7MuJb5NXEsXie6LfuLcLTUSeyY7E2SFn4uscdS2K9mC6WgBjhbvV1kwkw');
+    console.log("🚀 ~ getTransaction ~ parsedTransaction:", parsedTransaction)
     const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
+    console.log("🚀 ~ getTransaction ~ tokenAddress:", tokenAddress)
     const isUsdcToken = tokenAddress === usdcData.mint;
     //@ts-ignore
     const amount = parsedTransaction?.meta?.innerInstructions?.[0].instructions.find(item => item.parsed.type === 'transfer').parsed.info.amount;
