@@ -35,7 +35,7 @@ export const useTotalInvested = (mintCollection: string) => {
       const isUsdcToken = tokenAddress === usdcData.mint;
       //@ts-ignore
       const amount = transaction?.meta?.innerInstructions?.[0].instructions[2].parsed.info.amount;
-      const convertAmount = isUsdcToken ? amount / usdcData.decimals : amount / solData.decimals;
+      const convertAmount = isUsdcToken ? amount / 10e4 : amount / solData.decimals;
 
       const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
 
