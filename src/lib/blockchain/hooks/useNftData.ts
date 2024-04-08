@@ -80,7 +80,7 @@ export const useNftData = () => {
 
     //@ts-ignore
     const amount = parsedTransaction?.meta?.innerInstructions[0].instructions[2].parsed.info.amount
-    const convertAmount = isUsdcToken ? amount / usdcData.decimals : amount / solData.decimals;
+    const convertAmount = isUsdcToken ? amount / 10e4 : amount / solData.decimals;
 
     const date = new Date(parsedTransaction!.blockTime! * 1000);
     const formattedDate = date.toLocaleString();

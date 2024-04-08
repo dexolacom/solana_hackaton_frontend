@@ -30,7 +30,7 @@ export const treasury = new PublicKey('8QdnKN4JbhpSLdhJVcCswmSy3X1Z3hmyZEG3VvGGN
 // export const wSolPublicKey = new PublicKey(wSolAddress)
 
 export const coins = [
-  { currency: 'USDC', mint: 'BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe', decimals: 10e5 },
+  { currency: 'USDC', mint: 'BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe', decimals: 10e6 },
   { currency: 'ETH', mint: '4AJv9M5uMrMbyArp9Tio9MR2WovY9r5F8MXdQLRyDHaC', decimals: 10e8 },
   { currency: 'BTC', mint: '7u8NENSnY1k6vH6HERBvJvCjqkpwFHGTnxzmwEAvbMng', decimals: 10e8 },
   { currency: 'SOL', mint: 'So11111111111111111111111111111111111111112', decimals: 10e9 },
