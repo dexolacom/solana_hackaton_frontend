@@ -1,13 +1,18 @@
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { PublicKey, LAMPORTS_PER_SOL, Transaction, SystemProgram } from '@solana/web3.js';
+import {
+  // useConnection,
+  useWallet,
+} from '@solana/wallet-adapter-react'
+// import { PublicKey, LAMPORTS_PER_SOL, Transaction, SystemProgram } from '@solana/web3.js';
+import { clusterApiUrl, Transaction, SystemProgram, LAMPORTS_PER_SOL, PublicKey, Connection } from '@solana/web3.js'
 
 export function SendTransaction() {
-  const { connection } = useConnection();
-  const { sendTransaction, publicKey } = useWallet();
+  // const { connection } = useConnection();
+  const connection = new Connection(clusterApiUrl('devnet'))
+  const { sendTransaction, publicKey } = useWallet()
 
   const sendSolana = async () => {
-    const toPublicKey = new PublicKey('3XBJcNsP9qikSryCpgiiYGVYAhvi1HggNYyDCesqDmNL');
-    const transaction = new Transaction();
+    const toPublicKey = new PublicKey('2mxosq2T98t7dvigPcZENkjNK93JfZhU9MZzMAfD5XWN')
+    const transaction = new Transaction()
 
     transaction.add(
       SystemProgram.transfer({
@@ -15,10 +20,10 @@ export function SendTransaction() {
         toPubkey: toPublicKey,
         lamports: LAMPORTS_PER_SOL * 0.1,
       })
-    );
+    )
 
-    await sendTransaction(transaction, connection);
-  };
+    await sendTransaction(transaction, connection)
+  }
 
   return (
     <div>
@@ -26,5 +31,5 @@ export function SendTransaction() {
         Send transaction
       </button>
     </div>
-  );
+  )
 }
