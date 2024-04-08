@@ -8,12 +8,16 @@ import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx'
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx'
 import { ClassicPageTable } from '@/components/features/tabels/ClassicPageTable/ClassicPageTable.tsx'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
+import { currencyFormatter } from '@/lib/utils'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { addressClassicCollection } from '@/lib/blockchain/constant'
 
 const ClassicPage = () => {
+  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
   const tempData = {
     amount: {
       title: 'Total amount invested',
-      number: '$1,013,724.41',
+      number: isLoadingClassic? 'Calculation...' : currencyFormatter(classicInvested ?? 0) ,
     },
     holdings: {
       title: 'Holdings',

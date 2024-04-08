@@ -202,45 +202,13 @@ export const useBuyNftByToken = () => {
       [portfolioLookupTable, new PublicKey("HjKTcMNmExUTbmSrPGDLRgriw6GqQgVXNNKKK2RzxAfv")]
     )
 
-    // for (const ata of wrpool.ata) {
-    //   console.log(await connection.getTokenAccountBalance(ata))
-    // }
-
-    // const d2 = await connection.getAccountInfo(collectionMetadata);
-
-    // deser.de
-    // console.log(deser.deserialize(d2.data)[0].collectionDetails)
-
-
-    // await selectProgram.methods.buyPortfolio(
-    //   nftId,
-    //   collectionData.uri,
-    //   new BN(inputValue * usdcData.decimals),
-    // )
-    //   .accounts({
-    //     payer: publicKey,
-    //     nftUserTokenAccount: nftATA,
-    //     nftRecord: nftRecord,
-    //     portfolioData: onchainNftData,
-    //     tokenMint: nftMint,
-    //     metadataAccount: nftMetaData,
-    //     masterEditionAccount: nftMasterEdition,
-    //     collectionMetadata: onchainCollectionData,
-    //     collection: collectionMint,
-    //     paymentToken: usdcPublicKey,
-    //     mplProgram: TOKEN_METADATA_PROGRAM_ID,
-    //     sysvarInstructions: web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-    //     paymentUserTokenAccount: userATA.address,
-    //     paymentProgramTokenAccount: programATA.address,
-    //     splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
-    //   }).preInstructions([additionalComputeBudgetInstruction]).rpc()
-
     setNftPrice(`${inputValue} USDC`);
   }
 
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: buyNftByToken,
     onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ['totalInvested'] });
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('INVEST');

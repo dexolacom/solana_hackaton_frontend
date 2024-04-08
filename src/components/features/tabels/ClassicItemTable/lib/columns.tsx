@@ -1,4 +1,4 @@
-import info from '@/assets/icons/info.svg'
+// import info from '@/assets/icons/info.svg'
 import { Badge } from '@/components/ui/Badge.tsx'
 import { currencyLinks } from '@/lib/constants.tsx'
 import { ColumnDef } from '@tanstack/react-table'

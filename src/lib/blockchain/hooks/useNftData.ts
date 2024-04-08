@@ -1,21 +1,25 @@
 import { useGetNfts } from '@/lib/blockchain/hooks/useGetNfts'
 import { useQueries } from '@tanstack/react-query';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
+import { addressClassicCollection, addressEcosystemCollection} from '@/lib/blockchain/constant';
 import { PublicKey } from '@solana/web3.js';
+import { getCoinData } from '../helpers/getCoinData';
 import { connection } from '@/lib/blockchain/constant';
 import { useEffect, useState } from 'react';
-import { useAppContext } from '@/providers/AppProvider/AppProvider';
-import { getCoinData } from '../helpers/getCoinData';
+
 
 export const useNftData = () => {
   const [cards, setCards] = useState<any[]>([]);
   const { tokens, isLoading: isLoadingTokens } = useGetNfts();
   const { solanaRate } = useSolanaRate();
-  const {setInvested} = useAppContext();
 
-  const usdcData = getCoinData('USDT');
+
+  const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
  
+  
+  const [invested, setInvested] = useState<Record<string, number>>({});
+
   const data = useQueries({
     queries: tokens?.map((token) => ({
       queryKey: ['transaction', token.metadata.mint],
@@ -39,25 +43,42 @@ export const useNftData = () => {
       const invested = data?.data.reduce((accumulator, item) => {
         return accumulator + (item?.investedPrice ?? 0);
       }, 0);
+  
+      const classicInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressClassicCollection)
+        .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
+ 
+      
+
+      const ecosystemInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressEcosystemCollection)
+        .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
+     
 
       setCards(newNftData);
-      setInvested(invested);
+      setInvested({'all': invested,
+        'classic': classicInvested,
+        'ecosystem': ecosystemInvested
+      });
     }
   }, [data?.pending])
 
   const getTransaction = async (mint: string) => {
-    const signatures = await connection.getSignaturesForAddress(new PublicKey(mint))
-    // const signaturesLength = signatures.length;
-    const firstSignarure = signatures[0].signature;
-    console.log("🚀 ~ getTransaction ~ firstSignarure:", firstSignarure)
 
-    const parsedTransaction = await connection.getParsedTransaction('67pFUeMGZ9kvvaba9KHzpy4ZDuavCqZ7MuJb5NXEsXie6LfuLcLTUSeyY7E2SFn4uscdS2K9mC6WgBjhbvV1kwkw');
-    console.log("🚀 ~ getTransaction ~ parsedTransaction:", parsedTransaction)
+    const signatures = await connection.getSignaturesForAddress(new PublicKey(mint))
+  
+    const firstSignarure = signatures[0].signature;
+
+
+    const parsedTransaction = await connection.getParsedTransaction(firstSignarure, {
+
+      maxSupportedTransactionVersion: 0,
+    });
+
     const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
-    console.log("🚀 ~ getTransaction ~ tokenAddress:", tokenAddress)
+
     const isUsdcToken = tokenAddress === usdcData.mint;
+
     //@ts-ignore
-    const amount = parsedTransaction?.meta?.innerInstructions?.[0].instructions.find(item => item.parsed.type === 'transfer').parsed.info.amount;
+    const amount = parsedTransaction?.meta?.innerInstructions[0].instructions[2].parsed.info.amount
     const convertAmount = isUsdcToken ? amount / usdcData.decimals : amount / solData.decimals;
 
     const date = new Date(parsedTransaction!.blockTime! * 1000);
@@ -69,5 +90,5 @@ export const useNftData = () => {
 
   const isLoading = isLoadingTokens || data.pending
 
-  return {cards, isLoading}
+  return { cards, isLoading, invested }
 }
