@@ -6,36 +6,36 @@ export const classicHoldings = {
     items: [
       {
         name: 'BTC',
-        percent: 30,
+        percent: 35,
       },
       {
         name: 'SOL',
-        percent: 20,
+        percent: 25,
       },
       {
         name: 'ETH',
-        percent: 15,
+        percent: 20,
       },
       {
         name: 'JUP',
-        percent: 10,
+        percent: 20,
       },
-      {
-        name: 'RNDR',
-        percent: 10,
-      },
-      {
-        name: 'HNT',
-        percent: 5,
-      },
-      {
-        name: 'BONK',
-        percent: 5,
-      },
-      {
-        name: 'PYTH',
-        percent: 5,
-      },
+      // {
+      //   name: 'RNDR',
+      //   percent: 10,
+      // },
+      // {
+      //   name: 'HNT',
+      //   percent: 5,
+      // },
+      // {
+      //   name: 'BONK',
+      //   percent: 5,
+      // },
+      // {
+      //   name: 'PYTH',
+      //   percent: 5,
+      // },
     ],
   },
 }
@@ -46,40 +46,40 @@ export const ecosystemHoldings = {
     items: [
       {
         name: 'SOL',
-        percent: 30,
+        percent: 35,
       },
       {
         name: 'JUP',
-        percent: 15,
+        percent: 25,
       },
       {
         name: 'RNDR',
-        percent: 15,
+        percent: 20,
       },
       {
         name: 'HNT',
-        percent: 15,
+        percent: 20,
       },
-      {
-        name: 'BONK',
-        percent: 10,
-      },
-      {
-        name: 'PYTH',
-        percent: 5,
-      },
-      {
-        name: 'RAY',
-        percent: 5,
-      },
-      {
-        name: 'JTO',
-        percent: 5,
-      },
-      {
-        name: 'WIF',
-        percent: 5,
-      },
+      // {
+      //   name: 'BONK',
+      //   percent: 10,
+      // },
+      // {
+      //   name: 'PYTH',
+      //   percent: 5,
+      // },
+      // {
+      //   name: 'RAY',
+      //   percent: 5,
+      // },
+      // {
+      //   name: 'JTO',
+      //   percent: 5,
+      // },
+      // {
+      //   name: 'WIF',
+      //   percent: 5,
+      // },
     ],
   },
 }
@@ -137,36 +137,36 @@ export const getCardsData = (projectList?: ProjectType[]) => {
           items: [
             {
               name: 'BTC',
-              percent: 30,
+              percent: 35,
             },
             {
               name: 'SOL',
-              percent: 20,
+              percent: 25,
             },
             {
               name: 'ETH',
-              percent: 15,
+              percent: 20,
             },
             {
               name: 'JUP',
-              percent: 10,
+              percent: 20,
             },
-            {
-              name: 'RNDR',
-              percent: 10,
-            },
-            {
-              name: 'HNT',
-              percent: 5,
-            },
-            {
-              name: 'BONK',
-              percent: 5,
-            },
-            {
-              name: 'PYTH',
-              percent: 5,
-            },
+            // {
+            //   name: 'RNDR',
+            //   percent: 10,
+            // },
+            // {
+            //   name: 'HNT',
+            //   percent: 5,
+            // },
+            // {
+            //   name: 'BONK',
+            //   percent: 5,
+            // },
+            // {
+            //   name: 'PYTH',
+            //   percent: 5,
+            // },
           ],
         },
         description: {

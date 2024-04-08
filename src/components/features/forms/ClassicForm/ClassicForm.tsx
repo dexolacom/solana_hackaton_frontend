@@ -35,8 +35,8 @@ export const ClassicForm = (props: ClassicFormProps) => {
   const formCurrencyData = getFormCurrencyValues(amountWithCurrency, currencyInfo)
   const currencyColumns =
     currenciesVariant === 'classic'
-      ? { firstColumn: [0, 4], secondColumn: [4, formCurrencyData.length] }
-      : { firstColumn: [0, 5], secondColumn: [5, formCurrencyData.length] }
+      ? { firstColumn: [0, 2], secondColumn: [2, formCurrencyData.length] }
+      : { firstColumn: [0, 2], secondColumn: [2, formCurrencyData.length] }
 
   useEffect(() => {
     onlyIntegersInputValidator()
