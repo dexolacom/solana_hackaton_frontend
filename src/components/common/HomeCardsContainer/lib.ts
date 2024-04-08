@@ -1,4 +1,5 @@
 import { ProjectType } from "@/lib/types";
+import { currencyFormatter } from "@/lib/utils";
 
 export const classicHoldings = {
   holdings: {
@@ -84,7 +85,7 @@ export const ecosystemHoldings = {
   },
 }
 
-export const getCardsData = (projectList?: ProjectType[]) => {
+export const getCardsData = (projectList?: ProjectType[], classicInvested?: number, isLoading?: boolean) => {
   return [
     {
       title: 'classic',
@@ -92,7 +93,7 @@ export const getCardsData = (projectList?: ProjectType[]) => {
       content: {
         amount: {
           title: 'Total amount invested',
-          number: '$1,013,724.41',
+          number: isLoading? 'Calculation...' : currencyFormatter(classicInvested!) ,
         },
         ...classicHoldings,
         description: {

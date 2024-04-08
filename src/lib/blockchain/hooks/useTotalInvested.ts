@@ -6,78 +6,51 @@ import { PublicKey } from '@solana/web3.js';
 import { connection } from '@/lib/blockchain/constant';
 import { useEffect, useState } from 'react';
 import { ConfirmedSignatureInfo } from '@solana/web3.js';
+import { useQuery } from '@tanstack/react-query';
 import { useAppContext } from '@/providers/AppProvider/AppProvider';
 
-export const useTotalInvested = () => {
+export const useTotalInvested = (mintCollection: string) => {
   const { solanaRate } = useSolanaRate();
-  const [transactions, setTransactions] = useState<ConfirmedSignatureInfo[]>([]);
 
-  // const {setInvested} = useAppContext();
-//  
-  // const data = useQueries({
-  //   queries: transactions.map((transaction) => ({
-  //     queryKey: ['transaction', token.metadata.mint],
-  //     queryFn: () => getTransaction(token.metadata.mint),
-  //     staleTime: Infinity,
-  //   })),
-  //   combine: (results) => {
-  //     return {
-  //       data: results.map((result) => result.data),
-  //       pending: results.some((result) => result.isPending),
-  //     }
-  //   },
-  // })
+  const getTransactions = async (mintCollection: string) => {
 
-  // useEffect(() => {
-  //   if (!data.pending) {
-  //     const newNftData = tokens?.map(item => ({
-  //       ...item,
-  //       content: { ...data?.data?.find(element => element?.mint === item.metadata.mint) }
-  //     }))
-  //     const invested = data?.data.reduce((accumulator, item) => {
-  //       return accumulator + (item?.investedPrice ?? 0);
-  //     }, 0);
-  //     setCards(newNftData);
-  //     setInvested(invested);
-  //   }
-  // }, [data?.pending])
-
-  const getTransaction = async (mintCollection: string) => {
-    
     const signatures = await connection.getSignaturesForAddress(new PublicKey(mintCollection));
-    setTransactions(signatures)
-    const parsedTransaction = await connection.getParsedTransaction( signatures[0].signature);
-    const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
-    console.log("🚀 ~ getTransaction ~ tokenAddress:", tokenAddress)
 
-    const isUsdcToken = tokenAddress === usdcAddress;
-    //@ts-ignore
-    const amount = parsedTransaction?.meta?.innerInstructions?.[0].instructions.find(item => item.parsed.type === 'transfer').parsed.info.amount;
-    const convertAmount = isUsdcToken ? amount / decimalsToken['USDC'] : amount / decimalsToken['SOL'];
+    const transactions: any[] = [];
+    
+    let i = 0;
+    while (i < signatures.length - 4) {
+        const chunk = signatures.slice(i, i + 10);
+        i += 10;
 
-    const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
-
-
-
-
-    return {signatures};
-   
-    // const signaturesLength = signatures.length;
-    // const firstSignarure = signatures[signaturesLength - 1].signature;
-
-    // const parsedTransaction = await connection.getParsedTransaction(firstSignarure);
-    // const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
-    // const isUsdcToken = tokenAddress === usdcAddress;
-    // //@ts-ignore
-    // const amount = parsedTransaction?.meta?.innerInstructions?.[0].instructions.find(item => item.parsed.type === 'transfer').parsed.info.amount;
-    // const convertAmount = isUsdcToken ? amount / decimalsToken['USDC'] : amount / decimalsToken['SOL'];
-
-    // const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
-
-    // return { investedPrice };
+    const currentTransactions = await Promise.all(chunk.map(async (item) => {
+      return await connection.getParsedTransaction(item.signature);
+    }));
+    transactions.push(currentTransactions)
   }
 
-  // const isLoading = isLoadingTokens || data.pending
+    console.log("🚀 ~ transactions ~ transactions:", transactions)
+    const totalInvestedPrice = transactions.flat().reduce((acc, transaction) => {
+      const tokenAddress = transaction?.meta?.preTokenBalances?.[0].mint;
+      const isUsdcToken = tokenAddress === usdcAddress;
+      //@ts-ignore
+      const amount = transaction?.meta?.innerInstructions?.[0].instructions.find(item => item.parsed.type === 'transfer').parsed.info.amount;
+      const convertAmount = isUsdcToken ? amount / decimalsToken['USDC'] : amount / decimalsToken['SOL'];
 
-  return {getTransaction}
-}
+      const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
+      return acc + investedPrice;
+    }, 0);
+    console.log("🚀 ~ getTransactions ~ totalInvestedPrice:", totalInvestedPrice)
+    return totalInvestedPrice;
+  }
+
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['totalInvested'],
+    queryFn: () => getTransactions(mintCollection),
+    staleTime: 30000,
+  })
+
+  return { data, isLoading, isError }
+};
+
