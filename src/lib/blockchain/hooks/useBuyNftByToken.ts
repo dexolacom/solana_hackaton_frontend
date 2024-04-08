@@ -125,7 +125,7 @@ export const useBuyNftByToken = () => {
       owner: publicKey,
     });
 
-    const wrpool = await getPortfolioSwapData(publicKey, new BN(inputValue), usdcPublicKey, classicPortfolioTokens, nftMint);
+    const wrpool = await getPortfolioSwapData(publicKey, new BN(inputValue * usdcData.decimals), usdcPublicKey, classicPortfolioTokens, nftMint);
 
     const additionalComputeBudgetInstruction =
       ComputeBudgetProgram.setComputeUnitLimit({
@@ -159,7 +159,7 @@ export const useBuyNftByToken = () => {
     // const selectProgram = mintCollection === addressClassicCollection ? classicProgram : ecosystemProgram
     // console.log(wrpool.args.aToB);
   
-
+      console.log(inputValue * usdcData.decimals);
     const instruction = await program.methods.buyPortfolio(
       nftId,
       classicPotrfolioId,

@@ -113,10 +113,10 @@ export const solanaCurrencyInfo = [
 ]
 
 export const classicTemplate = [
-  { symbol: 'BTC', icon: btc, distribution: '35%' },
-  { symbol: 'SOL', icon: sol, distribution: '25%' },
-  { symbol: 'ETH', icon: eth, distribution: '20%' },
-  { symbol: 'JUP', icon: jup, distribution: '20%' },
+  { symbol: 'BTC', icon: btc, distribution: '35%', coinAmount: 0.00048 },
+  { symbol: 'SOL', icon: sol, distribution: '25%', coinAmount: 0.13966 },
+  { symbol: 'ETH', icon: eth, distribution: '20%', coinAmount: 0.00542 },
+  { symbol: 'JUP', icon: jup, distribution: '20%', coinAmount: 13.9860 },
   // { symbol: 'RNDR', icon: rndr, distribution: '10%' },
   // { symbol: 'HNT', icon: hnt, distribution: '5%' },
   // { symbol: 'BONK', icon: bonk, distribution: '5%' },

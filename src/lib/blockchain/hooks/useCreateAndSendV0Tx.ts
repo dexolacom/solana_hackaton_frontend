@@ -59,7 +59,7 @@ const createAndSendV0Tx = async(
     }).compileToV0Message();
   }
 
-  console.log("   ✅ - Compiled Transaction Message");
+  // console.log("   ✅ - Compiled Transaction Message");
   const transaction = new VersionedTransaction(messageV0);
 
 

@@ -6,14 +6,12 @@ import { useQuery } from '@tanstack/react-query';
 
 
 export const useTotalInvested = (mintCollection: string) => {
-  console.log("🚀 ~ useTotalInvested ~ mintCollection:", mintCollection)
   const { solanaRate } = useSolanaRate();
   const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
 
   const getTransactions = async (mintCollection: string) => {
     const signatures = await connection.getSignaturesForAddress(new PublicKey(mintCollection));
-    console.log("🚀 ~ getTransactions ~ signatures:", signatures)
 
     const transactions: any[] = [];
 

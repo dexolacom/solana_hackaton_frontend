@@ -35,6 +35,7 @@ export const useNftData = () => {
   })
 
   useEffect(() => {
+
     if (!data.pending) {
       const newNftData = tokens?.map(item => ({
         ...item,
