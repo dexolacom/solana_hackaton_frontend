@@ -1,18 +1,19 @@
 import { useGetNfts } from '@/lib/blockchain/hooks/useGetNfts'
 import { useQueries } from '@tanstack/react-query';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
-import { decimalsToken, usdcAddress } from '@/lib/blockchain/constant';
+import { addressClassicCollection, addressEcosystemCollection, decimalsToken, usdcAddress } from '@/lib/blockchain/constant';
 import { PublicKey } from '@solana/web3.js';
 import { connection } from '@/lib/blockchain/constant';
 import { useEffect, useState } from 'react';
-import { useAppContext } from '@/providers/AppProvider/AppProvider';
 
 export const useNftData = () => {
   const [cards, setCards] = useState<any[]>([]);
   const { tokens, isLoading: isLoadingTokens } = useGetNfts();
   const { solanaRate } = useSolanaRate();
-  const {setInvested} = useAppContext();
- 
+  const [invested, setInvested] = useState<Record<string, number>>({});
+  // const [invested, setInvested] = useState(0);
+
+
   const data = useQueries({
     queries: tokens?.map((token) => ({
       queryKey: ['transaction', token.metadata.mint],
@@ -36,8 +37,21 @@ export const useNftData = () => {
       const invested = data?.data.reduce((accumulator, item) => {
         return accumulator + (item?.investedPrice ?? 0);
       }, 0);
+      console.log("🚀 ~ invested ~ invested:", invested)
+      const classicInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressClassicCollection)
+        .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
+      console.log("🚀 ~ useEffect ~ classicInvested:", classicInvested)
+      
+
+      const ecosystemInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressEcosystemCollection)
+        .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
+      console.log("🚀 ~ useEffect ~ ecosystemInvested:", ecosystemInvested)
       setCards(newNftData);
-      setInvested(invested);
+      // setInvested(invested);
+      setInvested({'all': invested,
+        'classic': classicInvested,
+        'ecosystem': ecosystemInvested
+      });
     }
   }, [data?.pending])
 
@@ -62,5 +76,5 @@ export const useNftData = () => {
 
   const isLoading = isLoadingTokens || data.pending
 
-  return {cards, isLoading}
+  return { cards, isLoading, invested }
 }

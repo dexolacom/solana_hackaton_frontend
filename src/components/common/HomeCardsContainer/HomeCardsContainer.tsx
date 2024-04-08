@@ -9,7 +9,6 @@ export const HomeCardsContainer = () => {
   const { projectList } = useProjectList();
   const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
   const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  // console.log("🚀 ~ HomeCardsContainer ~ data:", data)
   const cards = getCardsData({projectList, classicInvested, ecosystemInvested, isLoadingClassic,  isLoadingEcosystem});
   
   return (

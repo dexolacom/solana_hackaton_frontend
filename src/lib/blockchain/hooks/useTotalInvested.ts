@@ -7,11 +7,9 @@ import { useQuery } from '@tanstack/react-query';
 
 export const useTotalInvested = (mintCollection: string) => {
   const { solanaRate } = useSolanaRate();
-  console.log("🚀 ~ useTotalInvested ~ solanaRate:", solanaRate)
-
 
   const getTransactions = async (mintCollection: string) => {
-
+    console.log('WORK')
     const signatures = await connection.getSignaturesForAddress(new PublicKey(mintCollection));
 
     const transactions: any[] = [];
@@ -37,6 +35,7 @@ export const useTotalInvested = (mintCollection: string) => {
       const convertAmount = isUsdcToken ? amount / decimalsToken['USDC'] : amount / decimalsToken['SOL'];
 
       const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
+      console.log("🚀 ~ totalInvestedPrice ~ investedPrice:", investedPrice)
 
       return acc + investedPrice;
     }, 0);
