@@ -47,7 +47,7 @@ export const useTransferNft = () => {
         payer: publicKey,
         signTransaction
       })
-
+      
     const instruction = createTransferInstruction(
       nftATA,
       destinationAddressATA.address,

@@ -60,7 +60,7 @@ export const useClassicForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>,) {
     if (data.amountCurrency === 'USDC') {
-      buyNftByToken({ inputValue: +data.amount, nftId: 1, mintCollection: addressClassicCollection })
+      buyNftByToken({ inputValue: +data.amount, nftId: 2, mintCollection: addressClassicCollection })
       return;
     }
     // buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })

@@ -8,6 +8,8 @@ import {
 } from "@solana/spl-token";
 import { Transaction, PublicKey } from '@solana/web3.js';
 import { connection, commitmentLevel } from '@/lib/blockchain/constant'
+import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { ASSOCIATED_PROGRAM_ID } from "@coral-xyz/anchor/dist/cjs/utils/token";
 
 interface GetOrCreateATA {
   owner: PublicKey, 
@@ -36,6 +38,8 @@ export const getOrCreateATA = async ({owner, mint, payer, signTransaction}: GetO
             associatedToken,
             owner,
             mint,
+            TOKEN_PROGRAM_ID,
+            ASSOCIATED_PROGRAM_ID
           )
         )
 
@@ -51,8 +55,9 @@ export const getOrCreateATA = async ({owner, mint, payer, signTransaction}: GetO
           lastValidBlockHeight: blockHash.lastValidBlockHeight,
           signature,
         })
-      } catch (error: unknown) {
-        console.log(error);
+      } catch (error:any) {
+        console.log(error.logs) ;
+        console.log(error) ;
       }
       account = await getAccount(connection, associatedToken, commitmentLevel);
     } else {

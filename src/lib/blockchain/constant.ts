@@ -15,14 +15,14 @@ export const programId = new PublicKey(idl.metadata.address)
 export const classicProgramInterface = JSON.parse(JSON.stringify(idl))
 
 
-export const addressClassicCollection = '93wtUpeLZQ9o7TGgG6PB3BaLmDbGVF6TpqQ7xDbEx4JZ'
+export const addressClassicCollection = '4R3AXjBh9aWRXUPFDeQMoKH21LqHbFeupMCwBjZkNKhJ'
 export const addressEcosystemCollection = 'zr24szrS9LJs37gx1rZJDiCRunsA5Cstk9yV69VbgTy'
 
 export const TOKEN_METADATA_PROGRAM_ID = new PublicKey(
   "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 )
 
-export const portfolioLookupTable = new PublicKey('HM52qWcMh94tRa5q9bC93sEY8RoEMgMrbVLM89brVGd1')
+export const portfolioLookupTable = new PublicKey('GAvAbmJH9ZbsBxqHkQaE7Rtc4a6QHRANc3KhHx416uAN')
 export const treasury = new PublicKey('8QdnKN4JbhpSLdhJVcCswmSy3X1Z3hmyZEG3VvGGNHn7')
 // export const usdcAddress = 'BRjpCHtyQLNCo8gqRUr8jtdAj5AjPYQaoqbvcZiHok1k'
 // export const wSolAddress = 'So11111111111111111111111111111111111111112'
