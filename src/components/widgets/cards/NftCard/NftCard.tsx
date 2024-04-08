@@ -23,6 +23,7 @@ interface NftCardProps {
 export const NftCard = (props: NftCardProps) => {
   
   const { title, uri, collection, investedPrice, mint } = props
+  console.log("🚀 ~ NftCard ~ collection:", collection)
   const { img } = useGetNftImg(uri);
   const { setModalName, setMint, setNftPrice, setNftTitle } = useModalsContext()
 
@@ -30,13 +31,14 @@ export const NftCard = (props: NftCardProps) => {
   const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
+  console.log("🚀 ~ NftCard ~ currentCollection:", currentCollection)
 
   const { currentPrice } = useNftCurrentPrice({ collection: currentCollection });
 
   return (
     <Card className={'relative'}>
       <Link
-        to={`Classic/${title}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
+        to={`Classic/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
         className={'z-10 absolute w-full h-full top-0 left-0'}
         onClick={(e) => {
           e.stopPropagation();
