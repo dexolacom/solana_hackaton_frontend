@@ -7,13 +7,10 @@ import { PublicKey } from "@solana/web3.js";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 
 export const useWhirpool = () => {
-  const {whirlpool} = useProgramContext();
+  const {whirlpool: whirlpoolCtx} = useProgramContext();
   
-  if(!whirlpool) {
-    throw new Error ("Error whirpool");
-  }
 
-const fetcher = whirlpool.fetcher;
+
 // let portfolio_lookup_table;
 // let treasury_ata_sol: PublicKey;
 
@@ -23,8 +20,12 @@ const getWhirlpool = async (
   // token_b: PublicKey, 
   amount: BN, 
   invert: boolean) => {
+    if(!whirlpoolCtx) {
+      throw new Error('whirlpool Error');
+    }
+  
   // const whirlpool_pubkey = PDAUtil.getWhirlpool(ORCA_WHIRLPOOL_PROGRAM_ID, ORCA_WHIRLPOOLS_CONFIG, token_a, token_b, 1).publicKey;
- 
+  const fetcher = whirlpoolCtx.fetcher;
   const whirlpool_oracle_pubkey = PDAUtil.getOracle(ORCA_WHIRLPOOL_PROGRAM_ID, whirlpool_pubkey).publicKey;
   const whirlpool = await fetcher.getPool(whirlpool_pubkey);
   if (!whirlpool) {

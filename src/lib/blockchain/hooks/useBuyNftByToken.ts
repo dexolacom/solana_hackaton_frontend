@@ -141,7 +141,7 @@ export const useBuyNftByToken = () => {
     //   nftMetaData,
     //   nftMasterEdition,
     // ]
-  //   await createAndSendV0Tx(wrpool.instructionsForAta);
+    await createAndSendV0Tx(wrpool.instructionsForAta);
 
   //       const extendInstruction = web3.AddressLookupTableProgram.extendLookupTable({
   //     payer: publicKey,
@@ -156,6 +156,8 @@ export const useBuyNftByToken = () => {
   //   await createAndSendV0Tx([extendInstruction])
 
     // const selectProgram = mintCollection === addressClassicCollection ? classicProgram : ecosystemProgram
+    console.log(wrpool.args.aToB);
+  
 
     const instruction = await program.methods.buyPortfolio(
       nftId,
@@ -187,10 +189,11 @@ export const useBuyNftByToken = () => {
         splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
       }).
       remainingAccounts(wrpool.accounts.map(e => {
+        // console.log(e.toString());
         return { pubkey: e, isSigner: false, isWritable: true };
       })).instruction()
 
-    // console.log(instruction)
+    console.log(instruction.keys.map(item => item.pubkey.toBase58()))
     await createAndSendV0Tx(
       [
         additionalComputeBudgetInstruction,

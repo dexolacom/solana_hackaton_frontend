@@ -22,7 +22,7 @@ export const TOKEN_METADATA_PROGRAM_ID = new PublicKey(
   "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 )
 
-export const portfolioLookupTable = new PublicKey('2Rmh6mL3pN92rjtLoZDyUjEwL9A22YDJTQwQXYnG3M1V')
+export const portfolioLookupTable = new PublicKey('HM52qWcMh94tRa5q9bC93sEY8RoEMgMrbVLM89brVGd1')
 export const treasury = new PublicKey('8QdnKN4JbhpSLdhJVcCswmSy3X1Z3hmyZEG3VvGGNHn7')
 // export const usdcAddress = 'BRjpCHtyQLNCo8gqRUr8jtdAj5AjPYQaoqbvcZiHok1k'
 // export const wSolAddress = 'So11111111111111111111111111111111111111112'
@@ -96,37 +96,37 @@ export const WHIRLPOOLS = {
 export const classicPortfolioTokens = [
   {
     key: new PublicKey("7u8NENSnY1k6vH6HERBvJvCjqkpwFHGTnxzmwEAvbMng"), // BTC
-    percent: 300
+    percent: 350
   },
   {
     key: new PublicKey("So11111111111111111111111111111111111111112"), // SOL
-    percent: 200
+    percent: 250
   },
   {
     key: new PublicKey("4AJv9M5uMrMbyArp9Tio9MR2WovY9r5F8MXdQLRyDHaC"), // ETH
-    percent: 150
+    percent: 200
   },
   {
     key: new PublicKey("B9L1ksf9U7fyWJcb6oEUs9NQjar3gYWPTrG23phHdHcm"), // JUP
-    percent: 100
+    percent: 200
   },
-  {
-    key: new PublicKey("7nXViVzM7ehQZ5y5Jg6nBjPkpfcXPUyi2JEo6NiwzgHx"), // RNDR
-    percent: 100
-  },
-  {
-    key: new PublicKey("Au69YNzR39wDY2MEVFUFakmiEYzmpS7bjJyJdkiatRwJ"), // HNT
-    percent: 50
-  },
-  {
-    key: new PublicKey("2Koqru6oQmNRWiw9M1JMh3gVboPsfh2s6kh7Cgwz9SBb"), // BONK
-    percent: 50
-  },
-  {
-    key: new PublicKey("CZPL3GNVuYELeSJYoreN4MhiieDaJX2ooR2wjsnLu9nX"), // PYTH
-    percent: 50
-  }
+  // {
+  //   key: new PublicKey("7nXViVzM7ehQZ5y5Jg6nBjPkpfcXPUyi2JEo6NiwzgHx"), // RNDR
+  //   percent: 100
+  // },
+  // {
+  //   key: new PublicKey("Au69YNzR39wDY2MEVFUFakmiEYzmpS7bjJyJdkiatRwJ"), // HNT
+  //   percent: 50
+  // },
+  // {
+  //   key: new PublicKey("2Koqru6oQmNRWiw9M1JMh3gVboPsfh2s6kh7Cgwz9SBb"), // BONK
+  //   percent: 50
+  // },
+  // {
+  //   key: new PublicKey("CZPL3GNVuYELeSJYoreN4MhiieDaJX2ooR2wjsnLu9nX"), // PYTH
+  //   percent: 50
+  // }
 ]
 
-export const classicPotrfolioId = 1;
+export const classicPotrfolioId = 3;
 export const ecosystemPortfolioId = 2;

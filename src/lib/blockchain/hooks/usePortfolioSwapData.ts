@@ -34,7 +34,6 @@ export const usePortfolioSwapData = () => {
     nftMint: PublicKey,
     forTableCreation = false
   ) => {
-    console.log("🚀 ~ usePortfolioSwapData ~ amountIn:", amountIn)
     
     const result: ResultType = {
       args: {
