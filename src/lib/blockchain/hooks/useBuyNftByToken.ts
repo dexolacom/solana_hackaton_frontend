@@ -47,6 +47,7 @@ export const useBuyNftByToken = () => {
   const usdcPublicKey = new PublicKey(usdcData.mint);
 
   const buyNftByToken = async ({ inputValue, nftId, mintCollection }: BuyNftArgs) => {
+    console.log("🚀 ~ buyNftByToken ~ nftId:", nftId)
     const collectionData = generateColectionData(mintCollection)
     // const isClassicCollection = mintCollection === addressClassicCollection;
     if (!publicKey || !program || !signTransaction) {
@@ -156,7 +157,7 @@ export const useBuyNftByToken = () => {
   //   await createAndSendV0Tx([extendInstruction])
 
     // const selectProgram = mintCollection === addressClassicCollection ? classicProgram : ecosystemProgram
-    console.log(wrpool.args.aToB);
+    // console.log(wrpool.args.aToB);
   
 
     const instruction = await program.methods.buyPortfolio(

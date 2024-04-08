@@ -11,7 +11,7 @@ import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib'
 import { getHoldingPageData } from './lib/lib'
 import { useSearchParams } from 'react-router-dom'
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-import { addressClassicCollection, addressEcosystemCollection } from '@/lib/blockchain/constant';
+import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData'
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
@@ -30,8 +30,13 @@ const MyHoldingsPage = () => {
   }, [])
 
   const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+  console.log("🚀 ~ MyHoldingsPage ~ classicInvested:", classicInvested)
 
-  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  const ecosystemInvested = 0;
+  const isLoadingEcosystem = false;
+
+  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  // console.log("🚀 ~ MyHoldingsPage ~ ecosystemInvested:", ecosystemInvested)
 
   const data = getHoldingPageData({
     variant: holdingsFilter!,

@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 // import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
+import { generateRandomNumber } from '@/temp/utils/generateRandomNumber';
 import { 
   addressClassicCollection,
   //  addressEcosystemCollection 
@@ -60,7 +61,7 @@ export const useClassicForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>,) {
     if (data.amountCurrency === 'USDC') {
-      buyNftByToken({ inputValue: +data.amount, nftId: 2, mintCollection: addressClassicCollection })
+      buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection: addressClassicCollection })
       return;
     }
     // buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })

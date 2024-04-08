@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 
 export const useTotalInvested = (mintCollection: string) => {
+  console.log("🚀 ~ useTotalInvested ~ mintCollection:", mintCollection)
   const { solanaRate } = useSolanaRate();
   const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
@@ -15,7 +16,6 @@ export const useTotalInvested = (mintCollection: string) => {
     console.log("🚀 ~ getTransactions ~ signatures:", signatures)
 
     const transactions: any[] = [];
-    console.log("🚀 ~ getTransactions ~ transactions:", transactions)
 
     let i = 0;
     while (i < signatures.length) {
@@ -27,7 +27,6 @@ export const useTotalInvested = (mintCollection: string) => {
           maxSupportedTransactionVersion: 0,
         });
       }));
-      console.log("🚀 ~ currentTransactions ~ currentTransactions:", currentTransactions)
       transactions.push(currentTransactions)
     }
 
@@ -38,11 +37,9 @@ export const useTotalInvested = (mintCollection: string) => {
       const isUsdcToken = tokenAddress === usdcData.mint;
       //@ts-ignore
       const amount = transaction?.meta?.innerInstructions?.[0].instructions[2].parsed.info.amount;
-      console.log("🚀 ~ totalInvestedPrice ~ amount:", amount)
       const convertAmount = isUsdcToken ? amount / usdcData.decimals : amount / solData.decimals;
 
       const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
-      console.log("🚀 ~ totalInvestedPrice ~ investedPrice:", investedPrice)
 
       return acc + investedPrice;
     }, 0);
