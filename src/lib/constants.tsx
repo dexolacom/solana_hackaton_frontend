@@ -113,14 +113,14 @@ export const solanaCurrencyInfo = [
 ]
 
 export const classicTemplate = [
-  { symbol: 'BTC', icon: btc, distribution: '30%' },
-  { symbol: 'SOL', icon: sol, distribution: '20%' },
-  { symbol: 'ETH', icon: eth, distribution: '15%' },
-  { symbol: 'JUP', icon: jup, distribution: '10%' },
-  { symbol: 'RNDR', icon: rndr, distribution: '10%' },
-  { symbol: 'HNT', icon: hnt, distribution: '5%' },
-  { symbol: 'BONK', icon: bonk, distribution: '5%' },
-  { symbol: 'PYTH', icon: pyth, distribution: '5%' },
+  { symbol: 'BTC', icon: btc, distribution: '30%', coinAmount: '0.0342' },
+  { symbol: 'SOL', icon: sol, distribution: '20%', coinAmount: '0.1089' },
+  { symbol: 'ETH', icon: eth, distribution: '15%', coinAmount: '0.0042' },
+  { symbol: 'JUP', icon: jup, distribution: '10%', coinAmount: '6.7696' },
+  { symbol: 'RNDR', icon: rndr, distribution: '10%', coinAmount: '1.0195' },
+  { symbol: 'HNT', icon: hnt, distribution: '5%', coinAmount: '0.8158' },
+  { symbol: 'BONK', icon: bonk, distribution: '5%', coinAmount: '202.7k' },
+  { symbol: 'PYTH', icon: pyth, distribution: '5%', coinAmount: '5.8085' },
 ]
 
 export const ecosystemTemplate = [
