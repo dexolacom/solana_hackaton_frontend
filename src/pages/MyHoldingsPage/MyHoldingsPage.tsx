@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { PageHeader } from '@/components/common/PageHeader/PageHeader.tsx'
 import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx'
 import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx'
@@ -10,27 +10,27 @@ import { useAppContext } from '@/providers/AppProvider/AppProvider'
 import { currencyFormatter } from '@/lib/utils'
 import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib'
 import { getHoldingPageData } from './lib/lib'
-import { useQueryClient } from '@tanstack/react-query'
-import { useWallet } from '@solana/wallet-adapter-react'
+import { useSearchParams } from 'react-router-dom'
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
 
 
 const MyHoldingsPage = () => {
-  const [holdingsFilter, setHoldingsFilter] = useState<HoldingsFilterType>('all');
+  const [searchParams, setSearchParams] = useSearchParams();
   const { invested } = useAppContext();
-  const queryClient = useQueryClient();
-  const { publicKey } = useWallet();
+
+  const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
 
   useEffect(() => {
-      queryClient.invalidateQueries({ queryKey: ['getNfts']  });
-  },[publicKey])
+    setSearchParams({ filter: 'all' });
+  },[])
+ 
 
-  const data = getHoldingPageData(holdingsFilter);
+  const data = getHoldingPageData(holdingsFilter!);
 
   return (
     <div>
-      <MyHoldingsFilter setFilter={setHoldingsFilter} />
+      <MyHoldingsFilter setFilter={setSearchParams} />
       <div className={'flex gap-8'}>
         <div className='flex-1'>
           <PageHeader>
