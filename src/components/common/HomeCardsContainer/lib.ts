@@ -85,7 +85,15 @@ export const ecosystemHoldings = {
   },
 }
 
-export const getCardsData = (projectList?: ProjectType[], classicInvested?: number, isLoading?: boolean) => {
+interface GetCardsDataArgs {
+  projectList?: ProjectType[], 
+  classicInvested?: number, 
+  ecosystemInvested?: number,
+  isLoadingClassic: boolean,
+  isLoadingEcosystem: boolean
+}
+
+export const getCardsData = ({projectList, classicInvested, ecosystemInvested, isLoadingClassic,  isLoadingEcosystem }: GetCardsDataArgs) => {
   return [
     {
       title: 'classic',
@@ -93,7 +101,7 @@ export const getCardsData = (projectList?: ProjectType[], classicInvested?: numb
       content: {
         amount: {
           title: 'Total amount invested',
-          number: isLoading? 'Calculation...' : currencyFormatter(classicInvested!) ,
+          number: isLoadingClassic? 'Calculation...' : currencyFormatter(classicInvested ?? 0) ,
         },
         ...classicHoldings,
         description: {
@@ -112,7 +120,7 @@ export const getCardsData = (projectList?: ProjectType[], classicInvested?: numb
       content: {
         amount: {
           title: 'Total amount invested',
-          number: '$1,013,724.41',
+          number:  isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0),
         },
         ...ecosystemHoldings,
         description: {

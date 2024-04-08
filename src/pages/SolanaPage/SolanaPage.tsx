@@ -8,12 +8,17 @@ import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx'
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { SolanaPageTable } from '@/components/features/tabels/SolanaPageTable/SolanaPageTable.tsx'
+import { currencyFormatter } from '@/lib/utils'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { addressEcosystemCollection } from '@/lib/blockchain/constant'
 
 const SolanaPage = () => {
+  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+
   const tempData = {
     amount: {
       title: 'Total amount invested',
-      number: '$1,013,724.41',
+      number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0),
     },
     holdings: {
       title: 'Holdings',

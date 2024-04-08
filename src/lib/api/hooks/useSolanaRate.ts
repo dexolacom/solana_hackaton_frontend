@@ -17,8 +17,8 @@ export const useSolanaRate = () => {
   const projectListId = projectList?.find(item => item.name === projectName)?.id;
   // const id = paramsId ? paramsId : projectListId;
   const { projectById } = useSolanaProjectById(projectListId ?? '');
-  
   const solanaRate = projectById?.find((item) => item.name === 'Solana')?.coinPrice
+
 
   return { solanaRate }
 }
