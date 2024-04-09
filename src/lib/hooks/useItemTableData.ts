@@ -52,7 +52,7 @@ export const useItemTableData = ({ template }: UseTableData) => {
         coinPrice: currencyFormatter(match.coinPrice),
         change24h: `${match.change24h?.toFixed(2)}%`,
         marketCap: currencyFormatter(match.marketCap),
-        coinAmount: (tokensAmount?.[item.symbol] ?? 0) / (decimals ?? 0)
+        coinAmount: (tokensAmount?.[item.symbol] ?? 0) / (decimals ?? 0) * 10  
       }
     } else {
       return stub
