@@ -30,9 +30,10 @@ export const useTransferNft = () => {
   const transferNft = async ({ destinationAddress, portfolioId, nftId }: TransferNftProps) => {
 
     if (!publicKey || !signTransaction) {
+      const error = new Error('Please, connect wallet.');
       toast({
         title: 'Error!',
-        description: 'Please, connect wallet'
+        description: error.message
       });
       return;
     }
@@ -64,12 +65,14 @@ export const useTransferNft = () => {
     onSuccess: () => {
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+        queryClient.invalidateQueries({ queryKey: ['transaction'] });
+      }, 3000);
         setModalName('');
         toast({
-          title: 'Error',
+          title: 'Info',
           description: 'Transfer success',
         });
-      }, 3000);
+      
     },
     onError: (error) => {
       console.log(error);

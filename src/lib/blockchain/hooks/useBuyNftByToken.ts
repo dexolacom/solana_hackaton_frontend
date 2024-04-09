@@ -75,29 +75,9 @@ export const useBuyNftByToken = () => {
       collectionMasterEdition,
       onchainCollectionData
     } = await getCollectionAddresses(selectPortfolioId);
-      // console.log("🚀 ~ buyNftByToken ~ onchainCollectionData:", onchainCollectionData.toBase58())
-      // console.log("🚀 ~ buyNftByToken ~ collectionMasterEdition:", collectionMasterEdition.toBase58())
-      // console.log("🚀 ~ buyNftByToken ~ collectionMetadata:", collectionMetadata.toBase58())
-      // console.log("🚀 ~ buyNftByToken ~ collectionMint:", collectionMint.toBase58())
-
-    // const slot = await connection.getSlot() - 1;
-
-    // const [lookupTableInst, lookupTableAddress] =
-
-    //    web3.AddressLookupTableProgram.createLookupTable({
-    //         authority: publicKey,
-    //         payer: publicKey,
-    //         recentSlot: slot,
-    //     });
-    //     console.log("🚀 ~ buyNftByToken ~ lookupTableAddress:", lookupTableAddress)
-
-    //    const transaction =new Transaction()
-    //    transaction.add(lookupTableInst)
-    //     sendTransaction(transaction, connection);
  
 
     const userATA = await getOrCreateATA({ owner: publicKey, mint: usdcPublicKey, payer: publicKey, signTransaction });
-    // const programATA = await getOrCreateATA({ owner: selectProgramId, mint: usdcPublicKey, payer: publicKey, signTransaction });
     const treasuryATA = await getOrCreateATA({ owner: treasury, mint: usdcPublicKey, payer: publicKey, signTransaction });
    
     const getBalance = await connection.getTokenAccountBalance(userATA.address);
@@ -132,32 +112,8 @@ export const useBuyNftByToken = () => {
         units: 600000,
       });
 
-    // const test = [
-    //   treasuryAta,
-    //   configAddress,
-    //   userATA.address,
-    //   nftMint,
-    //   nftATA,
-    //   nftRecord,
-    //   nftMetaData,
-    //   nftMasterEdition,
-    // ]
     await createAndSendV0Tx(wrpool.instructionsForAta);
 
-  //       const extendInstruction = web3.AddressLookupTableProgram.extendLookupTable({
-  //     payer: publicKey,
-  //     authority: publicKey,
-  //     lookupTable: new PublicKey("HjKTcMNmExUTbmSrPGDLRgriw6GqQgVXNNKKK2RzxAfv"),
-  //     addresses: [
-  //         ...wrpool.ata,
-  //     ]
-  // });
-
-
-  //   await createAndSendV0Tx([extendInstruction])
-
-    // const selectProgram = mintCollection === addressClassicCollection ? classicProgram : ecosystemProgram
-    // console.log(wrpool.args.aToB);
   
       console.log(inputValue * usdcData.decimals);
     const instruction = await program.methods.buyPortfolio(

@@ -13,10 +13,8 @@ export const useNftData = () => {
   const { tokens, isLoading: isLoadingTokens } = useGetNfts();
   const { solanaRate } = useSolanaRate();
 
-
   const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
- 
   
   const [invested, setInvested] = useState<Record<string, number>>({});
 

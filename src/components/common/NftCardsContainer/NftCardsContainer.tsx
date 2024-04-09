@@ -8,6 +8,7 @@ export const NftCardsContainer = () => {
   const { publicKey } = useWallet();
   const { cards, isLoading } = useNftData();
 
+
   if (!publicKey) {
     return (
       <div className='h-[340px] flex justify-center items-center text-[20px]'>Please, connect wallet.</div>
