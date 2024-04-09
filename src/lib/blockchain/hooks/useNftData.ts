@@ -40,7 +40,8 @@ export const useNftData = () => {
       const newNftData = tokens?.map(item => ({
         ...item,
         content: { ...data?.data?.find(element => element?.mint === item.metadata.mint) }
-      }))
+      })).sort((a, b) => (+a?.metadata?.name?.replace(/\D/g, "")) - (+b?.metadata?.name?.replace(/\D/g, "")));
+
       const invested = data?.data.reduce((accumulator, item) => {
         return accumulator + (item?.investedPrice ?? 0);
       }, 0);
