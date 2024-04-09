@@ -52,7 +52,7 @@ export const TransferNftModal = () => {
                 Cancel
               </Button>
               <Button variant={'accent'} className={'flex-1'} type='submit' >
-              {isLoading && <Loader2 className='animate-spin' />}
+              {isLoading && <Loader2 className='animate-spin mr-2' />}
                 Confirm
               </Button>
             </CardFooter>

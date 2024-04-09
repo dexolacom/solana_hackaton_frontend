@@ -14,6 +14,7 @@ export const NftCardsContainer = () => {
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
 
+
   if (!publicKey) {
     return (
       <div className='h-[340px] flex justify-center items-center text-[20px]'>Please, connect wallet.</div>

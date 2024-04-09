@@ -18,6 +18,8 @@ export const useNftData = () => {
   const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
 
+
+
   const data = useQueries({
     queries: tokens?.map((token) => ({
       queryKey: ['transaction', token.metadata.mint],
