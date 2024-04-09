@@ -17,11 +17,11 @@ import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
 import { addressClassicCollection } from '@/lib/blockchain/constant'
 
 const ClassicItemPage = () => {
-  const {data:classicInvested, isLoading:isLoadingClassic}  = useTotalInvested(addressClassicCollection);
+  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
   const tempData = {
     amount: {
       title: 'Current Portfolio Price',
-      number:  isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0),
+      number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0),
     },
     holdings: {
       title: 'Holdings',
@@ -67,7 +67,7 @@ const ClassicItemPage = () => {
   }
   const [searchParams] = useSearchParams();
   const { item } = useParams();
-  const { setModalName, setNftPrice, setNftTitle } = useModalsContext()
+  const { setModalName, setNftPrice, setNftTitle, setCollection } = useModalsContext()
   const invested = searchParams.get('invested');
   const currentPrice = searchParams.get('currentPrice');
 
@@ -76,7 +76,12 @@ const ClassicItemPage = () => {
       <BackLink title={'My holdings'} path={'/my-holdings'} />
       <PageTitle title={item ?? 'CLASSIC item'}>
         <div className={'flex gap-4'}>
-          <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
+          <Button className={'flex-1 gap-2'} variant={'accent'}
+            onClick={() => {
+              setModalName('TRANSFER_NFT');
+              setNftTitle(item ?? '');
+              setCollection(addressClassicCollection);
+            }}>
             {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
@@ -85,6 +90,7 @@ const ClassicItemPage = () => {
               setModalName('BURN_NFT');
               setNftPrice(currentPrice ? currentPrice.toString() : '0');
               setNftTitle(item ?? '');
+              setCollection(addressClassicCollection);
             }}>
             {/* <Flame className={'w-4 h-4'} /> */}
             Burn

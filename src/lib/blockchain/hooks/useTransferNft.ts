@@ -13,7 +13,6 @@ import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
 
 interface TransferNftProps {
   destinationAddress: PublicKey;
-  // mintPubkey: PublicKey;
   portfolioId: number;
   nftId: number;
 }
@@ -64,15 +63,14 @@ export const useTransferNft = () => {
     mutationFn: transferNft,
     onSuccess: () => {
       setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         queryClient.invalidateQueries({ queryKey: ['transaction'] });
-      }, 3000);
+        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('');
         toast({
           title: 'Info',
           description: 'Transfer success',
         });
-      
+      }, 3000);
     },
     onError: (error) => {
       console.log(error);
@@ -91,29 +89,3 @@ export const useTransferNft = () => {
 
   return { transfer, isLoading, isSuccess, isError };
 }
-
-
-// const myKeypair = umi.eddsa.createKeypairFromSecretKey(Buffer.from("mLLd2nBYkZL2gLVmQvtzn6v61FM6bFPqnFBqvZsSSeDbUkerH5eSDeToCLJ1JTQa32qJ3siCw7xfq5sW6dApmmW"));
-// const mySinger = createSignerFromKeypair(umi, myKeypair);
-
-//  const feePayer = Keypair.fromSecretKey(
-//     bs58.decode("mLLd2nBYkZL2gLVmQvtzn6v61FM6bFPqnFBqvZsSSeDbUkerH5eSDeToCLJ1JTQa32qJ3siCw7xfq5sW6dApmmW")
-//   );
-
-// import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
-// import { transferV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata';
-// import { publicKey as createPubKey, generateSigner } from '@metaplex-foundation/umi';
-// import { umi } from "../constant";
-
-// umi.use(walletAdapterIdentity(wallet));
-// const currentOwner = generateSigner(umi);
-// console.log("🚀 ~ transferNft ~ currentOwner:", currentOwner)
-// console.log("🚀 ~ transferNft ~ umi:", umi)
-// console.log("🚀 ~ transferNft ~ currentOwner:", currentOwner)
-// await transferV1(umi, {
-//   mint: createPubKey(mintPubkey.toBase58()),
-//   authority: currentOwner,
-//   tokenOwner: currentOwner.publicKey,
-//   destinationOwner: createPubKey(destinationATA.address.toBase58()),
-//   tokenStandard: TokenStandard.NonFungible,
-// }).sendAndConfirm(umi)
