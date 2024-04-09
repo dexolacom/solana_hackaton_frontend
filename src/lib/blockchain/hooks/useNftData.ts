@@ -18,8 +18,6 @@ export const useNftData = () => {
   const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
 
-
-
   const data = useQueries({
     queries: tokens?.map((token) => ({
       queryKey: ['transaction', token.metadata.mint],
@@ -38,6 +36,7 @@ export const useNftData = () => {
 
     if (!data.pending) {
       const newNftData = tokens?.map(item => ({
+
         ...item,
         content: { ...data?.data?.find(element => element?.mint === item.metadata.mint) }
       })).sort((a, b) => (+a?.metadata?.name?.replace(/\D/g, "")) - (+b?.metadata?.name?.replace(/\D/g, "")));
@@ -73,16 +72,26 @@ export const useNftData = () => {
 
     const signatures = await connection.getSignaturesForAddress(new PublicKey(mint))
 
-    const firstSignarure = signatures[0].signature;
-
+    const firstSignarure = signatures[signatures.length - 2].signature;
 
     const parsedTransaction = await connection.getParsedTransaction(firstSignarure, {
-
       maxSupportedTransactionVersion: 0,
     });
 
-    const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
+    const dataForAmount = parsedTransaction?.meta?.innerInstructions?.[0].instructions;
 
+    const tokensAmount = {
+        //@ts-ignore
+      'BTC': dataForAmount?.[5]?.parsed?.info?.amount,
+       //@ts-ignore
+      'ETH': dataForAmount?.[11]?.parsed?.info?.amount,
+       //@ts-ignore
+      'SOL': dataForAmount?.[8]?.parsed?.info?.amount,
+       //@ts-ignore
+      'JUP': dataForAmount?.[14]?.parsed?.info?.amount,
+    }
+  
+    const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
     const isUsdcToken = tokenAddress === usdcData.mint;
 
     //@ts-ignore
@@ -93,10 +102,10 @@ export const useNftData = () => {
     const formattedDate = date.toLocaleString();
     const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
 
-    return { investedPrice, formattedDate, mint };
+    return { investedPrice, formattedDate, mint, tokensAmount };
   }
 
   const isLoading = isLoadingTokens || data.pending
 
-  return { cards, isLoading, invested }
+  return { cards, isLoading, invested}
 }
