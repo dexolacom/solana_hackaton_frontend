@@ -1,7 +1,7 @@
 import { useGetNfts } from '@/lib/blockchain/hooks/useGetNfts'
 import { useQueries } from '@tanstack/react-query';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
-import { addressClassicCollection, addressEcosystemCollection} from '@/lib/blockchain/constant';
+import { addressClassicCollection, addressEcosystemCollection } from '@/lib/blockchain/constant';
 import { PublicKey } from '@solana/web3.js';
 import { getCoinData } from '../helpers/getCoinData';
 import { connection } from '@/lib/blockchain/constant';
@@ -9,16 +9,14 @@ import { useEffect, useState } from 'react';
 
 
 export const useNftData = () => {
-  const [cards, setCards] = useState<any[]>([]);
+  const [cards, setCards] = useState<Record<string, any[]>>();
+  const [invested, setInvested] = useState<Record<string, number>>({});
   const { tokens, isLoading: isLoadingTokens } = useGetNfts();
-  const { solanaRate } = useSolanaRate();
 
+  const { solanaRate } = useSolanaRate();
 
   const usdcData = getCoinData('USDC');
   const solData = getCoinData('SOL');
- 
-  
-  const [invested, setInvested] = useState<Record<string, number>>({});
 
   const data = useQueries({
     queries: tokens?.map((token) => ({
@@ -44,20 +42,26 @@ export const useNftData = () => {
       const invested = data?.data.reduce((accumulator, item) => {
         return accumulator + (item?.investedPrice ?? 0);
       }, 0);
-  
+
       const classicInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressClassicCollection)
         .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
- 
-      
 
       const ecosystemInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressEcosystemCollection)
         .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
-     
 
-      setCards(newNftData);
-      setInvested({'all': invested,
-        'classic': classicInvested,
-        'ecosystem': ecosystemInvested
+      const classicCards = newNftData.filter(element => element?.metadata.collection.value.key === addressClassicCollection)
+      const ecosystemCards = newNftData.filter(element => element?.metadata.collection.value.key === addressEcosystemCollection)
+      setCards({
+        'all': newNftData,
+        'classic': classicCards,
+        'ecosystem': ecosystemCards
+      }
+      );
+
+      setInvested({
+        'all': invested ?? 0,
+        'classic': classicInvested ?? 0,
+        'ecosystem': ecosystemInvested ?? 0
       });
     }
   }, [data?.pending])
@@ -65,7 +69,7 @@ export const useNftData = () => {
   const getTransaction = async (mint: string) => {
 
     const signatures = await connection.getSignaturesForAddress(new PublicKey(mint))
-  
+
     const firstSignarure = signatures[0].signature;
 
 
