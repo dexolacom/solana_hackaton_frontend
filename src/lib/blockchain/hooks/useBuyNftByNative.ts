@@ -28,7 +28,6 @@
 
 //   const { publicKey, signTransaction, sendTransaction } = useWallet();
 //   const { connection } = useConnection();
-//   const { classicProgram, ecosystemProgram } = useProgramContext();
 //   const { toast } = useToast();
 //   const { setModalName, setNftPrice } = useModalsContext();
 //   const queryClient = useQueryClient();

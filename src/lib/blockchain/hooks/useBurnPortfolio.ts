@@ -25,7 +25,6 @@ import { getNftAddresses } from "../helpers/getNftAddresses";
 import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
-import { getOrCreateATA } from "../helpers/getOrCreateATA";
 
 interface BurnPortfolioArgs {
   portfolioId: number;

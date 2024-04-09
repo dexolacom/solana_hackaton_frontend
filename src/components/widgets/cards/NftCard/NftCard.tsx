@@ -33,7 +33,7 @@ export const NftCard = (props: NftCardProps) => {
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
-  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection });
+  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
 
   return (
     <Card className={'relative'}>
