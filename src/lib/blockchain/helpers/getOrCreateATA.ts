@@ -22,7 +22,7 @@ export const getOrCreateATA = async ({owner, mint, payer, signTransaction}: GetO
   const associatedToken = await getAssociatedTokenAddress(
     mint,
     owner,
-    false
+    true
   );
 
   let account: Account;

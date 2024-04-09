@@ -40,6 +40,8 @@ export const useBurnPortfolio = () => {
   const { setModalName } = useModalsContext();
 
   const burnNft = async ({ portfolioId, nftId }: BurnPortfolioArgs) => {
+  console.log("🚀 ~ burnNft ~ nftId:", nftId)
+  console.log("🚀 ~ burnNft ~ portfolioId:", portfolioId)
 
     if (!publicKey || !program || !signTransaction) {
       const error = new Error('Please, connect wallet.');
@@ -84,6 +86,7 @@ export const useBurnPortfolio = () => {
     // )[0];
 
     for (const token of classicPortfolioTokens) {
+      // const userATA = await getOrCreateATA({owner: publicKey, mint: token.key, payer:publicKey, signTransaction});
       const userATA = getAssociatedTokenAddressSync(
         token.key,
         publicKey,
@@ -91,7 +94,7 @@ export const useBurnPortfolio = () => {
         TOKEN_PROGRAM_ID,
         ASSOCIATED_TOKEN_PROGRAM_ID
       );
-
+      // const portfolioATA = await getOrCreateATA({owner: nftMint, mint: token.key, payer:publicKey, signTransaction});
       const portfolioATA = getAssociatedTokenAddressSync(
         token.key,
         nftMint,

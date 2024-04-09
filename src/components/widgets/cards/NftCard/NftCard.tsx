@@ -33,7 +33,7 @@ export const NftCard = (props: NftCardProps) => {
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
-  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection });
+  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
 
   return (
     <Card className={'relative'}>
@@ -88,6 +88,7 @@ export const NftCard = (props: NftCardProps) => {
             setModalName('BURN_NFT');
             setNftPrice(currentPrice ? currentPrice.toString() : '0')
             setNftTitle(title)
+            setCollection(collection)
           }}
         >
           {/* <Flame className={'w-4 h-4'} /> */}
