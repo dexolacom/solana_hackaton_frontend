@@ -23,16 +23,10 @@ const createAndSendV0Tx = async(
     return
   }
   
-  // Step 1 - Fetch the latest blockhash
   const latestBlockhash = await connection.getLatestBlockhash(
     "confirmed"
   );
-  // console.log(
-  //   "   ✅ - Fetched latest blockhash. Last Valid Height:",
-  //   latestBlockhash.lastValidBlockHeight
-  // );
 
-  // Step 2 - Generate Transaction Message
   let messageV0;
   if (addressLookupTable && addressLookupTable.length !== 0) {
     const result = []
@@ -50,7 +44,7 @@ const createAndSendV0Tx = async(
       recentBlockhash: latestBlockhash.blockhash,
       instructions: txInstructions,
     }).compileToV0Message(result);
-    // console.log(messageV0)
+
   } else {
     messageV0 = new TransactionMessage({
       payerKey: publicKey,
@@ -59,14 +53,9 @@ const createAndSendV0Tx = async(
     }).compileToV0Message();
   }
 
-  // console.log("   ✅ - Compiled Transaction Message");
   const transaction = new VersionedTransaction(messageV0);
 
-
-  // Step 3 - Sign your transaction with the required `Signers`
   const blockHash = await connection.getLatestBlockhash()
-  // transaction.feePayer = publicKey
-  // transaction.recentBlockhash = blockHash.blockhash
   const signed = await signTransaction(transaction)
 
   const signature = await connection.sendRawTransaction(signed.serialize()).catch(err => {
@@ -79,34 +68,6 @@ const createAndSendV0Tx = async(
     lastValidBlockHeight: blockHash.lastValidBlockHeight,
     signature,
   })
-  // const txid = await provider.connection.sendTransaction(transaction, {
-  //   maxRetries: 5,
-  // }).catch(err => {
-  //   console.error(err)
-  //   if (err.logs) {
-  //     err.logs.forEach(element => {
-  //       console.error(element)
-  //     });
-  //   }
-  //   throw new Error(err)
-  // });
-  // console.log("   ✅ - Transaction sent to network");
-
-  // // Step 5 - Confirm Transaction
-  // const confirmation = await provider.connection.confirmTransaction({
-  //   signature: txid,
-  //   blockhash: latestBlockhash.blockhash,
-  //   lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
-  // });
-  // // provider.connection.lo
-  // if (confirmation.value.err) {
-  //   throw new Error(
-  //     `   ❌ - Transaction not confirmed.\nReason: ${confirmation.value.err}`
-  //   );
-  // }
-
-  // console.log("🎉 Transaction Successfully Confirmed!");
-
 }
   return {createAndSendV0Tx};
 }

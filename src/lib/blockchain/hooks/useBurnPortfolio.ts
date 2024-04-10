@@ -7,21 +7,21 @@ import {
   TOKEN_PROGRAM_ID,
   createAssociatedTokenAccountInstruction,
   getAssociatedTokenAddressSync,
+  TokenAccountNotFoundError,
+  TokenInvalidAccountOwnerError,
+  getAccount
 } from "@solana/spl-token";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ComputeBudgetProgram } from "@solana/web3.js";
-import { 
-  TOKEN_METADATA_PROGRAM_ID, 
-  classicPortfolioTokens, 
-  // programId, 
-  // treasury, 
+import {
+  connection,
+  TOKEN_METADATA_PROGRAM_ID,
+  classicPortfolioTokens,
   portfolioLookupTable,
-  // connection 
+  commitmentLevel
 } from "@/lib/blockchain/constant";
-// import { getCoinData } from "../helpers/getCoinData";
 import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
-// import { getOrCreateATA } from "../helpers/getOrCreateATA";
 import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
@@ -40,8 +40,6 @@ export const useBurnPortfolio = () => {
   const { setModalName } = useModalsContext();
 
   const burnNft = async ({ portfolioId, nftId }: BurnPortfolioArgs) => {
-  console.log("🚀 ~ burnNft ~ nftId:", nftId)
-  console.log("🚀 ~ burnNft ~ portfolioId:", portfolioId)
 
     if (!publicKey || !program || !signTransaction) {
       const error = new Error('Please, connect wallet.');
@@ -55,7 +53,6 @@ export const useBurnPortfolio = () => {
     const {
       collectionMint,
       collectionMetadata,
-      // collectionMasterEdition,
       onchainCollectionData
     } = await getCollectionAddresses(portfolioId);
 
@@ -63,30 +60,14 @@ export const useBurnPortfolio = () => {
       nftMint,
       nftMetaData,
       nftMasterEdition,
-      // onchainNftData,
       nftATA,
       nftRecord
     } = await getNftAddresses({ collection: collectionMint, nftId, owner: publicKey });
 
-    // const usdcData = getCoinData('USDC');
-    // const usdcPublicKey = new PublicKey(usdcData.mint);
-
-    // const treasuryATA = await getOrCreateATA({ owner: treasury, mint: usdcPublicKey, payer: publicKey, signTransaction });
-    // const deser = getMetadataAccountDataSerializer();
-    // console.log("🚀 ~ burn ~ deser:", deser)
-
     const atasInstructions = []
     const atas = []
 
-    // const configAddress = PublicKey.findProgramAddressSync(
-    //   [
-    //     Buffer.from("config"),
-    //   ],
-    //   programId
-    // )[0];
-
     for (const token of classicPortfolioTokens) {
-      // const userATA = await getOrCreateATA({owner: publicKey, mint: token.key, payer:publicKey, signTransaction});
       const userATA = getAssociatedTokenAddressSync(
         token.key,
         publicKey,
@@ -94,7 +75,7 @@ export const useBurnPortfolio = () => {
         TOKEN_PROGRAM_ID,
         ASSOCIATED_TOKEN_PROGRAM_ID
       );
-      // const portfolioATA = await getOrCreateATA({owner: nftMint, mint: token.key, payer:publicKey, signTransaction});
+
       const portfolioATA = getAssociatedTokenAddressSync(
         token.key,
         nftMint,
@@ -103,16 +84,21 @@ export const useBurnPortfolio = () => {
         ASSOCIATED_TOKEN_PROGRAM_ID
       );
 
-      atasInstructions.push(
-        createAssociatedTokenAccountInstruction(
-          publicKey,
-          userATA,
-          publicKey,
-          token.key,
-          TOKEN_PROGRAM_ID,
-          ASSOCIATED_TOKEN_PROGRAM_ID
-        )
-      );
+      try {
+        await getAccount(connection, userATA, commitmentLevel);
+      } catch (error: unknown) {
+        if (error instanceof TokenAccountNotFoundError || error instanceof TokenInvalidAccountOwnerError) {
+          atasInstructions.push(createAssociatedTokenAccountInstruction(
+            publicKey,
+            userATA,
+            publicKey,
+            token.key,
+            TOKEN_PROGRAM_ID,
+            ASSOCIATED_TOKEN_PROGRAM_ID
+          )
+          )
+        }
+      }
       atas.push(portfolioATA);
       atas.push(userATA);
     }
@@ -121,25 +107,15 @@ export const useBurnPortfolio = () => {
       ComputeBudgetProgram.setComputeUnitLimit({
         units: 200000,
       });
-    await createAndSendV0Tx(atasInstructions)
 
-    // console.log(await connection.getAccountInfo(nftMetaData));
-    // console.log(await connection.getAccountInfo(nftMint));
-    // console.log(await connection.getAccountInfo(nftATA));
-    // console.log(await connection.getAccountInfo(nftRecord));
-    // console.log(await connection.getAccountInfo(nftMasterEdition));
-
-    // for (const acc of accs) {
-    //   console.log(await provider.connection.getAccountInfo(acc))
-    // }
+    if (atasInstructions.length !== 0) {
+      await createAndSendV0Tx(atasInstructions);
+    }
 
     const instruction = await program.methods.burnPortfolio(nftId).accounts({
-      // treasuryAta: treasuryATA.address, 
-      // config: configAddress,
       payer: publicKey,
       collection: collectionMint,
       collectionMetadata: collectionMetadata,
-      // collectionMasterEdition: collectionMasterEdition,
       collectionOnchaindata: onchainCollectionData,
       tokenMint: nftMint,
       nftUserTokenAccount: nftATA,
@@ -160,22 +136,6 @@ export const useBurnPortfolio = () => {
       ],
       [portfolioLookupTable]
     )
-
-    // for (const ata of atas) {
-    //   // console.log()
-    //   try {
-    //     await provider.connection.getTokenAccountBalance(ata);
-    //     assert.fail('shoud faild bcs ata doesnt exists');
-    //   } catch (e) {
-    //     const error = e as Error;
-    //     assert.match(error.message, /could not find account/); // SqrtPriceOutOfBounds
-    //   }
-    // }
-
-    // const d2 = await connection.getAccountInfo(collectionMetadata);
-
-    // // deser.de
-    // console.log(deser.deserialize(d2.data)[0].collectionDetails)
   }
   const { mutate: burn, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: burnNft,
@@ -184,7 +144,7 @@ export const useBurnPortfolio = () => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('');
         toast({
-          title: 'Error',
+          title: 'Info',
           description: 'Burn success',
         });
       }, 3000);
@@ -204,5 +164,5 @@ export const useBurnPortfolio = () => {
     }
   })
 
-  return {burn, isError, isLoading, isSuccess};
+  return { burn, isError, isLoading, isSuccess };
 }
