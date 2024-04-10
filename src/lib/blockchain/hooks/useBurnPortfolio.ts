@@ -144,7 +144,7 @@ export const useBurnPortfolio = () => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('');
         toast({
-          title: 'Error',
+          title: 'Info',
           description: 'Burn success',
         });
       }, 3000);
