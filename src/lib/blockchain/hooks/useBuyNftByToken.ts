@@ -1,6 +1,7 @@
 import {
   programId,
   TOKEN_METADATA_PROGRAM_ID,
+  connection,
   // addressClassicCollection,
   classicPotrfolioId,
   // ecosystemPortfolioId,
@@ -11,7 +12,7 @@ import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 import { web3 } from "@coral-xyz/anchor";
 import { BN } from '@project-serum/anchor';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, } from "@solana/spl-token";
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { ComputeBudgetProgram, PublicKey } from '@solana/web3.js';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { generateColectionData } from "../helpers/generateColectionData";
@@ -35,7 +36,6 @@ export interface BuyNftArgs {
 export const useBuyNftByToken = () => {
 
   const { publicKey, signTransaction } = useWallet();
-  const { connection } = useConnection();
   const { program } = useProgramContext();
   const { toast } = useToast();
   const { setModalName, setNftPrice } = useModalsContext();
