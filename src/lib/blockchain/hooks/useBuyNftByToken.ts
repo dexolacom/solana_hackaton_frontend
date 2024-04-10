@@ -114,8 +114,6 @@ export const useBuyNftByToken = () => {
 
     await createAndSendV0Tx(wrpool.instructionsForAta);
 
-  
-      console.log(inputValue * usdcData.decimals);
     const instruction = await program.methods.buyPortfolio(
       nftId,
       classicPotrfolioId,

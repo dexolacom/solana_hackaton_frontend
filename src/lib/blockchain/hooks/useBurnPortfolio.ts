@@ -7,13 +7,18 @@ import {
   TOKEN_PROGRAM_ID,
   createAssociatedTokenAccountInstruction,
   getAssociatedTokenAddressSync,
+  TokenAccountNotFoundError,
+  TokenInvalidAccountOwnerError,
+  getAccount
 } from "@solana/spl-token";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ComputeBudgetProgram } from "@solana/web3.js";
-import { 
-  TOKEN_METADATA_PROGRAM_ID, 
-  classicPortfolioTokens, 
+import {
+  connection,
+  TOKEN_METADATA_PROGRAM_ID,
+  classicPortfolioTokens,
   portfolioLookupTable,
+  commitmentLevel
 } from "@/lib/blockchain/constant";
 import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
 import { getNftAddresses } from "../helpers/getNftAddresses";
@@ -79,16 +84,21 @@ export const useBurnPortfolio = () => {
         ASSOCIATED_TOKEN_PROGRAM_ID
       );
 
-      atasInstructions.push(
-        createAssociatedTokenAccountInstruction(
-          publicKey,
-          userATA,
-          publicKey,
-          token.key,
-          TOKEN_PROGRAM_ID,
-          ASSOCIATED_TOKEN_PROGRAM_ID
-        )
-      );
+      try {
+        await getAccount(connection, userATA, commitmentLevel);
+      } catch (error: unknown) {
+        if (error instanceof TokenAccountNotFoundError || error instanceof TokenInvalidAccountOwnerError) {
+          atasInstructions.push(createAssociatedTokenAccountInstruction(
+            publicKey,
+            userATA,
+            publicKey,
+            token.key,
+            TOKEN_PROGRAM_ID,
+            ASSOCIATED_TOKEN_PROGRAM_ID
+          )
+          )
+        }
+      }
       atas.push(portfolioATA);
       atas.push(userATA);
     }
@@ -97,7 +107,10 @@ export const useBurnPortfolio = () => {
       ComputeBudgetProgram.setComputeUnitLimit({
         units: 200000,
       });
-    await createAndSendV0Tx(atasInstructions)
+
+    if (atasInstructions.length !== 0) {
+      await createAndSendV0Tx(atasInstructions);
+    }
 
     const instruction = await program.methods.burnPortfolio(nftId).accounts({
       payer: publicKey,
@@ -151,5 +164,5 @@ export const useBurnPortfolio = () => {
     }
   })
 
-  return {burn, isError, isLoading, isSuccess};
+  return { burn, isError, isLoading, isSuccess };
 }
