@@ -5,11 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 // import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
-import { generateRandomNumber } from '@/temp/utils/generateRandomNumber';
-import { 
+import { generateRandomNumber } from '@/lib/utils';
+import {
   addressClassicCollection,
   //  addressEcosystemCollection 
-  } from '@/lib/blockchain/constant';
+} from '@/lib/blockchain/constant';
 
 // TODO: add debounce for amount field
 
@@ -23,7 +23,7 @@ export const useClassicForm = () => {
   // const isClassicColection = pathname.includes('classic');
   // const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
 
-  const isLoading = isLoadingToken 
+  const isLoading = isLoadingToken
   // || isLoadingNative
 
   const FormSchema = z.object({

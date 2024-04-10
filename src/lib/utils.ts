@@ -22,3 +22,9 @@ export const shortAddress = (publicKey: PublicKey | null): string => {
   const address = publicKey?.toBase58();
   return `${address?.slice(0, 6)}...${address?.slice(-5)}`;
 };
+
+export const generateRandomNumber = () => {
+  const randomNumber = Math.floor(Math.random() * 251);
+  return randomNumber;
+}
+

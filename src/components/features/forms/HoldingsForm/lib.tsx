@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { generateRandomNumber } from '@/temp/utils/generateRandomNumber'
+import { generateRandomNumber } from '@/lib/utils'
 import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken'
 // import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
@@ -10,11 +10,11 @@ import { addressClassicCollection, addressEcosystemCollection } from '@/lib/bloc
 
 export const useHoldingsForm = () => {
 
-  const { buy: buyNftByToken,  isLoading: isLoadingToken } = useBuyNftByToken();
+  const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
   // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
   const { solanaRate } = useSolanaRate();
 
-  const isLoading = isLoadingToken 
+  const isLoading = isLoadingToken
   // || isLoadingNative
 
   const FormSchema = z.object({
