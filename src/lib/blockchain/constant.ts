@@ -24,10 +24,6 @@ export const TOKEN_METADATA_PROGRAM_ID = new PublicKey(
 
 export const portfolioLookupTable = new PublicKey('GAvAbmJH9ZbsBxqHkQaE7Rtc4a6QHRANc3KhHx416uAN')
 export const treasury = new PublicKey('8QdnKN4JbhpSLdhJVcCswmSy3X1Z3hmyZEG3VvGGNHn7')
-// export const usdcAddress = 'BRjpCHtyQLNCo8gqRUr8jtdAj5AjPYQaoqbvcZiHok1k'
-// export const wSolAddress = 'So11111111111111111111111111111111111111112'
-// export const usdcPublicKey = new PublicKey(usdcAddress)
-// export const wSolPublicKey = new PublicKey(wSolAddress)
 
 export const coins = [
   { currency: 'USDC', mint: 'BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe', decimals: 10e6 },

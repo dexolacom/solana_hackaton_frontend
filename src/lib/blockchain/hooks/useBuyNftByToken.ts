@@ -146,7 +146,6 @@ export const useBuyNftByToken = () => {
         splAtaProgram: ASSOCIATED_TOKEN_PROGRAM_ID
       }).
       remainingAccounts(wrpool.accounts.map(e => {
-        // console.log(e.toString());
         return { pubkey: e, isSigner: false, isWritable: true };
       })).instruction()
 
@@ -165,7 +164,6 @@ export const useBuyNftByToken = () => {
   const { mutate: buy, isError, isSuccess, isPending: isLoading } = useMutation({
     mutationFn: buyNftByToken,
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ['totalInvested'] });
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ['getNfts'] });
         setModalName('INVEST');
