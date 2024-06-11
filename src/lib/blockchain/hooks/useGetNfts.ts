@@ -99,7 +99,7 @@ export const useGetNfts = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["getNfts"],
+    queryKey: ["getNfts", publicKey],
     queryFn: () => fetchNfts(),
     staleTime: 60000,
     enabled: !!publicKey,

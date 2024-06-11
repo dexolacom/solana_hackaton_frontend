@@ -6,7 +6,7 @@ export const useSolanaProjectById = (id: string | null) => {
     queryKey: ['projectById', id],
     queryFn: () => getProjectById(id || ''),
     enabled: !!id,
-    refetchInterval: 300000,
+    staleTime: 60000,
   })
 
   const projectById = data?.data?.tokens

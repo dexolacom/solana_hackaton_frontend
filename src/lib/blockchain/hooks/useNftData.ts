@@ -24,7 +24,7 @@ export const useNftData = () => {
         ],
       queryFn: () => getTransaction(token.mintAddress
         ),
-      staleTime: Infinity,
+        staleTime: Infinity,
     })),
     combine: (results) => {
       return {
@@ -35,9 +35,8 @@ export const useNftData = () => {
   })
 
   useEffect(() => {
-  
 
-    if (!data.pending) {
+    if (data && !data.pending) {
       const newNftData = tokens?.map(item => ({
 
         ...item,
@@ -69,7 +68,7 @@ export const useNftData = () => {
         'ecosystem': ecosystemInvested ?? 0
       });
     }
-  }, [data?.pending])
+  }, [data])
 
   const getTransaction = async (mint: string) => {
 

@@ -11,13 +11,9 @@ interface UseCurrentPriceNftArgs {
 
 export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs) => {
   const {cards} = useNftData();
-  console.log("🚀 ~ useNftCurrentPrice ~ cards:", cards?.['all'][0].content.tokensAmount)
-
-  const nftId = title.slice(title.indexOf('#')+1);
-  console.log("🚀 ~ useNftCurrentPrice ~ nftId:", nftId)
+  const nftId = title.slice(title.indexOf('#')+1).trim();
   const tokensAmount = cards?.['all']?.filter(card => card?.name?.replace(/\D/g, "") === nftId)?.[0]?.content?.tokensAmount;
   console.log("🚀 ~ useNftCurrentPrice ~ tokensAmount:", tokensAmount)
-  
 
   const { projectList } = useProjectList();
   const classicId = collection === 'Classic' ? projectList?.find(item => item.name === collection)?.id : undefined;
