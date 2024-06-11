@@ -26,7 +26,7 @@ export const useItemTableData = ({ template }: UseTableData) => {
   const { projectById, isLoading: isLoadingPrj } = useSolanaProjectById(id ?? '');
 
   const nftId = decodeURIComponent(pathname).replace(/\D/g, "");
-  const tokensAmount = cards?.['all']?.filter(card => card?.metadata?.name?.replace(/\D/g, "") === nftId)?.[0]?.content?.tokensAmount;
+  const tokensAmount = cards?.['all']?.filter(card => card?.name?.replace(/\D/g, "") === nftId)?.[0]?.content?.tokensAmount;
   
   const isLoading = isLoadingId || isLoadingPrj || isLoadingNftData;
 

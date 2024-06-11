@@ -36,15 +36,14 @@ export const NftCardsContainer = () => {
         :
         <div className='grid grid-cols-3 gap-4'>
           {cards && cards[holdingsFilter].map((item) => {
-            const data = item?.metadata;
-            const title = data?.name.replace("PortfolioToken", data.collection.value.key === addressClassicCollection ? "Classic#" : "Solana Ecosystem #")
+            const title = item?.name.replace("PortfolioToken", item.collection.key.toString() === addressClassicCollection ? "Classic# " : "Solana Ecosystem# ")
             return <NftCard
-              key={`${data?.name}`}
+              key={`${item?.name}`}
               title={title}
-              uri={data?.uri}
+              uri={item?.uri}
               investedPrice={item.content.investedPrice}
-              collection={data.collection.value.key}
-              mint={data?.mint}
+              collection={item.collection.key}
+              mint={item.addressMint}
             />;
           })}
         </div>

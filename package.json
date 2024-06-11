@@ -13,6 +13,7 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.29.0",
     "@hookform/resolvers": "^3.3.4",
+    "@metaplex-foundation/js": "^0.20.1",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
     "@metaplex-foundation/umi": "^0.9.1",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",

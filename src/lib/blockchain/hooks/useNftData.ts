@@ -20,8 +20,10 @@ export const useNftData = () => {
 
   const data = useQueries({
     queries: tokens?.map((token) => ({
-      queryKey: ['transaction', token.metadata.mint],
-      queryFn: () => getTransaction(token.metadata.mint),
+      queryKey: ['transaction', token.mintAddress
+        ],
+      queryFn: () => getTransaction(token.mintAddress
+        ),
       staleTime: Infinity,
     })),
     combine: (results) => {
@@ -33,26 +35,27 @@ export const useNftData = () => {
   })
 
   useEffect(() => {
+  
 
     if (!data.pending) {
       const newNftData = tokens?.map(item => ({
 
         ...item,
-        content: { ...data?.data?.find(element => element?.mint === item.metadata.mint) }
-      })).sort((a, b) => (+a?.metadata?.name?.replace(/\D/g, "")) - (+b?.metadata?.name?.replace(/\D/g, "")));
+        content: { ...data?.data?.find(element => element?.mint=== item.mintAddress) }
+      })).sort((a, b) => (+a?.name?.replace(/\D/g, "")) - (+b?.name?.replace(/\D/g, "")));
 
       const invested = data?.data.reduce((accumulator, item) => {
         return accumulator + (item?.investedPrice ?? 0);
       }, 0);
-
-      const classicInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressClassicCollection)
+  
+      const classicInvested = newNftData.filter(element => element?.collection.key.toString() === addressClassicCollection)
         .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
 
-      const ecosystemInvested = newNftData.filter(element => element?.metadata.collection.value.key === addressEcosystemCollection)
+      const ecosystemInvested = newNftData.filter(element => element?.collection.key.toString() === addressEcosystemCollection)
         .reduce((accumulator, item) => accumulator + (item?.content?.investedPrice ?? 0), 0);
 
-      const classicCards = newNftData.filter(element => element?.metadata.collection.value.key === addressClassicCollection)
-      const ecosystemCards = newNftData.filter(element => element?.metadata.collection.value.key === addressEcosystemCollection)
+      const classicCards = newNftData.filter(element => element?.collection.key.toString() === addressClassicCollection)
+      const ecosystemCards = newNftData.filter(element => element?.collection.key.toString() === addressEcosystemCollection)
       setCards({
         'all': newNftData,
         'classic': classicCards,
@@ -105,7 +108,8 @@ export const useNftData = () => {
     return { investedPrice, formattedDate, mint, tokensAmount };
   }
 
-  const isLoading = isLoadingTokens || data.pending
+  const isLoading = isLoadingTokens || data.pending;
+
 
   return { cards, isLoading, invested}
 }
