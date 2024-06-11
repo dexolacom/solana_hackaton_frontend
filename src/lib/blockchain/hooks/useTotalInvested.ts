@@ -48,7 +48,7 @@ export const useTotalInvested = (mintCollection: string) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['totalInvested'],
     queryFn: () => getTransactions(mintCollection),
-    staleTime: 30000,
+    staleTime: 300000,
     enabled: !!solanaRate
   })
 

@@ -13,13 +13,13 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/SolanaItemTable'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { currencyFormatter } from '@/lib/utils'
-// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
-// import { addressEcosystemCollection } from '@/lib/blockchain/constant'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { addressEcosystemCollection } from '@/lib/blockchain/constant'
 
 const SolanaItemPage = () => {
-  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  const ecosystemInvested = 0; 
-  const isLoadingEcosystem = false; 
+  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  // const ecosystemInvested = 0; 
+  // const isLoadingEcosystem = false; 
 
   const tempData = {
     amount: {

@@ -10,8 +10,8 @@ import { currencyFormatter } from '@/lib/utils'
 import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib'
 import { getHoldingPageData } from './lib/lib'
 import { useSearchParams } from 'react-router-dom'
-// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-// import { addressClassicCollection } from '@/lib/blockchain/constant';
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
+import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData'
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
@@ -27,9 +27,9 @@ const MyHoldingsPage = () => {
     setSearchParams({ filter: 'all' });
   }, [])
 
-  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
-  const classicInvested = 0;
-  const isLoadingClassic = false;
+  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+  // const classicInvested = 0;
+  // const isLoadingClassic = false;
   const ecosystemInvested = 0;
   const isLoadingEcosystem = false;
 

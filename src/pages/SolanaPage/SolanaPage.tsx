@@ -9,13 +9,13 @@ import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx'
 import { SolanaPageTable } from '@/components/features/tabels/SolanaPageTable/SolanaPageTable.tsx'
 import { currencyFormatter } from '@/lib/utils'
-// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
-// import { addressEcosystemCollection } from '@/lib/blockchain/constant'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { addressEcosystemCollection } from '@/lib/blockchain/constant'
 
 const SolanaPage = () => {
-  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  const ecosystemInvested = 0; 
-  const isLoadingEcosystem = false; 
+  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  // const ecosystemInvested = 0; 
+  // const isLoadingEcosystem = false; 
 
   const tempData = {
     amount: {

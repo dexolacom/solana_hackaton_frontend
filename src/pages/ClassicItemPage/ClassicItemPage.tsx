@@ -13,14 +13,14 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/ClassicItemTable.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { currencyFormatter } from '@/lib/utils'
-// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
 import { addressClassicCollection } from '@/lib/blockchain/constant'
 
 const ClassicItemPage = () => {
-  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
  
-  const classicInvested = 0; 
-  const isLoadingClassic = false; 
+  // const classicInvested = 0; 
+  // const isLoadingClassic = false; 
   const tempData = {
     amount: {
       title: 'Current Portfolio Price',
