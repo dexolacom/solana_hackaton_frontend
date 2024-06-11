@@ -20,7 +20,7 @@ export const useNftData = () => {
 
   const data = useQueries({
     queries: tokens?.map((token) => ({
-      queryKey: ['transaction', token.mintAddress
+      queryKey: ['transaction', token
         ],
       queryFn: () => getTransaction(token.mintAddress
         ),
