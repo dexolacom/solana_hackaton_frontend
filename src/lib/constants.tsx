@@ -41,96 +41,96 @@ export const currencyLinks: Record<string, string> = {
 export const classicCurrencyInfo = [
   {
     title: 'BTC',
-    percent: 0.35,
+    percent: 0.3,
   },
   {
     title: 'SOL',
-    percent: 0.25,
+    percent: 0.2,
   },
   {
     title: 'ETH',
-    percent: 0.2,
+    percent: 0.15,
   },
   {
     title: 'JUP',
-    percent: 0.2,
+    percent: 0.1,
   },
-  // {
-  //   title: 'RNDR',
-  //   percent: 0.1,
-  // },
-  // {
-  //   title: 'HNT',
-  //   percent: 0.05,
-  // },
-  // {
-  //   title: 'BONK',
-  //   percent: 0.05,
-  // },
-  // {
-  //   title: 'PYTH',
-  //   percent: 0.05,
-  // },
+  {
+    title: 'RNDR',
+    percent: 0.1,
+  },
+  {
+    title: 'HNT',
+    percent: 0.05,
+  },
+  {
+    title: 'BONK',
+    percent: 0.05,
+  },
+  {
+    title: 'PYTH',
+    percent: 0.05,
+  },
 ]
 
 export const solanaCurrencyInfo = [
   {
     title: 'SOL',
-    percent: 0.35,
+    percent: 0.3,
   },
   {
     title: 'JUP',
-    percent: 0.25,
+    percent: 0.15,
   },
   {
     title: 'RNDR',
-    percent: 0.20,
+    percent: 0.15,
   },
   {
     title: 'HNT',
-    percent: 0.20,
+    percent: 0.15,
   },
-  // {
-  //   title: 'BONK',
-  //   percent: 0.1,
-  // },
-  // {
-  //   title: 'PYTH',
-  //   percent: 0.05,
-  // },
-  // {
-  //   title: 'RAY',
-  //   percent: 0.05,
-  // },
-  // {
-  //   title: 'JTO',
-  //   percent: 0.05,
-  // },
-  // {
-  //   title: 'WIF',
-  //   percent: 0.05,
-  // },
+  {
+    title: 'BONK',
+    percent: 0.1,
+  },
+  {
+    title: 'PYTH',
+    percent: 0.05,
+  },
+  {
+    title: 'RAY',
+    percent: 0.05,
+  },
+  {
+    title: 'JTO',
+    percent: 0.05,
+  },
+  {
+    title: 'WIF',
+    percent: 0.05,
+  },
 ]
 
 export const classicTemplate = [
-  { symbol: 'BTC', icon: btc, distribution: '35%'},
-  { symbol: 'SOL', icon: sol, distribution: '25%'},
-  { symbol: 'ETH', icon: eth, distribution: '20%'},
-  { symbol: 'JUP', icon: jup, distribution: '20%'}
-  // { symbol: 'RNDR', icon: rndr, distribution: '10%' },
-  // { symbol: 'HNT', icon: hnt, distribution: '5%' },
-  // { symbol: 'BONK', icon: bonk, distribution: '5%' },
-  // { symbol: 'PYTH', icon: pyth, distribution: '5%' },
+  { symbol: 'BTC', icon: btc, distribution: '30%'},
+  { symbol: 'SOL', icon: sol, distribution: '20%'},
+  { symbol: 'ETH', icon: eth, distribution: '15%'},
+  { symbol: 'JUP', icon: jup, distribution: '10%'},
+  { symbol: 'RNDR', icon: rndr, distribution: '10%' },
+  { symbol: 'HNT', icon: hnt, distribution: '5%' },
+  { symbol: 'BONK', icon: bonk, distribution: '5%' },
+  { symbol: 'PYTH', icon: pyth, distribution: '5%' },
 ]
 
 export const ecosystemTemplate = [
-  { symbol: 'SOL', icon: sol, distribution: '35%' },
-  { symbol: 'JUP', icon: jup, distribution: '25%' },
-  { symbol: 'RNDR', icon: rndr, distribution: '20%' },
-  { symbol: 'HNT', icon: hnt, distribution: '20%' },
-  // { symbol: 'BONK', icon: bonk, distribution: '10%' },
-  // { symbol: 'PYTH', icon: pyth, distribution: '5%' },
-  // { symbol: 'RAY', icon: ray, distribution: '5%' },
-  // { symbol: 'JTO', icon: jto, distribution: '5%' },
-  // { symbol: 'WIF', icon: wif, distribution: '5%' },
+  { symbol: 'SOL', icon: sol, distribution: '30%' },
+  { symbol: 'JUP', icon: jup, distribution: '15%' },
+  { symbol: 'RNDR', icon: rndr, distribution: '15%' },
+  { symbol: 'HNT', icon: hnt, distribution: '15%' },
+  { symbol: 'BONK', icon: bonk, distribution: '10%' },
+  { symbol: 'PYTH', icon: pyth, distribution: '5%' },
+  { symbol: 'RAY', icon: ray, distribution: '5%' },
+  { symbol: 'JTO', icon: jto, distribution: '5%' },
+  { symbol: 'WIF', icon: wif, distribution: '5%' },
 ]

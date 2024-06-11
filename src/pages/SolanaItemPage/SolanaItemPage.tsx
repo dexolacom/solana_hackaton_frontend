@@ -31,40 +31,40 @@ const SolanaItemPage = () => {
       items: [
         {
           name: 'SOL',
-          percent: 35,
+          percent: 30,
         },
         {
           name: 'JUP',
-          percent: 25,
+          percent: 15,
         },
         {
           name: 'RNDR',
-          percent: 20,
+          percent: 15,
         },
         {
           name: 'HNT',
-          percent: 20,
+          percent: 15,
         },
-        // {
-        //   name: 'BONK',
-        //   percent: 10,
-        // },
-        // {
-        //   name: 'PYTH',
-        //   percent: 5,
-        // },
-        // {
-        //   name: 'RAY',
-        //   percent: 5,
-        // },
-        // {
-        //   name: 'JTO',
-        //   percent: 5,
-        // },
-        // {
-        //   name: 'WIF',
-        //   percent: 5,
-        // },
+        {
+          name: 'BONK',
+          percent: 10,
+        },
+        {
+          name: 'PYTH',
+          percent: 5,
+        },
+        {
+          name: 'RAY',
+          percent: 5,
+        },
+        {
+          name: 'JTO',
+          percent: 5,
+        },
+        {
+          name: 'WIF',
+          percent: 5,
+        },
       ],
     },
     description: {

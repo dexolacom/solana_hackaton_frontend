@@ -19,7 +19,7 @@ export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal'
 
 const MyHoldingsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const { invested } = useNftData();
+  const { invested } = useNftData();
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
 
@@ -49,7 +49,7 @@ const MyHoldingsPage = () => {
       <MyHoldingsFilter setFilter={setSearchParams} />
       <div className={'flex gap-8'}>
         <div className='flex-1'>
-          {/* <PageHeader>
+          <PageHeader>
             <AmountCard className={'w-[35%]'} amount={data.amount} variant={data.amountCardVariant}>
               <div className={'mt-4 flex flex-col gap-1'}>
                 <span className={'font-regular text-sm'}>Invested</span>
@@ -57,7 +57,7 @@ const MyHoldingsPage = () => {
               </div>
             </AmountCard>
             <HoldingsCard className={'flex-1'} holdings={data.holdings} progressVariant={data.progressVariant} withPercent={false} />
-          </PageHeader> */}
+          </PageHeader>
 
           <h3 className={'text-2xl font-semibold mb-8'}>NFTs</h3>
 
@@ -65,9 +65,9 @@ const MyHoldingsPage = () => {
         </div>
 
         <div className={'flex flex-col items-start'}>
-          {/* <InvestCard>
+          <InvestCard>
             <HoldingsForm />
-          </InvestCard> */}
+          </InvestCard>
         </div>
       </div>
     </div>

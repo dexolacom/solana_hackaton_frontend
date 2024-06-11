@@ -42,7 +42,7 @@ export const NftCardsContainer = () => {
               title={title}
               uri={item?.uri}
               investedPrice={item.content.investedPrice}
-              collection={item.collection.key}
+              collection={item.collection.key.toString()}
               mint={item.addressMint}
             />;
           })}

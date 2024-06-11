@@ -88,26 +88,26 @@ export const getHoldingPageData = ({ variant,
             name: 'HNT',
             percent: 5,
           },
-          // {
-          //   name: 'BONK',
-          //   percent: 5,
-          // },
-          // {
-          //   name: 'PYTH',
-          //   percent: 5,
-          // },
-          // {
-          //   name: 'RAY',
-          //   percent: 5,
-          // },
-          // {
-          //   name: 'JTO',
-          //   percent: 5,
-          // },
-          // {
-          //   name: 'WIF',
-          //   percent: 5,
-          // },
+          {
+            name: 'BONK',
+            percent: 5,
+          },
+          {
+            name: 'PYTH',
+            percent: 5,
+          },
+          {
+            name: 'RAY',
+            percent: 5,
+          },
+          {
+            name: 'JTO',
+            percent: 5,
+          },
+          {
+            name: 'WIF',
+            percent: 5,
+          },
         ],
       },
       amountCardVariant: 'accentGray',

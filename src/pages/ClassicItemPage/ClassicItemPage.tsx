@@ -31,36 +31,36 @@ const ClassicItemPage = () => {
       items: [
         {
           name: 'BTC',
-          percent: 35,
+          percent: 30,
         },
         {
           name: 'SOL',
-          percent: 25,
+          percent: 20,
         },
         {
           name: 'ETH',
-          percent: 20,
+          percent: 15,
         },
         {
           name: 'JUP',
-          percent: 20,
+          percent: 10,
         },
-        // {
-        //   name: 'RNDR',
-        //   percent: 10,
-        // },
-        // {
-        //   name: 'HNT',
-        //   percent: 5,
-        // },
-        // {
-        //   name: 'BONK',
-        //   percent: 5,
-        // },
-        // {
-        //   name: 'PYTH',
-        //   percent: 5,
-        // },
+        {
+          name: 'RNDR',
+          percent: 10,
+        },
+        {
+          name: 'HNT',
+          percent: 5,
+        },
+        {
+          name: 'BONK',
+          percent: 5,
+        },
+        {
+          name: 'PYTH',
+          percent: 5,
+        },
       ],
     },
     description: {
