@@ -1,86 +1,86 @@
-import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx'
-import { columns } from './columns.tsx'
+import { DataTable } from '@/components/widgets/DataTable/DataTable.tsx';
+import { columns } from './columns.tsx';
 
 type TableData = {
   token: {
-    title: string
-    fullTitle: string
-  }
-  riskType: 'Low' | 'Medium' | 'High'
-  distribution: string
-}
+    title: string;
+    fullTitle: string;
+  };
+  riskType: 'Low' | 'Medium' | 'High';
+  distribution: string;
+};
 
 export const ClassicEarnPageTable = () => {
   const data: TableData[] = [
     {
       token: {
         title: 'BTC',
-        fullTitle: 'Bitcoin',
+        fullTitle: 'Bitcoin'
       },
       riskType: 'Low',
-      distribution: '30%',
+      distribution: '30%'
     },
     {
       token: {
         title: 'SOL',
-        fullTitle: 'Solana',
+        fullTitle: 'Solana'
       },
       riskType: 'Medium',
-      distribution: '20%',
+      distribution: '20%'
     },
     {
       token: {
         title: 'ETH',
-        fullTitle: 'Ethereum',
+        fullTitle: 'Ethereum'
       },
       riskType: 'High',
-      distribution: '15%',
+      distribution: '15%'
     },
     {
       token: {
         title: 'JUP',
-        fullTitle: 'Jupiter',
+        fullTitle: 'Jupiter'
       },
       riskType: 'Medium',
-      distribution: '10%',
+      distribution: '10%'
     },
     {
       token: {
         title: 'RNDR',
-        fullTitle: 'Render',
+        fullTitle: 'Render'
       },
       riskType: 'Low',
-      distribution: '10%',
+      distribution: '10%'
     },
     {
       token: {
         title: 'HNT',
-        fullTitle: 'Helium',
+        fullTitle: 'Helium'
       },
       riskType: 'Low',
-      distribution: '5%',
+      distribution: '5%'
     },
     {
       token: {
         title: 'BONK',
-        fullTitle: 'Bonk',
+        fullTitle: 'Bonk'
       },
       riskType: 'Medium',
-      distribution: '5%',
+      distribution: '5%'
     },
     {
       token: {
         title: 'PYTH',
-        fullTitle: 'Pyth Network',
+        fullTitle: 'Pyth Network'
       },
       riskType: 'High',
-      distribution: '5%',
-    },
-  ]
+      distribution: '5%'
+    }
+  ];
 
   return (
     <div>
       <DataTable columns={columns} data={data} />
     </div>
-  )
-}
+  );
+};

@@ -1,56 +1,54 @@
-import { PublicKey } from "@solana/web3.js";
-import { BN } from "@coral-xyz/anchor";
+import { PublicKey } from '@solana/web3.js';
+import { BN } from '@coral-xyz/anchor';
 import {
   getAssociatedTokenAddressSync,
   TOKEN_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   createAssociatedTokenAccountInstruction
-} from "@solana/spl-token";
-import { useWhirpool } from "./useWhirpool";
-import { WHIRLPOOLS } from "../constant";
+} from '@solana/spl-token';
+import { useWhirpool } from './useWhirpool';
+import { WHIRLPOOLS } from '../constant';
 
 interface ResultType {
-    args: {
-        amount: any[];
-        otherAmountThreshold: any[];
-        sqrtPriceLimit: any[];
-        amountSpecifiedIsInput: any[];
-        aToB: any[];
-    };
-    accounts: any[];
-    instructionsForAta: any[];
-    ata: any[];
+  args: {
+    amount: any[];
+    otherAmountThreshold: any[];
+    sqrtPriceLimit: any[];
+    amountSpecifiedIsInput: any[];
+    aToB: any[];
+  };
+  accounts: any[];
+  instructionsForAta: any[];
+  ata: any[];
 }
 
 export const usePortfolioSwapData = () => {
-
-  const {getWhirlpool} = useWhirpool();
+  const { getWhirlpool } = useWhirpool();
 
   const getPortfolioSwapData = async (
     payer: PublicKey,
     amountIn: BN,
     paymen_token: PublicKey,
-    tokens_data: Array<{ key: PublicKey, percent: number }>,
+    tokens_data: Array<{ key: PublicKey; percent: number }>,
     nftMint: PublicKey,
     forTableCreation = false
   ) => {
-    console.log("🚀 ~ usePortfolioSwapData ~ amountIn:", amountIn)
-    
+    console.log('🚀 ~ usePortfolioSwapData ~ amountIn:', amountIn);
+
     const result: ResultType = {
       args: {
         amount: [],
         otherAmountThreshold: [],
         sqrtPriceLimit: [],
         amountSpecifiedIsInput: [],
-        aToB: [],
+        aToB: []
       },
       accounts: [],
       instructionsForAta: [],
-      ata: [],
-    }
+      ata: []
+    };
 
     for (const token of tokens_data) {
-
       const associatedToken = getAssociatedTokenAddressSync(
         token.key,
         nftMint,
@@ -60,7 +58,6 @@ export const usePortfolioSwapData = () => {
       );
 
       result.instructionsForAta.push(
-     
         createAssociatedTokenAccountInstruction(
           payer,
           associatedToken,
@@ -98,8 +95,7 @@ export const usePortfolioSwapData = () => {
     }
 
     return result;
-  }
+  };
 
-  return { getPortfolioSwapData }
-}
-
+  return { getPortfolioSwapData };
+};

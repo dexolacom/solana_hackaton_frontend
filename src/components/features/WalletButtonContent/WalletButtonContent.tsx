@@ -1,18 +1,18 @@
-import { useAppContext } from '@/providers/AppProvider/AppProvider'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { currencyIcons } from '@/lib/constants'
+import { useAppContext } from '@/providers/AppProvider/AppProvider';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { currencyIcons } from '@/lib/constants';
 
 export const WalletButtonContent = () => {
-  const { publicKey } = useWallet()
-  const { balance } = useAppContext()
+  const { publicKey } = useWallet();
+  const { balance } = useAppContext();
 
   const getButtonContent = () => {
     if (publicKey) {
-      const base58 = publicKey.toBase58()
-      return base58.slice(0, 5) + '...' + base58.slice(-5)
+      const base58 = publicKey.toBase58();
+      return base58.slice(0, 5) + '...' + base58.slice(-5);
     }
-    return 'Connect Wallet'
-  }
+    return 'Connect Wallet';
+  };
 
   const ButtonContent = () => {
     return (
@@ -22,8 +22,8 @@ export const WalletButtonContent = () => {
       >
         {getButtonContent()}
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className='flex gap-2 text-sm'>
@@ -39,5 +39,5 @@ export const WalletButtonContent = () => {
         <ButtonContent />
       )}
     </div>
-  )
-}
+  );
+};

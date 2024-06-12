@@ -1,66 +1,47 @@
 import { PublicKey } from '@solana/web3.js';
-import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
-import { getAssociatedTokenAddress } from "@solana/spl-token";
+import { TOKEN_METADATA_PROGRAM_ID } from '@/lib/blockchain/constant';
+import { getAssociatedTokenAddress } from '@solana/spl-token';
 import { programId } from '@/lib/blockchain/constant';
 
 interface GetNftAddressesArgs {
-  collection: PublicKey; 
+  collection: PublicKey;
   nftId: number;
   owner: PublicKey;
 }
 
-export const getNftAddresses = async ({collection, nftId, owner}: GetNftAddressesArgs) => {
+export const getNftAddresses = async ({ collection, nftId, owner }: GetNftAddressesArgs) => {
   const nftMint = PublicKey.findProgramAddressSync(
-    [
-      Buffer.from("token"),
-      collection.toBuffer(),
-      Buffer.from([nftId])
-    ],
+    [Buffer.from('token'), collection.toBuffer(), Buffer.from([nftId])],
     programId
-  )[0]
+  )[0];
 
   const nftMetaData = PublicKey.findProgramAddressSync(
-    [
-      Buffer.from("metadata"),
-      TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      nftMint.toBuffer(),
-    ],
+    [Buffer.from('metadata'), TOKEN_METADATA_PROGRAM_ID.toBuffer(), nftMint.toBuffer()],
     TOKEN_METADATA_PROGRAM_ID
-  )[0]
+  )[0];
 
   const nftMasterEdition = PublicKey.findProgramAddressSync(
-    [
-      Buffer.from("metadata"),
-      TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      nftMint.toBuffer(),
-      Buffer.from("edition")
-    ],
+    [Buffer.from('metadata'), TOKEN_METADATA_PROGRAM_ID.toBuffer(), nftMint.toBuffer(), Buffer.from('edition')],
     TOKEN_METADATA_PROGRAM_ID
-  )[0]
+  )[0];
 
   const onchainNftData = PublicKey.findProgramAddressSync(
-    [
-      Buffer.from("onchain-data"),
-      nftMetaData.toBuffer(),
-    ],
+    [Buffer.from('onchain-data'), nftMetaData.toBuffer()],
     programId
-  )[0]
+  )[0];
 
-  const nftATA = await getAssociatedTokenAddress(
-    nftMint,
-    owner
-  )
+  const nftATA = await getAssociatedTokenAddress(nftMint, owner);
 
   const nftRecord = PublicKey.findProgramAddressSync(
     [
-      Buffer.from("metadata"),
+      Buffer.from('metadata'),
       TOKEN_METADATA_PROGRAM_ID.toBuffer(),
       nftMint.toBuffer(),
-      Buffer.from("token_record"),
+      Buffer.from('token_record'),
       nftATA.toBuffer()
     ],
     TOKEN_METADATA_PROGRAM_ID
-  )[0]
+  )[0];
 
   return {
     nftMint,
@@ -69,5 +50,5 @@ export const getNftAddresses = async ({collection, nftId, owner}: GetNftAddresse
     onchainNftData,
     nftATA,
     nftRecord
-  }
-}
+  };
+};

@@ -1,18 +1,12 @@
-import {
-  ORCA_WHIRLPOOL_PROGRAM_ID,
-  PDAUtil, SwapUtils,
-} from "@orca-so/whirlpools-sdk"
-import { BN } from "@coral-xyz/anchor";
-import { PublicKey } from "@solana/web3.js";
-import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
+import { ORCA_WHIRLPOOL_PROGRAM_ID, PDAUtil, SwapUtils } from '@orca-so/whirlpools-sdk';
+import { BN } from '@coral-xyz/anchor';
+import { PublicKey } from '@solana/web3.js';
+import { useProgramContext } from '@/providers/ProgramProvider/ProgramProvider';
 
 export const useWhirpool = () => {
   const { whirlpool: whirlpoolCtx } = useProgramContext();
 
-  const getWhirlpool = async (
-    whirlpool_pubkey: PublicKey,
-    amount: BN,
-    invert: boolean) => {
+  const getWhirlpool = async (whirlpool_pubkey: PublicKey, amount: BN, invert: boolean) => {
     if (!whirlpoolCtx) {
       throw new Error('whirlpool Error');
     }
@@ -42,8 +36,8 @@ export const useWhirpool = () => {
       otherAmountThreshold,
       sqrtPriceLimit,
       amountSpecifiedIsInput,
-      aToB,
-    }
+      aToB
+    };
 
     const accounts = {
       whirlpool: whirlpool_pubkey,
@@ -52,11 +46,11 @@ export const useWhirpool = () => {
       tickArray0: tickarrays[0],
       tickArray1: tickarrays[1],
       tickArray2: tickarrays[2],
-      oracle: whirlpool_oracle_pubkey,
-    }
+      oracle: whirlpool_oracle_pubkey
+    };
 
     return { args, accounts };
-  }
+  };
 
   return { getWhirlpool };
-} 
+};

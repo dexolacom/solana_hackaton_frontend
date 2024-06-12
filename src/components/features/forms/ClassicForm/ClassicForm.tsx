@@ -5,42 +5,42 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from '@/components/ui/Form.tsx'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
-import { Input } from '@/components/ui/Input.tsx'
-import { Button } from '@/components/ui/Button.tsx'
-import { Loader2 } from 'lucide-react'
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
-import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
-import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
-import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx'
-import { useEffect } from 'react'
-import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
+  FormMessage
+} from '@/components/ui/Form.tsx';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx';
+import { Input } from '@/components/ui/Input.tsx';
+import { Button } from '@/components/ui/Button.tsx';
+import { Loader2 } from 'lucide-react';
+import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
+import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx';
+import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
+import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx';
+import { useEffect } from 'react';
+import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx';
 
 interface ClassicFormProps {
-  currenciesVariant?: 'classic' | 'solana'
+  currenciesVariant?: 'classic' | 'solana';
 }
 
 export const ClassicForm = (props: ClassicFormProps) => {
-  const { currenciesVariant = 'classic' } = props
-  const { form, onSubmit, isLoading, solanaRate } = useClassicForm()
-  const infoCardData = useFormInfo(form.watch())
-  const amount = form.watch('amount')
-  const currency = form.watch('amountCurrency')
-  const amountWithCurrency = currency === 'USDC' ? amount : amount * (solanaRate ?? 0)
+  const { currenciesVariant = 'classic' } = props;
+  const { form, onSubmit, isLoading, solanaRate } = useClassicForm();
+  const infoCardData = useFormInfo(form.watch());
+  const amount = form.watch('amount');
+  const currency = form.watch('amountCurrency');
+  const amountWithCurrency = currency === 'USDC' ? amount : amount * (solanaRate ?? 0);
 
-  const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo
-  const formCurrencyData = getFormCurrencyValues(amountWithCurrency, currencyInfo)
+  const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo;
+  const formCurrencyData = getFormCurrencyValues(amountWithCurrency, currencyInfo);
   const currencyColumns =
     currenciesVariant === 'classic'
       ? { firstColumn: [0, 4], secondColumn: [4, formCurrencyData.length] }
-      : { firstColumn: [0, 5], secondColumn: [5, formCurrencyData.length] }
+      : { firstColumn: [0, 5], secondColumn: [5, formCurrencyData.length] };
 
   useEffect(() => {
-    onlyIntegersInputValidator()
-  }, [])
+    onlyIntegersInputValidator();
+  }, []);
 
   return (
     <Form {...form}>
@@ -69,7 +69,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
           control={form.control}
           name='amountCurrency'
           render={({ field }) => (
-            <FormItem >
+            <FormItem>
               <FormLabel>Amount Currency</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={'USDC'}>
                 <FormControl>
@@ -116,5 +116,5 @@ export const ClassicForm = (props: ClassicFormProps) => {
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};

@@ -1,28 +1,23 @@
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWallet } from '@solana/wallet-adapter-react';
 // import { ParsedAccountData } from "@solana/web3.js";
 // import { fetchDigitalAssetWithTokenByMint } from "@metaplex-foundation/mpl-token-metadata";
 // import { publicKey as createPubKey } from "@metaplex-foundation/umi";
 // import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { connectionDevNet } from "../constant";
-import { useQuery } from "@tanstack/react-query";
-import {
-  addressClassicCollection,
-  addressEcosystemCollection,
-} from "../constant";
+import { connectionDevNet } from '../constant';
+import { useQuery } from '@tanstack/react-query';
+import { addressClassicCollection, addressEcosystemCollection } from '../constant';
 import { Metaplex, walletAdapterIdentity } from '@metaplex-foundation/js';
-import { NftMetadataType } from "@/lib/types";
+import { NftMetadataType } from '@/lib/types';
 // import { umi } from "../constant";
 // import { useCallback } from "react";
 
 export const useGetNfts = () => {
   const { publicKey, wallet } = useWallet();
 
-    const fetchNfts = async () => {
+  const fetchNfts = async () => {
     if (!publicKey || !wallet) return [];
 
-    const metaplex = Metaplex.make(connectionDevNet).use(
-      walletAdapterIdentity(wallet.adapter)
-    );
+    const metaplex = Metaplex.make(connectionDevNet).use(walletAdapterIdentity(wallet.adapter));
 
     const nfts = await metaplex.nfts().findAllByOwner({ owner: publicKey });
 
@@ -97,12 +92,12 @@ export const useGetNfts = () => {
   const {
     data: tokens = [],
     isLoading,
-    isError,
+    isError
   } = useQuery({
-    queryKey: ["getNfts", publicKey],
+    queryKey: ['getNfts', publicKey],
     queryFn: () => fetchNfts(),
     staleTime: Infinity,
-    enabled: !!publicKey,
+    enabled: !!publicKey
   });
 
   return { tokens, isLoading, isError };

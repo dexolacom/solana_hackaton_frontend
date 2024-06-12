@@ -1,14 +1,14 @@
-import { Card, CardContent } from '@/components/ui/Card.tsx'
+import { Card, CardContent } from '@/components/ui/Card.tsx';
 
 interface InfoCardProps {
   data: {
-    title: string
-    value: string
-  }[]
+    title: string;
+    value: string;
+  }[];
 }
 
 export const InfoCard = (props: InfoCardProps) => {
-  const { data } = props
+  const { data } = props;
 
   return (
     <Card className={'bg-card border text-foreground'}>
@@ -20,5 +20,5 @@ export const InfoCard = (props: InfoCardProps) => {
         </div>
       ))}
     </Card>
-  )
-}
+  );
+};

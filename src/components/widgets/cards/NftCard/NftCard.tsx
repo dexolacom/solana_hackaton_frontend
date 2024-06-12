@@ -1,33 +1,32 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
-import defaultCard from '@/assets/defaultCard.png'
-import { Button } from '@/components/ui/Button.tsx'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
+import defaultCard from '@/assets/defaultCard.png';
+import { Button } from '@/components/ui/Button.tsx';
 // import { ArrowUpDown } from 'lucide-react'
 // import { Flame } from 'lucide-react'
-import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg'
-import { CollectionType } from '@/lib/api/hooks/useSolanaRate'
-import { currencyIcons } from '@/lib/constants.tsx'
-import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
-import { Link } from 'react-router-dom'
-import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice'
-import { addressClassicCollection } from '@/lib/blockchain/constant'
-import { currencyFormatter } from '@/lib/utils'
+import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg';
+import { CollectionType } from '@/lib/api/hooks/useSolanaRate';
+import { currencyIcons } from '@/lib/constants.tsx';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
+import { Link } from 'react-router-dom';
+import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice';
+import { addressClassicCollection } from '@/lib/blockchain/constant';
+import { currencyFormatter } from '@/lib/utils';
 
 interface NftCardProps {
-  title: string
-  uri: string
-  collection: string
-  investedPrice: number
-  mint?: string
+  title: string;
+  uri: string;
+  collection: string;
+  investedPrice: number;
+  mint?: string;
 }
 
 export const NftCard = (props: NftCardProps) => {
-
-  const { title, uri, collection, investedPrice } = props
+  const { title, uri, collection, investedPrice } = props;
   const { img } = useGetNftImg(uri);
-  const { setModalName, setCollection, setNftPrice, setNftTitle } = useModalsContext()
+  const { setModalName, setCollection, setNftPrice, setNftTitle } = useModalsContext();
 
-  const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
-  const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
+  const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH'];
+  const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF'];
   // const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP']
   // const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT']
 
@@ -44,8 +43,8 @@ export const NftCard = (props: NftCardProps) => {
           e.stopPropagation();
           setCollection(collection);
           setNftTitle(title);
-
-        }} />
+        }}
+      />
       <img
         src={img || defaultCard}
         width={312}
@@ -74,27 +73,32 @@ export const NftCard = (props: NftCardProps) => {
         </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6 relative z-20'}>
-        <Button className={'flex-1 gap-2'} variant={'accent'}
+        <Button
+          className={'flex-1 gap-2'}
+          variant={'accent'}
           onClick={() => {
             setModalName('TRANSFER_NFT');
             setCollection(collection);
-            setNftTitle(title)
-          }}>
+            setNftTitle(title);
+          }}
+        >
           {/* <ArrowUpDown className={'w-4 h-4'} /> */}
           Transfer
         </Button>
-        <Button className={'flex-1 gap-2'} variant={'destructive'}
+        <Button
+          className={'flex-1 gap-2'}
+          variant={'destructive'}
           onClick={() => {
             setModalName('BURN_NFT');
-            setNftPrice(currentPrice ? currentPrice.toString() : '0')
-            setNftTitle(title)
-            setCollection(collection)
+            setNftPrice(currentPrice ? currentPrice.toString() : '0');
+            setNftTitle(title);
+            setCollection(collection);
           }}
         >
           {/* <Flame className={'w-4 h-4'} /> */}
           Burn
         </Button>
       </CardFooter>
-    </Card >
-  )
-}
+    </Card>
+  );
+};

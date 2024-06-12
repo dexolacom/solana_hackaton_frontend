@@ -1,40 +1,40 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
-import { Badge } from '@/components/ui/Badge.tsx'
-import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx'
-import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx'
-import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/DescriptionCard.tsx'
-import { AppLink } from '@/components/common/AppLink/AppLink.tsx'
-import { ArrowRight } from 'lucide-react'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
+import { Badge } from '@/components/ui/Badge.tsx';
+import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx';
+import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx';
+import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/DescriptionCard.tsx';
+import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
+import { ArrowRight } from 'lucide-react';
 
 export interface HomeCardProps {
-  title: string
-  badges?: string[]
+  title: string;
+  badges?: string[];
   content: {
     amount: {
-      title: string
-      number: string
-    }
+      title: string;
+      number: string;
+    };
     holdings: {
-      title: string
+      title: string;
       items: {
-        name: string
-        percent: string | number
-      }[]
-    }
+        name: string;
+        percent: string | number;
+      }[];
+    };
     description: {
-      title: string
-      text: string
-    }
-  }
-  linkPath: string
-  buttonVariant: 'muted' | 'accent'
-  amountCardVariant: 'accent' | 'accentTeal' | 'accentGray'
-  progressVariant: 'classic' | 'classicEarn' | 'solana'
+      title: string;
+      text: string;
+    };
+  };
+  linkPath: string;
+  buttonVariant: 'muted' | 'accent';
+  amountCardVariant: 'accent' | 'accentTeal' | 'accentGray';
+  progressVariant: 'classic' | 'classicEarn' | 'solana';
 }
 
 export const HomeCard = (props: HomeCardProps) => {
-  const { title, badges, content, linkPath, buttonVariant, amountCardVariant, progressVariant } = props
-  const { amount, holdings, description } = content
+  const { title, badges, content, linkPath, buttonVariant, amountCardVariant, progressVariant } = props;
+  const { amount, holdings, description } = content;
 
   return (
     <Card className='flex-1'>
@@ -45,7 +45,7 @@ export const HomeCard = (props: HomeCardProps) => {
       <CardContent className={'flex flex-col gap-4 py-6'}>
         <AmountCard amount={amount} variant={amountCardVariant} />
         <HoldingsCard variant={'bordered'} holdings={holdings} progressVariant={progressVariant} />
-        <DescriptionCard variant={'bordered'} description={description} withIcon={false} className=' lg:h-[182px]'/>
+        <DescriptionCard variant={'bordered'} description={description} withIcon={false} className=' lg:h-[182px]' />
       </CardContent>
       <CardFooter>
         <AppLink to={linkPath} variant={buttonVariant} className={'w-full self-end'}>
@@ -54,5 +54,5 @@ export const HomeCard = (props: HomeCardProps) => {
         </AppLink>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};

@@ -1,13 +1,13 @@
-import { useToast } from "@/lib/hooks/useToast";
-import { createTransferInstruction } from "@solana/spl-token";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getOrCreateATA } from "../helpers/getOrCreateATA";
-import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
-import { getNftAddresses } from "../helpers/getNftAddresses";
-import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
-import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
+import { useToast } from '@/lib/hooks/useToast';
+import { createTransferInstruction } from '@solana/spl-token';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { getOrCreateATA } from '../helpers/getOrCreateATA';
+import { getCollectionAddresses } from '../helpers/getCollectionAddresses';
+import { getNftAddresses } from '../helpers/getNftAddresses';
+import { useCreateAndSendV0Tx } from './useCreateAndSendV0Tx';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider';
 
 interface TransferNftProps {
   destinationAddress: PublicKey;
@@ -24,16 +24,12 @@ export const useTransferNft = () => {
 
   const queryClient = useQueryClient();
 
-  const transferNft = async ({
-    destinationAddress,
-    portfolioId,
-    nftId,
-  }: TransferNftProps) => {
+  const transferNft = async ({ destinationAddress, portfolioId, nftId }: TransferNftProps) => {
     if (!publicKey || !signTransaction) {
-      const error = new Error("Please, connect wallet.");
+      const error = new Error('Please, connect wallet.');
       toast({
-        title: "Error!",
-        description: error.message,
+        title: 'Error!',
+        description: error.message
       });
       return;
     }
@@ -42,22 +38,17 @@ export const useTransferNft = () => {
     const { nftMint, nftATA } = await getNftAddresses({
       collection: collectionMint,
       nftId,
-      owner: publicKey,
+      owner: publicKey
     });
 
     const destinationAddressATA = await getOrCreateATA({
       owner: destinationAddress,
       mint: nftMint,
       payer: publicKey,
-      signTransaction,
+      signTransaction
     });
 
-    const instruction = createTransferInstruction(
-      nftATA,
-      destinationAddressATA.address,
-      publicKey,
-      1
-    );
+    const instruction = createTransferInstruction(nftATA, destinationAddressATA.address, publicKey, 1);
 
     await createAndSendV0Tx([instruction]);
   };
@@ -66,32 +57,32 @@ export const useTransferNft = () => {
     mutate: transfer,
     isError,
     isSuccess,
-    isPending: isLoading,
+    isPending: isLoading
   } = useMutation({
     mutationFn: transferNft,
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ["getNfts"] });
-      setModalName("");
+      queryClient.refetchQueries({ queryKey: ['getNfts'] });
+      setModalName('');
       toast({
-        title: "Info",
-        description: "Transfer success",
+        title: 'Info',
+        description: 'Transfer success'
       });
       setTimeout(() => {
         queryClient.refetchQueries({ queryKey: ['transaction'] });
-        }, 500);
+      }, 500);
     },
     onError: (error) => {
       console.log(error);
       error instanceof Error
         ? toast({
-            title: "Error",
-            description: error.message,
+            title: 'Error',
+            description: error.message
           })
         : toast({
-            title: "Error",
-            description: "Unsuccessful operation",
+            title: 'Error',
+            description: 'Unsuccessful operation'
           });
-    },
+    }
   });
 
   return { transfer, isLoading, isSuccess, isError };

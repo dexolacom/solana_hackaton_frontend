@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
 export interface AppContextProps {
-  balance: number
-  getBalance: () => Promise<void>
+  balance: number;
+  getBalance: () => Promise<void>;
 }
 
 export interface AppProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }

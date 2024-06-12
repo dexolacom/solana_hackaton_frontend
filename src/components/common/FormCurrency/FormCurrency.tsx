@@ -1,19 +1,19 @@
-import { currencyIcons } from '@/lib/constants.tsx'
-import { formatCurrencyNumber } from '@/components/common/FormCurrency/lib.ts'
+import { currencyIcons } from '@/lib/constants.tsx';
+import { formatCurrencyNumber } from '@/components/common/FormCurrency/lib.ts';
 
 interface Currency {
-  title: string
-  value: number
+  title: string;
+  value: number;
 }
 
 interface FormCurrencyProps {
-  data: Currency[]
-  columns: Record<string, number[]>
+  data: Currency[];
+  columns: Record<string, number[]>;
 }
 
 export const FormCurrency = (props: FormCurrencyProps) => {
-  const { data, columns } = props
-  const { firstColumn, secondColumn } = columns
+  const { data, columns } = props;
+  const { firstColumn, secondColumn } = columns;
 
   return (
     <div className={'flex gap-10'}>
@@ -41,5 +41,5 @@ export const FormCurrency = (props: FormCurrencyProps) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

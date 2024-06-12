@@ -1,14 +1,14 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
-import { ReactNode } from 'react'
-import assetsIcon from '@/assets/icons/assets.svg'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
+import { ReactNode } from 'react';
+import assetsIcon from '@/assets/icons/assets.svg';
 
 interface AssetsCardProps {
-  className?: string
-  children: ReactNode
+  className?: string;
+  children: ReactNode;
 }
 
 export const AssetsCard = (props: AssetsCardProps) => {
-  const { className, children } = props
+  const { className, children } = props;
 
   return (
     <Card className={className}>
@@ -20,5 +20,5 @@ export const AssetsCard = (props: AssetsCardProps) => {
       </CardHeader>
       <CardContent>{children}</CardContent>
     </Card>
-  )
-}
+  );
+};

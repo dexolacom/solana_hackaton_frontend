@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { getNftImg } from '@/lib/api/api'
+import { useQuery } from '@tanstack/react-query';
+import { getNftImg } from '@/lib/api/api';
 // import { useEffect, useState } from 'react'
 
 export const useGetNftImg = (uri: string) => {
@@ -37,9 +37,9 @@ export const useGetNftImg = (uri: string) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: [uri],
     queryFn: () => getNftImg(uri),
-    staleTime: Infinity,
+    staleTime: Infinity
   });
   const img = data?.data?.image;
 
-  return { img, isLoading, isError }
-}
+  return { img, isLoading, isError };
+};

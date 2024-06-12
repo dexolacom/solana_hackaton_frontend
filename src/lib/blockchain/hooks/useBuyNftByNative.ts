@@ -36,7 +36,7 @@
 //     console.log("🚀 ~ buyNftByNative ~ mintCollection:", mintCollection)
 //     const collectionData = generateColectionData(mintCollection)
 //     const isClassicColection = mintCollection === addressClassicCollection;
-    
+
 //     if (!publicKey || !ecosystemProgram || !classicProgram || !signTransaction) {
 //       const error = new Error('Please, connect wallet.');
 //       toast({
@@ -78,7 +78,7 @@
 //       throw error;
 //     }
 
-//     const { 
+//     const {
 //       nftMint,
 //       nftMetaData,
 //       nftMasterEdition,
@@ -91,7 +91,6 @@
 //       owner: publicKey,
 //       programId: selectProgramId
 //     });
-
 
 //     // console.log("🚀 ~ buyNftByToken ~ nftATA:", nft.nftATA.toBase58());
 //     // console.log("🚀 ~ buyNftByToken ~ masterEditionAccountAddress:", nft.masterEditionAccountAddress.toBase58());

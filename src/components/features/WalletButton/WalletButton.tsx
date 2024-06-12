@@ -1,39 +1,39 @@
-import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui'
-import { ReactNode, useEffect, useRef, useState } from 'react'
-import { useWalletModal,  } from '@solana/wallet-adapter-react-ui'
+import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 interface WalletButtonProps {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 export const WalletButton = ({ children }: WalletButtonProps) => {
-  const { setVisible: setModalVisible } = useWalletModal()
+  const { setVisible: setModalVisible } = useWalletModal();
   const { buttonState, onConnect, onDisconnect, publicKey } = useWalletMultiButton({
     onSelectWallet() {
-      setModalVisible(true)
-    },
-  })
-  const [copied, setCopied] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const ref = useRef<HTMLUListElement>(null)
+      setModalVisible(true);
+    }
+  });
+  const [copied, setCopied] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
-      const node = ref.current
+      const node = ref.current;
 
-      if (!node || node.contains(event.target as Node)) return
+      if (!node || node.contains(event.target as Node)) return;
 
-      setMenuOpen(false)
-    }
+      setMenuOpen(false);
+    };
 
-    document.addEventListener('mousedown', listener)
-    document.addEventListener('touchstart', listener)
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
 
     return () => {
-      document.removeEventListener('mousedown', listener)
-      document.removeEventListener('touchstart', listener)
-    }
-  }, [])
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, []);
 
   return (
     <div className='relative'>
@@ -44,17 +44,17 @@ export const WalletButton = ({ children }: WalletButtonProps) => {
         onClick={() => {
           switch (buttonState) {
             case 'no-wallet':
-              setModalVisible(true)
-              break
+              setModalVisible(true);
+              break;
             case 'has-wallet':
               if (onConnect) {
-                onConnect()
+                onConnect();
               }
-              break
+              break;
             case 'connected':
-              console.log('Connected')
-              setMenuOpen(true)
-              break
+              console.log('Connected');
+              setMenuOpen(true);
+              break;
           }
         }}
       >
@@ -70,9 +70,9 @@ export const WalletButton = ({ children }: WalletButtonProps) => {
           <li
             className='wallet-adapter-dropdown-list-item'
             onClick={async () => {
-              await navigator.clipboard.writeText(publicKey.toBase58())
-              setCopied(true)
-              setTimeout(() => setCopied(false), 400)
+              await navigator.clipboard.writeText(publicKey.toBase58());
+              setCopied(true);
+              setTimeout(() => setCopied(false), 400);
             }}
             role='menuitem'
           >
@@ -82,8 +82,8 @@ export const WalletButton = ({ children }: WalletButtonProps) => {
         <li
           className='wallet-adapter-dropdown-list-item'
           onClick={() => {
-            setModalVisible(true)
-            setMenuOpen(false)
+            setModalVisible(true);
+            setMenuOpen(false);
           }}
           role='menuitem'
         >
@@ -93,8 +93,8 @@ export const WalletButton = ({ children }: WalletButtonProps) => {
           <li
             className='wallet-adapter-dropdown-list-item'
             onClick={() => {
-              onDisconnect()
-              setMenuOpen(false)
+              onDisconnect();
+              setMenuOpen(false);
             }}
             role='menuitem'
           >
@@ -103,5 +103,5 @@ export const WalletButton = ({ children }: WalletButtonProps) => {
         ) : null}
       </ul>
     </div>
-  )
-}
+  );
+};

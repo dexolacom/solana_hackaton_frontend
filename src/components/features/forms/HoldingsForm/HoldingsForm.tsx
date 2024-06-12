@@ -5,25 +5,25 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from '@/components/ui/Form.tsx'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
-import { Loader2 } from 'lucide-react'
-import { Input } from '@/components/ui/Input.tsx'
-import { Button } from '@/components/ui/Button.tsx'
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { useHoldingsForm } from '@/components/features/forms/HoldingsForm/lib.tsx'
-import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
-import { useEffect } from 'react'
-import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
+  FormMessage
+} from '@/components/ui/Form.tsx';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx';
+import { Loader2 } from 'lucide-react';
+import { Input } from '@/components/ui/Input.tsx';
+import { Button } from '@/components/ui/Button.tsx';
+import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
+import { useHoldingsForm } from '@/components/features/forms/HoldingsForm/lib.tsx';
+import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
+import { useEffect } from 'react';
+import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx';
 
 export const HoldingsForm = () => {
-  const { form, onSubmit, isLoading } = useHoldingsForm()
-  const infoCardData = useFormInfo(form.watch())
+  const { form, onSubmit, isLoading } = useHoldingsForm();
+  const infoCardData = useFormInfo(form.watch());
 
   useEffect(() => {
-    onlyIntegersInputValidator()
-  }, [])
+    onlyIntegersInputValidator();
+  }, []);
 
   return (
     <Form {...form}>
@@ -117,10 +117,10 @@ export const HoldingsForm = () => {
         /> */}
         <InfoCard data={infoCardData} />
         <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
-          {isLoading && <Loader2 className='animate-spin'/>}
+          {isLoading && <Loader2 className='animate-spin' />}
           <span>Invest</span>
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};

@@ -1,13 +1,13 @@
-import logo from '@/assets/BISCUIT.svg'
-import house from '@/assets/icons/house.svg'
-import briefcase from '../../../assets/icons/briefCase.svg'
-import { AppLink } from '@/components/common/AppLink/AppLink.tsx'
-import { useLocation } from 'react-router-dom'
-import { WalletButton } from '@/components/features/WalletButton/WalletButton'
-import { WalletButtonContent } from '@/components/features/WalletButtonContent/WalletButtonContent'
+import logo from '@/assets/BISCUIT.svg';
+import house from '@/assets/icons/house.svg';
+import briefcase from '../../../assets/icons/briefCase.svg';
+import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
+import { useLocation } from 'react-router-dom';
+import { WalletButton } from '@/components/features/WalletButton/WalletButton';
+import { WalletButtonContent } from '@/components/features/WalletButtonContent/WalletButtonContent';
 
 export const Header = () => {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <header className={'py-4 px-4 flex justify-center items-center'}>
@@ -30,5 +30,5 @@ export const Header = () => {
         </WalletButton>
       </div>
     </header>
-  )
-}
+  );
+};

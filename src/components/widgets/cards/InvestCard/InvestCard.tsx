@@ -1,15 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
-import { cn } from '@/lib/utils.ts'
-import { ReactNode } from 'react'
-import investIcon from '@/assets/icons/invest.svg'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
+import { cn } from '@/lib/utils.ts';
+import { ReactNode } from 'react';
+import investIcon from '@/assets/icons/invest.svg';
 
 interface InvestCardProps {
-  className?: string
-  children: ReactNode
+  className?: string;
+  children: ReactNode;
 }
 
 export const InvestCard = (props: InvestCardProps) => {
-  const { className, children } = props
+  const { className, children } = props;
 
   return (
     <Card className={cn('bg-card text-foreground w-[400px] font-regular', className)}>
@@ -21,5 +21,5 @@ export const InvestCard = (props: InvestCardProps) => {
       </CardHeader>
       <CardContent>{children}</CardContent>
     </Card>
-  )
-}
+  );
+};

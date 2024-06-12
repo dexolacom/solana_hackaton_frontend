@@ -1,59 +1,59 @@
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .content {
-	flex: 1;
-	width: 100%;
-	max-width: 1760px;
-	padding: 0 1rem 0 1rem;
-	margin: 48px auto;
+  flex: 1;
+  width: 100%;
+  max-width: 1760px;
+  padding: 0 1rem 0 1rem;
+  margin: 48px auto;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /*styles for wallets adapter*/
 .wallet-adapter-button {
-	font-family: Lufga, sans-serif !important;
+  font-family: Lufga, sans-serif !important;
 }
 
 .wallet-adapter-button-trigger {
-	border-radius: 6px;
-	border: 2px solid #0f1729;
-	background-color: transparent !important;
-	padding: 4px 12px;
-	transition: all 0.3s ease;
+  border-radius: 6px;
+  border: 2px solid #0f1729;
+  background-color: transparent !important;
+  padding: 4px 12px;
+  transition: all 0.3s ease;
 }
 
 .wallet-adapter-button-trigger:hover {
-	border: 2px solid hsl(222, 46%, 11%, 0.8) !important;
+  border: 2px solid hsl(222, 46%, 11%, 0.8) !important;
 }
 
 .wallet-adapter-button:not([disabled]):hover {
-	border: 2px solid hsl(222, 46%, 11%, 0.8) !important;
+  border: 2px solid hsl(222, 46%, 11%, 0.8) !important;
 }
 
 .wallet-adapter-dropdown-list {
-	background: hsl(222, 46%, 11%) !important;
-	font-family: Lufga, sans-serif !important;
+  background: hsl(222, 46%, 11%) !important;
+  font-family: Lufga, sans-serif !important;
 }
 
 .wallet-adapter-dropdown-list-item:not([disabled]):hover {
-	background-color: hsl(0, 0%, 100%, 0.1) !important;
+  background-color: hsl(0, 0%, 100%, 0.1) !important;
 }
 
 .wallet-adapter-modal-wrapper {
-	background: initial !important;
-	background-color: #070b14 !important;
-	font-family: Lufga, sans-serif !important;
+  background: initial !important;
+  background-color: #070b14 !important;
+  font-family: Lufga, sans-serif !important;
 }
 
 .wallet-adapter-modal-overlay {
-	background: hsl(215, 19%, 35%, 0.5) !important;
+  background: hsl(215, 19%, 35%, 0.5) !important;
 }

@@ -1,14 +1,14 @@
-import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
+import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 // import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { Button } from '@/components/ui/Button.tsx'
-import { Loader2 } from 'lucide-react'
-import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { currencyFormatter, shortAddress } from '@/lib/utils'
-import { useBurnPortfolio } from '@/lib/blockchain/hooks/useBurnPortfolio'
-import { addressClassicCollection } from '@/lib/blockchain/constant'
-import { classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant'
+import { Button } from '@/components/ui/Button.tsx';
+import { Loader2 } from 'lucide-react';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
+import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { currencyFormatter, shortAddress } from '@/lib/utils';
+import { useBurnPortfolio } from '@/lib/blockchain/hooks/useBurnPortfolio';
+import { addressClassicCollection } from '@/lib/blockchain/constant';
+import { classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant';
 
 export const BurnNftModal = () => {
   const { publicKey } = useWallet();
@@ -25,23 +25,23 @@ export const BurnNftModal = () => {
   const tempData = [
     {
       title: 'Current NFT Price',
-      value: currencyFormatter(nftPriceToNumber),
+      value: currencyFormatter(nftPriceToNumber)
     },
     {
       title: 'Transaction Fee, 0.5%',
-      value: currencyFormatter(fee),
+      value: currencyFormatter(fee)
     },
     {
       title: 'You will get',
-      value: currencyFormatter(get),
+      value: currencyFormatter(get)
     },
     {
       title: 'Wallet Address',
-      value: shortAddress(publicKey),
-    },
-  ]
+      value: shortAddress(publicKey)
+    }
+  ];
 
-  const { setModalName } = useModalsContext()
+  const { setModalName } = useModalsContext();
 
   return (
     <>
@@ -50,8 +50,8 @@ export const BurnNftModal = () => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4'}>
         <p className={'text-sm'}>
-          Please, confirm you’re going to burn <span className={'font-black'}>{nftTitle}</span>. This
-          action cannot be undone.
+          Please, confirm you’re going to burn <span className={'font-black'}>{nftTitle}</span>. This action cannot be
+          undone.
         </p>
         <InfoCard data={tempData} />
       </CardContent>
@@ -59,12 +59,11 @@ export const BurnNftModal = () => {
         <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
           Cancel
         </Button>
-        <Button variant={'accent'} className={'flex-1'}
-          onClick={() => burn({ portfolioId, nftId })}>
+        <Button variant={'accent'} className={'flex-1'} onClick={() => burn({ portfolioId, nftId })}>
           {isLoading && <Loader2 className='animate-spin mr-2' />}
           Confirm
         </Button>
       </CardFooter>
     </>
-  )
-}
+  );
+};

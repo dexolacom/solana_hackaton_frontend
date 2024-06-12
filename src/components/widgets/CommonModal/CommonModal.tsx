@@ -1,22 +1,22 @@
-import { ReactNode, useEffect } from 'react'
-import { Card } from '@/components/ui/Card.tsx'
+import { ReactNode, useEffect } from 'react';
+import { Card } from '@/components/ui/Card.tsx';
 
 interface CommonModalProps {
-  children: ReactNode
-  handleClose: () => void
+  children: ReactNode;
+  handleClose: () => void;
 }
 
 const CommonModal = ({ children, handleClose }: CommonModalProps) => {
   useEffect(() => {
-    window.addEventListener('keyup', keyUpClose)
-    return () => window.removeEventListener('keyup', keyUpClose)
-  }, [])
+    window.addEventListener('keyup', keyUpClose);
+    return () => window.removeEventListener('keyup', keyUpClose);
+  }, []);
 
   const keyUpClose = (event: { key: string }) => {
     if (event.key === 'Escape') {
-      return handleClose()
+      return handleClose();
     }
-  }
+  };
 
   return (
     <div
@@ -27,7 +27,7 @@ const CommonModal = ({ children, handleClose }: CommonModalProps) => {
         {children}
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default CommonModal
+export default CommonModal;

@@ -1,34 +1,33 @@
-import { BN } from "@project-serum/anchor";
+import { BN } from '@project-serum/anchor';
 
 interface BaseData {
-  id: string
-  created_at: string
-  updated_at: string
+  id: string;
+  created_at: string;
+  updated_at: string;
 }
 interface InfoCoin {
-  name: string
-  symbol: string
-  riskType: 'Low' | 'Medium' | 'High'
+  name: string;
+  symbol: string;
+  riskType: 'Low' | 'Medium' | 'High';
 }
 
 export interface ProjectType extends BaseData {
-  name: string
+  name: string;
 }
 
 export interface ResponseProjectTypeItem {
-  name: string
-  tokens: ProjectTypeItem[]
+  name: string;
+  tokens: ProjectTypeItem[];
 }
 export interface ProjectTypeItem extends InfoCoin {
-  coinPrice: number
-  change24h: number
-  marketCap: number
+  coinPrice: number;
+  change24h: number;
+  marketCap: number;
 }
 
 export interface TokenType extends InfoCoin, BaseData {
-  coinmarketcapId: number
+  coinmarketcapId: number;
 }
-
 
 export interface NftMetadataType {
   model: string;
