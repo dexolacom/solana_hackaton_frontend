@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom'
 import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice'
 import { addressClassicCollection } from '@/lib/blockchain/constant'
 import { currencyFormatter } from '@/lib/utils'
-import { Skeleton } from '@/components/common/Skeleton/Skeleton'
 
 interface NftCardProps {
   title: string
@@ -34,7 +33,7 @@ export const NftCard = (props: NftCardProps) => {
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
-  const { currentPrice, isLoading } = useNftCurrentPrice({ collection: currentCollection, title });
+  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
 
   return (
     <Card className={'relative'}>
@@ -67,11 +66,11 @@ export const NftCard = (props: NftCardProps) => {
         </div>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
-          {isLoading ? <Skeleton height={12} width={30}/>  : <span className={'font-roboto text-sm font-medium'}>{currencyFormatter(investedPrice ?? 0)}</span>}
+          <span className={'font-roboto text-sm font-medium'}>{currencyFormatter(investedPrice ?? 0)}</span>
         </div>
         <div className={'flex items-center justify-between'}>
           <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
-          {isLoading ? <Skeleton height={12} width={30}/>  :<span className={'font-roboto text-sm font-medium'}>{currencyFormatter(currentPrice ?? 0)}</span>}
+          <span className={'font-roboto text-sm font-medium'}>{currencyFormatter(currentPrice ?? 0)}</span>
         </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6 relative z-20'}>

@@ -5,7 +5,7 @@ import { mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
 
 export const commitmentLevel = "confirmed";
 export const endpoint =
-  "https://solana-devnet.g.alchemy.com/v2/VERaxcMMFR84w2yCPfcC3zncSv4Nwegn";
+  `https://solana-devnet.g.alchemy.com/v2/${import.meta.env.VITE_ALCHEMY_API_KEY}`;
 
 export const endpointDevNet = clusterApiUrl("devnet");
 export const connection = new Connection(endpoint, commitmentLevel);
@@ -37,62 +37,62 @@ export const coins = [
   {
     currency: "USDC",
     mint: "BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe",
-    decimals: 10e6,
+    decimals: 1e6,
   },
   {
     currency: "ETH",
     mint: "4AJv9M5uMrMbyArp9Tio9MR2WovY9r5F8MXdQLRyDHaC",
-    decimals: 10e8,
+    decimals: 1e8,
   },
   {
     currency: "BTC",
     mint: "7u8NENSnY1k6vH6HERBvJvCjqkpwFHGTnxzmwEAvbMng",
-    decimals: 10e8,
+    decimals: 1e8,
   },
   {
     currency: "SOL",
     mint: "So11111111111111111111111111111111111111112",
-    decimals: 10e9,
+    decimals: 1e9,
   },
   {
     currency: "JUP",
     mint: "B9L1ksf9U7fyWJcb6oEUs9NQjar3gYWPTrG23phHdHcm",
-    decimals: 10e6,
+    decimals: 1e6,
   },
   {
     currency: "RNDR",
     mint: "7nXViVzM7ehQZ5y5Jg6nBjPkpfcXPUyi2JEo6NiwzgHx",
-    decimals: 10e8,
+    decimals: 1e8,
   },
   {
     currency: "HNT",
     mint: "Au69YNzR39wDY2MEVFUFakmiEYzmpS7bjJyJdkiatRwJ",
-    decimals: 10e8,
+    decimals: 1e8,
   },
   {
     currency: "BONK",
     mint: "2Koqru6oQmNRWiw9M1JMh3gVboPsfh2s6kh7Cgwz9SBb",
-    decimals: 10e5,
+    decimals: 1e5,
   },
   {
     currency: "PYTH",
     mint: "CZPL3GNVuYELeSJYoreN4MhiieDaJX2ooR2wjsnLu9nX",
-    decimals: 10e6,
+    decimals: 1e6,
   },
   {
     currency: "RAY",
     mint: "3mqUMjrvHPhJj97Ks7Z1msp1Xb1HAfYDbGsXkbMET7qo",
-    decimals: 10e6,
+    decimals: 1e6,
   },
   {
     currency: "JTO",
     mint: "ArUaz7YBGZ3Z5Ut1VNLLEuYV2P1dM9FWmwxf6XMxTbCy",
-    decimals: 10e9,
+    decimals: 1e9,
   },
   {
     currency: "WIF",
     mint: "4z5zhHoGTV1zmjgSfMJKcFHBvxRY5XMheFopNPm5mszJ",
-    decimals: 10e6,
+    decimals: 1e6,
   },
 ];
 

@@ -15,6 +15,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { currencyFormatter } from '@/lib/utils'
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
 import { addressClassicCollection } from '@/lib/blockchain/constant'
+import { classicHoldings } from '@/lib/constants'
 
 const ClassicItemPage = () => {
   const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
@@ -26,43 +27,7 @@ const ClassicItemPage = () => {
       title: 'Current Portfolio Price',
       number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0),
     },
-    holdings: {
-      title: 'Holdings',
-      items: [
-        {
-          name: 'BTC',
-          percent: 30,
-        },
-        {
-          name: 'SOL',
-          percent: 20,
-        },
-        {
-          name: 'ETH',
-          percent: 15,
-        },
-        {
-          name: 'JUP',
-          percent: 10,
-        },
-        {
-          name: 'RNDR',
-          percent: 10,
-        },
-        {
-          name: 'HNT',
-          percent: 5,
-        },
-        {
-          name: 'BONK',
-          percent: 5,
-        },
-        {
-          name: 'PYTH',
-          percent: 5,
-        },
-      ],
-    },
+    ...classicHoldings,
     description: {
       title: 'Description',
       text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.',
