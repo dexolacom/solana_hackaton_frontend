@@ -54,7 +54,7 @@ export const useItemTableData = ({ template }: UseTableData) => {
         coinPrice: currencyFormatter(match.coinPrice),
         change24h: `${match.change24h?.toFixed(2)}%`,
         marketCap: currencyFormatter(match.marketCap),
-        coinAmount: (decimalsOperations((tokensAmount?.[item.symbol] ?? 0) ,(decimals ?? 0), OperationType.MUL))
+        coinAmount: (decimalsOperations((tokensAmount?.[item.symbol] ?? 0) ,(decimals ?? 0), OperationType.DIV))
       };
     } else {
       return stub;
