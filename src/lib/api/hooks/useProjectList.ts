@@ -5,7 +5,7 @@ export const useProjectList = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['projectList'],
     queryFn: () => getProjectList(),
-    staleTime: 300000,
+    staleTime: Infinity,
   })
 
   const projectList = data?.data

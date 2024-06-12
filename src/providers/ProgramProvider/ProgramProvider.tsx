@@ -1,49 +1,48 @@
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
 import { AnchorProvider, Program } from "@coral-xyz/anchor";
-import { ClassicProgramType } from '@/lib/blockchain/programData/classicTypes';
-import { EcosystemProgramType } from '@/lib/blockchain/programData/ecosystemTypes';
+import { ProgramType } from '@/lib/blockchain/programData/types';
 import {
   commitmentLevel,
-  classicProgramId,
+  programId,
   classicProgramInterface,
-  ecosystemProgramId,
-  ecosystemProgramInterface
 } from '@/lib/blockchain/constant';
 import { ProgramContextProviderProps, ProgramContextType } from './types';
+import {
+  ORCA_WHIRLPOOL_PROGRAM_ID,
+  WhirlpoolContext,
+} from "@orca-so/whirlpools-sdk"
 
 const ProgramContext = createContext<ProgramContextType | undefined>(undefined);
 
 export const ProgramContextProvider = ({ children }: ProgramContextProviderProps) => {
   const wallet = useAnchorWallet();
   const { connection } = useConnection();
-  const [classicProgram, setClassicProgram] = useState<Program<ClassicProgramType> | null>(null);
-  const [ecosystemProgram, setEcosystemProgram] = useState<Program<EcosystemProgramType> | null>(null);
+  const [program, setProgram] = useState<Program<ProgramType> | null>(null);
+
+  const [whirlpool, setWhirlpool] = useState<WhirlpoolContext | null>(null);
 
   useEffect(() => {
     if (!wallet) {
-      setClassicProgram(null);
-      setEcosystemProgram(null);
+      setProgram(null);
+      setWhirlpool(null);
       return;
     }
     const provider = new AnchorProvider(connection, wallet, {
       preflightCommitment: commitmentLevel,
     });
 
-    const newClassicProgram = new Program(classicProgramInterface, classicProgramId, provider) as Program<ClassicProgramType>;
-    const newEcosystemProgram = new Program(ecosystemProgramInterface, ecosystemProgramId, provider) as Program<EcosystemProgramType>;
-    setClassicProgram(newClassicProgram);
-    setEcosystemProgram(newEcosystemProgram);
-
-
+    const whirlpoolCtx = WhirlpoolContext.withProvider(provider, ORCA_WHIRLPOOL_PROGRAM_ID);
+    setWhirlpool(whirlpoolCtx);
+    const newProgram = new Program(classicProgramInterface, programId, provider) as Program<ProgramType>;
+    setProgram(newProgram);
   }, [connection, wallet]);
 
   const contextValue = useMemo(() => ({
-    classicProgram,
-    setClassicProgram,
-    ecosystemProgram,
-    setEcosystemProgram
-  }), [classicProgram, ecosystemProgram])
+    program,
+    setProgram,
+    whirlpool,
+  }), [program, whirlpool])
 
   return (
     <ProgramContext.Provider value={contextValue}>

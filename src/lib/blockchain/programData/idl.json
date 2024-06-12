@@ -1,37 +1,72 @@
-export type ClassicProgramType = {
+{
   "version": "0.1.0",
   "name": "biscuit",
   "instructions": [
     {
       "name": "initialize",
-      "accounts": [],
-      "args": []
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "treasury",
+          "type": "publicKey"
+        }
+      ]
     },
     {
       "name": "createPortfolio",
       "accounts": [
         {
-          "name": "authority",
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "collectionMint",
+          "name": "mint",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "metadataAccount",
+          "name": "metadata",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "masterEditionAccount",
+          "name": "masterEdition",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "portfolioMetadata",
+          "name": "onchainData",
           "isMut": true,
           "isSigner": false
         },
@@ -63,12 +98,8 @@ export type ClassicProgramType = {
       ],
       "args": [
         {
-          "name": "name",
-          "type": "string"
-        },
-        {
-          "name": "symbol",
-          "type": "string"
+          "name": "portfolioId",
+          "type": "u8"
         },
         {
           "name": "uri",
@@ -83,11 +114,166 @@ export type ClassicProgramType = {
         {
           "name": "percentages",
           "type": "bytes"
+        },
+        {
+          "name": "feeIn",
+          "type": "u8"
+        },
+        {
+          "name": "feeOut",
+          "type": "u8"
         }
       ]
     },
     {
       "name": "buyPortfolio",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "collection",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionMasterEdition",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionOnchaindata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadataAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "masterEditionAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "paymentTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftUserTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftRecord",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mplProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "splAtaProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "sysvarInstructions",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "whirlpoolProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "id",
+          "type": "u8"
+        },
+        {
+          "name": "portfolioId",
+          "type": "u8"
+        },
+        {
+          "name": "uri",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "otherAmountThreshold",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "sqrtPriceLimit",
+          "type": {
+            "vec": "u128"
+          }
+        },
+        {
+          "name": "amountSpecifiedIsInput",
+          "type": {
+            "vec": "bool"
+          }
+        },
+        {
+          "name": "aToB",
+          "type": {
+            "vec": "bool"
+          }
+        }
+      ]
+    },
+    {
+      "name": "burnPortfolio",
       "accounts": [
         {
           "name": "payer",
@@ -96,6 +282,11 @@ export type ClassicProgramType = {
         },
         {
           "name": "collection",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionOnchaindata",
           "isMut": true,
           "isSigner": false
         },
@@ -116,26 +307,6 @@ export type ClassicProgramType = {
         },
         {
           "name": "masterEditionAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "portfolioData",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "paymentToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "paymentUserTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "paymentProgramTokenAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -184,21 +355,13 @@ export type ClassicProgramType = {
         {
           "name": "id",
           "type": "u8"
-        },
-        {
-          "name": "uri",
-          "type": "string"
-        },
-        {
-          "name": "amount",
-          "type": "u64"
         }
       ]
     }
   ],
   "accounts": [
     {
-      "name": "portfolioData",
+      "name": "PortfolioData",
       "type": {
         "kind": "struct",
         "fields": [
@@ -209,22 +372,32 @@ export type ClassicProgramType = {
           {
             "name": "amount",
             "type": "u64"
-          },
-          {
-            "name": "assets",
-            "type": {
-              "vec": "u64"
-            }
-          },
-          {
-            "name": "bump",
-            "type": "u8"
           }
         ]
       }
     },
     {
-      "name": "portfolioCollectionData",
+      "name": "BiscuitConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "adminAuthority",
+            "type": "publicKey"
+          },
+          {
+            "name": "minAmount",
+            "type": "u64"
+          },
+          {
+            "name": "treasury",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PortfolioCollectionData",
       "type": {
         "kind": "struct",
         "fields": [
@@ -239,24 +412,16 @@ export type ClassicProgramType = {
             "type": "bytes"
           },
           {
-            "name": "bump",
+            "name": "feeIn",
             "type": "u8"
-          }
-        ]
-      }
-    }
-  ],
-  "types": [
-    {
-      "name": "PaymentType",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "SOL"
           },
           {
-            "name": "Token"
+            "name": "feeOut",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
@@ -267,279 +432,24 @@ export type ClassicProgramType = {
       "code": 6000,
       "name": "DataLengthMissmatch",
       "msg": "Portfolio data length is missmatch"
-    }
-  ]
-};
-
-export const IDL: ClassicProgramType = {
-  "version": "0.1.0",
-  "name": "biscuit",
-  "instructions": [
-    {
-      "name": "initialize",
-      "accounts": [],
-      "args": []
     },
     {
-      "name": "createPortfolio",
-      "accounts": [
-        {
-          "name": "authority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "collectionMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "metadataAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "masterEditionAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "portfolioMetadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "mplProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "sysvarInstructions",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "name",
-          "type": "string"
-        },
-        {
-          "name": "symbol",
-          "type": "string"
-        },
-        {
-          "name": "uri",
-          "type": "string"
-        },
-        {
-          "name": "tokens",
-          "type": {
-            "vec": "publicKey"
-          }
-        },
-        {
-          "name": "percentages",
-          "type": "bytes"
-        }
-      ]
+      "code": 6001,
+      "name": "InvalidPoolForSwap",
+      "msg": "Invalid token account for swap"
     },
     {
-      "name": "buyPortfolio",
-      "accounts": [
-        {
-          "name": "payer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "collection",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMetadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "metadataAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "masterEditionAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "portfolioData",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "paymentToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "paymentUserTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "paymentProgramTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nftUserTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nftRecord",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "mplProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "splAtaProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "sysvarInstructions",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "id",
-          "type": "u8"
-        },
-        {
-          "name": "uri",
-          "type": "string"
-        },
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    }
-  ],
-  "accounts": [
-    {
-      "name": "portfolioData",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "token",
-            "type": "publicKey"
-          },
-          {
-            "name": "amount",
-            "type": "u64"
-          },
-          {
-            "name": "assets",
-            "type": {
-              "vec": "u64"
-            }
-          },
-          {
-            "name": "bump",
-            "type": "u8"
-          }
-        ]
-      }
+      "code": 6002,
+      "name": "InvalidCollectionMetadata",
+      "msg": "Invalid collection metadata"
     },
     {
-      "name": "portfolioCollectionData",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "tokens",
-            "type": {
-              "vec": "publicKey"
-            }
-          },
-          {
-            "name": "percentages",
-            "type": "bytes"
-          },
-          {
-            "name": "bump",
-            "type": "u8"
-          }
-        ]
-      }
+      "code": 6003,
+      "name": "InvalidNFTId",
+      "msg": "Invalid NFT id"
     }
   ],
-  "types": [
-    {
-      "name": "PaymentType",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "SOL"
-          },
-          {
-            "name": "Token"
-          }
-        ]
-      }
-    }
-  ],
-  "errors": [
-    {
-      "code": 6000,
-      "name": "DataLengthMissmatch",
-      "msg": "Portfolio data length is missmatch"
-    }
-  ]
-};
+  "metadata": {
+    "address": "BxcGdnbRBXvxPcjSW2f7Gtc9iqPdGNZbf9Z5RqyXxpWM"
+  }
+}

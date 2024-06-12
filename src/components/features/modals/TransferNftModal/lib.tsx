@@ -1,33 +1,21 @@
-import { useEffect } from 'react';
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/lib/hooks/useToast.ts'
 import { PublicKey } from '@solana/web3.js';
 import { useTransferNft } from '@/lib/blockchain/hooks/useTransferNft';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider';
+import { addressClassicCollection, classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant';
 
 // TODO: add debounce for amount field
 
-export const useTransferForm = (mint: string) => {
+export const useTransferForm = () => {
 
-  const { transfer: transferNft, isError, isSuccess, isLoading } = useTransferNft();
+  const { transfer: transferNft, isLoading } = useTransferNft();
   const { publicKey } = useWallet();
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        title: 'Info',
-        description: 'Operation is successful',
-      })
-    }
-    if (isError) {
-      toast({
-        title: 'Error',
-        description: 'Unsuccessful operation',
-      })
-    }
-  }, [isError, isSuccess])
+  const { nftTitle, collection } = useModalsContext();
+  const nftId = +nftTitle.slice(nftTitle.indexOf('#') + 1);
+  const portfolioId = collection === addressClassicCollection ? classicPotrfolioId : ecosystemPortfolioId;
 
   const FormSchema = z.object({
     address: z.string().refine(value => {
@@ -51,10 +39,11 @@ export const useTransferForm = (mint: string) => {
     },
   })
 
-  async function onSubmit(data: z.infer<typeof FormSchema>,) {
-    await transferNft({
+  function onSubmit(data: z.infer<typeof FormSchema>,) {
+    transferNft({
       destinationAddress: new PublicKey(data.address),
-      mintPubkey: new PublicKey(mint)
+      nftId,
+      portfolioId
     })
   }
   return { form, onSubmit, isLoading }

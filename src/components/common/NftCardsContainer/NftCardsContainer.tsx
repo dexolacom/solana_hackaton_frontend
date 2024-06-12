@@ -1,11 +1,19 @@
 import { NftCard } from '@/components/widgets/cards/NftCard/NftCard.tsx'
+import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Loader2 } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib';
 
 export const NftCardsContainer = () => {
   const { publicKey } = useWallet();
   const { cards, isLoading } = useNftData();
+  
+  const [searchParams] = useSearchParams();
+
+  const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
+
 
   if (!publicKey) {
     return (
@@ -13,29 +21,29 @@ export const NftCardsContainer = () => {
     )
   }
 
-  if (isLoading && cards.length === 0) {
+  if (isLoading && cards && cards[holdingsFilter].length === 0) {
     return (
       <div className='w-full h-[340px] flex justify-center items-center'>
         <Loader2 size={80} className='animate-spin'/>
       </div>
     )
-  }
+  } 
 
   return (
     <>
-      {cards.length === 0 ?
+      {cards && cards[holdingsFilter].length === 0 ?
         <div className='h-[340px] flex justify-center items-center text-[20px]'>We have just checked, but there are no portfolios in your wallet.</div>
         :
         <div className='grid grid-cols-3 gap-4'>
-          {cards.map((item, i) => {
-            const data = item?.metadata;
+          {cards && cards[holdingsFilter].map((item) => {
+            const title = item?.name.replace("PortfolioToken", item.collection.key.toString() === addressClassicCollection ? "Classic# " : "Solana Ecosystem# ")
             return <NftCard
-              key={`${data?.name}#${i}`}
-              title={data.name}
-              uri={data?.uri}
+              key={`${item?.name}`}
+              title={title}
+              uri={item?.uri}
               investedPrice={item.content.investedPrice}
-              collection={data?.collection?.value?.key}
-              mint={data?.mint}
+              collection={item.collection.key.toString()}
+              mint={item.addressMint}
             />;
           })}
         </div>

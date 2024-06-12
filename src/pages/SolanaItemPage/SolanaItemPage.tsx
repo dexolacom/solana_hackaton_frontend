@@ -13,54 +13,21 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/SolanaItemTable'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { currencyFormatter } from '@/lib/utils'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { addressEcosystemCollection } from '@/lib/blockchain/constant'
+import { ecosystemHoldings } from '@/lib/constants'
 
 const SolanaItemPage = () => {
+  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  // const ecosystemInvested = 0; 
+  // const isLoadingEcosystem = false; 
+
   const tempData = {
     amount: {
       title: 'Current Portfolio Price',
-      number: '$1,013,724.41',
+      number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0),
     },
-    holdings: {
-      title: 'Holdings',
-      items: [
-        {
-          name: 'SOL',
-          percent: 30,
-        },
-        {
-          name: 'JUP',
-          percent: 15,
-        },
-        {
-          name: 'RNDR',
-          percent: 15,
-        },
-        {
-          name: 'HNT',
-          percent: 15,
-        },
-        {
-          name: 'BONK',
-          percent: 10,
-        },
-        {
-          name: 'PYTH',
-          percent: 5,
-        },
-        {
-          name: 'RAY',
-          percent: 5,
-        },
-        {
-          name: 'JTO',
-          percent: 5,
-        },
-        {
-          name: 'WIF',
-          percent: 5,
-        },
-      ],
-    },
+    ...ecosystemHoldings,
     description: {
       title: 'Description',
       text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`,

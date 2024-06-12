@@ -1,3 +1,5 @@
+import { BN } from "@project-serum/anchor";
+
 interface BaseData {
   id: string
   created_at: string
@@ -25,4 +27,31 @@ export interface ProjectTypeItem extends InfoCoin {
 
 export interface TokenType extends InfoCoin, BaseData {
   coinmarketcapId: number
+}
+
+
+export interface NftMetadataType {
+  model: string;
+  address: BN;
+  mintAddress: BN;
+  updateAuthorityAddress: BN;
+  json: null;
+  jsonLoaded: boolean;
+  name: string;
+  symbol: string;
+  uri: string;
+  isMutable: boolean;
+  primarySaleHappened: boolean;
+  sellerFeeBasisPoints: number;
+  editionNonce: number;
+  creators: any[];
+  tokenStandard: number;
+  collection: {
+    verified: boolean;
+    key: BN;
+    address: BN;
+  };
+  collectionDetails: any;
+  uses: any;
+  programmableConfig: any;
 }

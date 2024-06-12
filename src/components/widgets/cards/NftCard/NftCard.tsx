@@ -17,30 +17,33 @@ interface NftCardProps {
   uri: string
   collection: string
   investedPrice: number
-  mint: string
+  mint?: string
 }
 
 export const NftCard = (props: NftCardProps) => {
-  
-  const { title, uri, collection, investedPrice, mint } = props
+
+  const { title, uri, collection, investedPrice } = props
   const { img } = useGetNftImg(uri);
-  const { setModalName, setMint, setNftPrice, setNftTitle } = useModalsContext()
+  const { setModalName, setCollection, setNftPrice, setNftTitle } = useModalsContext()
 
   const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH']
   const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF']
+  // const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP']
+  // const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT']
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
-  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection });
+  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
 
   return (
     <Card className={'relative'}>
       <Link
-        to={`Classic/${title}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
+        to={`Classic/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
         className={'z-10 absolute w-full h-full top-0 left-0'}
         onClick={(e) => {
           e.stopPropagation();
-          setMint(mint);
+          setCollection(collection);
+          setNftTitle(title);
 
         }} />
       <img
@@ -71,7 +74,12 @@ export const NftCard = (props: NftCardProps) => {
         </div>
       </CardContent>
       <CardFooter className={'flex gap-4 pt-6 relative z-20'}>
-        <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => { setModalName('TRANSFER_NFT'); setMint(mint) }}>
+        <Button className={'flex-1 gap-2'} variant={'accent'}
+          onClick={() => {
+            setModalName('TRANSFER_NFT');
+            setCollection(collection);
+            setNftTitle(title)
+          }}>
           {/* <ArrowUpDown className={'w-4 h-4'} /> */}
           Transfer
         </Button>
@@ -80,6 +88,7 @@ export const NftCard = (props: NftCardProps) => {
             setModalName('BURN_NFT');
             setNftPrice(currentPrice ? currentPrice.toString() : '0')
             setNftTitle(title)
+            setCollection(collection)
           }}
         >
           {/* <Flame className={'w-4 h-4'} /> */}

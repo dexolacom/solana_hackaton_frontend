@@ -13,50 +13,21 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { ClassicItemTable } from '@/components/features/tabels/ClassicItemTable/ClassicItemTable.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { currencyFormatter } from '@/lib/utils'
+import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested'
+import { addressClassicCollection } from '@/lib/blockchain/constant'
+import { classicHoldings } from '@/lib/constants'
 
 const ClassicItemPage = () => {
+  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+ 
+  // const classicInvested = 0; 
+  // const isLoadingClassic = false; 
   const tempData = {
     amount: {
       title: 'Current Portfolio Price',
-      number: '$1,013,724.41',
+      number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0),
     },
-    holdings: {
-      title: 'Holdings',
-      items: [
-        {
-          name: 'BTC',
-          percent: 30,
-        },
-        {
-          name: 'SOL',
-          percent: 20,
-        },
-        {
-          name: 'ETH',
-          percent: 15,
-        },
-        {
-          name: 'JUP',
-          percent: 10,
-        },
-        {
-          name: 'RNDR',
-          percent: 10,
-        },
-        {
-          name: 'HNT',
-          percent: 5,
-        },
-        {
-          name: 'BONK',
-          percent: 5,
-        },
-        {
-          name: 'PYTH',
-          percent: 5,
-        },
-      ],
-    },
+    ...classicHoldings,
     description: {
       title: 'Description',
       text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.',
@@ -64,7 +35,7 @@ const ClassicItemPage = () => {
   }
   const [searchParams] = useSearchParams();
   const { item } = useParams();
-  const { setModalName, setNftPrice, setNftTitle } = useModalsContext()
+  const { setModalName, setNftPrice, setNftTitle, setCollection } = useModalsContext()
   const invested = searchParams.get('invested');
   const currentPrice = searchParams.get('currentPrice');
 
@@ -73,7 +44,12 @@ const ClassicItemPage = () => {
       <BackLink title={'My holdings'} path={'/my-holdings'} />
       <PageTitle title={item ?? 'CLASSIC item'}>
         <div className={'flex gap-4'}>
-          <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
+          <Button className={'flex-1 gap-2'} variant={'accent'}
+            onClick={() => {
+              setModalName('TRANSFER_NFT');
+              setNftTitle(item ?? '');
+              setCollection(addressClassicCollection);
+            }}>
             {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
@@ -82,6 +58,7 @@ const ClassicItemPage = () => {
               setModalName('BURN_NFT');
               setNftPrice(currentPrice ? currentPrice.toString() : '0');
               setNftTitle(item ?? '');
+              setCollection(addressClassicCollection);
             }}>
             {/* <Flame className={'w-4 h-4'} /> */}
             Burn

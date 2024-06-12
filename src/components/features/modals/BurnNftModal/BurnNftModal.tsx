@@ -6,10 +6,17 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
 import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { currencyFormatter, shortAddress } from '@/lib/utils'
+import { useBurnPortfolio } from '@/lib/blockchain/hooks/useBurnPortfolio'
+import { addressClassicCollection } from '@/lib/blockchain/constant'
+import { classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant'
 
 export const BurnNftModal = () => {
-  const {publicKey}= useWallet();
-  const {nftPrice, nftTitle} = useModalsContext();
+  const { publicKey } = useWallet();
+  const { nftPrice, nftTitle, collection } = useModalsContext();
+  const { burn, isLoading } = useBurnPortfolio();
+
+  const nftId = +nftTitle.slice(nftTitle.indexOf('#') + 1);
+  const portfolioId = collection === addressClassicCollection ? classicPotrfolioId : ecosystemPortfolioId;
 
   const nftPriceToNumber = +nftPrice;
   const fee = nftPriceToNumber * 0.005;
@@ -35,7 +42,7 @@ export const BurnNftModal = () => {
   ]
 
   const { setModalName } = useModalsContext()
-    const isLoading = false;
+
   return (
     <>
       <CardHeader>
@@ -52,8 +59,9 @@ export const BurnNftModal = () => {
         <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
           Cancel
         </Button>
-        <Button variant={'accent'} className={'flex-1'} onClick={() => setModalName('')}>
-          {isLoading && <Loader2 className='animate-spin' />}
+        <Button variant={'accent'} className={'flex-1'}
+          onClick={() => burn({ portfolioId, nftId })}>
+          {isLoading && <Loader2 className='animate-spin mr-2' />}
           Confirm
         </Button>
       </CardFooter>

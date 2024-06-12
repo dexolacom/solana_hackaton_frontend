@@ -1,45 +1,48 @@
 import { PublicKey} from '@solana/web3.js';
 import { TOKEN_METADATA_PROGRAM_ID } from "@/lib/blockchain/constant";
+import { programId } from '@/lib/blockchain/constant';
 
-export const getCollectionAddresses = async (programId: PublicKey) => {
-  const associatedTokenAccount = PublicKey.findProgramAddressSync(
+export const getCollectionAddresses = async (portfolioId: number) => {
+  const collectionMint = PublicKey.findProgramAddressSync(
     [
-      Buffer.from("collection")
+      Buffer.from("collection"),
+      programId.toBuffer(),
+      Buffer.from([portfolioId])
     ],
     programId
   )[0]
 
-  const metadataAccountAddress = PublicKey.findProgramAddressSync(
+  const collectionMetadata = PublicKey.findProgramAddressSync(
     [
       Buffer.from("metadata"),
       TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      associatedTokenAccount.toBuffer(),
+      collectionMint.toBuffer(),
     ],
     TOKEN_METADATA_PROGRAM_ID
   )[0]
 
-  const masterEditionAccountAddress = PublicKey.findProgramAddressSync(
+  const collectionMasterEdition = PublicKey.findProgramAddressSync(
     [
       Buffer.from("metadata"),
       TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-      associatedTokenAccount.toBuffer(),
+      collectionMint.toBuffer(),
       Buffer.from("edition")
     ],
     TOKEN_METADATA_PROGRAM_ID
   )[0]
 
-  const onchainDataAddress = PublicKey.findProgramAddressSync(
+  const onchainCollectionData = PublicKey.findProgramAddressSync(
     [
       Buffer.from("onchain-data"),
-      metadataAccountAddress.toBuffer(),
+      collectionMint.toBuffer(),
     ],
     programId
   )[0]
 
   return {
-    tokenAccount: associatedTokenAccount,
-    metadataAccountAddress,
-    masterEditionAccountAddress,
-    onchainDataAddress
+    collectionMint,
+    collectionMetadata,
+    collectionMasterEdition,
+    onchainCollectionData
   }
 }
