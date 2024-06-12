@@ -7,5 +7,5 @@ import { Skeleton } from '@/components/common/Skeleton/Skeleton.tsx';
 export const ClassicItemTable = () => {
   const { dataTable, isLoading } = useItemTableData({ template: classicTemplate });
 
-  return <div>{isLoading ? <Skeleton height={590} /> : <DataTable columns={columns} data={dataTable} />}</div>;
+  return <div>{isLoading ? <Skeleton height={670} /> : <DataTable columns={columns} data={dataTable} />}</div>;
 };

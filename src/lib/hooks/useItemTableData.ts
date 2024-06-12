@@ -5,6 +5,7 @@ import { currencyFormatter } from '@/lib/utils';
 import { useLocation } from 'react-router-dom';
 import { useNftData } from '../blockchain/hooks/useNftData';
 import { coins } from '../blockchain/constant';
+import { OperationType, decimalsOperations } from '../helpers/decimalsOperations';
 
 interface TemplateType {
   symbol: string;
@@ -53,7 +54,7 @@ export const useItemTableData = ({ template }: UseTableData) => {
         coinPrice: currencyFormatter(match.coinPrice),
         change24h: `${match.change24h?.toFixed(2)}%`,
         marketCap: currencyFormatter(match.marketCap),
-        coinAmount: ((tokensAmount?.[item.symbol] ?? 0) / (decimals ?? 0)) * 10
+        coinAmount: (decimalsOperations((tokensAmount?.[item.symbol] ?? 0) ,(decimals ?? 0), OperationType.MUL))
       };
     } else {
       return stub;

@@ -3,6 +3,7 @@ import { useSolanaProjectById } from '@/lib/api/hooks/useSolanaProjectById';
 import { CollectionType } from '../api/hooks/useSolanaRate';
 import { useNftData } from '../blockchain/hooks/useNftData';
 import { coins } from '../blockchain/constant';
+import { OperationType, decimalsOperations } from '../helpers/decimalsOperations';
 
 interface UseCurrentPriceNftArgs {
   collection: CollectionType;
@@ -28,7 +29,8 @@ export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs
   const currentPrice = coinsToReduce?.reduce((accumulator, coin) => {
     const amount = tokensAmount?.[coin.symbol] ?? 0;
     const decimals = coins.find((item) => item.currency === coin.symbol)?.decimals ?? 0;
-    return accumulator + ((coin.coinPrice * amount) / decimals) * 10;
+    const countCoins = decimalsOperations(coin.coinPrice, amount, OperationType.MUL);
+    return accumulator + ((decimalsOperations(countCoins, decimals, OperationType.DIV)));
   }, 0);
 
   return { currentPrice, isLoading };

@@ -3,6 +3,7 @@ import { getCoinData } from '../helpers/getCoinData';
 import { PublicKey } from '@solana/web3.js';
 import { connection } from '@/lib/blockchain/constant';
 import { useQuery } from '@tanstack/react-query';
+import { OperationType, decimalsOperations } from '@/lib/helpers/decimalsOperations';
 
 export const useTotalInvested = (mintCollection: string) => {
   const { solanaRate } = useSolanaRate();
@@ -38,9 +39,9 @@ export const useTotalInvested = (mintCollection: string) => {
         const isUsdcToken = tokenAddress === usdcData.mint;
         //@ts-ignore
         const amount = transaction?.meta?.innerInstructions?.[0].instructions[2].parsed.info.amount;
-        const convertAmount = isUsdcToken ? amount / 10e4 : amount / solData.decimals;
+        const convertAmount = isUsdcToken ? decimalsOperations(amount, 1e5, OperationType.DIV) : decimalsOperations(amount,solData.decimals, OperationType.DIV);
 
-        const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
+        const investedPrice = isUsdcToken ? convertAmount : decimalsOperations((solanaRate ?? 0), convertAmount, OperationType.MUL);
 
         return acc + investedPrice;
       }, 0);

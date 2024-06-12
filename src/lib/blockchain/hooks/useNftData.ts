@@ -6,6 +6,7 @@ import { PublicKey } from '@solana/web3.js';
 import { getCoinData } from '../helpers/getCoinData';
 import { connection } from '@/lib/blockchain/constant';
 import { useEffect, useState } from 'react';
+import { OperationType, decimalsOperations } from '@/lib/helpers/decimalsOperations';
 
 export const useNftData = () => {
   const [cards, setCards] = useState<Record<string, any[]>>();
@@ -99,11 +100,11 @@ export const useNftData = () => {
 
     //@ts-ignore
     const amount = parsedTransaction?.meta?.innerInstructions[0].instructions[2].parsed.info.amount;
-    const convertAmount = isUsdcToken ? amount / 10e4 : amount / solData.decimals;
+    const convertAmount = isUsdcToken ? decimalsOperations(amount,1e5, OperationType.DIV) : decimalsOperations(amount, solData.decimals, OperationType.DIV);
 
     const date = new Date(parsedTransaction!.blockTime! * 1000);
     const formattedDate = date.toLocaleString();
-    const investedPrice = isUsdcToken ? convertAmount : (solanaRate ?? 0) * convertAmount;
+    const investedPrice = isUsdcToken ? convertAmount : decimalsOperations((solanaRate ?? 0), convertAmount, OperationType.MUL);
 
     return { investedPrice, formattedDate, mint, tokensAmount };
   };
