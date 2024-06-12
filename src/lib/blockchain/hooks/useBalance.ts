@@ -1,6 +1,6 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useEffect, useState, useCallback } from 'react';
-import { connection } from '../blockchain/constant';
+import { connection } from '../constant';
 
 export const useBalance = () => {
   const [balance, setBalance] = useState(0);

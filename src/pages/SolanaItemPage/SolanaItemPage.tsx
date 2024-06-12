@@ -16,9 +16,11 @@ import { currencyFormatter } from '@/lib/utils';
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import { addressEcosystemCollection } from '@/lib/blockchain/constant';
 import { ecosystemHoldings } from '@/lib/constants';
+import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 
 const SolanaItemPage = () => {
   const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  useNavigateTo('/');
   // const ecosystemInvested = 0;
   // const isLoadingEcosystem = false;
 

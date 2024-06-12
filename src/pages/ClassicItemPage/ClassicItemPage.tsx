@@ -16,10 +16,11 @@ import { currencyFormatter } from '@/lib/utils';
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { classicHoldings } from '@/lib/constants';
+import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 
 const ClassicItemPage = () => {
   const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
-
+  useNavigateTo('/');
   // const classicInvested = 0;
   // const isLoadingClassic = false;
   const tempData = {

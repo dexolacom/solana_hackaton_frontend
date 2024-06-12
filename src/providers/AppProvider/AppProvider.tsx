@@ -1,4 +1,4 @@
-import { useBalance } from '@/lib/hooks/useBalance.ts';
+import { useBalance } from '@/lib/blockchain/hooks/useBalance.ts';
 import { createContext, useContext, useMemo } from 'react';
 import { AppContextProps, AppProviderProps } from './types.ts';
 
