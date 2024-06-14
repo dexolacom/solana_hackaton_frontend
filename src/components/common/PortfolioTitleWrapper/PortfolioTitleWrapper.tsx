@@ -1,9 +1,12 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react';
 
-export const PortfolioTitleWrapper = ({children}:{children: ReactNode}) => {
+export const PortfolioTitleWrapper = ({ children, image }: { children: ReactNode; image: string }) => {
   return (
-    <div className={`p-6 bg-[url('@/assets/images/classicCase.webp')] bg-cover flex-1 flex flex-col justify-between rounded-xl shadow-sm`}>
+    <div
+      className={`p-6 bg-cover flex-1 flex flex-col justify-between rounded-xl shadow-sm`}
+      style={{ backgroundImage: `url('${image}')` }}
+    >
       {children}
     </div>
-  )
-}
+  );
+};

@@ -9,8 +9,8 @@ interface AmountCardProps {
     number: string;
   };
   variant?: 'bordered';
-  headerVariant? : 'portfolio';
-  descriptionVariant? :'portfolio';
+  headerVariant?: 'portfolio';
+  descriptionVariant?: 'portfolio';
   className?: string;
   children?: ReactNode;
 }
@@ -22,7 +22,7 @@ export const AmountCard = (props: AmountCardProps) => {
   const cardVariants = cva('bg-inherit p-0', {
     variants: {
       variant: {
-        bordered: 'border p-6',
+        bordered: 'border p-6'
         // accent: 'bg-accent text-accent-foreground',
         // accentTeal: 'bg-accent-accentTeal text-accent-foreground',
         // accentGray: 'bg-accent-accentGray text-accent-foreground'
@@ -33,7 +33,7 @@ export const AmountCard = (props: AmountCardProps) => {
   const headerVariants = cva('font-bold text-lg', {
     variants: {
       variant: {
-        portfolio: 'm-0 text-base font-semibold',
+        portfolio: 'm-0 text-base font-semibold'
       }
     }
   });
@@ -41,7 +41,7 @@ export const AmountCard = (props: AmountCardProps) => {
   const descriptionVariants = cva('text-[2.5rem] font-roboto font-bold', {
     variants: {
       variant: {
-        portfolio: 'm-0 text-m text-4xl',
+        portfolio: 'm-0 text-m text-4xl'
       }
     }
   });

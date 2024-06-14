@@ -9,14 +9,14 @@ import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
 import { SolanaPageTable } from '@/components/features/tabels/SolanaPageTable/SolanaPageTable.tsx';
 import { currencyFormatter } from '@/lib/utils';
-import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-import { addressEcosystemCollection } from '@/lib/blockchain/constant';
 import { ecosystemHoldings } from '@/lib/constants';
+import cardBackground from '@/assets/images/ecosystemCase.webp';
+import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
 
 const SolanaPage = () => {
-  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  // const ecosystemInvested = 0;
-  // const isLoadingEcosystem = false;
+  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+  const ecosystemInvested = 0;
+  const isLoadingEcosystem = false;
 
   const tempData = {
     amount: {
@@ -32,10 +32,12 @@ const SolanaPage = () => {
 
   return (
     <div>
-      <BackLink title={'Home'} path={'/'} />
-      <PageTitle title={'solana ecosystem'} />
+      <BackLink title={'Home Page'} path={'/'} />
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} />
+        <PortfolioTitleWrapper image={cardBackground}>
+          <PageTitle title={'solana ecosystem'} />
+          <AmountCard amount={tempData.amount} headerVariant='portfolio' descriptionVariant='portfolio' />
+        </PortfolioTitleWrapper>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'solana'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>

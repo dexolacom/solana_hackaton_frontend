@@ -12,6 +12,7 @@ import { currencyFormatter } from '@/lib/utils';
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { classicHoldings } from '@/lib/constants';
+import cardBackground from '@/assets/images/classicCase.webp';
 import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
 
 const ClassicPage = () => {
@@ -35,7 +36,7 @@ const ClassicPage = () => {
     <div>
       <BackLink title={'Home page'} path={'/'} />
       <PageHeader>
-        <PortfolioTitleWrapper>
+        <PortfolioTitleWrapper image={cardBackground}>
           <PageTitle title={'classic'} />
           <AmountCard amount={tempData.amount} headerVariant='portfolio' descriptionVariant='portfolio' />
         </PortfolioTitleWrapper>
