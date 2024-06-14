@@ -39,14 +39,14 @@ const ClassicPage = () => {
           <PageTitle title={'classic'} />
           <AmountCard amount={tempData.amount} headerVariant='portfolio' descriptionVariant='portfolio' />
         </PortfolioTitleWrapper>
-        <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classic'} />
-        <DescriptionCard className={'flex-1'} description={tempData.description} />
+        <HoldingsCard className={'flex-1 shadow-sm'} holdings={tempData.holdings} progressVariant={'classic'} />
+        <DescriptionCard className={'flex-1 shadow-sm'} description={tempData.description} />
       </PageHeader>
       <div className={'flex gap-8 items-start'}>
-        <AssetsCard className={'flex-1'}>
+        <AssetsCard className={'flex-1 shadow-sm'}>
           <ClassicPageTable />
         </AssetsCard>
-        <InvestCard className={'flex-2'}>
+        <InvestCard className={'flex-2 shadow-sm'}>
           <ClassicForm />
         </InvestCard>
       </div>

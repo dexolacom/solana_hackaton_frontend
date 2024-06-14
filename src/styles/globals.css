@@ -16,7 +16,7 @@
 
     --card: 0, 0%, 100%; /* white */
     --card-foreground: 0, 0%, 0%, 1; /* slate-900 */
-    --card-additional-foreground: 215, 16%, 47%; /* slate-500 */
+    --card-additional-foreground: 240, 1%, 61%, 1;
 
     /*--accent: 217, 91%, 60%; !* blue-500 *!*/
     --accent: 172, 66%, 50%, 1;

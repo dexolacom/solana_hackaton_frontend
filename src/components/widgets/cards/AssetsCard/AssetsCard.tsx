@@ -13,8 +13,8 @@ export const AssetsCard = (props: AssetsCardProps) => {
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className={'flex gap-2'}>
-          <img src={assetsIcon} className={'w-4 h-4'} />
+        <CardTitle className={'flex gap-2 items-center font-bold text-base'}>
+          <img src={assetsIcon} className={'w-6 h-6'} />
           assets
         </CardTitle>
       </CardHeader>

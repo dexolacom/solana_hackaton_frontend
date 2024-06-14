@@ -19,7 +19,7 @@ export const HoldingsProgress = (props: HoldingsProgressProps) => {
   return (
     <div>
       {isProgress && (
-        <div className={'relative h-7 w-full flex overflow-hidden rounded-md gap-1 mb-4'}>
+        <div className={'relative h-14 w-full flex overflow-hidden gap-1 mb-4'}>
           {holdings.map((item, i) => (
             <Progress key={i} percent={item?.percent} className={progressColors[item?.name]} />
           ))}

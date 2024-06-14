@@ -34,7 +34,7 @@ export const PortfolioCard = (props: PortfolioCardProps) => {
   const { amount, holdings } = content;
 
   return (
-    <Card className='flex-1 p-0 shadow-[0px_4px_16px_8px_rgba(0,0,0,0.02)]'>
+    <Card className='flex-1 p-0 shadow-sm'>
       <CardHeader
         className={`mb-0 bg-cover h-[227px] rounded-lg px-6 py-10 items-start flex-col justify-start gap-4`}
         style={{ backgroundImage: `url('${backgroundImage}')` }}

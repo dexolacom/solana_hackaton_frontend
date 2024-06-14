@@ -17,6 +17,10 @@ module.exports = {
         raleway: ['Raleway', 'sans-serif'],
         kanit: ['Kanit', 'sans-serif']
       },
+      boxShadow: {
+        'sm': '0px 2px 8px 2px rgba(0, 0, 0, 0.04);',
+        'm': '0px 4px 16px 8px rgba(0, 0, 0, 0.02)',
+      },
       fontWeight: {
         light: '300',
         regular: '400',
