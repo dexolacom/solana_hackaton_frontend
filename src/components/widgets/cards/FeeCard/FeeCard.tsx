@@ -7,11 +7,11 @@ interface InfoCardProps {
   }[];
 }
 
-export const InfoCard = (props: InfoCardProps) => {
+export const FeeCard = (props: InfoCardProps) => {
   const { data } = props;
 
   return (
-    <Card className={'bg-card border text-foreground'}>
+    <Card className={'bg-card border text-foreground p-4'}>
       <CardContent className={'flex flex-col gap-1'}></CardContent>
       {data.map((item, i) => (
         <div key={i} className={'flex items-center justify-between text-sm'}>

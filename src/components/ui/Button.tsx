@@ -8,7 +8,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        accent: 'bg-actions text-actions-foreground hover:bg-slate-900/90',
+        accent: 'bg-actions text-actions-foreground hover:bg-black',
         secondary: 'bg-slate-500 text-actions-foreground hover:bg-slate-500/90',
         destructive: 'bg-red-600 text-actions-foreground hover:bg-red-600/90',
         muted: 'bg-slate-200 text-foreground',
@@ -17,7 +17,7 @@ const buttonVariants = cva(
       },
       size: {
         lg: 'h-16 px-8',
-        default: 'h-10 px-4 py-2',
+        default: 'h-12 px-6 py-2.5',
         sm: 'h-9 px-3',
         icon: 'h-8 w-8'
       }

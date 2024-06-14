@@ -3,7 +3,7 @@ import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/
 import { Button } from '@/components/ui/Button.tsx';
 import { Loader2 } from 'lucide-react';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
+import { FeeCard } from '@/components/widgets/cards/FeeCard/FeeCard.tsx';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { currencyFormatter, shortAddress } from '@/lib/utils';
 import { useBurnPortfolio } from '@/lib/blockchain/hooks/useBurnPortfolio';
@@ -53,7 +53,7 @@ export const BurnNftModal = () => {
           Please, confirm you’re going to burn <span className={'font-black'}>{nftTitle}</span>. This action cannot be
           undone.
         </p>
-        <InfoCard data={tempData} />
+        <FeeCard data={tempData} />
       </CardContent>
       <CardFooter className={'gap-4 mt-6'}>
         <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
