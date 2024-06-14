@@ -27,13 +27,13 @@ export const DescriptionCard = (props: DescriptionCardProps) => {
 
   return (
     <Card className={cn(cardVariants({ variant, className }))}>
-      <CardHeader>
-        <CardTitle className={'flex gap-2'}>
-          {withIcon && <img src={descIcon} className={'w-4 h-4'} />}
+      <CardHeader className='mb-6'>
+        <CardTitle className={'flex gap-2 items-center font-bold'}>
+          {withIcon && <img src={descIcon} className={'w-6 h-6'} />}
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent className={'text-sm'}>{text}</CardContent>
+      <CardContent className={'text-base font-medium'}>{text}</CardContent>
     </Card>
   );
 };

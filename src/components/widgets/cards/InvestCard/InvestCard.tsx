@@ -12,10 +12,10 @@ export const InvestCard = (props: InvestCardProps) => {
   const { className, children } = props;
 
   return (
-    <Card className={cn('bg-card text-foreground w-[400px] font-regular', className)}>
+    <Card className={cn('bg-card text-foreground w-[400px] font-semibold', className)}>
       <CardHeader>
-        <CardTitle className={'flex gap-2'}>
-          <img src={investIcon} className={'w-4 h-4 mt-[2px]'} />
+        <CardTitle className={'flex gap-2 font-bold items-center'}>
+          <img src={investIcon} className={'w-6 h-6 mt-[2px]'} />
           invest
         </CardTitle>
       </CardHeader>

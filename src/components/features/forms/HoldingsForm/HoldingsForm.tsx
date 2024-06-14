@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/Input.tsx';
 import { Button } from '@/components/ui/Button.tsx';
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx';
+import { FeeCard } from '@/components/widgets/cards/FeeCard/FeeCard.tsx';
 import { useHoldingsForm } from '@/components/features/forms/HoldingsForm/lib.tsx';
 import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
 import { useEffect } from 'react';
@@ -115,7 +115,7 @@ export const HoldingsForm = () => {
             </FormItem>
           )}
         /> */}
-        <InfoCard data={infoCardData} />
+        <FeeCard data={infoCardData} />
         <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
           {isLoading && <Loader2 className='animate-spin' />}
           <span>Invest</span>

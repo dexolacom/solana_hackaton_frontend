@@ -27,7 +27,7 @@ export const columns: ColumnDef<TableData>[] = [
               href={currencyLinks[symbol]}
               target='_blank'
               rel='noopener noreferrer'
-              className={'font-medium underline underline-offset-2'}
+              className={'font-bold underline underline-offset-2'}
             >
               {symbol}
             </a>

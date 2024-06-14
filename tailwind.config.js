@@ -17,6 +17,10 @@ module.exports = {
         raleway: ['Raleway', 'sans-serif'],
         kanit: ['Kanit', 'sans-serif']
       },
+      boxShadow: {
+        sm: '0px 2px 8px 2px rgba(0, 0, 0, 0.04);',
+        m: '0px 4px 16px 8px rgba(0, 0, 0, 0.02)'
+      },
       fontWeight: {
         light: '300',
         regular: '400',
@@ -44,9 +48,7 @@ module.exports = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-          accentTeal: 'hsl(var(--accent-teal))',
-          accentGray: 'hsl(var(--accent-gray))'
+          foreground: 'hsl(var(--accent-foreground))'
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
