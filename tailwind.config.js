@@ -14,7 +14,8 @@ module.exports = {
     extend: {
       fontFamily: {
         roboto: ['Roboto mono', 'mono-space'],
-        lufga: ['Lufga', 'sans-serif']
+        raleway: ['Raleway', 'sans-serif'],
+        kanit: ['Kanit', 'sans-serif']
       },
       fontWeight: {
         light: '300',
@@ -24,7 +25,7 @@ module.exports = {
         bold: '700'
       },
       colors: {
-        border: 'hsl(var(--border))',
+        border: 'rgba(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
@@ -35,7 +36,11 @@ module.exports = {
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+          foreground: 'hsl(var(--muted-foreground))',
+          background: 'hsl(var(--muted-background))'
+        },
+        disabled: {
+          foreground: 'hsl(var(--disabled-foreground))'
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',

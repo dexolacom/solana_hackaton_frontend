@@ -54,7 +54,7 @@ export const columns: ColumnDef<TableData>[] = [
     header: 'Coin Price',
     cell: ({ row }) => {
       const { change24h, coinPrice } = row.original;
-      return <div className={+change24h.slice(0, -1) > 0 ? 'text-lime-600' : "text-red-500" }>{coinPrice}</div>
+      return <div className={+change24h.slice(0, -1) > 0 ? 'text-lime-600' : 'text-red-500'}>{coinPrice}</div>;
     }
   },
   {
@@ -62,7 +62,7 @@ export const columns: ColumnDef<TableData>[] = [
     header: '24h Change',
     cell: ({ row }) => {
       const { change24h } = row.original;
-      return <div className={+change24h.slice(0, -1) > 0 ? 'text-lime-600' : "text-red-500" }>{change24h}</div>
+      return <div className={+change24h.slice(0, -1) > 0 ? 'text-lime-600' : 'text-red-500'}>{change24h}</div>;
     }
   },
   {

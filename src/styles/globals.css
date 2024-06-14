@@ -1,24 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap');
-
-@font-face {
-  font-family: 'Lufga';
-  src: url('../assets/fonts/Lufga-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Lufga Medium';
-  src: url('../assets/fonts/Lufga-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Lufga Light';
-  src: url('../assets/fonts/Lufga-Light.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Lufga SemiBold';
-  src: url('../assets/fonts/Lufga-SemiBold.woff2') format('woff2');
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,25 +9,29 @@
 @layer base {
   :root {
     --background: 210, 40%, 96%; /* slate-300 */
-    --foreground: 222.2 47.4% 11.2%; /* slate-900 */
+    --foreground: 0, 0%, 0%, 1; /* black */
 
     --actions: 222, 47%, 11%; /* slate-900 */
     --actions-foreground: 0, 0%, 100%; /* white */
 
     --card: 0, 0%, 100%; /* white */
-    --card-foreground: 222.2 47.4% 11.2%; /* slate-900 */
+    --card-foreground: 0, 0%, 0%, 1; /* slate-900 */
     --card-additional-foreground: 215, 16%, 47%; /* slate-500 */
 
     /*--accent: 217, 91%, 60%; !* blue-500 *!*/
-    --accent: 221, 83%, 53%; /* blue-600 */
+    --accent: 172, 66%, 50%, 1;
+    --accent-link: 0, 0%, 52%, 1;
     --accent-foreground: 0, 0%, 100%; /* white */
     --accent-teal: 175, 84%, 32%; /* teal-600 */
     --accent-gray: 215, 14%, 34%; /* gray-600 */
 
     --muted: 214, 32%, 91%; /* slate-200 */
-    --muted-foreground: 215, 20%, 65%; /*slate-400*/
+    --muted-foreground: 0, 0%, 52%, 1;
+    --muted-background: 0, 0%, 80%;
 
-    --border: 213, 27%, 84%;
+    --disabled-foreground: 0, 0%, 30.19607843137255%;
+
+    --border: 0, 0, 0, 0.08;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
@@ -57,8 +43,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Lufga', 'sans-serif';
+    @apply text-foreground;
+    font-family: 'Raleway', 'sans-serif';
   }
 
   *,
@@ -75,5 +61,6 @@
   body,
   #root {
     height: 100%;
+    scroll-behavior: smooth;
   }
 }

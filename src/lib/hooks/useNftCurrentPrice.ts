@@ -30,7 +30,7 @@ export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs
     const amount = tokensAmount?.[coin.symbol] ?? 0;
     const decimals = coins.find((item) => item.currency === coin.symbol)?.decimals ?? 0;
     const countCoins = decimalsOperations(coin.coinPrice, amount, OperationType.MUL);
-    return accumulator + ((decimalsOperations(countCoins, decimals, OperationType.DIV)));
+    return accumulator + decimalsOperations(countCoins, decimals, OperationType.DIV);
   }, 0);
 
   return { currentPrice, isLoading };

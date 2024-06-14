@@ -64,7 +64,7 @@ const ClassicEarnPage = () => {
       <PageTitle title={'Classic + Earn'} isBadges />
 
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accentTeal'} />
+        <AmountCard className={'flex-1'} amount={tempData.amount} />
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classicEarn'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>

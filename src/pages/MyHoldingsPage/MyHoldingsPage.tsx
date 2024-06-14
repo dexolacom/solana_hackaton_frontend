@@ -13,12 +13,14 @@ import { useSearchParams } from 'react-router-dom';
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData';
+import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal';
 
 const MyHoldingsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { invested } = useNftData();
+  useNavigateTo('/');
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
 
@@ -49,7 +51,7 @@ const MyHoldingsPage = () => {
       <div className={'flex gap-8'}>
         <div className='flex-1'>
           <PageHeader>
-            <AmountCard className={'w-[35%]'} amount={data.amount} variant={data.amountCardVariant}>
+            <AmountCard className={'w-[35%]'} amount={data.amount}>
               <div className={'mt-4 flex flex-col gap-1'}>
                 <span className={'font-regular text-sm'}>Invested</span>
                 <span className={'font-roboto font-medium'}>{currencyFormatter(invested[holdingsFilter])}</span>
