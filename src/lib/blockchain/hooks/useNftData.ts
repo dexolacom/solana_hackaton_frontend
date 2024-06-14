@@ -100,11 +100,15 @@ export const useNftData = () => {
 
     //@ts-ignore
     const amount = parsedTransaction?.meta?.innerInstructions[0].instructions[2].parsed.info.amount;
-    const convertAmount = isUsdcToken ? decimalsOperations(amount,1e5, OperationType.DIV) : decimalsOperations(amount, solData.decimals, OperationType.DIV);
+    const convertAmount = isUsdcToken
+      ? decimalsOperations(amount, 1e5, OperationType.DIV)
+      : decimalsOperations(amount, solData.decimals, OperationType.DIV);
 
     const date = new Date(parsedTransaction!.blockTime! * 1000);
     const formattedDate = date.toLocaleString();
-    const investedPrice = isUsdcToken ? convertAmount : decimalsOperations((solanaRate ?? 0), convertAmount, OperationType.MUL);
+    const investedPrice = isUsdcToken
+      ? convertAmount
+      : decimalsOperations(solanaRate ?? 0, convertAmount, OperationType.MUL);
 
     return { investedPrice, formattedDate, mint, tokensAmount };
   };

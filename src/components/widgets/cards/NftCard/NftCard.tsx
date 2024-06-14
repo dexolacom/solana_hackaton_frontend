@@ -1,5 +1,5 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
-import defaultCard from '@/assets/defaultCard.png';
+import defaultCard from '@/assets/images/defaultCard.png';
 import { Button } from '@/components/ui/Button.tsx';
 // import { ArrowUpDown } from 'lucide-react'
 // import { Flame } from 'lucide-react'

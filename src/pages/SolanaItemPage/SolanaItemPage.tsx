@@ -57,7 +57,7 @@ const SolanaItemPage = () => {
         </div>
       </PageTitle>
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accentTeal'}>
+        <AmountCard className={'flex-1'} amount={tempData.amount}>
           <div className={'mt-4 flex flex-col gap-1'}>
             <span className={'font-regular text-sm'}>Invested</span>
             <span className={'font-roboto font-medium'}>{currencyFormatter(invested ? +invested : 0)}</span>

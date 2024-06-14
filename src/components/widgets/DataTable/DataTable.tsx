@@ -38,7 +38,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
               <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'} className={'border-none'}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    className={'text-center font-roboto [&:nth-child(2)]:font-lufga [&:nth-child(1)]:font-lufga'}
+                    className={'text-center font-roboto [&:nth-child(2)]:font-raleway [&:nth-child(1)]:font-raleway'}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

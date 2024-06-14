@@ -1,5 +1,8 @@
 import { ProjectType } from '@/lib/types';
 import { currencyFormatter } from '@/lib/utils';
+import classicCase from '@/assets/images/classicCase.webp';
+import ecosystemCase from '@/assets/images/ecosystemCase.webp';
+import classicEarnCase from '@/assets/images/classicEarnCase.webp';
 
 export const classicHoldings = {
   holdings: {
@@ -109,16 +112,13 @@ export const getCardsData = ({
           title: 'Total amount invested',
           number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0)
         },
-        ...classicHoldings,
-        description: {
-          title: 'Description',
-          text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.'
-        }
+        ...classicHoldings
       },
       linkPath: `/classic/${projectList?.find((item) => item.name === 'Classic')?.id ?? ''}`,
       buttonVariant: 'accent',
-      amountCardVariant: 'accent',
-      progressVariant: 'classic'
+      progressVariant: 'classic',
+      amountVariant: 'bordered',
+      backgroundImage: classicCase
     },
     {
       title: 'solana ecosystem',
@@ -128,16 +128,13 @@ export const getCardsData = ({
           title: 'Total amount invested',
           number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
         },
-        ...ecosystemHoldings,
-        description: {
-          title: 'Description',
-          text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`
-        }
+        ...ecosystemHoldings
       },
       linkPath: `/solana/${projectList?.find((item) => item.name === 'Solana Ecosystem')?.id ?? ''}`,
       buttonVariant: 'accent',
-      amountCardVariant: 'accentTeal',
-      progressVariant: 'solana'
+      progressVariant: 'solana',
+      amountVariant: 'bordered',
+      backgroundImage: ecosystemCase
     },
     {
       title: 'classic + earn',
@@ -145,7 +142,7 @@ export const getCardsData = ({
       content: {
         amount: {
           title: 'Total amount invested',
-          number: 'Coming soon'
+          number: 'Coming soon...'
         },
         holdings: {
           title: 'Holdings',
@@ -183,16 +180,13 @@ export const getCardsData = ({
               percent: 5
             }
           ]
-        },
-        description: {
-          title: 'Description',
-          text: 'The Classic + Earn portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. It channels these assets into staking/landing/vaults for additional earning opportunities while aiming to optimize returns.'
         }
       },
       linkPath: '/classic-earn',
       buttonVariant: 'muted',
-      amountCardVariant: 'accentGray',
-      progressVariant: 'classicEarn'
+      progressVariant: 'classicEarn',
+      amountVariant: 'bordered',
+      backgroundImage: classicEarnCase
     }
   ];
 };

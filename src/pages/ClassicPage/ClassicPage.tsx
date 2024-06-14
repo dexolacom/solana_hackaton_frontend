@@ -35,7 +35,7 @@ const ClassicPage = () => {
       <BackLink title={'Home'} path={'/'} />
       <PageTitle title={'classic'} />
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} variant={'accent'} />
+        <AmountCard className={'flex-1'} amount={tempData.amount} />
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classic'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>

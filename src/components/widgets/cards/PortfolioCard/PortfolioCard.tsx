@@ -2,13 +2,12 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Badge } from '@/components/ui/Badge.tsx';
 import { AmountCard } from '@/components/widgets/cards/AmountCard/AmountCard.tsx';
 import { HoldingsCard } from '@/components/widgets/cards/HoldingsCard/HoldingsCard.tsx';
-import { DescriptionCard } from '@/components/widgets/cards/DescritptionCard/DescriptionCard.tsx';
 import { AppLink } from '@/components/common/AppLink/AppLink.tsx';
 import { ArrowRight } from 'lucide-react';
 
-export interface HomeCardProps {
+export interface PortfolioCardProps {
   title: string;
-  badges?: string[];
+  backgroundImage: string;
   content: {
     amount: {
       title: string;
@@ -21,33 +20,33 @@ export interface HomeCardProps {
         percent: string | number;
       }[];
     };
-    description: {
-      title: string;
-      text: string;
-    };
   };
   linkPath: string;
   buttonVariant: 'muted' | 'accent';
-  amountCardVariant: 'accent' | 'accentTeal' | 'accentGray';
   progressVariant: 'classic' | 'classicEarn' | 'solana';
+  amountCardVariant?: 'bordered';
+  badges?: string[];
 }
 
-export const HomeCard = (props: HomeCardProps) => {
-  const { title, badges, content, linkPath, buttonVariant, amountCardVariant, progressVariant } = props;
-  const { amount, holdings, description } = content;
+export const PortfolioCard = (props: PortfolioCardProps) => {
+  const { title, badges, content, linkPath, buttonVariant, amountCardVariant, progressVariant, backgroundImage } =
+    props;
+  const { amount, holdings } = content;
 
   return (
-    <Card className='flex-1'>
-      <CardHeader className={'mb-0'}>
+    <Card className='flex-1 p-0 shadow-[0px_4px_16px_8px_rgba(0,0,0,0.02)]'>
+      <CardHeader
+        className={`mb-0 bg-cover h-[227px] rounded-lg px-6 py-10 items-start flex-col justify-start gap-4`}
+        style={{ backgroundImage: `url('${backgroundImage}')` }}
+      >
         <CardTitle className={'text-2xl font-semibold'}>{title}</CardTitle>
         <span className={'flex gap-2'}>{badges?.map((badge, i) => <Badge key={i}>{badge}</Badge>)}</span>
       </CardHeader>
-      <CardContent className={'flex flex-col gap-4 py-6'}>
+      <CardContent className={'flex flex-col gap-4 p-6'}>
         <AmountCard amount={amount} variant={amountCardVariant} />
-        <HoldingsCard variant={'bordered'} holdings={holdings} progressVariant={progressVariant} />
-        <DescriptionCard variant={'bordered'} description={description} withIcon={false} className=' lg:h-[182px]' />
+        <HoldingsCard variant={'bordered'} holdings={holdings} progressVariant={progressVariant} isProgress={false} />
       </CardContent>
-      <CardFooter>
+      <CardFooter className={'pb-10 px-6'}>
         <AppLink to={linkPath} variant={buttonVariant} className={'w-full self-end'}>
           Details & Invest
           <ArrowRight className={'w-6 h-6'} />
