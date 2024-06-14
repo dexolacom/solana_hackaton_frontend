@@ -8,7 +8,7 @@ interface HeroProps {
 
 export const Hero = ({ scrollToPortfolios }: HeroProps) => {
   return (
-    <section className="relative overflow-hidden w-full px-[80px] pt-[224px] pb-[80px] bg-[url('@/assets/heroBackground.svg')] bg-cover rounded-3xl mb-[120px] shadow-[0px_4px_16px_8px_rgba(0,0,0,0.02)]">
+    <section className="relative overflow-hidden w-full px-[80px] pt-[224px] pb-[80px] bg-[url('@/assets/heroBackground.svg')] bg-cover rounded-3xl mb-[120px] shadow-[0px_4px_16px_8px_rgba(0,0,0,0.02)] mt-20">
       <div className='flex items-center gap-4 absolute top-[65px] left-[-40px] h-[58px] w-[395px] border-2 border-white rounded-[50px] pl-[80px]'>
         <span className='text-2xl text-white uppercase font-semibold'>Built on</span>
         <img src={solana} alt='Solana' />

@@ -12,6 +12,7 @@ import { currencyFormatter } from '@/lib/utils';
 import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { classicHoldings } from '@/lib/constants';
+import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
 
 const ClassicPage = () => {
   const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
@@ -32,10 +33,12 @@ const ClassicPage = () => {
 
   return (
     <div>
-      <BackLink title={'Home'} path={'/'} />
-      <PageTitle title={'classic'} />
+      <BackLink title={'Home page'} path={'/'} />
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount} />
+        <PortfolioTitleWrapper>
+          <PageTitle title={'classic'} />
+          <AmountCard amount={tempData.amount} headerVariant='portfolio' descriptionVariant='portfolio' />
+        </PortfolioTitleWrapper>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'classic'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>
