@@ -1,3 +1,6 @@
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
+import { useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx';
+import { Button } from '@/components/ui/Button.tsx';
 import {
   Form,
   FormControl,
@@ -7,17 +10,15 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/Form.tsx';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx';
 import { Input } from '@/components/ui/Input.tsx';
-import { Button } from '@/components/ui/Button.tsx';
-import { Loader2 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx';
 import { FeeCard } from '@/components/widgets/cards/FeeCard/FeeCard.tsx';
-import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
-import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx';
-import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
-import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx';
-import { useEffect } from 'react';
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx';
+import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
+import { Loader2 } from 'lucide-react';
+import { useDebounce } from '@/lib/hooks/useDebounce';
+import { useEffect } from 'react';
+import { useCurrencyCount } from '@/lib/hooks/useCurrencyCount';
 
 interface ClassicFormProps {
   currenciesVariant?: 'classic' | 'solana';
@@ -27,16 +28,14 @@ export const ClassicForm = (props: ClassicFormProps) => {
   const { currenciesVariant = 'classic' } = props;
   const { form, onSubmit, isLoading, solanaRate } = useClassicForm();
   const infoCardData = useFormInfo(form.watch());
-  const amount = form.watch('amount');
+  const amount = useDebounce(form.watch('amount'));
   const currency = form.watch('amountCurrency');
-  const amountWithCurrency = currency === 'USDC' ? amount : amount * (solanaRate ?? 0);
-
-  const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo;
-  const formCurrencyData = getFormCurrencyValues(amountWithCurrency, currencyInfo);
-  const currencyColumns =
-    currenciesVariant === 'classic'
-      ? { firstColumn: [0, 4], secondColumn: [4, formCurrencyData.length] }
-      : { firstColumn: [0, 5], secondColumn: [5, formCurrencyData.length] };
+  const { currencyColumns, formCurrencyData } = useCurrencyCount({
+    solanaRate: solanaRate ?? 0,
+    amount,
+    currency,
+    currenciesVariant
+  });
 
   useEffect(() => {
     onlyIntegersInputValidator();

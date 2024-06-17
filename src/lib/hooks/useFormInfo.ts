@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate.ts';
+import { useDebounce } from './useDebounce';
 
 type FormData = {
   amount: string | number;
@@ -9,7 +10,7 @@ type FormData = {
 
 export const useFormInfo = (formData: FormData) => {
   const { solanaRate } = useSolanaRate();
-  const amount = formData.amount;
+  const amount = useDebounce(formData.amount);
   const amountCurrency = formData.amountCurrency;
   const [amountUSD, setAmountUSD] = useState(0);
   const [fee, setFee] = useState(0);

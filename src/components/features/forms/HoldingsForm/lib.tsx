@@ -64,5 +64,5 @@ export const useHoldingsForm = () => {
     // await buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })
   }
 
-  return { form, onSubmit, isLoading };
+  return { form, onSubmit, isLoading, solanaRate };
 };

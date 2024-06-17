@@ -16,10 +16,23 @@ import { useHoldingsForm } from '@/components/features/forms/HoldingsForm/lib.ts
 import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
 import { useEffect } from 'react';
 import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx';
+import { useCurrencyCount } from '@/lib/hooks/useCurrencyCount';
+import { useDebounce } from '@/lib/hooks/useDebounce';
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency';
 
 export const HoldingsForm = () => {
-  const { form, onSubmit, isLoading } = useHoldingsForm();
+  const { form, onSubmit, isLoading, solanaRate } = useHoldingsForm();
   const infoCardData = useFormInfo(form.watch());
+  const amount = useDebounce(form.watch('amount'));
+  const currency = form.watch('amountCurrency');
+  const currenciesVariant = form.watch('portfolio');
+
+  const {currencyColumns, formCurrencyData} = useCurrencyCount({
+    solanaRate: solanaRate ?? 0,
+    amount,
+    currency,
+    currenciesVariant
+  });
 
   useEffect(() => {
     onlyIntegersInputValidator();
@@ -116,6 +129,7 @@ export const HoldingsForm = () => {
           )}
         /> */}
         <FeeCard data={infoCardData} />
+        {currenciesVariant && <FormCurrency data={formCurrencyData} columns={currencyColumns} />}
         <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
           {isLoading && <Loader2 className='animate-spin' />}
           <span>Invest</span>

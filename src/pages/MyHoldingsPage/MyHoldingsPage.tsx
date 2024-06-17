@@ -14,12 +14,13 @@ import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData';
 import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
+import { Skeleton } from '@/components/common/Skeleton/Skeleton';
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal';
 
 const MyHoldingsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { invested } = useNftData();
+  const { invested, isLoading: isLoadingInvested } = useNftData();
   useNavigateTo('/');
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
@@ -47,14 +48,24 @@ const MyHoldingsPage = () => {
 
   return (
     <div>
-      <MyHoldingsFilter setFilter={setSearchParams}/>
+      <MyHoldingsFilter setFilter={setSearchParams} />
       <div className={'flex gap-8'}>
         <div className='flex-1'>
           <PageHeader>
-            <AmountCard className={'w-[35%] font-bold bg-white rounden-lg shadow-sm p-6'} amount={data.amount} headerVariant='holdings'>
+            <AmountCard
+              className={'w-[35%] font-bold bg-white rounden-lg shadow-sm p-6'}
+              amount={data.amount}
+              headerVariant='holdings'
+            >
               <div className={'mt-8 flex flex-col gap-1 text-sm font-medium'}>
                 <span className={'text-sm font-medium text-muted-foreground'}>Invested</span>
-                <span className={'font-roboto'}>{currencyFormatter(invested[holdingsFilter])}</span>
+                <span className={'font-roboto'}>
+                  {isLoadingInvested ? (
+                    <Skeleton isLoader={false} height={20} width={50} />
+                  ) : (
+                    currencyFormatter(invested[holdingsFilter])
+                  )}
+                </span>
               </div>
             </AmountCard>
             <HoldingsCard

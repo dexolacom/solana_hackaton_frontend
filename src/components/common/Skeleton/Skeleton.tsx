@@ -1,17 +1,19 @@
 import { Loader2 } from 'lucide-react';
 export interface SkeletonProps {
   height?: number;
+  width?: number;
+  isLoader?: boolean;
 }
 
 export const Skeleton = (props: SkeletonProps) => {
-  const { height } = props;
+  const { height, width, isLoader = true } = props;
 
   return (
     <div
-      className={`animate-pulse w-full bg-slate-200 rounded-md flex justify-center items-center`}
-      style={{ height: `${height}px` }}
+      className={`animate-pulse bg-slate-200 rounded-md flex justify-center items-center`}
+      style={{ height: `${height}px`, width: width ? `${width}px` : '100%' }}
     >
-      <Loader2 size={80} className='animate-spin' />
+      {isLoader && <Loader2 size={80} className='animate-spin' />}
     </div>
   );
 };
