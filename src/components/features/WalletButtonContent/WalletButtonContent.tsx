@@ -26,7 +26,7 @@ export const WalletButtonContent = () => {
   };
 
   return (
-    <div className='flex gap-4 text-sm font-semibold uppercase'>
+    <div className='flex gap-4 text-lg font-semibold uppercase'>
       {publicKey ? (
         <>
           <ButtonContent />

@@ -12,6 +12,10 @@ module.exports = {
       }
     },
     extend: {
+      screens: {
+        '1440': '1440px',
+        '1920': '1920px',
+      },
       fontFamily: {
         roboto: ['Roboto mono', 'mono-space'],
         raleway: ['Raleway', 'sans-serif'],

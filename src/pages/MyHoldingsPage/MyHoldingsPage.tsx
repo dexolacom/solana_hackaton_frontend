@@ -47,18 +47,18 @@ const MyHoldingsPage = () => {
 
   return (
     <div>
-      <MyHoldingsFilter setFilter={setSearchParams} />
+      <MyHoldingsFilter setFilter={setSearchParams}/>
       <div className={'flex gap-8'}>
         <div className='flex-1'>
           <PageHeader>
-            <AmountCard className={'w-[35%]'} amount={data.amount}>
-              <div className={'mt-4 flex flex-col gap-1'}>
-                <span className={'font-regular text-sm'}>Invested</span>
-                <span className={'font-roboto font-medium'}>{currencyFormatter(invested[holdingsFilter])}</span>
+            <AmountCard className={'w-[35%] font-bold bg-white rounden-lg shadow-sm p-6'} amount={data.amount} headerVariant='holdings'>
+              <div className={'mt-8 flex flex-col gap-1 text-sm font-medium'}>
+                <span className={'text-sm font-medium text-muted-foreground'}>Invested</span>
+                <span className={'font-roboto'}>{currencyFormatter(invested[holdingsFilter])}</span>
               </div>
             </AmountCard>
             <HoldingsCard
-              className={'flex-1'}
+              className={'flex-1 shadow-sm'}
               holdings={data.holdings}
               progressVariant={data.progressVariant}
               withPercent={false}
@@ -71,7 +71,7 @@ const MyHoldingsPage = () => {
         </div>
 
         <div className={'flex flex-col items-start'}>
-          <InvestCard>
+          <InvestCard className='shadow-sm'>
             <HoldingsForm />
           </InvestCard>
         </div>

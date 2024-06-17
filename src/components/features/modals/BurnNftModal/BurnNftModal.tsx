@@ -45,21 +45,21 @@ export const BurnNftModal = () => {
 
   return (
     <>
-      <CardHeader>
-        <CardTitle className={'text-2xl'}>Burn nft</CardTitle>
+      <CardHeader className='px-6 pt-6 mb-0'>
+        <CardTitle className={'text-xl font-bold'}>Burn nft</CardTitle>
       </CardHeader>
-      <CardContent className={'flex flex-col gap-4'}>
+      <CardContent className={'flex flex-col gap-4 px-6 py-4'}>
         <p className={'text-sm'}>
-          Please, confirm you’re going to burn <span className={'font-black'}>{nftTitle}</span>. This action cannot be
+          Please, confirm you’re going to burn <span className={'font-semibold'}>{nftTitle}</span>. This action cannot be
           undone.
         </p>
         <FeeCard data={tempData} />
       </CardContent>
-      <CardFooter className={'gap-4 mt-6'}>
-        <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
+      <CardFooter className={'gap-4 px-6 pb-4 pt-6 border border-border justify-end'}>
+        <Button variant={'outline'} className={'w-[25%]'} onClick={() => setModalName('')}>
           Cancel
         </Button>
-        <Button variant={'accent'} className={'flex-1'} onClick={() => burn({ portfolioId, nftId })}>
+        <Button variant={'accent'} className={'w-[25%]'} onClick={() => burn({ portfolioId, nftId })}>
           {isLoading && <Loader2 className='animate-spin mr-2' />}
           Confirm
         </Button>

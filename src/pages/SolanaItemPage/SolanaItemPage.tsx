@@ -6,6 +6,7 @@ import { AssetsCard } from '@/components/widgets/cards/AssetsCard/AssetsCard.tsx
 import { InvestCard } from '@/components/widgets/cards/InvestCard/InvestCard.tsx';
 import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx';
+import cardBackground from '@/assets/images/ecosystemCase.webp';
 import { Button } from '@/components/ui/Button.tsx';
 // import { ArrowUpDown, Flame } from 'lucide-react'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
@@ -13,16 +14,18 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/SolanaItemTable';
 import { useSearchParams, useParams } from 'react-router-dom';
 import { currencyFormatter } from '@/lib/utils';
-import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-import { addressEcosystemCollection } from '@/lib/blockchain/constant';
+// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
+// import { addressEcosystemCollection } from '@/lib/blockchain/constant';
 import { ecosystemHoldings } from '@/lib/constants';
-import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
+// import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
+import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
 
 const SolanaItemPage = () => {
-  const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  useNavigateTo('/');
-  // const ecosystemInvested = 0;
-  // const isLoadingEcosystem = false;
+  // useNavigateTo('/');
+  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
+
+  const ecosystemInvested = 0;
+  const isLoadingEcosystem = false;
 
   const tempData = {
     amount: {
@@ -47,22 +50,22 @@ const SolanaItemPage = () => {
       <PageTitle title={item ?? 'SOLANA ECOSYSTEM item'}>
         <div className={'flex gap-4'}>
           <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
-            {/* <ArrowUpDown className={'w-4 h-4'} /> */}
             Transfer
           </Button>
           <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
-            {/* <Flame className={'w-4 h-4'} /> */}
             Burn
           </Button>
         </div>
       </PageTitle>
       <PageHeader>
-        <AmountCard className={'flex-1'} amount={tempData.amount}>
-          <div className={'mt-4 flex flex-col gap-1'}>
-            <span className={'font-regular text-sm'}>Invested</span>
-            <span className={'font-roboto font-medium'}>{currencyFormatter(invested ? +invested : 0)}</span>
-          </div>
-        </AmountCard>
+        <PortfolioTitleWrapper image={cardBackground}>
+          <AmountCard className={'flex-1'} amount={tempData.amount} headerVariant='holdings'>
+            <div className={'flex flex-col gap-1 text-sm font-medium mt-16'}>
+              <span className={'text-sm font-medium'}>Invested</span>
+              <span className={'font-roboto'}>{currencyFormatter(invested ? +invested : 0)}</span>
+            </div>
+          </AmountCard>
+        </PortfolioTitleWrapper>
         <HoldingsCard className={'flex-1'} holdings={tempData.holdings} progressVariant={'solana'} />
         <DescriptionCard className={'flex-1'} description={tempData.description} />
       </PageHeader>

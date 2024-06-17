@@ -35,7 +35,7 @@ export const NftCard = (props: NftCardProps) => {
   const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
 
   return (
-    <Card className={'relative'}>
+    <Card className={'relative shadow-sm p-0'}>
       <Link
         to={`Classic/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
         className={'z-10 absolute w-full h-full top-0 left-0'}
@@ -50,32 +50,35 @@ export const NftCard = (props: NftCardProps) => {
         width={312}
         height={312}
         alt={'Portfolio image'}
-        style={{ width: 'calc(100% + 48px)', maxWidth: 'none' }}
-        className={'rounded-md mb-6 -ml-[24px] -mt-[24px] rounded-b-none'}
+        style={{ width: '100%', maxWidth: 'none' }}
+        className={'rounded-md rounded-b-none'}
       />
-
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className={'flex items-center gap-2 mb-4'}>
-          {currentCollection === CollectionType.CLASSIC
-            ? classicIcons.map((icon) => <img key={icon} className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[icon]} />)
-            : solanaIcons.map((icon) => <img key={icon} className={'h-6 w-6 -mt-[3px]'} src={currencyIcons[icon]} />)}
-        </div>
-        <div className={'flex items-center justify-between'}>
-          <span className={'font-regular text-sm text-card-additionalForeground'}>Invested</span>
-          <span className={'font-roboto text-sm font-medium'}>{currencyFormatter(investedPrice ?? 0)}</span>
-        </div>
-        <div className={'flex items-center justify-between'}>
-          <span className={'font-regular text-sm text-card-additionalForeground'}>Current Price</span>
-          <span className={'font-roboto text-sm font-medium'}>{currencyFormatter(currentPrice ?? 0)}</span>
-        </div>
-      </CardContent>
-      <CardFooter className={'flex gap-4 pt-6 relative z-20'}>
+      <div className='px-4 p-6 flex flex-col gap-4'>
+        <CardHeader className='rounded-lg mb-0'>
+          <CardTitle className='text-base font-bold normal-case'>{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className={'flex items-center gap-2 mb-4'}>
+            {currentCollection === CollectionType.CLASSIC
+              ? classicIcons.map((icon) => <img key={icon} className={'h-6 w-6'} src={currencyIcons[icon]} />)
+              : solanaIcons.map((icon) => <img key={icon} className={'h-6 w-6'} src={currencyIcons[icon]} />)}
+          </div>
+          <div className='flex font-medium text-sm'>
+            <div className={'flex flex-col flex-1 gap-1'}>
+              <span className={'font-regular text-muted-foreground'}>Invested</span>
+              <span className={'font-roboto'}>{currencyFormatter(investedPrice ?? 0)}</span>
+            </div>
+            <div className={'flex flex-col flex-1 gap-1'}>
+              <span className={'font-regular text-muted-foreground'}>Current Price</span>
+              <span className={'font-roboto'}>{currencyFormatter(currentPrice ?? 0)}</span>
+            </div>
+          </div>
+        </CardContent>
+      </div>
+      <CardFooter className={'flex gap-4 p-4 relative z-20 border-t border-border'}>
         <Button
           className={'flex-1 gap-2'}
-          variant={'accent'}
+          variant={'outline'}
           onClick={() => {
             setModalName('TRANSFER_NFT');
             setCollection(collection);
@@ -87,7 +90,7 @@ export const NftCard = (props: NftCardProps) => {
         </Button>
         <Button
           className={'flex-1 gap-2'}
-          variant={'destructive'}
+          variant={'accent'}
           onClick={() => {
             setModalName('BURN_NFT');
             setNftPrice(currentPrice ? currentPrice.toString() : '0');

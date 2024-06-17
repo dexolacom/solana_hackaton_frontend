@@ -31,16 +31,16 @@ export const colors: Record<string, Record<string, string>> = {
     PYTH: 'bg-gray-100'
   },
   all: {
-    BTC: 'bg-gray-600',
-    SOL: 'bg-gray-400',
-    ETH: 'bg-gray-300',
-    JUP: 'bg-gray-200',
-    RNDR: 'bg-gray-400',
-    HNT: 'bg-gray-300',
-    BONK: 'bg-gray-200',
-    PYTH: 'bg-gray-100',
-    RAY: 'bg-gray-300',
-    JTO: 'bg-gray-200',
-    WIF: 'bg-gray-100'
+    BTC: 'bg-indigo-500',
+    SOL: 'bg-emerald-300',
+    ETH: 'bg-sky-500',
+    JUP: 'bg-indigo-300',
+    RNDR: 'bg-blue-500',
+    HNT: 'bg-green-300',
+    BONK: 'bg-teal-500',
+    PYTH: 'bg-indigo-400',
+    RAY: 'bg-cyan-300',
+    JTO: 'bg-blue-400',
+    WIF: 'bg-lime-500'
   }
 };

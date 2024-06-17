@@ -9,7 +9,7 @@ interface AmountCardProps {
     number: string;
   };
   variant?: 'bordered';
-  headerVariant?: 'portfolio';
+  headerVariant?: 'portfolio' | 'holdings';
   descriptionVariant?: 'portfolio';
   className?: string;
   children?: ReactNode;
@@ -33,12 +33,13 @@ export const AmountCard = (props: AmountCardProps) => {
   const headerVariants = cva('font-bold text-lg', {
     variants: {
       variant: {
-        portfolio: 'm-0 text-base font-semibold'
+        portfolio: 'm-0 text-base font-semibold',
+        holdings: 'mb-4 text-base'
       }
     }
   });
 
-  const descriptionVariants = cva('text-[2.5rem] font-roboto font-bold', {
+  const descriptionVariants = cva('text-3xl font-roboto font-bold 1920:text-[2.5rem]', {
     variants: {
       variant: {
         portfolio: 'm-0 text-m text-4xl'
@@ -49,12 +50,12 @@ export const AmountCard = (props: AmountCardProps) => {
   return (
     <Card className={cn(cardVariants({ variant, className }))}>
       <CardHeader className={cn(headerVariants({ variant: headerVariant }))}>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className={`${headerVariant === 'holdings' && 'font-bold'}`}>{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <span className={cn(descriptionVariants({ variant: descriptionVariant }))}>{number}</span>
-        {children}
       </CardContent>
+      {children}
     </Card>
   );
 };

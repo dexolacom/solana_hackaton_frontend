@@ -11,11 +11,13 @@ export const MyHoldingsFilter = ({ setFilter }: MyHoldingsFilterProps) => {
   return (
     <div className={'mb-8'}>
       <Select defaultValue='all' onValueChange={(value: HoldingsFilterType) => setFilter({ filter: value })}>
-        <SelectTrigger className={'w-[300px] text-foreground border-transparent'}>
+        <SelectTrigger
+          className={`w-[300px] text-foreground border-transparent h-6 rounded-none bg-transparent uppercase px-0 font-bold text-xl mt-10`}
+        >
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>
+          <SelectGroup className='uppercase'>
             <SelectItem value='all'>All portfolios holdings</SelectItem>
             <SelectItem value='classic'>Classic</SelectItem>
             <SelectItem value='ecosystem'>Solana Ecosystem</SelectItem>

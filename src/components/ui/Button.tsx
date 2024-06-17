@@ -13,7 +13,8 @@ const buttonVariants = cva(
         destructive: 'bg-red-600 text-actions-foreground hover:bg-red-600/90',
         muted: 'bg-slate-200 text-foreground',
         ghost: 'bg-transparent hover:bg-blue-500/50',
-        clear: 'bg-transparent'
+        clear: 'bg-transparent',
+        outline: 'bg-transparent text-black border-2 border-black'
       },
       size: {
         lg: 'h-16 px-8',

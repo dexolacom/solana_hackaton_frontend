@@ -7,5 +7,5 @@ import { classicTemplate } from '@/lib/constants';
 export const ClassicPageTable = () => {
   const { dataTable, isLoading } = useTableData({ template: classicTemplate });
 
-  return <div>{isLoading ? <Skeleton height={400} /> : <DataTable columns={columns} data={dataTable} />}</div>;
+  return <div>{isLoading ? <Skeleton height={670} /> : <DataTable columns={columns} data={dataTable} />}</div>;
 };

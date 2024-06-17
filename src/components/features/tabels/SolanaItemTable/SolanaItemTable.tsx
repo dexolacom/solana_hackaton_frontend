@@ -7,5 +7,5 @@ import { Skeleton } from '@/components/common/Skeleton/Skeleton';
 export const SolanaItemTable = () => {
   const { dataTable, isLoading } = useItemTableData({ template: ecosystemTemplate });
 
-  return <div>{isLoading ? <Skeleton height={660} /> : <DataTable columns={columns} data={dataTable} />}</div>;
+  return <div>{isLoading ? <Skeleton height={740} /> : <DataTable columns={columns} data={dataTable} />}</div>;
 };

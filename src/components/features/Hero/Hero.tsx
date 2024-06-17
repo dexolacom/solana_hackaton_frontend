@@ -13,11 +13,11 @@ export const Hero = ({ scrollToPortfolios }: HeroProps) => {
         <span className='text-2xl text-white uppercase font-semibold'>Built on</span>
         <img src={solana} alt='Solana' />
       </div>
-      <h1 className='text-8xl uppercase mb-10'>
+      <h1 className='text-7xl uppercase mb-10 1920:text-8xl'>
         <div className='font-semibold'>Decentralized</div>
         <div className='font-extrabold bg-white inline-block'>Investment platform</div>
       </h1>
-      <p className='font-medium text-2xl text-white mb-[140px]'>
+      <p className='font-medium text-[2rem] leading-9 text-white mb-[140px]'>
         Invest in your first financial NFT portfolio in just a few clicks
       </p>
       <Button variant={'accent'} size={'lg'} onClick={() => scrollToPortfolios()}>

@@ -7,5 +7,5 @@ import { useTableData } from '@/lib/hooks/useTableData';
 export const SolanaPageTable = () => {
   const { dataTable, isLoading } = useTableData({ template: ecosystemTemplate });
 
-  return <div>{isLoading ? <Skeleton height={400} /> : <DataTable columns={columns} data={dataTable} />}</div>;
+  return <div>{isLoading ? <Skeleton height={740} /> : <DataTable columns={columns} data={dataTable} />}</div>;
 };
