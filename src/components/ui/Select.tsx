@@ -17,15 +17,18 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      `flex h-12 w-full border items-center justify-between text-foreground rounded-lg border-black bg-card px-4 hover:border-indigo-700 focus:border-2 focus:border-indigo-700
-       py-1 text-sm data-[placeholder]:text-gray-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1`,
+      `flex h-12 w-full border items-center justify-between text-foreground rounded-lg border-black bg-card px-4
+       hover:border-indigo-700 focus:border-2 focus:border-indigo-700
+      data-[state=open]:border-2 data-[state=open]:border-indigo-700
+       py-1 text-sm data-[placeholder]:text-gray-400 focus:outline-none 
+       disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 hover:stroke-indigo-700`,
       className
     )}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className='h-4 w-4' />
+      <ChevronDown className='h-4 w-4 group-hover:stroke-indigo-700 group-focus:stroke-indigo-700 group-data-[state=open]:stroke-indigo-700' />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -54,7 +57,7 @@ const SelectScrollDownButton = React.forwardRef<
     className={cn('flex cursor-default items-center justify-center py-1', className)}
     {...props}
   >
-    <ChevronDown className='h-4 w-4 hover:fill-indigo-700' />
+    <ChevronDown className='h-4 w-4' />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
@@ -106,7 +109,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-gray-400 focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-indigo-700 focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
     )}
     {...props}

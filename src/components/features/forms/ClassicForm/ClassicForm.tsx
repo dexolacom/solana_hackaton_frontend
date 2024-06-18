@@ -27,6 +27,7 @@ interface ClassicFormProps {
 export const ClassicForm = (props: ClassicFormProps) => {
   const { currenciesVariant = 'classic' } = props;
   const { form, onSubmit, isLoading, solanaRate } = useClassicForm();
+  const { handleSubmit, formState: { errors } } = form;
   const infoCardData = useFormInfo(form.watch());
   const amount = useDebounce(form.watch('amount'));
   const currency = form.watch('amountCurrency');
@@ -37,19 +38,21 @@ export const ClassicForm = (props: ClassicFormProps) => {
     currenciesVariant
   });
 
+  const clsRedBoard = 'border-2 border-[#F20000] hover:border-[#F20000] focus:border-[#F20000]';
+
   useEffect(() => {
     onlyIntegersInputValidator();
   }, []);
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
+      <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
         <FormField
           control={form.control}
           name='amount'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Amount</FormLabel>
+              <FormLabel className={errors.amount && 'text-[#F20000]'}>Amount</FormLabel>
               <FormControl>
                 <Input
                   data-value={'numericInput'}
@@ -57,6 +60,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
                   maxLength={10}
                   placeholder='Enter amount of investment'
                   {...field}
+                  className={errors.amount && clsRedBoard}
                 />
               </FormControl>
               <FormDescription>MIN sum invested should be ≥ $100</FormDescription>
@@ -69,10 +73,10 @@ export const ClassicForm = (props: ClassicFormProps) => {
           name='amountCurrency'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Amount Currency</FormLabel>
+              <FormLabel className={errors.amountCurrency && 'text-[#F20000]'}>Amount Currency</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={'USDC'}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className={`${errors.amountCurrency && clsRedBoard} group`}>
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>

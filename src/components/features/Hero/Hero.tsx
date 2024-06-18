@@ -17,7 +17,7 @@ export const Hero = ({ scrollToPortfolios }: HeroProps) => {
         <div className='font-semibold'>Decentralized</div>
         <div className='font-extrabold bg-white inline-block'>Investment platform</div>
       </h1>
-      <p className='font-medium text-[2rem] leading-9 text-white mb-[140px]'>
+      <p className='font-medium text-3xl text-white mb-[140px]'>
         Invest in your first financial NFT portfolio in just a few clicks
       </p>
       <Button variant={'accent'} size={'lg'} onClick={() => scrollToPortfolios()}>
