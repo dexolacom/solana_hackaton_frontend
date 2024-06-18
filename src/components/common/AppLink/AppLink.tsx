@@ -16,7 +16,7 @@ export const AppLink = (props: AppLinkProps) => {
     {
       variants: {
         variant: {
-          accent: 'bg-actions text-actions-foreground hover:bg-slate-900/90 rounded-lg h-12 px-4 py-2',
+          accent: 'bg-black text-actions-foreground hover:bg-indigo-950 rounded-lg h-12 px-4 py-2',
           ghost: `${isActive ? 'border-b-2 border-black' : 'border-b-2 border-transparent'}`,
           disabled: 'text-muted-foreground cursor-auto pointer-events-none',
           muted:

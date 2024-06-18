@@ -17,7 +17,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      `flex h-12 w-full border items-center justify-between text-foreground rounded-lg border-black bg-card px-4
+      `flex h-12 w-full border items-center justify-between text-foreground rounded-lg border-black bg-card px-4 hover:border-indigo-700 focus:border-2 focus:border-indigo-700
        py-1 text-sm data-[placeholder]:text-gray-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1`,
       className
     )}
@@ -54,7 +54,7 @@ const SelectScrollDownButton = React.forwardRef<
     className={cn('flex cursor-default items-center justify-center py-1', className)}
     {...props}
   >
-    <ChevronDown className='h-4 w-4' />
+    <ChevronDown className='h-4 w-4 hover:fill-indigo-700' />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
