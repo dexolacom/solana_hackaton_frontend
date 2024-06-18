@@ -1,4 +1,4 @@
-export type ProgramType = {
+export type Biscuit = {
   "version": "0.1.0",
   "name": "biscuit",
   "instructions": [
@@ -977,7 +977,7 @@ export type ProgramType = {
   ]
 };
 
-export const IDL: ProgramType = {
+export const IDL: Biscuit = {
   "version": "0.1.0",
   "name": "biscuit",
   "instructions": [
