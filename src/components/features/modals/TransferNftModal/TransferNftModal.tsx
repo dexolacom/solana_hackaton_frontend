@@ -63,12 +63,7 @@ export const TransferNftModal = () => {
               )}
             />
             <CardFooter className={'gap-4 px-6 pb-4 pt-6 border border-border justify-end'}>
-              <Button
-                variant={'outline'}
-                className={'w-[25%]'}
-                type='button'
-                onClick={() => setModalName('')}
-              >
+              <Button variant={'outline'} className={'w-[25%]'} type='button' onClick={() => setModalName('')}>
                 Cancel
               </Button>
               <Button variant={'accent'} className={'w-[25%]'} type='submit'>

@@ -12,7 +12,8 @@ export const MyHoldingsFilter = ({ setFilter }: MyHoldingsFilterProps) => {
     <div className={'mb-8'}>
       <Select defaultValue='all' onValueChange={(value: HoldingsFilterType) => setFilter({ filter: value })}>
         <SelectTrigger
-          className={`w-[300px] text-foreground border-transparent h-6 rounded-none bg-transparent uppercase px-0 font-bold text-xl mt-10`}
+          className={`w-[300px] text-foreground border-transparent h-6 rounded-none bg-transparent uppercase 
+            px-0 font-bold text-xl mt-10 hover:border-none focus:border-none data-[state=open]:border-none`}
         >
           <SelectValue />
         </SelectTrigger>

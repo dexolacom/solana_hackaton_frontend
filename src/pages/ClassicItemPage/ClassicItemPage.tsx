@@ -74,7 +74,7 @@ const ClassicItemPage = () => {
         </div>
       </PageTitle>
       <PageHeader>
-      <PortfolioTitleWrapper image={cardBackground}>
+        <PortfolioTitleWrapper image={cardBackground}>
           <AmountCard className={'flex-1'} amount={tempData.amount} headerVariant='holdings'>
             <div className={'flex flex-col gap-1 text-sm font-medium mt-16'}>
               <span className={'text-sm font-medium'}>Invested</span>

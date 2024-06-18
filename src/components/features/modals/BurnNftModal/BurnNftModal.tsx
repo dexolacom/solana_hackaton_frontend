@@ -50,8 +50,8 @@ export const BurnNftModal = () => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 px-6 py-4'}>
         <p className={'text-sm'}>
-          Please, confirm you’re going to burn <span className={'font-semibold'}>{nftTitle}</span>. This action cannot be
-          undone.
+          Please, confirm you’re going to burn <span className={'font-semibold'}>{nftTitle}</span>. This action cannot
+          be undone.
         </p>
         <FeeCard data={tempData} />
       </CardContent>
