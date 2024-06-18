@@ -22,13 +22,16 @@ import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency';
 
 export const HoldingsForm = () => {
   const { form, onSubmit, isLoading, solanaRate } = useHoldingsForm();
-  const { handleSubmit, formState: { errors } } = form;
+  const {
+    handleSubmit,
+    formState: { errors }
+  } = form;
   const infoCardData = useFormInfo(form.watch());
   const amount = useDebounce(form.watch('amount'));
   const currency = form.watch('amountCurrency');
   const currenciesVariant = form.watch('portfolio');
 
-  const {currencyColumns, formCurrencyData} = useCurrencyCount({
+  const { currencyColumns, formCurrencyData } = useCurrencyCount({
     solanaRate: solanaRate ?? 0,
     amount,
     currency,
@@ -54,7 +57,7 @@ export const HoldingsForm = () => {
                 <FormControl>
                   <SelectTrigger className={`${errors.portfolio && clsRedBoard} group`}>
                     <SelectValue placeholder='Select portfolio from the list' />
-                  </SelectTrigger >
+                  </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='classic'>Classic</SelectItem>

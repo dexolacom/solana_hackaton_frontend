@@ -27,7 +27,10 @@ interface ClassicFormProps {
 export const ClassicForm = (props: ClassicFormProps) => {
   const { currenciesVariant = 'classic' } = props;
   const { form, onSubmit, isLoading, solanaRate } = useClassicForm();
-  const { handleSubmit, formState: { errors } } = form;
+  const {
+    handleSubmit,
+    formState: { errors }
+  } = form;
   const infoCardData = useFormInfo(form.watch());
   const amount = useDebounce(form.watch('amount'));
   const currency = form.watch('amountCurrency');

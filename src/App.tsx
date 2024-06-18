@@ -7,7 +7,6 @@ import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 import { ModalsFactory } from '@/components/common/ModalFactory/ModalFactory.tsx';
 
 function App() {
-  
   const { modalName } = useModalsContext();
 
   return (
