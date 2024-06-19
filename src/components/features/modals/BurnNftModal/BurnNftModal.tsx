@@ -56,10 +56,10 @@ export const BurnNftModal = () => {
         <FeeCard data={tempData} />
       </CardContent>
       <CardFooter className={'gap-4 px-6 pb-4 pt-6 border border-border justify-end'}>
-        <Button variant={'outline'} className={'w-[25%]'} onClick={() => setModalName('')}>
+        <Button variant={'outline'} onClick={() => setModalName('')}>
           Cancel
         </Button>
-        <Button variant={'accent'} className={'w-[25%]'} onClick={() => burn({ portfolioId, nftId })}>
+        <Button variant={'accent'} onClick={() => burn({ portfolioId, nftId })}>
           {isLoading && <Loader2 className='animate-spin mr-2' />}
           Confirm
         </Button>

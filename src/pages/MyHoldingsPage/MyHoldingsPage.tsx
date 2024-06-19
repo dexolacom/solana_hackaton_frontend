@@ -29,9 +29,9 @@ const MyHoldingsPage = () => {
     setSearchParams({ filter: 'all' });
   }, []);
 
-  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
-  // const classicInvested = 0;
-  // const isLoadingClassic = false;
+  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+  const classicInvested = 0;
+  const isLoadingClassic = false;
   const ecosystemInvested = 0;
   const isLoadingEcosystem = false;
 

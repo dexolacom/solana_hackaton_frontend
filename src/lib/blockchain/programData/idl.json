@@ -103,7 +103,7 @@
       ],
       "args": [
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -162,16 +162,6 @@
         },
         {
           "name": "collection",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMetadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMasterEdition",
           "isMut": true,
           "isSigner": false
         },
@@ -253,11 +243,11 @@
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -341,11 +331,11 @@
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -445,11 +435,11 @@
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -502,12 +492,27 @@
           "isSigner": false
         },
         {
+          "name": "collectionMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionMasterEdition",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "collectionOnchaindata",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
           "isMut": true,
           "isSigner": false
         },
@@ -532,6 +537,11 @@
           "isSigner": false
         },
         {
+          "name": "mplProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "sysvarInstructions",
           "isMut": false,
           "isSigner": false
@@ -544,11 +554,11 @@
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         }
       ]
@@ -624,11 +634,11 @@
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -735,11 +745,11 @@
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         }
       ]
@@ -974,5 +984,8 @@
       "name": "InvalidRemainingAccountLength",
       "msg": "Invalid remaining account length"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "AguvXyhZXA9WMXfezVHCnz9rjGDPRrDY6FdMcmgSaaKN"
+  }
 }

@@ -6,7 +6,6 @@ import { getPortfolioCollectionAddresses } from "../collection";
 import { getPortfolioAddresses } from "../portfolio";
 import { getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
-
 /**
  * @name getSwapPortfolioInstruction
  * @description - This function creates an instruction to swap a portfolio

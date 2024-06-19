@@ -12,6 +12,7 @@ export const useNftData = () => {
   const [cards, setCards] = useState<Record<string, any[]>>();
   const [invested, setInvested] = useState<Record<string, number>>({});
   const { tokens, isLoading: isLoadingTokens } = useGetNfts();
+  console.log("🚀 ~ useNftData ~ tokens:", tokens)
 
   const { solanaRate } = useSolanaRate();
 
@@ -21,7 +22,7 @@ export const useNftData = () => {
   const data = useQueries({
     queries: tokens?.map((token) => ({
       queryKey: ['transaction', token],
-      queryFn: () => getTransaction(token.mintAddress),
+      queryFn: () => getTransaction(token.mintAddress, token?.collection?.key?.toString()),
       staleTime: Infinity
     })),
     combine: (results) => {
@@ -33,6 +34,7 @@ export const useNftData = () => {
   });
 
   useEffect(() => {
+
     if (data && !data.pending) {
       const newNftData = tokens
         ?.map((item) => ({
@@ -73,39 +75,61 @@ export const useNftData = () => {
     }
   }, [data]);
 
-  const getTransaction = async (mint: string) => {
-    const signatures = await connection.getSignaturesForAddress(new PublicKey(mint));
+  const getTransaction = async (mint: PublicKey, collectionAddress: string) => {
+    const signatures = await connection.getSignaturesForAddress(mint);
 
-    const firstSignarure = signatures[signatures.length - 2].signature;
+    const firstSignarure = signatures[signatures.length - 4].signature;
+    const secondtSignarure = signatures[signatures.length - 3].signature;  
 
-    const parsedTransaction = await connection.getParsedTransaction(firstSignarure, {
+    const parsedTransactionFirst = await connection.getParsedTransaction(firstSignarure, {
       maxSupportedTransactionVersion: 0
     });
 
-    const dataForAmount = parsedTransaction?.meta?.innerInstructions?.[0].instructions;
+    const parsedTransactionSecond = await connection.getParsedTransaction(secondtSignarure, {
+      maxSupportedTransactionVersion: 0
+    });
+    
 
-    const tokensAmount = {
+    const dataForAmountFirst = parsedTransactionFirst?.meta?.innerInstructions?.[0].instructions;
+    const dataForAmountSecond = parsedTransactionSecond?.meta?.innerInstructions?.[0].instructions;
+
+    let tokensAmount;
+    if(collectionAddress === addressClassicCollection) { 
+      tokensAmount = {
       //@ts-ignore
-      BTC: dataForAmount?.[5]?.parsed?.info?.amount,
+      BTC: dataForAmountFirst ?.[5]?.parsed?.info?.amount,
       //@ts-ignore
-      ETH: dataForAmount?.[11]?.parsed?.info?.amount,
+      ETH: dataForAmountFirst ?.[11]?.parsed?.info?.amount,
       //@ts-ignore
-      SOL: dataForAmount?.[8]?.parsed?.info?.amount,
+      SOL: dataForAmountFirst ?.[8]?.parsed?.info?.amount,
       //@ts-ignore
-      JUP: dataForAmount?.[14]?.parsed?.info?.amount
+      JUP: dataForAmountFirst ?.[14]?.parsed?.info?.amount
     };
+  } else {
+    tokensAmount = {
+      //@ts-ignore
+      BTC: dataForAmountSecond ?.[5]?.parsed?.info?.amount,
+      //@ts-ignore
+      ETH: dataForAmountSecond ?.[11]?.parsed?.info?.amount,
+      //@ts-ignore
+      SOL: dataForAmountSecond ?.[8]?.parsed?.info?.amount,
+      //@ts-ignore
+      JUP: dataForAmountSecond ?.[14]?.parsed?.info?.amount
+    };
+  }
 
-    const tokenAddress = parsedTransaction?.meta?.preTokenBalances?.[0].mint;
+    const tokenAddress = parsedTransactionFirst?.meta?.preTokenBalances?.[0].mint;
     const isUsdcToken = tokenAddress === usdcData.mint;
 
     //@ts-ignore
     const amount = parsedTransaction?.meta?.innerInstructions[0].instructions[2].parsed.info.amount;
     const convertAmount = isUsdcToken
-      ? decimalsOperations(amount, 1e5, OperationType.DIV)
+      ? decimalsOperations(amount, 1e6, OperationType.DIV)
       : decimalsOperations(amount, solData.decimals, OperationType.DIV);
 
-    const date = new Date(parsedTransaction!.blockTime! * 1000);
+    const date = new Date(parsedTransactionFirst!.blockTime! * 1000);
     const formattedDate = date.toLocaleString();
+    console.log("🚀 ~ getTransaction ~ formattedDate:", formattedDate)
     const investedPrice = isUsdcToken
       ? convertAmount
       : decimalsOperations(solanaRate ?? 0, convertAmount, OperationType.MUL);

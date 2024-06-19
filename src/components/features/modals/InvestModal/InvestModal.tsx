@@ -10,24 +10,23 @@ export const InvestModal = () => {
 
   return (
     <>
-      <CardHeader>
-        <CardTitle className={'text-2xl'}>Investment Successful</CardTitle>
+      <CardHeader className='px-6 pt-6 pb-4 mb-0'>
+        <CardTitle className={'text-xl font-bold'}>Investment Successful</CardTitle>
       </CardHeader>
-      <CardContent className={'flex flex-col gap-4'}>
-        <p className={'text-sm'}>
-          You have successfully invested <span className={'font-black'}>{nftPrice}</span> in NFT.
+      <CardContent className={'flex flex-col gap-4 px-6 py-4'}>
+        <p className={'text-base'}>
+          You have successfully invested <span className={'font-black font-roboto'}>{nftPrice}</span> in NFT.
           {/* with following assets distribution: */}
           {/* <span className={'font-medium'}>Classical: #0001</span>  */}
         </p>
         {/* <ModalCurrency /> */}
       </CardContent>
-      <CardFooter className={'gap-4 mt-6'}>
-        <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
+      <CardFooter className={'gap-4 px-6 pb-4 pt-6 border border-border justify-end'}>
+        <Button variant={'outline'} onClick={() => setModalName('')}>
           Close
         </Button>
         <Button
-          variant={'accent'}
-          className={'flex-1'}
+          variant={'accent'} 
           onClick={() => {
             navigate(`/my-holdings`);
             setModalName('');

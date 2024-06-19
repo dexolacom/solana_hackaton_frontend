@@ -1,8 +1,8 @@
+import { BN } from "@coral-xyz/anchor";
 import { PublicKey, Connection } from "@solana/web3.js";
 import { ORCA_WHIRLPOOLS_CONFIG } from "./constants";
 import { getAssociatedTokenAddressSync } from "@solana/spl-token";
 import { PDAUtil, PoolUtil, PriceMath, SwapUtils, ORCA_WHIRLPOOL_PROGRAM_ID, ParsableWhirlpool } from "@orca-so/whirlpools-sdk";
-import { BN } from "@coral-xyz/anchor";
 
 export async function getWhirlpoolInfo(connection: Connection, pool: PublicKey){
   const account = await connection.getAccountInfo(pool);

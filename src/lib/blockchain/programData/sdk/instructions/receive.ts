@@ -1,10 +1,10 @@
 import { Program } from "@coral-xyz/anchor";
 import { Biscuit } from "../artifacts";
 import { PublicKey, SYSVAR_INSTRUCTIONS_PUBKEY, TransactionInstruction } from "@solana/web3.js";
-import {  BISCUIT_VAULT, } from "../constants";
+import {  BISCUIT_VAULT, TOKEN_METADATA_PROGRAM_ID } from "../constants";
 import { getPortfolioCollectionAddresses } from "../collection";
 import { getPortfolioAddresses } from "../portfolio";
-import { getAssociatedTokenAddressSync, createAssociatedTokenAccountInstruction, TOKEN_PROGRAM_ID} from "@solana/spl-token";
+import { getAssociatedTokenAddressSync, createAssociatedTokenAccountInstruction, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
 /**
  * Receive a portfolio
@@ -63,11 +63,15 @@ export async function getReceivePortfolioInstruction(
         payer: user,
         vault: BISCUIT_VAULT,
         vaultAccount: vaultAccount,
+        collectionMetadata: portfolio_collection.metadata,
+        collectionMasterEdition: portfolio_collection.masterEdition,
         collection: portfolio_collection.collection,
         collectionOnchaindata: portfolio_collection.collectionOnchaindata,
         mint: portfolio.mint,
+        metadata: portfolio.metadata,
         portfolioData: portfolio.portfolioData,
         receiverAccount: receiverAccount,
+        mplProgram: TOKEN_METADATA_PROGRAM_ID,
         tokenProgram: TOKEN_PROGRAM_ID,
         sysvarInstructions: SYSVAR_INSTRUCTIONS_PUBKEY,
       }

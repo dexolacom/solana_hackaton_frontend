@@ -103,7 +103,7 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -162,16 +162,6 @@ export type Biscuit = {
         },
         {
           "name": "collection",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMetadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMasterEdition",
           "isMut": true,
           "isSigner": false
         },
@@ -253,11 +243,11 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -341,11 +331,11 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -445,11 +435,11 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -502,12 +492,27 @@ export type Biscuit = {
           "isSigner": false
         },
         {
+          "name": "collectionMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionMasterEdition",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "collectionOnchaindata",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
           "isMut": true,
           "isSigner": false
         },
@@ -532,6 +537,11 @@ export type Biscuit = {
           "isSigner": false
         },
         {
+          "name": "mplProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "sysvarInstructions",
           "isMut": false,
           "isSigner": false
@@ -544,11 +554,11 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         }
       ]
@@ -624,11 +634,11 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -735,11 +745,11 @@ export type Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         }
       ]
@@ -1082,7 +1092,7 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -1141,16 +1151,6 @@ export const IDL: Biscuit = {
         },
         {
           "name": "collection",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMetadata",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "collectionMasterEdition",
           "isMut": true,
           "isSigner": false
         },
@@ -1232,11 +1232,11 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -1320,11 +1320,11 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -1424,11 +1424,11 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -1481,12 +1481,27 @@ export const IDL: Biscuit = {
           "isSigner": false
         },
         {
+          "name": "collectionMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collectionMasterEdition",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "collectionOnchaindata",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
           "isMut": true,
           "isSigner": false
         },
@@ -1511,6 +1526,11 @@ export const IDL: Biscuit = {
           "isSigner": false
         },
         {
+          "name": "mplProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "sysvarInstructions",
           "isMut": false,
           "isSigner": false
@@ -1523,11 +1543,11 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         }
       ]
@@ -1603,11 +1623,11 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         },
         {
@@ -1714,11 +1734,11 @@ export const IDL: Biscuit = {
       ],
       "args": [
         {
-          "name": "id",
+          "name": "portfolioId",
           "type": "u8"
         },
         {
-          "name": "portfolioId",
+          "name": "collectionId",
           "type": "u8"
         }
       ]
