@@ -2,7 +2,6 @@ import { useProjectList } from '@/lib/api/hooks/useProjectList';
 import { useSolanaProjectById } from '@/lib/api/hooks/useSolanaProjectById';
 import { CollectionType } from '../api/hooks/useSolanaRate';
 import { useNftData } from '../blockchain/hooks/useNftData';
-import { coins } from '../blockchain/constant';
 import { OperationType, decimalsOperations } from '../helpers/decimalsOperations';
 
 interface UseCurrentPriceNftArgs {
@@ -13,9 +12,8 @@ interface UseCurrentPriceNftArgs {
 export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs) => {
   const { cards, isLoading } = useNftData();
   const nftId = title.slice(title.indexOf('#') + 1).trim();
-  const tokensAmount = cards?.['all']?.filter((card) => card?.name?.replace(/\D/g, '') === nftId)?.[0]?.content
-    ?.tokensAmount;
-
+  const tokensAmount = cards?.['all']?.filter((card) => card?.name?.replace(/\D/g, '') === nftId)?.[0]?.content?.coinAmounts
+  
   const { projectList } = useProjectList();
   const classicId = collection === 'Classic' ? projectList?.find((item) => item.name === collection)?.id : undefined;
   const ecoSystemId =
@@ -23,14 +21,17 @@ export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs
   const { projectById: classicPrjCoin } = useSolanaProjectById(classicId ?? null);
   const { projectById: ecoSystemPrjCoin } = useSolanaProjectById(ecoSystemId ?? null);
 
-  const newClassicProject = classicPrjCoin?.filter((item) => ['BTC', 'ETH', 'SOL', 'JUP'].includes(item.symbol));
+  // const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH'];
+  // const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF'];
 
-  const coinsToReduce = classicId ? newClassicProject : ecoSystemPrjCoin;
+  // const newClassicProject = classicPrjCoin?.filter((item) => ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH'].includes(item.symbol));
+  // const newClassicProject = ecoSystemPrjCoin?.filter((item) => ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF'].includes(item.symbol));
+
+  const coinsToReduce = classicId ? classicPrjCoin : ecoSystemPrjCoin;
   const currentPrice = coinsToReduce?.reduce((accumulator, coin) => {
-    const amount = tokensAmount?.[coin.symbol] ?? 0;
-    const decimals = coins.find((item) => item.currency === coin.symbol)?.decimals ?? 0;
+    const amount = tokensAmount?.[coin.symbol]?.uiAmount ?? 0;
     const countCoins = decimalsOperations(coin.coinPrice, amount, OperationType.MUL);
-    return accumulator + decimalsOperations(countCoins, decimals, OperationType.DIV);
+    return accumulator + countCoins;
   }, 0);
 
   return { currentPrice, isLoading };

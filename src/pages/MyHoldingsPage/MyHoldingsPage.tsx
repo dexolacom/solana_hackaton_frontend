@@ -13,12 +13,14 @@ import { useSearchParams } from 'react-router-dom';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData';
 import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 import { Skeleton } from '@/components/common/Skeleton/Skeleton';
+import { useCurrentTotalPrice } from '@/lib/hooks/useCurrentTotalPrice';
 
 export type AmountVariantType = 'accentGray' | 'accent' | 'accentTeal';
 
 const MyHoldingsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { invested, isLoading: isLoadingInvested } = useNftData();
+  const { totalPrice, isLoading } = useCurrentTotalPrice();
   useNavigateTo('/');
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
@@ -27,21 +29,11 @@ const MyHoldingsPage = () => {
     setSearchParams({ filter: 'all' });
   }, []);
 
-  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
-  const classicInvested = 0;
-  const isLoadingClassic = false;
-  const ecosystemInvested = 0;
-  const isLoadingEcosystem = false;
-
-  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  // console.log("🚀 ~ MyHoldingsPage ~ ecosystemInvested:", ecosystemInvested)
 
   const data = getHoldingPageData({
     variant: holdingsFilter!,
-    classicInvested,
-    ecosystemInvested,
-    isLoadingClassic,
-    isLoadingEcosystem
+    totalPrice, 
+    isLoading
   });
 
   return (

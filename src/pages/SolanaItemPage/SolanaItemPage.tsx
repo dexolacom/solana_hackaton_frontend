@@ -8,29 +8,30 @@ import { PageTitle } from '@/components/common/PageTitle/PageTitle.tsx';
 import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm.tsx';
 import cardBackground from '@/assets/images/ecosystemCase.webp';
 import { Button } from '@/components/ui/Button.tsx';
-// import { ArrowUpDown, Flame } from 'lucide-react'
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 import { SolanaItemTable } from '@/components/features/tabels/SolanaItemTable/SolanaItemTable';
 import { useSearchParams, useParams } from 'react-router-dom';
 import { currencyFormatter } from '@/lib/utils';
-// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-// import { addressEcosystemCollection } from '@/lib/blockchain/constant';
 import { ecosystemHoldings } from '@/lib/constants';
-// import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
 
 const SolanaItemPage = () => {
   // useNavigateTo('/');
-  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
 
-  const ecosystemInvested = 0;
-  const isLoadingEcosystem = false;
+
+ 
+
+  const [searchParams] = useSearchParams();
+  const { setModalName } = useModalsContext();
+  const { item } = useParams();
+  const invested = searchParams.get('invested');
+  const currentPrice = searchParams.get('currentPrice');
 
   const tempData = {
     amount: {
       title: 'Current Portfolio Price',
-      number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
+      number: currencyFormatter(+(currentPrice ?? '0'))
     },
     ...ecosystemHoldings,
     description: {
@@ -38,11 +39,6 @@ const SolanaItemPage = () => {
       text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`
     }
   };
-
-  const [searchParams] = useSearchParams();
-  const { setModalName } = useModalsContext();
-  const { item } = useParams();
-  const invested = searchParams.get('invested');
 
   return (
     <div>

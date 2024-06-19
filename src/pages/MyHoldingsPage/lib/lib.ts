@@ -22,25 +22,21 @@ interface TempDataType {
 
 interface GetHoldingPageDataArgs {
   variant: HoldingsFilterType;
-  classicInvested?: number;
-  ecosystemInvested?: number;
-  isLoadingClassic: boolean;
-  isLoadingEcosystem: boolean;
+  totalPrice: number;
+  isLoading: boolean;
 }
 
 export const getHoldingPageData = ({
   variant,
-  classicInvested,
-  ecosystemInvested,
-  isLoadingClassic,
-  isLoadingEcosystem
+  totalPrice, 
+  isLoading
 }: GetHoldingPageDataArgs) => {
   const tempData: TempDataType[] = [
     {
       title: 'classic',
       amount: {
         title: 'Current Portfolio Price',
-        number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0)
+        number: isLoading? 'Calculation...' : currencyFormatter(totalPrice ?? 0)
       },
       ...classicHoldings,
       amountCardVariant: 'accent',
@@ -50,7 +46,7 @@ export const getHoldingPageData = ({
       title: 'ecosystem',
       amount: {
         title: 'Current Portfolio Price',
-        number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
+        number: isLoading ? 'Calculation...' : currencyFormatter(totalPrice ?? 0)
       },
       ...ecosystemHoldings,
       amountCardVariant: 'accentTeal',
@@ -61,9 +57,9 @@ export const getHoldingPageData = ({
       amount: {
         title: 'Portfolios Price',
         number:
-          isLoadingClassic || isLoadingEcosystem
+          isLoading
             ? 'Calculation...'
-            : currencyFormatter((ecosystemInvested ?? 0) + (classicInvested ?? 0))
+            : currencyFormatter(totalPrice)
       },
       holdings: {
         title: 'Holdings',
