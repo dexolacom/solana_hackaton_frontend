@@ -37,7 +37,7 @@ export const NftCard = (props: NftCardProps) => {
   return (
     <Card className={'relative shadow-sm p-0'}>
       <Link
-        to={`Classic/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
+        to={`${collection === addressClassicCollection ? 'classic' : 'solana'}/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
         className={'z-10 absolute w-full h-full top-0 left-0'}
         onClick={(e) => {
           e.stopPropagation();

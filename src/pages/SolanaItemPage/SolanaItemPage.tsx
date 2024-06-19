@@ -19,9 +19,6 @@ import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper
 const SolanaItemPage = () => {
   // useNavigateTo('/');
 
-
- 
-
   const [searchParams] = useSearchParams();
   const { setModalName } = useModalsContext();
   const { item } = useParams();

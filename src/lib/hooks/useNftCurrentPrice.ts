@@ -21,12 +21,6 @@ export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs
   const { projectById: classicPrjCoin } = useSolanaProjectById(classicId ?? null);
   const { projectById: ecoSystemPrjCoin } = useSolanaProjectById(ecoSystemId ?? null);
 
-  // const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH'];
-  // const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF'];
-
-  // const newClassicProject = classicPrjCoin?.filter((item) => ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH'].includes(item.symbol));
-  // const newClassicProject = ecoSystemPrjCoin?.filter((item) => ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF'].includes(item.symbol));
-
   const coinsToReduce = classicId ? classicPrjCoin : ecoSystemPrjCoin;
   const currentPrice = coinsToReduce?.reduce((accumulator, coin) => {
     const amount = tokensAmount?.[coin.symbol]?.uiAmount ?? 0;
