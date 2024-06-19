@@ -12,80 +12,82 @@ export const connectionDevNet = new Connection(endpointDevNet, commitmentLevel);
 
 export const umi = createUmi(endpoint).use(mplTokenMetadata());
 
-export const programId = new PublicKey(idl.metadata.address);
+export const programId = new PublicKey('AguvXyhZXA9WMXfezVHCnz9rjGDPRrDY6FdMcmgSaaKN');
 
 export const classicProgramInterface = JSON.parse(JSON.stringify(idl));
 
-export const addressClassicCollection = '4R3AXjBh9aWRXUPFDeQMoKH21LqHbFeupMCwBjZkNKhJ';
-export const addressEcosystemCollection = 'zr24szrS9LJs37gx1rZJDiCRunsA5Cstk9yV69VbgTy';
+export const addressClassicCollection = 'AseMf5WSUqKkP1SFXTDnBNUcHmJunRdj5ix1mUsNoP9V';  //-?
+export const addressEcosystemCollection = 'B2v4NRfTRC546VWmAUzvwjmoufnDv8bmdrcm86dZRn7K'; //-?
 
 export const TOKEN_METADATA_PROGRAM_ID = new PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
 
-export const portfolioLookupTable = new PublicKey('GAvAbmJH9ZbsBxqHkQaE7Rtc4a6QHRANc3KhHx416uAN');
+export const portfolioLookupTable = new PublicKey('7SXMzMSkHZ95BFb62F18b6rP3WWG16VMQmqkUjDXmWwD');
 export const treasury = new PublicKey('8QdnKN4JbhpSLdhJVcCswmSy3X1Z3hmyZEG3VvGGNHn7');
+
 
 export const coins = [
   {
-    currency: 'USDC',
-    mint: 'BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe',
-    decimals: 1e6
+      currency: "USDC",
+      mint: "HxwDiYR6swJjW3hhAt4CCmq2qPxXGn29BCjaciXR6S3J",
+      decimals: 1e6,
   },
   {
-    currency: 'ETH',
-    mint: '4AJv9M5uMrMbyArp9Tio9MR2WovY9r5F8MXdQLRyDHaC',
-    decimals: 1e8
+      currency: "SOL",
+      mint: "So11111111111111111111111111111111111111112",
+      decimals: 1e9
   },
   {
-    currency: 'BTC',
-    mint: '7u8NENSnY1k6vH6HERBvJvCjqkpwFHGTnxzmwEAvbMng',
-    decimals: 1e8
+      currency: "BTC",
+      decimals: 1e8,
+      mint: "FibETkfHcCF7Brxn1TryCtD6Z6KAjQgF1VtjfRRS4KQy"
   },
   {
-    currency: 'SOL',
-    mint: 'So11111111111111111111111111111111111111112',
-    decimals: 1e9
+      decimals: 1e8,
+      currency: "ETH",
+      mint: "NftTPJXniF2Pqfw15HWfn1NfoNa36LgnWi7DCoWmKzC"
   },
   {
-    currency: 'JUP',
-    mint: 'B9L1ksf9U7fyWJcb6oEUs9NQjar3gYWPTrG23phHdHcm',
-    decimals: 1e6
+      decimals: 1e6,
+      currency: "JUP",
+      mint: "BaRCAG2Jw7pyNbDMgaj2vrZGhRrXWpFzSZgoPQ1CyFkL"
   },
   {
-    currency: 'RNDR',
-    mint: '7nXViVzM7ehQZ5y5Jg6nBjPkpfcXPUyi2JEo6NiwzgHx',
-    decimals: 1e8
+      decimals: 1e8,
+      currency: "RNDR",
+      mint: "JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN"
   },
   {
-    currency: 'HNT',
-    mint: 'Au69YNzR39wDY2MEVFUFakmiEYzmpS7bjJyJdkiatRwJ',
-    decimals: 1e8
+      decimals: 1e8,
+      currency: "HNT",
+      mint: "7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE"
   },
   {
-    currency: 'BONK',
-    mint: '2Koqru6oQmNRWiw9M1JMh3gVboPsfh2s6kh7Cgwz9SBb',
-    decimals: 1e5
+      decimals: 1e5,
+      currency: "BONK",
+      mint: "EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq"
   },
   {
-    currency: 'PYTH',
-    mint: 'CZPL3GNVuYELeSJYoreN4MhiieDaJX2ooR2wjsnLu9nX',
-    decimals: 1e6
+      decimals: 1e6,
+      currency: "PYTH",
+      mint: "9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6"
   },
   {
-    currency: 'RAY',
-    mint: '3mqUMjrvHPhJj97Ks7Z1msp1Xb1HAfYDbGsXkbMET7qo',
-    decimals: 1e6
+      decimals: 1e6,
+      currency: "RAY",
+      mint: "3krnbdBdvzrZDR34BBwUA4ttxNJ5Jf9EGuFZViuJZZw2"
   },
   {
-    currency: 'JTO',
-    mint: 'ArUaz7YBGZ3Z5Ut1VNLLEuYV2P1dM9FWmwxf6XMxTbCy',
-    decimals: 1e9
+      decimals: 1e9,
+      currency: "JTO",
+      mint: "2BjvT8iM9AQJsHXWDy2nuvzEu8yjCP4rL98VS89YTibw"
   },
   {
-    currency: 'WIF',
-    mint: '4z5zhHoGTV1zmjgSfMJKcFHBvxRY5XMheFopNPm5mszJ',
-    decimals: 1e6
+      decimals: 1e6,
+      currency: "WIF",
+      mint: "75hBcTeGiJ6xQRfVF3xvfX9eWhqsuK9B5kpEXjBWjehE"
   }
-];
+]
+
 
 export const WHIRLPOOLS = {
   ['BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe']: {
@@ -139,38 +141,94 @@ export const WHIRLPOOLS = {
 
 export const classicPortfolioTokens = [
   {
-    key: new PublicKey('7u8NENSnY1k6vH6HERBvJvCjqkpwFHGTnxzmwEAvbMng'), // BTC
-    percent: 350
+    key: new PublicKey('FibETkfHcCF7Brxn1TryCtD6Z6KAjQgF1VtjfRRS4KQy'), // BTC
+    percent: 300,
+    decimals: 8
   },
   {
     key: new PublicKey('So11111111111111111111111111111111111111112'), // SOL
-    percent: 250
+    percent: 200,
+    decimals: 9
   },
   {
-    key: new PublicKey('4AJv9M5uMrMbyArp9Tio9MR2WovY9r5F8MXdQLRyDHaC'), // ETH
-    percent: 200
+    key: new PublicKey('NftTPJXniF2Pqfw15HWfn1NfoNa36LgnWi7DCoWmKzC'), // ETH
+    percent: 150,
+    decimals: 8
   },
   {
-    key: new PublicKey('B9L1ksf9U7fyWJcb6oEUs9NQjar3gYWPTrG23phHdHcm'), // JUP
-    percent: 200
+    key: new PublicKey('BaRCAG2Jw7pyNbDMgaj2vrZGhRrXWpFzSZgoPQ1CyFkL'), // JUP
+    percent: 100,
+    decimals: 6
+  },
+  {
+    key: new PublicKey("JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN"), // RNDR
+    percent: 100,
+    decimals: 8
+  },
+  {
+    key: new PublicKey("7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE"), // HNT
+    percent: 50,
+    decimals: 8
+  },
+  {
+    key: new PublicKey("EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq"), // BONK
+    percent: 50,
+    decimals: 5
+  },
+  {
+    key: new PublicKey("9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6"), // PYTH
+    percent: 50,
+    decimals: 6
   }
-  // {
-  //   key: new PublicKey("7nXViVzM7ehQZ5y5Jg6nBjPkpfcXPUyi2JEo6NiwzgHx"), // RNDR
-  //   percent: 100
-  // },
-  // {
-  //   key: new PublicKey("Au69YNzR39wDY2MEVFUFakmiEYzmpS7bjJyJdkiatRwJ"), // HNT
-  //   percent: 50
-  // },
-  // {
-  //   key: new PublicKey("2Koqru6oQmNRWiw9M1JMh3gVboPsfh2s6kh7Cgwz9SBb"), // BONK
-  //   percent: 50
-  // },
-  // {
-  //   key: new PublicKey("CZPL3GNVuYELeSJYoreN4MhiieDaJX2ooR2wjsnLu9nX"), // PYTH
-  //   percent: 50
-  // }
 ];
 
-export const classicPotrfolioId = 3;
+export const ecosystemPortfolioTokens = [
+  {
+    key: new PublicKey('So11111111111111111111111111111111111111112'), // SOL
+    percent: 300,
+    decimals: 9
+  },
+  {
+    key: new PublicKey('BaRCAG2Jw7pyNbDMgaj2vrZGhRrXWpFzSZgoPQ1CyFkL'), // JUP
+    percent: 150,
+    decimals: 6
+  },
+  {
+    key: new PublicKey("JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN"), // RNDR
+    percent: 150,
+    decimals: 8
+  },
+  {
+    key: new PublicKey("7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE"), // HNT
+    percent: 150,
+    decimals: 8
+  },
+  {
+    key: new PublicKey("EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq"), // BONK
+    percent: 100,
+    decimals: 5
+  },
+  {
+    key: new PublicKey("9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6"), // PYTH
+    percent: 50,
+    decimals: 6
+  },
+  {
+    key: new PublicKey("3krnbdBdvzrZDR34BBwUA4ttxNJ5Jf9EGuFZViuJZZw2"), // RAY
+    percent: 50,
+    decimals: 6
+  },
+  {
+    key: new PublicKey("2BjvT8iM9AQJsHXWDy2nuvzEu8yjCP4rL98VS89YTibw"), // JTO
+    percent: 50,
+    decimals: 9
+  },
+  {
+    key: new PublicKey("75hBcTeGiJ6xQRfVF3xvfX9eWhqsuK9B5kpEXjBWjehE"), // WIF
+    percent: 50,
+    decimals: 6
+  }
+];
+
+export const classicPotrfolioId = 1;
 export const ecosystemPortfolioId = 2;

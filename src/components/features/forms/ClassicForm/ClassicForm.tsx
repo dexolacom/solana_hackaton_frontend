@@ -26,7 +26,7 @@ interface ClassicFormProps {
 
 export const ClassicForm = (props: ClassicFormProps) => {
   const { currenciesVariant = 'classic' } = props;
-  const { form, onSubmit, isLoading, solanaRate } = useClassicForm();
+  const { form, onSubmit, isLoading, solanaRate } = useClassicForm(currenciesVariant);
   const {
     handleSubmit,
     formState: { errors }

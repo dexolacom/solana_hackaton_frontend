@@ -2,18 +2,19 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken';
+import { useMintPortfolio } from '@/lib/blockchain/hooks/useMintPortfolio';
 // import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
 import { generateRandomNumber } from '@/lib/utils';
 import {
-  addressClassicCollection
+  classicPotrfolioId,
+  ecosystemPortfolioId
   //  addressEcosystemCollection
 } from '@/lib/blockchain/constant';
 
-export const useClassicForm = () => {
+export const useClassicForm = (currenciesVariant: 'classic' | 'solana') => {
   // const { pathname } = useLocation();
-  const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
+  const { mintPortfolio, isLoading: isLoadingToken } = useMintPortfolio(currenciesVariant === 'classic' ? 4 : 5);
   // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
   const { solanaRate } = useSolanaRate();
 
@@ -36,15 +37,15 @@ export const useClassicForm = () => {
     .refine(
       (data) => {
         if (data.amountCurrency === 'USDC') {
-          return data.amount >= 2;
+          return data.amount >= 100;
         } else if (data.amountCurrency === 'SOL') {
-          return solanaRate && data.amount >= 2 / solanaRate;
+          return solanaRate && data.amount >= 100 / solanaRate;
         }
 
         return true;
       },
       {
-        message: 'Should be at least $2',
+        message: 'Should be at least $100',
         path: ['amount']
       }
     );
@@ -62,10 +63,10 @@ export const useClassicForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     if (data.amountCurrency === 'USDC') {
-      buyNftByToken({
+      mintPortfolio({
         inputValue: +data.amount,
-        nftId: generateRandomNumber(),
-        mintCollection: addressClassicCollection
+        portfolioId: generateRandomNumber(),
+        collectionId: currenciesVariant === 'classic' ? classicPotrfolioId : ecosystemPortfolioId
       });
       return;
     }

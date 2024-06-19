@@ -2,19 +2,15 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { generateRandomNumber } from '@/lib/utils';
-import { useBuyNftByToken } from '@/lib/blockchain/hooks/useBuyNftByToken';
+import { useMintPortfolio } from '@/lib/blockchain/hooks/useMintPortfolio';
 // import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
-import { addressClassicCollection, addressEcosystemCollection } from '@/lib/blockchain/constant';
+import {
+  classicPotrfolioId,
+  ecosystemPortfolioId
+} from '@/lib/blockchain/constant';
 
 export const useHoldingsForm = () => {
-  const { buy: buyNftByToken, isLoading: isLoadingToken } = useBuyNftByToken();
-  // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
-  const { solanaRate } = useSolanaRate();
-
-  const isLoading = isLoadingToken;
-  // || isLoadingNative
-
   const FormSchema = z
     .object({
       portfolio: z.string().min(1, {
@@ -31,15 +27,15 @@ export const useHoldingsForm = () => {
     .refine(
       (data) => {
         if (data.amountCurrency === 'USDC') {
-          return data.amount >= 2;
+          return data.amount >= 100;
         } else if (data.amountCurrency === 'SOL') {
-          return solanaRate && data.amount >= 2 / solanaRate;
+          return solanaRate && data.amount >= 100 / solanaRate;
         }
 
         return true;
       },
       {
-        message: 'Should be at least $2',
+        message: 'Should be at least $100',
         path: ['amount']
       }
     );
@@ -55,10 +51,23 @@ export const useHoldingsForm = () => {
     }
   });
 
+  const currenciesVariant = form.watch('portfolio');
+  const swapCount = currenciesVariant === 'classic' ? 4 : 5;
+  const { mintPortfolio, isLoading: isLoadingToken } = useMintPortfolio(swapCount);
+  // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
+  const { solanaRate } = useSolanaRate();
+
+  const isLoading = isLoadingToken;
+  // || isLoadingNative
+
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const mintCollection = data.portfolio === 'classic' ? addressClassicCollection : addressEcosystemCollection;
+
     if (data.amountCurrency === 'USDC') {
-      await buyNftByToken({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection });
+      mintPortfolio({
+        inputValue: +data.amount,
+        portfolioId: generateRandomNumber(),
+        collectionId: currenciesVariant === 'classic' ? classicPotrfolioId : ecosystemPortfolioId
+      });
       return;
     }
     // await buyNftByNative({ inputValue: +data.amount, nftId: generateRandomNumber(), mintCollection })

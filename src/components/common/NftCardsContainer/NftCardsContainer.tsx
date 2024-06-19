@@ -37,7 +37,7 @@ export const NftCardsContainer = () => {
           {cards &&
             cards[holdingsFilter].map((item) => {
               const title = item?.name.replace(
-                'PortfolioToken',
+                'BiscuitPortfolio',
                 item.collection.key.toString() === addressClassicCollection ? 'Classic# ' : 'Solana Ecosystem# '
               );
               return (
@@ -45,7 +45,7 @@ export const NftCardsContainer = () => {
                   key={`${item?.name}`}
                   title={title}
                   uri={item?.uri}
-                  investedPrice={item.content.investedPrice}
+                  investedPrice={0}
                   collection={item.collection.key.toString()}
                   mint={item.addressMint}
                 />

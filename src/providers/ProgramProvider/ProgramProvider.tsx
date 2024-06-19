@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
 import { AnchorProvider, Program } from '@coral-xyz/anchor';
-import { ProgramType } from '@/lib/blockchain/programData/types';
+import { Biscuit } from '@/lib/blockchain/programData/types';
 import { commitmentLevel, programId, classicProgramInterface } from '@/lib/blockchain/constant';
 import { ProgramContextProviderProps, ProgramContextType } from './types';
 import { ORCA_WHIRLPOOL_PROGRAM_ID, WhirlpoolContext } from '@orca-so/whirlpools-sdk';
@@ -11,7 +11,7 @@ const ProgramContext = createContext<ProgramContextType | undefined>(undefined);
 export const ProgramContextProvider = ({ children }: ProgramContextProviderProps) => {
   const wallet = useAnchorWallet();
   const { connection } = useConnection();
-  const [program, setProgram] = useState<Program<ProgramType> | null>(null);
+  const [program, setProgram] = useState<Program<Biscuit> | null>(null);
 
   const [whirlpool, setWhirlpool] = useState<WhirlpoolContext | null>(null);
 
@@ -27,7 +27,7 @@ export const ProgramContextProvider = ({ children }: ProgramContextProviderProps
 
     const whirlpoolCtx = WhirlpoolContext.withProvider(provider, ORCA_WHIRLPOOL_PROGRAM_ID);
     setWhirlpool(whirlpoolCtx);
-    const newProgram = new Program(classicProgramInterface, programId, provider) as Program<ProgramType>;
+    const newProgram = new Program(classicProgramInterface, programId, provider) as Program<Biscuit>;
     setProgram(newProgram);
   }, [connection, wallet]);
 
