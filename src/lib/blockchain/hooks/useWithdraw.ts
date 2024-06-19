@@ -6,6 +6,7 @@ import { useProgramContext } from '@/providers/ProgramProvider/ProgramProvider';
 import { useToast } from '@/lib/hooks/useToast';
 import { addressClassicCollection, classicPortfolioTokens, ecosystemPortfolioTokens, portfolioLookupTable } from '../constant';
 import { PortfolioDataType } from '../types';
+import { getOrCreateATA } from '../helpers/getOrCreateATA';
 
 interface UseWithdrawProps extends PortfolioDataType {
   collectionAddress: string;
@@ -13,13 +14,13 @@ interface UseWithdrawProps extends PortfolioDataType {
 }
 
 export const useWithdraw = () => {
-  const { publicKey } = useWallet();
+  const { publicKey, signTransaction } = useWallet();
   const { createAndSendV0Tx } = useCreateAndSendV0Tx();
   const { program } = useProgramContext();
   const { toast } = useToast();
 
   const withdraw = async ({portfolioId, collectionId, paymentToken, collectionAddress}: UseWithdrawProps) => {
-    if (!publicKey || !program) {
+    if (!publicKey || !program || !signTransaction) {
       const error = new Error('Please, connect wallet.');
       toast({
         title: 'Error!',
@@ -32,6 +33,13 @@ export const useWithdraw = () => {
 
     const additionalComputeBudgetInstruction = ComputeBudgetProgram.setComputeUnitLimit({
       units: 500000
+    });
+
+    await getOrCreateATA({
+      owner: publicKey,
+      mint: paymentToken.key,
+      payer: publicKey,
+      signTransaction
     });
 
     const instruction = await getWithdrawPortfolioInstruction(
