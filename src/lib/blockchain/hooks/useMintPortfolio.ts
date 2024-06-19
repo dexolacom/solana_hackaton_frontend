@@ -1,12 +1,4 @@
-import {
-  addressClassicCollection,
-  connection,
-  ecosystemPortfolioTokens
-  // portfolioLookupTable,
-  // addressClassicCollection,
-  // classicPotrfolioId,
-  // ecosystemPortfolioId,
-} from '@/lib/blockchain/constant';
+import { addressClassicCollection, connection, ecosystemPortfolioTokens } from '@/lib/blockchain/constant';
 import { getCoinData } from '../helpers/getCoinData';
 import { useToast } from '@/lib/hooks/useToast';
 import { useProgramContext } from '@/providers/ProgramProvider/ProgramProvider';
@@ -31,7 +23,6 @@ export interface BuyNftArgs {
 }
 
 export const useMintPortfolio = (swapCount: number) => {
-
   const { publicKey, signTransaction } = useWallet();
   const { program } = useProgramContext();
   const { toast } = useToast();
@@ -40,12 +31,10 @@ export const useMintPortfolio = (swapCount: number) => {
   const { receive } = useReceive();
   const { setModalName, setNftPrice } = useModalsContext();
   const queryClient = useQueryClient();
-  // const { getPortfolioSwapData } = usePortfolioSwapData();
   const { createAndSendV0Tx } = useCreateAndSendV0Tx();
 
   const usdcData = getCoinData('USDC');
   const paymentToken = new PublicKey(usdcData.mint);
-  // const usdcPublicKey = new PublicKey(usdcData.mint);
 
   const mint = async ({ inputValue, portfolioId, collectionId }: BuyNftArgs) => {
     if (!publicKey || !program || !signTransaction) {
@@ -123,9 +112,9 @@ export const useMintPortfolio = (swapCount: number) => {
     mutationFn: mint,
     onSuccess: () => {
       setTimeout(() => {
-      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
-      queryClient.invalidateQueries({ queryKey: ['projectList'] });
-      setModalName('INVEST');
+        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+        queryClient.invalidateQueries({ queryKey: ['projectList'] });
+        setModalName('INVEST');
       }, 3000);
     },
     onError: (error) => {

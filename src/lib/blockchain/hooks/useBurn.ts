@@ -41,7 +41,7 @@ export const useBurn = () => {
     const collectionAddress = getPortfolioCollectionAddresses(collectionId)?.collection;
     const portfolio = getPortfolioAddresses(collectionAddress, portfolioId, publicKey);
 
-    const paymentToken = { key: new PublicKey(usdcData.mint), decimals: usdcData.decimals / 1e6 }
+    const paymentToken = { key: new PublicKey(usdcData.mint), decimals: usdcData.decimals / 1e6 };
 
     const instruction = await getBurnPortfolioInstruction(
       program,
@@ -67,7 +67,7 @@ export const useBurn = () => {
       portfolioId,
       paymentToken,
       collectionAddress: collectionAddress.toString()
-    })
+    });
   };
 
   const {
@@ -78,14 +78,13 @@ export const useBurn = () => {
   } = useMutation({
     mutationFn: burnPortfolio,
     onSuccess: () => {
-      // setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
-        setModalName('');
-        toast({
-          title: 'Info',
-          description: 'Burn success'
-        });
-      // }, 3000);
+      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+      queryClient.invalidateQueries({ queryKey: ['portfolioPrj'] });
+      setModalName('');
+      toast({
+        title: 'Info',
+        description: 'Burn success'
+      });
     },
     onError: (error) => {
       console.log(error);
@@ -101,7 +100,5 @@ export const useBurn = () => {
     }
   });
 
-  return {burn, isLoading, isSuccess, isError}
+  return { burn, isLoading, isSuccess, isError };
 };
-
-

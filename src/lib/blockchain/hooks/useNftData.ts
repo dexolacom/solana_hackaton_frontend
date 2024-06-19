@@ -35,9 +35,8 @@ export const useNftData = () => {
       };
     }
   });
- 
+
   useEffect(() => {
-    
     if (data && !data.pending) {
       const newNftData = tokens
 
@@ -47,9 +46,10 @@ export const useNftData = () => {
             ...data?.data?.find(
               (element) =>
                 element?.project.collectionId ===
-                (item?.collection.key.toString() === addressClassicCollection
-                  ? classicPotrfolioId
-                  : ecosystemPortfolioId) && element.portfolioId === +item?.name?.replace('BiscuitPortfolio', '')?.trim()
+                  (item?.collection.key.toString() === addressClassicCollection
+                    ? classicPotrfolioId
+                    : ecosystemPortfolioId) &&
+                element.portfolioId === +item?.name?.replace('BiscuitPortfolio', '')?.trim()
             )
           }
         }))
@@ -97,7 +97,7 @@ export const useNftData = () => {
         ecosystem: ecosystemInvested ?? 0
       });
     }
-  }, [data.pending]);
+  }, [data]);
 
   const isLoading = isLoadingTokens || data.pending;
 

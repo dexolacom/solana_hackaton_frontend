@@ -18,17 +18,9 @@ export const useProjectList = () => {
   const ecosystemProjectId = ecosystem?.id;
   const classicProjectId = classic?.id;
 
-  const classicInvested = decimalsOperations(
-    classic?.totalAmount ?? 0,
-    1e6,
-    OperationType.DIV
-  );
+  const classicInvested = decimalsOperations(classic?.totalAmount ?? 0, 1e6, OperationType.DIV);
 
-  const ecosystemInvested = decimalsOperations(
-    ecosystem?.totalAmount ?? 0,
-    1e6,
-    OperationType.DIV
-  );
+  const ecosystemInvested = decimalsOperations(ecosystem?.totalAmount ?? 0, 1e6, OperationType.DIV);
 
   return { projectList, isLoading, ecosystemInvested, classicInvested, ecosystemProjectId, classicProjectId };
 };

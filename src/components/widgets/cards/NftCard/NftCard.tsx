@@ -1,8 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
 import defaultCard from '@/assets/images/defaultCard.png';
 import { Button } from '@/components/ui/Button.tsx';
-// import { ArrowUpDown } from 'lucide-react'
-// import { Flame } from 'lucide-react'
 import { useGetNftImg } from '@/lib/api/hooks/useGetNftImg';
 import { CollectionType } from '@/lib/api/hooks/useSolanaRate';
 import { currencyIcons } from '@/lib/constants.tsx';
@@ -27,8 +25,6 @@ export const NftCard = (props: NftCardProps) => {
 
   const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH'];
   const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT', 'BONK', 'PYTH', 'RAY', 'JTO', 'WIF'];
-  // const classicIcons = ['BTC', 'SOL', 'ETH', 'JUP']
-  // const solanaIcons = ['SOL', 'JUP', 'RNDR', 'HNT']
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
@@ -85,7 +81,6 @@ export const NftCard = (props: NftCardProps) => {
             setNftTitle(title);
           }}
         >
-          {/* <ArrowUpDown className={'w-4 h-4'} /> */}
           Transfer
         </Button>
         <Button
@@ -93,13 +88,11 @@ export const NftCard = (props: NftCardProps) => {
           variant={'accent'}
           onClick={() => {
             setModalName('BURN_NFT');
-            //@ts-ignore
             setNftPrice(currentPrice ? currentPrice?.toString() : '0');
             setNftTitle(title);
             setCollection(collection);
           }}
         >
-          {/* <Flame className={'w-4 h-4'} /> */}
           Burn
         </Button>
       </CardFooter>

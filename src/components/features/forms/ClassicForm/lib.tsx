@@ -1,28 +1,15 @@
-// import { useLocation } from 'react-router-dom'
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMintPortfolio } from '@/lib/blockchain/hooks/useMintPortfolio';
-// import { useBuyNftByNative } from '@/lib/blockchain/hooks/useBuyNftByNative';
 import { useSolanaRate } from '@/lib/api/hooks/useSolanaRate';
 import { generateRandomNumber } from '@/lib/utils';
-import {
-  classicPotrfolioId,
-  ecosystemPortfolioId
-  //  addressEcosystemCollection
-} from '@/lib/blockchain/constant';
+import { classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant';
 
 export const useClassicForm = (currenciesVariant: 'classic' | 'solana') => {
-  // const { pathname } = useLocation();
-  const { mintPortfolio, isLoading: isLoadingToken } = useMintPortfolio(currenciesVariant === 'classic' ? 4 : 5);
-  // const { buy: buyNftByNative, isLoading: isLoadingNative } = useBuyNftByNative();
+  const { mintPortfolio, isLoading } = useMintPortfolio(currenciesVariant === 'classic' ? 4 : 5);
+
   const { solanaRate } = useSolanaRate();
-
-  // const isClassicColection = pathname.includes('classic');
-  // const mintCollection = isClassicColection ? addressClassicCollection : addressEcosystemCollection;
-
-  const isLoading = isLoadingToken;
-  // || isLoadingNative
 
   const FormSchema = z
     .object({

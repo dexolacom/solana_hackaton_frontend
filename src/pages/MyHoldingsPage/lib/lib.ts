@@ -26,17 +26,13 @@ interface GetHoldingPageDataArgs {
   isLoading: boolean;
 }
 
-export const getHoldingPageData = ({
-  variant,
-  totalPrice, 
-  isLoading
-}: GetHoldingPageDataArgs) => {
+export const getHoldingPageData = ({ variant, totalPrice, isLoading }: GetHoldingPageDataArgs) => {
   const tempData: TempDataType[] = [
     {
       title: 'classic',
       amount: {
         title: 'Current Portfolio Price',
-        number: isLoading? 'Calculation...' : currencyFormatter(totalPrice ?? 0)
+        number: isLoading ? 'Calculation...' : currencyFormatter(totalPrice ?? 0)
       },
       ...classicHoldings,
       amountCardVariant: 'accent',
@@ -56,10 +52,7 @@ export const getHoldingPageData = ({
       title: 'all',
       amount: {
         title: 'Portfolios Price',
-        number:
-          isLoading
-            ? 'Calculation...'
-            : currencyFormatter(totalPrice)
+        number: isLoading ? 'Calculation...' : currencyFormatter(totalPrice)
       },
       holdings: {
         title: 'Holdings',

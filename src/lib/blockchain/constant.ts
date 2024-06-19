@@ -16,7 +16,7 @@ export const programId = new PublicKey('AguvXyhZXA9WMXfezVHCnz9rjGDPRrDY6FdMcmgS
 
 export const classicProgramInterface = JSON.parse(JSON.stringify(idl));
 
-export const addressClassicCollection = 'AseMf5WSUqKkP1SFXTDnBNUcHmJunRdj5ix1mUsNoP9V';  //-?
+export const addressClassicCollection = 'AseMf5WSUqKkP1SFXTDnBNUcHmJunRdj5ix1mUsNoP9V'; //-?
 export const addressEcosystemCollection = 'B2v4NRfTRC546VWmAUzvwjmoufnDv8bmdrcm86dZRn7K'; //-?
 
 export const TOKEN_METADATA_PROGRAM_ID = new PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
@@ -24,70 +24,68 @@ export const TOKEN_METADATA_PROGRAM_ID = new PublicKey('metaqbxxUerdq28cj1RbAWkY
 export const portfolioLookupTable = new PublicKey('7SXMzMSkHZ95BFb62F18b6rP3WWG16VMQmqkUjDXmWwD');
 export const treasury = new PublicKey('8QdnKN4JbhpSLdhJVcCswmSy3X1Z3hmyZEG3VvGGNHn7');
 
-
 export const coins = [
   {
-      currency: "USDC",
-      mint: "HxwDiYR6swJjW3hhAt4CCmq2qPxXGn29BCjaciXR6S3J",
-      decimals: 1e6,
+    currency: 'USDC',
+    mint: 'HxwDiYR6swJjW3hhAt4CCmq2qPxXGn29BCjaciXR6S3J',
+    decimals: 1e6
   },
   {
-      currency: "SOL",
-      mint: "So11111111111111111111111111111111111111112",
-      decimals: 1e9
+    currency: 'SOL',
+    mint: 'So11111111111111111111111111111111111111112',
+    decimals: 1e9
   },
   {
-      currency: "BTC",
-      decimals: 1e8,
-      mint: "FibETkfHcCF7Brxn1TryCtD6Z6KAjQgF1VtjfRRS4KQy"
+    currency: 'BTC',
+    decimals: 1e8,
+    mint: 'FibETkfHcCF7Brxn1TryCtD6Z6KAjQgF1VtjfRRS4KQy'
   },
   {
-      decimals: 1e8,
-      currency: "ETH",
-      mint: "NftTPJXniF2Pqfw15HWfn1NfoNa36LgnWi7DCoWmKzC"
+    decimals: 1e8,
+    currency: 'ETH',
+    mint: 'NftTPJXniF2Pqfw15HWfn1NfoNa36LgnWi7DCoWmKzC'
   },
   {
-      decimals: 1e6,
-      currency: "JUP",
-      mint: "BaRCAG2Jw7pyNbDMgaj2vrZGhRrXWpFzSZgoPQ1CyFkL"
+    decimals: 1e6,
+    currency: 'JUP',
+    mint: 'BaRCAG2Jw7pyNbDMgaj2vrZGhRrXWpFzSZgoPQ1CyFkL'
   },
   {
-      decimals: 1e8,
-      currency: "RNDR",
-      mint: "JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN"
+    decimals: 1e8,
+    currency: 'RNDR',
+    mint: 'JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN'
   },
   {
-      decimals: 1e8,
-      currency: "HNT",
-      mint: "7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE"
+    decimals: 1e8,
+    currency: 'HNT',
+    mint: '7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE'
   },
   {
-      decimals: 1e5,
-      currency: "BONK",
-      mint: "EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq"
+    decimals: 1e5,
+    currency: 'BONK',
+    mint: 'EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq'
   },
   {
-      decimals: 1e6,
-      currency: "PYTH",
-      mint: "9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6"
+    decimals: 1e6,
+    currency: 'PYTH',
+    mint: '9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6'
   },
   {
-      decimals: 1e6,
-      currency: "RAY",
-      mint: "3krnbdBdvzrZDR34BBwUA4ttxNJ5Jf9EGuFZViuJZZw2"
+    decimals: 1e6,
+    currency: 'RAY',
+    mint: '3krnbdBdvzrZDR34BBwUA4ttxNJ5Jf9EGuFZViuJZZw2'
   },
   {
-      decimals: 1e9,
-      currency: "JTO",
-      mint: "2BjvT8iM9AQJsHXWDy2nuvzEu8yjCP4rL98VS89YTibw"
+    decimals: 1e9,
+    currency: 'JTO',
+    mint: '2BjvT8iM9AQJsHXWDy2nuvzEu8yjCP4rL98VS89YTibw'
   },
   {
-      decimals: 1e6,
-      currency: "WIF",
-      mint: "75hBcTeGiJ6xQRfVF3xvfX9eWhqsuK9B5kpEXjBWjehE"
+    decimals: 1e6,
+    currency: 'WIF',
+    mint: '75hBcTeGiJ6xQRfVF3xvfX9eWhqsuK9B5kpEXjBWjehE'
   }
-]
-
+];
 
 export const WHIRLPOOLS = {
   ['BhKhpfHuHvcLtteqDidKrzAtCbjDMSu6P2PDF7vFCsSe']: {
@@ -161,22 +159,22 @@ export const classicPortfolioTokens = [
     decimals: 6
   },
   {
-    key: new PublicKey("JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN"), // RNDR
+    key: new PublicKey('JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN'), // RNDR
     percent: 100,
     decimals: 8
   },
   {
-    key: new PublicKey("7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE"), // HNT
+    key: new PublicKey('7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE'), // HNT
     percent: 50,
     decimals: 8
   },
   {
-    key: new PublicKey("EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq"), // BONK
+    key: new PublicKey('EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq'), // BONK
     percent: 50,
     decimals: 5
   },
   {
-    key: new PublicKey("9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6"), // PYTH
+    key: new PublicKey('9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6'), // PYTH
     percent: 50,
     decimals: 6
   }
@@ -194,37 +192,37 @@ export const ecosystemPortfolioTokens = [
     decimals: 6
   },
   {
-    key: new PublicKey("JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN"), // RNDR
+    key: new PublicKey('JCdkWwFwLj1g9XGFmEqUT5sUroy71auNtwQCLUZNAmBN'), // RNDR
     percent: 150,
     decimals: 8
   },
   {
-    key: new PublicKey("7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE"), // HNT
+    key: new PublicKey('7a8BuU2PTLMCfoCLZkWsmgKZUxk9NTDTsH99QdJnAHRE'), // HNT
     percent: 150,
     decimals: 8
   },
   {
-    key: new PublicKey("EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq"), // BONK
+    key: new PublicKey('EuMqSBjc6m34CBGyeHGi9aV81iC8uRTgMb1V273cWdeq'), // BONK
     percent: 100,
     decimals: 5
   },
   {
-    key: new PublicKey("9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6"), // PYTH
+    key: new PublicKey('9F7rpeDN3aakcAhNMdH43EST4desvLBWdme3s3ZSyGr6'), // PYTH
     percent: 50,
     decimals: 6
   },
   {
-    key: new PublicKey("3krnbdBdvzrZDR34BBwUA4ttxNJ5Jf9EGuFZViuJZZw2"), // RAY
+    key: new PublicKey('3krnbdBdvzrZDR34BBwUA4ttxNJ5Jf9EGuFZViuJZZw2'), // RAY
     percent: 50,
     decimals: 6
   },
   {
-    key: new PublicKey("2BjvT8iM9AQJsHXWDy2nuvzEu8yjCP4rL98VS89YTibw"), // JTO
+    key: new PublicKey('2BjvT8iM9AQJsHXWDy2nuvzEu8yjCP4rL98VS89YTibw'), // JTO
     percent: 50,
     decimals: 9
   },
   {
-    key: new PublicKey("75hBcTeGiJ6xQRfVF3xvfX9eWhqsuK9B5kpEXjBWjehE"), // WIF
+    key: new PublicKey('75hBcTeGiJ6xQRfVF3xvfX9eWhqsuK9B5kpEXjBWjehE'), // WIF
     percent: 50,
     decimals: 6
   }

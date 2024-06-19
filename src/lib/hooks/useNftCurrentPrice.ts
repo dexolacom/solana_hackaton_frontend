@@ -12,8 +12,9 @@ interface UseCurrentPriceNftArgs {
 export const useNftCurrentPrice = ({ collection, title }: UseCurrentPriceNftArgs) => {
   const { cards, isLoading } = useNftData();
   const nftId = title.slice(title.indexOf('#') + 1).trim();
-  const tokensAmount = cards?.['all']?.filter((card) => card?.name?.replace(/\D/g, '') === nftId)?.[0]?.content?.coinAmounts
-  
+  const tokensAmount = cards?.['all']?.filter((card) => card?.name?.replace(/\D/g, '') === nftId)?.[0]?.content
+    ?.coinAmounts;
+
   const { projectList } = useProjectList();
   const classicId = collection === 'Classic' ? projectList?.find((item) => item.name === collection)?.id : undefined;
   const ecoSystemId =

@@ -20,7 +20,7 @@ const SolanaPage = () => {
   const tempData = {
     amount: {
       title: 'Total amount invested',
-      number: isLoading? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
+      number: isLoading ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
     },
     ...ecosystemHoldings,
     description: {

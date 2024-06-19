@@ -8,12 +8,12 @@ import { useProgramContext } from '@/providers/ProgramProvider/ProgramProvider';
 import { useToast } from '@/lib/hooks/useToast';
 import { PortfolioDataType } from '../types';
 
-interface UseSwapArgs extends PortfolioDataType{
+interface UseSwapArgs extends PortfolioDataType {
   portfolioMint: PublicKey;
   amount: BN;
   paymentToken: { key: PublicKey; decimals: number };
   tokens: { key: PublicKey; percent: number; decimals: number }[];
-  swapCount: number
+  swapCount: number;
 }
 
 export const useSwap = () => {
@@ -59,7 +59,6 @@ export const useSwap = () => {
     await createAndSendV0Tx([additionalComputeBudgetInstruction, instructions[0]], [portfolioLookupTable]);
     await createAndSendV0Tx([additionalComputeBudgetInstruction, instructions[1]], [portfolioLookupTable]);
   };
-    
 
   return { swap };
 };

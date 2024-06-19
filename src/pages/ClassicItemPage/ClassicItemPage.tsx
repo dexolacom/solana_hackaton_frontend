@@ -18,27 +18,25 @@ import { classicHoldings } from '@/lib/constants';
 // import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
 
-
 const ClassicItemPage = () => {
-
   // useNavigateTo('/');
- 
+
   const [searchParams] = useSearchParams();
   const { item } = useParams();
   const { setModalName, setNftPrice, setNftTitle, setCollection } = useModalsContext();
   const invested = searchParams.get('invested');
   const currentPrice = searchParams.get('currentPrice');
   const tempData = {
-  amount: {
-    title: 'Current Portfolio Price',
-    number: currencyFormatter(+(currentPrice ?? '0'))
-  },
-  ...classicHoldings,
-  description: {
-    title: 'Description',
-    text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.'
-  }
-};
+    amount: {
+      title: 'Current Portfolio Price',
+      number: currencyFormatter(+(currentPrice ?? '0'))
+    },
+    ...classicHoldings,
+    description: {
+      title: 'Description',
+      text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.'
+    }
+  };
 
   return (
     <div>

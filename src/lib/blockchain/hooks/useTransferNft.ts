@@ -61,15 +61,13 @@ export const useTransferNft = () => {
   } = useMutation({
     mutationFn: transferNft,
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['getNfts'] });
+      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+      queryClient.invalidateQueries({ queryKey: ['portfolioPrj'] });
       setModalName('');
       toast({
         title: 'Info',
         description: 'Transfer success'
       });
-      setTimeout(() => {
-        queryClient.refetchQueries({ queryKey: ['transaction'] });
-      }, 500);
     },
     onError: (error) => {
       console.log(error);

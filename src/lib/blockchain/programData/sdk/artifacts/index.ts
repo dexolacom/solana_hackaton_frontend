@@ -1,1 +1,1 @@
-export * from "@/lib/blockchain/programData/types";
+export * from '@/lib/blockchain/programData/types';

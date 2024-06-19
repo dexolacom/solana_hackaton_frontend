@@ -15,6 +15,7 @@ import { useSearchParams, useParams } from 'react-router-dom';
 import { currencyFormatter } from '@/lib/utils';
 import { ecosystemHoldings } from '@/lib/constants';
 import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
+// import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 
 const SolanaItemPage = () => {
   // useNavigateTo('/');

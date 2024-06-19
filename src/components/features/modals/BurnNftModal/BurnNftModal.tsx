@@ -1,5 +1,4 @@
 import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
-// import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
 import { Button } from '@/components/ui/Button.tsx';
 import { Loader2 } from 'lucide-react';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';

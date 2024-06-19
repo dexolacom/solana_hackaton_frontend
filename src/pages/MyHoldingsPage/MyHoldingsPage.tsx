@@ -29,10 +29,9 @@ const MyHoldingsPage = () => {
     setSearchParams({ filter: 'all' });
   }, []);
 
-
   const data = getHoldingPageData({
     variant: holdingsFilter!,
-    totalPrice, 
+    totalPrice,
     isLoading
   });
 

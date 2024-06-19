@@ -23,9 +23,6 @@ export const AmountCard = (props: AmountCardProps) => {
     variants: {
       variant: {
         bordered: 'border p-6'
-        // accent: 'bg-accent text-accent-foreground',
-        // accentTeal: 'bg-accent-accentTeal text-accent-foreground',
-        // accentGray: 'bg-accent-accentGray text-accent-foreground'
       }
     }
   });
