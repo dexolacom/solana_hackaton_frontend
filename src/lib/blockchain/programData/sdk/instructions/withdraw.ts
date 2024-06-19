@@ -41,6 +41,7 @@ export function getWithdrawPortfolioInstruction(
     );
 
     const remainingAccounts:  AccountMeta[] = [];
+
     // const burnModel = BurnModel[model];
 
     if(model === BurnModel.Raw){
@@ -62,7 +63,7 @@ export function getWithdrawPortfolioInstruction(
       const treasury_ata = getAssociatedTokenAddressSync(payment_token, treasury, true);
       remainingAccounts.push({pubkey: treasury_ata, isSigner: false, isWritable: true});
     }
-    
+    remainingAccounts.forEach(item => console.log(item.pubkey.toString()));
     return program.methods.withdrawPortfolio(
       portfolio_id,
       collection_id,
