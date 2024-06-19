@@ -40,12 +40,12 @@ const SolanaItemPage = () => {
   return (
     <div>
       <BackLink title={'My holdings'} path={'/my-holdings'} />
-      <PageTitle title={item ?? 'SOLANA ECOSYSTEM item'}>
+      <PageTitle title={item ?? 'SOLANA ECOSYSTEM item'} className='mb-6 font-xl'>
         <div className={'flex gap-4'}>
-          <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('TRANSFER_NFT')}>
+          <Button className={'flex-1 gap-2'} variant={'outline'} onClick={() => setModalName('TRANSFER_NFT')}>
             Transfer
           </Button>
-          <Button className={'flex-1 gap-2'} variant={'destructive'} onClick={() => setModalName('BURN_NFT')}>
+          <Button className={'flex-1 gap-2'} variant={'accent'} onClick={() => setModalName('BURN_NFT')}>
             Burn
           </Button>
         </div>

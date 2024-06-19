@@ -20,7 +20,7 @@ export const useNftData = () => {
 
   const data = useQueries({
     queries: tokens?.map((token) => ({
-      queryKey: ['portfolioPrj', token],
+      queryKey: ['portfolioPrj', token.name],
       queryFn: () =>
         getPortfolio(
           (token.collection.key.toString() === addressClassicCollection ? classicProjectId : ecosystemProjectId) ?? '',
@@ -35,8 +35,9 @@ export const useNftData = () => {
       };
     }
   });
-
+ 
   useEffect(() => {
+    
     if (data && !data.pending) {
       const newNftData = tokens
 
@@ -48,7 +49,7 @@ export const useNftData = () => {
                 element?.project.collectionId ===
                 (item?.collection.key.toString() === addressClassicCollection
                   ? classicPotrfolioId
-                  : ecosystemPortfolioId)
+                  : ecosystemPortfolioId) && element.portfolioId === +item?.name?.replace('BiscuitPortfolio', '')?.trim()
             )
           }
         }))

@@ -12,14 +12,20 @@ interface InfoCoin {
 }
 
 export interface ProjectType extends BaseData {
-  collectionId: number,
-  totalAmount: number,
+  collectionId: number;
+  totalAmount: number;
   name: string;
 }
 
 export interface ResponseProjectTypeItem {
   name: string;
   tokens: ProjectTypeItem[];
+}
+
+export interface ResponseFaucetData {
+  amount: number;
+  message: string;
+  transaction: string;
 }
 export interface ProjectTypeItem extends InfoCoin {
   coinPrice: number;
@@ -32,8 +38,8 @@ export interface ResponsePortfolioTypeItem {
   tokens: ProjectTypeItem[];
   project: ProjectType;
   amount: number;
+  portfolioId: number;
 }
-
 
 export interface TokenType extends InfoCoin, BaseData {
   coinmarketcapId: number;

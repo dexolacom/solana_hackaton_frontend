@@ -6,11 +6,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const currencyFormatter = (num: number) => {
+export const currencyFormatter = (num: number, fractionDigits?: number) => {
   const currencyOptions = {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 0
+    minimumFractionDigits: fractionDigits ?? 0
   };
 
   const formatter = new Intl.NumberFormat('en-US', currencyOptions);

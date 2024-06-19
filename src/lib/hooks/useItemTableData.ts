@@ -43,12 +43,11 @@ export const useItemTableData = ({ template }: UseTableData) => {
   const dataTable: TableData[] = template.map((item) => {
     const match = projectById?.find((dataItem) => dataItem.symbol === item.symbol);
     if (match) {
-      console.log(tokensAmount?.uiAmount?.[item.symbol] ?? 0)
       return {
         ...item,
         name: match.name,
         riskType: match.riskType,
-        coinPrice: currencyFormatter(match.coinPrice),
+        coinPrice: currencyFormatter(match.coinPrice, 5),
         change24h: `${match.change24h?.toFixed(2)}%`,
         marketCap: currencyFormatter(match.marketCap),
         coinAmount: tokensAmount?.[item.symbol]?.uiAmount ?? 0
