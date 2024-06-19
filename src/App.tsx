@@ -5,28 +5,14 @@ import { Footer } from '@/components/widgets/Footer/Footer.tsx';
 import { Toaster } from '@/components/ui/Toaster.tsx';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 import { ModalsFactory } from '@/components/common/ModalFactory/ModalFactory.tsx';
-import { useMintPortfolio } from './lib/blockchain/hooks/useMintPortfolio';
 
 function App() {
-  const { modalName, setModalName } = useModalsContext();
-  const { mintPortfolio } = useMintPortfolio(5);
+  const { modalName } = useModalsContext();
 
   return (
     <div className='wrapper'>
       <Header />
       <main className='content'>
-        <button onClick={()=> setModalName('INVEST')}>Invest</button>
-        <button
-          onClick={() =>
-            mintPortfolio({
-              inputValue: 10,
-              portfolioId: 2,
-              collectionId: 2
-            })
-          }
-        >
-          TEST
-        </button>
         <AppRouter />
       </main>
       {modalName && <ModalsFactory />}

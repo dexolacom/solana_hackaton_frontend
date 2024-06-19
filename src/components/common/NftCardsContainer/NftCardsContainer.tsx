@@ -45,7 +45,7 @@ export const NftCardsContainer = () => {
                   key={`${item?.name}`}
                   title={title}
                   uri={item?.uri}
-                  investedPrice={item.content.investedPrice}
+                  investedPrice={0}
                   collection={item.collection.key.toString()}
                   mint={item.addressMint}
                 />
