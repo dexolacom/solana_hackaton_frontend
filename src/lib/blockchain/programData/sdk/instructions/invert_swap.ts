@@ -33,6 +33,7 @@ export async function getInvertSwapPortfolioInstruction(
     payment_token: PublicKey,
     user: PublicKey,
 ){
+    console.log("🚀 ~ user:", user)
     const portfolio_collection = getPortfolioCollectionAddresses(collection_id);
     const portfolio = getPortfolioAddresses(
       portfolio_collection.collection,

@@ -6,10 +6,9 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useCreateAndSendV0Tx } from './useCreateAndSendV0Tx';
 import { useProgramContext } from '@/providers/ProgramProvider/ProgramProvider';
 import { useToast } from '@/lib/hooks/useToast';
+import { PortfolioDataType } from '../types';
 
-interface UseSwapArgs {
-  portfolioId: number;
-  collectionId: number;
+interface UseSwapArgs extends PortfolioDataType{
   portfolioMint: PublicKey;
   amount: BN;
   paymentToken: { key: PublicKey; decimals: number };

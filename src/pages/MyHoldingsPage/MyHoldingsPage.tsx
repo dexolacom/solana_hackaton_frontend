@@ -10,8 +10,6 @@ import { currencyFormatter } from '@/lib/utils';
 import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib';
 import { getHoldingPageData } from './lib/lib';
 import { useSearchParams } from 'react-router-dom';
-import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData';
 import { useNavigateTo } from '@/lib/hooks/useNavigateTo';
 import { Skeleton } from '@/components/common/Skeleton/Skeleton';

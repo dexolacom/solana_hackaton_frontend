@@ -7,15 +7,12 @@ import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
 import { useProgramContext } from "@/providers/ProgramProvider/ProgramProvider";
 import { useToast } from "@/lib/hooks/useToast";
 import { generateColectionData } from "../helpers/generateColectionData";
+import { PortfolioDataType } from "../types";
 
-
-interface UseBuyArgs {
-  portfolioId: number;
-  collectionId: number;
+interface UseBuyArgs extends PortfolioDataType {
   amount: BN;
   paymentToken: PublicKey;
   collectionAddress: PublicKey
-
 }
 
 export const useBuy = () => {
@@ -39,7 +36,7 @@ export const useBuy = () => {
     const additionalComputeBudgetInstruction = ComputeBudgetProgram.setComputeUnitLimit({
       units: 500000
     });
-    console.log("🚀 ~ buy ~ generateColectionData(collectionAddress.toString()).uri:", generateColectionData(collectionAddress.toString()).uri)
+
     const instruction = await getBuyPortfolioInstruction(
       program,
       portfolioId,

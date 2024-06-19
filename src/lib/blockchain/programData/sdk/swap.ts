@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { BN } from "@coral-xyz/anchor";
 import { PublicKey, Connection } from "@solana/web3.js";
 import { ORCA_WHIRLPOOLS_CONFIG } from "./constants";

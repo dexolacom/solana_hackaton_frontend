@@ -7,8 +7,6 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider';
 import { addressClassicCollection, classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant';
 
-// TODO: add debounce for amount field
-
 export const useTransferForm = () => {
   const { transfer: transferNft, isLoading } = useTransferNft();
   const { publicKey } = useWallet();

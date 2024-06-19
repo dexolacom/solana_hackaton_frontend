@@ -4,11 +4,7 @@ import { useProgramContext } from '@/providers/ProgramProvider/ProgramProvider';
 import { useToast } from '@/lib/hooks/useToast';
 import { TransactionInstruction } from '@solana/web3.js';
 import { getReceivePortfolioInstruction } from '../programData/sdk';
-
-interface UseReceiveArgs {
-  portfolioId: number;
-  collectionId: number;
-}
+import { PortfolioDataType } from '../types';
 
 export const useReceive = () => {
   const { publicKey } = useWallet();
@@ -16,7 +12,7 @@ export const useReceive = () => {
   const { program } = useProgramContext();
   const { toast } = useToast();
 
-  const receive = async ({ collectionId, portfolioId }: UseReceiveArgs) => {
+  const receive = async ({ collectionId, portfolioId }: PortfolioDataType) => {
     if (!publicKey || !program) {
       const error = new Error('Please, connect wallet.');
       toast({

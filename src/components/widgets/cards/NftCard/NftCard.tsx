@@ -93,7 +93,8 @@ export const NftCard = (props: NftCardProps) => {
           variant={'accent'}
           onClick={() => {
             setModalName('BURN_NFT');
-            setNftPrice(currentPrice ? currentPrice.toString() : '0');
+            //@ts-ignore
+            setNftPrice(currentPrice ? currentPrice?.toString() : '0');
             setNftTitle(title);
             setCollection(collection);
           }}

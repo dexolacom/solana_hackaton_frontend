@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
 import { getCardsData } from '@/components/common/HomeCardsContainer/lib.ts';
 import { useProjectList } from '@/lib/api/hooks/useProjectList';
-import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
+// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
 import {
-  addressClassicCollection
+  // addressClassicCollection
   // addressEcosystemCollection
 } from '@/lib/blockchain/constant';
 import { PortfolioCard } from '@/components/widgets/cards/PortfolioCard/PortfolioCard';
@@ -14,9 +14,11 @@ interface HomeCardsContainerProps {
 
 export const HomeCardsContainer = forwardRef<HTMLDivElement, HomeCardsContainerProps>((_, ref) => {
   const { projectList } = useProjectList();
-  const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
   const ecosystemInvested = 0;
   const isLoadingEcosystem = false;
+  const classicInvested = 0;
+  const isLoadingClassic = false;
   const cards = getCardsData({ projectList, classicInvested, ecosystemInvested, isLoadingClassic, isLoadingEcosystem });
 
   return (
