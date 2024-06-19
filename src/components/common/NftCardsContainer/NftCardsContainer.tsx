@@ -5,6 +5,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { Loader2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib';
+import { OperationType, decimalsOperations } from '@/lib/helpers/decimalsOperations';
 
 export const NftCardsContainer = () => {
   const { publicKey } = useWallet();
@@ -40,12 +41,13 @@ export const NftCardsContainer = () => {
                 'BiscuitPortfolio',
                 item.collection.key.toString() === addressClassicCollection ? 'Classic# ' : 'Solana Ecosystem# '
               );
+
               return (
                 <NftCard
                   key={`${item?.name}`}
                   title={title}
                   uri={item?.uri}
-                  investedPrice={0}
+                  investedPrice={decimalsOperations(item.content.amount, 1e6, OperationType.DIV)}
                   collection={item.collection.key.toString()}
                   mint={item.addressMint}
                 />

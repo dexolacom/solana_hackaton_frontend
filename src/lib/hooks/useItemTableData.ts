@@ -4,8 +4,6 @@ import { useSolanaProjectById } from '../api/hooks/useSolanaProjectById';
 import { currencyFormatter } from '@/lib/utils';
 import { useLocation } from 'react-router-dom';
 import { useNftData } from '../blockchain/hooks/useNftData';
-import { coins } from '../blockchain/constant';
-import { OperationType, decimalsOperations } from '../helpers/decimalsOperations';
 
 interface TemplateType {
   symbol: string;
@@ -27,8 +25,7 @@ export const useItemTableData = ({ template }: UseTableData) => {
   const { projectById, isLoading: isLoadingPrj } = useSolanaProjectById(id ?? '');
 
   const nftId = decodeURIComponent(pathname).replace(/\D/g, '');
-  const tokensAmount = cards?.['all']?.filter((card) => card?.name?.replace(/\D/g, '') === nftId)?.[0]?.content
-    ?.tokensAmount;
+  const tokensAmount = cards?.['all']?.filter((card) => card?.name?.replace(/\D/g, '') === nftId)?.[0]?.content?.coinAmounts
 
   const isLoading = isLoadingId || isLoadingPrj || isLoadingNftData;
 
@@ -45,8 +42,8 @@ export const useItemTableData = ({ template }: UseTableData) => {
 
   const dataTable: TableData[] = template.map((item) => {
     const match = projectById?.find((dataItem) => dataItem.symbol === item.symbol);
-    const decimals = coins.find((element) => element.currency === item.symbol)?.decimals;
     if (match) {
+      console.log(tokensAmount?.uiAmount?.[item.symbol] ?? 0)
       return {
         ...item,
         name: match.name,
@@ -54,7 +51,7 @@ export const useItemTableData = ({ template }: UseTableData) => {
         coinPrice: currencyFormatter(match.coinPrice),
         change24h: `${match.change24h?.toFixed(2)}%`,
         marketCap: currencyFormatter(match.marketCap),
-        coinAmount: decimalsOperations(tokensAmount?.[item.symbol] ?? 0, decimals ?? 0, OperationType.DIV)
+        coinAmount: tokensAmount?.[item.symbol]?.uiAmount ?? 0
       };
     } else {
       return stub;

@@ -8,7 +8,7 @@ import { CollectionType } from '@/lib/api/hooks/useSolanaRate';
 import { currencyIcons } from '@/lib/constants.tsx';
 import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
 import { Link } from 'react-router-dom';
-// import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice';
+import { useNftCurrentPrice } from '@/lib/hooks/useNftCurrentPrice';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { currencyFormatter } from '@/lib/utils';
 
@@ -32,12 +32,12 @@ export const NftCard = (props: NftCardProps) => {
 
   const currentCollection = collection === addressClassicCollection ? CollectionType.CLASSIC : CollectionType.ECOSYSTEM;
 
-  // const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
-  const  currentPrice = 0 
+  const { currentPrice } = useNftCurrentPrice({ collection: currentCollection, title });
+
   return (
     <Card className={'relative shadow-sm p-0'}>
       <Link
-        to={`Classic/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
+        to={`${collection === addressClassicCollection ? 'classic' : 'solana'}/${encodeURIComponent(title)}?invested=${investedPrice ?? 0}&currentPrice=${currentPrice ?? 0}`}
         className={'z-10 absolute w-full h-full top-0 left-0'}
         onClick={(e) => {
           e.stopPropagation();

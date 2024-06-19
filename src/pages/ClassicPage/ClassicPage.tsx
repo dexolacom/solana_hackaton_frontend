@@ -9,21 +9,18 @@ import { ClassicForm } from '@/components/features/forms/ClassicForm/ClassicForm
 import { ClassicPageTable } from '@/components/features/tabels/ClassicPageTable/ClassicPageTable.tsx';
 import { BackLink } from '@/components/common/BackLink/BackLink.tsx';
 import { currencyFormatter } from '@/lib/utils';
-// import { useTotalInvested } from '@/lib/blockchain/hooks/useTotalInvested';
-// import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { classicHoldings } from '@/lib/constants';
 import cardBackground from '@/assets/images/classicCase.webp';
 import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
+import { useProjectList } from '@/lib/api/hooks/useProjectList';
 
 const ClassicPage = () => {
-  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
+  const { isLoading, classicInvested } = useProjectList();
 
-  const classicInvested = 0;
-  const isLoadingClassic = false;
   const tempData = {
     amount: {
       title: 'Total amount invested',
-      number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0)
+      number: isLoading ? 'Calculation...' : currencyFormatter(classicInvested ?? 0)
     },
     ...classicHoldings,
     description: {

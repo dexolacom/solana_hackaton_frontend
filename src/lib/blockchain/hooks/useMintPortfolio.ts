@@ -124,6 +124,7 @@ export const useMintPortfolio = (swapCount: number) => {
     onSuccess: () => {
       setTimeout(() => {
       queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+      queryClient.invalidateQueries({ queryKey: ['projectList'] });
       setModalName('INVEST');
       }, 3000);
     },
