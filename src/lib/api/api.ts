@@ -1,6 +1,6 @@
 import axios from 'axios';
 const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
-import { TokenType, ProjectType, ResponseProjectTypeItem } from '../types';
+import { TokenType, ProjectType, ResponseProjectTypeItem, ResponsePortfolioTypeItem } from '../types';
 
 const API = axios.create({
   baseURL: BASE_API_URL
@@ -16,6 +16,10 @@ export const getTokenList = async () => {
 
 export const getProjectById = async (id: string) => {
   return await API.get<ResponseProjectTypeItem>(`/project/${id}`);
+};
+
+export const getPortfolio = async (projectId: string, portfolioId: number) => {
+  return await API.post<ResponsePortfolioTypeItem>(`portfolio/project`, { projectId, portfolioId });
 };
 
 export const getTokenById = async (id: string) => {

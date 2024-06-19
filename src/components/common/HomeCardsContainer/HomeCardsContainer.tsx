@@ -13,13 +13,9 @@ interface HomeCardsContainerProps {
 }
 
 export const HomeCardsContainer = forwardRef<HTMLDivElement, HomeCardsContainerProps>((_, ref) => {
-  const { projectList } = useProjectList();
-  // const { data: classicInvested, isLoading: isLoadingClassic } = useTotalInvested(addressClassicCollection);
-  const ecosystemInvested = 0;
-  const isLoadingEcosystem = false;
-  const classicInvested = 0;
-  const isLoadingClassic = false;
-  const cards = getCardsData({ projectList, classicInvested, ecosystemInvested, isLoadingClassic, isLoadingEcosystem });
+  const { projectList, isLoading, ecosystemInvested, classicInvested } = useProjectList();
+  
+  const cards = getCardsData({ projectList, classicInvested, ecosystemInvested, isLoadingClassic: isLoading, isLoadingEcosystem: isLoading });
 
   return (
     <section ref={ref}>

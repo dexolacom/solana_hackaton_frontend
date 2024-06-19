@@ -12,16 +12,15 @@ import { currencyFormatter } from '@/lib/utils';
 import { ecosystemHoldings } from '@/lib/constants';
 import cardBackground from '@/assets/images/ecosystemCase.webp';
 import { PortfolioTitleWrapper } from '@/components/common/PortfolioTitleWrapper/PortfolioTitleWrapper';
+import { useProjectList } from '@/lib/api/hooks/useProjectList';
 
 const SolanaPage = () => {
-  // const { data: ecosystemInvested, isLoading: isLoadingEcosystem } = useTotalInvested(addressEcosystemCollection);
-  const ecosystemInvested = 0;
-  const isLoadingEcosystem = false;
+  const { isLoading, ecosystemInvested } = useProjectList();
 
   const tempData = {
     amount: {
       title: 'Total amount invested',
-      number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
+      number: isLoading? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
     },
     ...ecosystemHoldings,
     description: {
