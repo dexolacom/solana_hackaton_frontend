@@ -20,7 +20,7 @@ export const MyHoldingsFilter = ({ setFilter }: MyHoldingsFilterProps) => {
         <SelectContent>
           <SelectGroup className='uppercase'>
             <SelectItem value='all'>All portfolios holdings</SelectItem>
-            <SelectItem value='classic'>Classic</SelectItem>
+            <SelectItem value='classic'>Classic Portfolio</SelectItem>
             <SelectItem value='ecosystem'>Solana Ecosystem</SelectItem>
           </SelectGroup>
         </SelectContent>

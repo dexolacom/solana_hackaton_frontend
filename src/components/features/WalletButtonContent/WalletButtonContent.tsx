@@ -17,7 +17,7 @@ export const WalletButtonContent = () => {
   const ButtonContent = () => {
     return (
       <div
-        className={`${publicKey ? 'bg-black px-3 py-1' : 'bg-inherit'} 
+        className={`${publicKey ? 'bg-black px-3 py-1 text-sm' : 'bg-inherit text-lg'} 
       rounded-md ${publicKey ? 'text-white' : 'text-card-foreground '} whitespace-nowrap`}
       >
         {getButtonContent()}
@@ -26,7 +26,7 @@ export const WalletButtonContent = () => {
   };
 
   return (
-    <div className='flex gap-4 text-lg font-semibold uppercase'>
+    <div className='flex gap-4 font-semibold uppercase'>
       {publicKey ? (
         <>
           <ButtonContent />

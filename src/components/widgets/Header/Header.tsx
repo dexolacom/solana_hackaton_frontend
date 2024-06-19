@@ -7,6 +7,8 @@ import { useLocation } from 'react-router-dom';
 import { WalletButton } from '@/components/features/WalletButton/WalletButton';
 import { WalletButtonContent } from '@/components/features/WalletButtonContent/WalletButtonContent';
 import { useWallet } from '@solana/wallet-adapter-react';
+import faucet from '@/assets/icons/faucet.svg';
+import { Button } from '@/components/ui/Button';
 
 export const Header = () => {
   const location = useLocation();
@@ -30,7 +32,13 @@ export const Header = () => {
           My Holdings
         </AppLink>
       </div>
-      <div className='flex-1 flex justify-end'>
+      <div className='flex-1 flex justify-end gap-3'>
+        {publicKey && (
+          <Button variant='outline' className='flex gap-4 font-mono font-semibold'>
+            <img src={faucet} alt='Faucet' width={32} height={32} className='block' />
+            <span>USDC</span>
+          </Button>
+        )}
         <WalletButton>
           <WalletButtonContent />
         </WalletButton>
