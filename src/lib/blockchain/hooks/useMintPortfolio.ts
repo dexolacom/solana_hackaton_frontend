@@ -111,7 +111,7 @@ export const useMintPortfolio = (swapCount: number) => {
       collectionId
     });
 
-    setNftPrice(`${inputValue} USDC`);
+    setNftPrice(`${inputValue}`);
   };
 
   const {

@@ -15,7 +15,8 @@ export const InvestModal = () => {
       </CardHeader>
       <CardContent className={'flex flex-col gap-4 px-6 py-4'}>
         <p className={'text-base'}>
-          You have successfully invested <span className={'font-black font-roboto'}>{nftPrice}</span> in NFT.
+          You have successfully invested <span className={'font-black font-roboto'}>{nftPrice}</span>{' '}
+          <span className='font-bold'>USDC</span> in the portfolio.
           {/* with following assets distribution: */}
           {/* <span className={'font-medium'}>Classical: #0001</span>  */}
         </p>
@@ -26,7 +27,7 @@ export const InvestModal = () => {
           Close
         </Button>
         <Button
-          variant={'accent'} 
+          variant={'accent'}
           onClick={() => {
             navigate(`/my-holdings`);
             setModalName('');

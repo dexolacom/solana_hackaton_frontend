@@ -33,7 +33,7 @@ export const NftCardsContainer = () => {
           We have just checked, but there are no portfolios in your wallet.
         </div>
       ) : (
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid gap-4 grid-cols-2 1920:grid-cols-3 '>
           {cards &&
             cards[holdingsFilter].map((item) => {
               const title = item?.name.replace(

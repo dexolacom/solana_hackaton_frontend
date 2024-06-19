@@ -56,7 +56,7 @@ export const HoldingsForm = () => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger className={`${errors.portfolio && clsRedBoard} group`}>
-                    <SelectValue placeholder='Select portfolio from the list' />
+                    <SelectValue placeholder='Select collection to invest in' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
