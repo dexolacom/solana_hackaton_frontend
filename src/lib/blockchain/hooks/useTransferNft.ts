@@ -1,15 +1,13 @@
-import { useToast } from "@/lib/hooks/useToast";
-import {
-  createTransferInstruction,
-} from "@solana/spl-token";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getOrCreateATA } from "../helpers/getOrCreateATA";
-import { getCollectionAddresses } from "../helpers/getCollectionAddresses";
-import { getNftAddresses } from "../helpers/getNftAddresses";
-import { useCreateAndSendV0Tx } from "./useCreateAndSendV0Tx";
-import { useModalsContext } from "@/providers/ModalProvider/ModalProvider";
+import { useToast } from '@/lib/hooks/useToast';
+import { createTransferInstruction } from '@solana/spl-token';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { getOrCreateATA } from '../helpers/getOrCreateATA';
+import { getCollectionAddresses } from '../helpers/getCollectionAddresses';
+import { getNftAddresses } from '../helpers/getNftAddresses';
+import { useCreateAndSendV0Tx } from './useCreateAndSendV0Tx';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider';
 
 interface TransferNftProps {
   destinationAddress: PublicKey;
@@ -27,7 +25,6 @@ export const useTransferNft = () => {
   const queryClient = useQueryClient();
 
   const transferNft = async ({ destinationAddress, portfolioId, nftId }: TransferNftProps) => {
-
     if (!publicKey || !signTransaction) {
       const error = new Error('Please, connect wallet.');
       toast({
@@ -38,54 +35,53 @@ export const useTransferNft = () => {
     }
 
     const { collectionMint } = await getCollectionAddresses(portfolioId);
-    const { nftMint, nftATA } = await getNftAddresses({ collection: collectionMint, nftId, owner: publicKey });
+    const { nftMint, nftATA } = await getNftAddresses({
+      collection: collectionMint,
+      nftId,
+      owner: publicKey
+    });
 
-    const destinationAddressATA = await getOrCreateATA(
-      {
-        owner: destinationAddress,
-        mint: nftMint,
-        payer: publicKey,
-        signTransaction
-      })
-      
-    const instruction = createTransferInstruction(
-      nftATA,
-      destinationAddressATA.address,
-      publicKey,
-      1
-    );
+    const destinationAddressATA = await getOrCreateATA({
+      owner: destinationAddress,
+      mint: nftMint,
+      payer: publicKey,
+      signTransaction
+    });
+
+    const instruction = createTransferInstruction(nftATA, destinationAddressATA.address, publicKey, 1);
 
     await createAndSendV0Tx([instruction]);
-    
-  }
+  };
 
-  const { mutate: transfer, isError, isSuccess, isPending: isLoading } = useMutation({
+  const {
+    mutate: transfer,
+    isError,
+    isSuccess,
+    isPending: isLoading
+  } = useMutation({
     mutationFn: transferNft,
     onSuccess: () => {
-      setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['transaction'] });
-        queryClient.invalidateQueries({ queryKey: ['getNfts'] });
-        setModalName('');
-        toast({
-          title: 'Info',
-          description: 'Transfer success',
-        });
-      }, 3000);
+      queryClient.invalidateQueries({ queryKey: ['getNfts'] });
+      queryClient.invalidateQueries({ queryKey: ['portfolioPrj'] });
+      setModalName('');
+      toast({
+        title: 'Info',
+        description: 'Transfer success'
+      });
     },
     onError: (error) => {
       console.log(error);
-      (error instanceof Error) ?
-        toast({
-          title: 'Error',
-          description: error.message,
-        })
-        :
-        toast({
-          title: 'Error',
-          description: 'Unsuccessful operation',
-        });
+      error instanceof Error
+        ? toast({
+            title: 'Error',
+            description: error.message
+          })
+        : toast({
+            title: 'Error',
+            description: 'Unsuccessful operation'
+          });
     }
-  })
+  });
 
   return { transfer, isLoading, isSuccess, isError };
-}
+};

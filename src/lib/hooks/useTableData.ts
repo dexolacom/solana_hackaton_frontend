@@ -1,21 +1,21 @@
-import { TableData } from '../../components/features/tabels/ClassicPageTable/lib/columns'
-import { useSolanaProjectById } from '../api/hooks/useSolanaProjectById'
-import { currencyFormatter } from '@/lib/utils'
+import { TableData } from '../../components/features/tabels/ClassicPageTable/lib/columns';
+import { useSolanaProjectById } from '../api/hooks/useSolanaProjectById';
+import { currencyFormatter } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 
 interface TemplateType {
-  symbol: string
-  icon: string
-  distribution: string
+  symbol: string;
+  icon: string;
+  distribution: string;
 }
 
 interface UseTableData {
-  template: TemplateType[]
+  template: TemplateType[];
 }
 
 export const useTableData = ({ template }: UseTableData) => {
-   const { id } = useParams();
-  const { projectById, isLoading } = useSolanaProjectById(id ?? '')
+  const { id } = useParams();
+  const { projectById, isLoading } = useSolanaProjectById(id ?? '');
 
   const stub: TableData = {
     symbol: '',
@@ -25,11 +25,11 @@ export const useTableData = ({ template }: UseTableData) => {
     riskType: 'Low',
     coinPrice: '',
     change24h: '',
-    marketCap: '',
-  }
+    marketCap: ''
+  };
 
   const dataTable: TableData[] = template.map((item) => {
-    const match = projectById?.find((dataItem) => dataItem.symbol === item.symbol)
+    const match = projectById?.find((dataItem) => dataItem.symbol === item.symbol);
     if (match) {
       return {
         ...item,
@@ -37,12 +37,12 @@ export const useTableData = ({ template }: UseTableData) => {
         riskType: match.riskType,
         coinPrice: currencyFormatter(match.coinPrice),
         change24h: `${match.change24h?.toFixed(2)}%`,
-        marketCap: currencyFormatter(match.marketCap),
-      }
+        marketCap: currencyFormatter(match.marketCap)
+      };
     } else {
-      return stub
+      return stub;
     }
-  })
+  });
 
-  return { dataTable, isLoading }
-}
+  return { dataTable, isLoading };
+};

@@ -1,22 +1,22 @@
-import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx'
-// import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { Button } from '@/components/ui/Button.tsx'
-import { Loader2 } from 'lucide-react'
-import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx'
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { currencyFormatter, shortAddress } from '@/lib/utils'
-import { useBurnPortfolio } from '@/lib/blockchain/hooks/useBurnPortfolio'
-import { addressClassicCollection } from '@/lib/blockchain/constant'
-import { classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant'
+import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card.tsx';
+import { Button } from '@/components/ui/Button.tsx';
+import { Loader2 } from 'lucide-react';
+import { useModalsContext } from '@/providers/ModalProvider/ModalProvider.tsx';
+import { FeeCard } from '@/components/widgets/cards/FeeCard/FeeCard.tsx';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { currencyFormatter, shortAddress } from '@/lib/utils';
+import { addressClassicCollection } from '@/lib/blockchain/constant';
+import { classicPotrfolioId, ecosystemPortfolioId } from '@/lib/blockchain/constant';
+import { useBurn } from '@/lib/blockchain/hooks/useBurn';
 
 export const BurnNftModal = () => {
   const { publicKey } = useWallet();
   const { nftPrice, nftTitle, collection } = useModalsContext();
-  const { burn, isLoading } = useBurnPortfolio();
 
-  const nftId = +nftTitle.slice(nftTitle.indexOf('#') + 1);
-  const portfolioId = collection === addressClassicCollection ? classicPotrfolioId : ecosystemPortfolioId;
+  const { burn, isLoading } = useBurn();
+
+  const portfolioId = +nftTitle.slice(nftTitle.indexOf('#') + 1);
+  const collectionId = collection === addressClassicCollection ? classicPotrfolioId : ecosystemPortfolioId;
 
   const nftPriceToNumber = +nftPrice;
   const fee = nftPriceToNumber * 0.005;
@@ -25,46 +25,45 @@ export const BurnNftModal = () => {
   const tempData = [
     {
       title: 'Current NFT Price',
-      value: currencyFormatter(nftPriceToNumber),
+      value: currencyFormatter(nftPriceToNumber)
     },
     {
       title: 'Transaction Fee, 0.5%',
-      value: currencyFormatter(fee),
+      value: currencyFormatter(fee)
     },
     {
       title: 'You will get',
-      value: currencyFormatter(get),
+      value: currencyFormatter(get)
     },
     {
       title: 'Wallet Address',
-      value: shortAddress(publicKey),
-    },
-  ]
+      value: shortAddress(publicKey)
+    }
+  ];
 
-  const { setModalName } = useModalsContext()
+  const { setModalName } = useModalsContext();
 
   return (
     <>
-      <CardHeader>
-        <CardTitle className={'text-2xl'}>Burn nft</CardTitle>
+      <CardHeader className='px-6 pt-6 mb-0'>
+        <CardTitle className={'text-xl font-bold'}>Burn nft</CardTitle>
       </CardHeader>
-      <CardContent className={'flex flex-col gap-4'}>
+      <CardContent className={'flex flex-col gap-4 px-6 py-4'}>
         <p className={'text-sm'}>
-          Please, confirm you’re going to burn <span className={'font-black'}>{nftTitle}</span>. This
-          action cannot be undone.
+          Please, confirm you’re going to burn <span className={'font-semibold'}>{nftTitle}</span>. This action cannot
+          be undone.
         </p>
-        <InfoCard data={tempData} />
+        <FeeCard data={tempData} />
       </CardContent>
-      <CardFooter className={'gap-4 mt-6'}>
-        <Button variant={'secondary'} className={'flex-1'} onClick={() => setModalName('')}>
+      <CardFooter className={'gap-4 px-6 pb-4 pt-6 border border-border justify-end'}>
+        <Button variant={'outline'} onClick={() => setModalName('')}>
           Cancel
         </Button>
-        <Button variant={'accent'} className={'flex-1'}
-          onClick={() => burn({ portfolioId, nftId })}>
+        <Button variant={'accent'} onClick={() => burn({ collectionId, portfolioId })}>
           {isLoading && <Loader2 className='animate-spin mr-2' />}
           Confirm
         </Button>
       </CardFooter>
     </>
-  )
-}
+  );
+};

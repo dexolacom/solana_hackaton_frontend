@@ -1,20 +1,20 @@
-'use client'
+'use client';
 
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table.tsx'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table.tsx';
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
+    getCoreRowModel: getCoreRowModel()
+  });
 
   return (
     <div>
@@ -27,7 +27,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                   <TableHead className={'text-center text-card-additionalForeground text-xs'} key={header.id}>
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
@@ -38,7 +38,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
               <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'} className={'border-none'}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    className={'text-center font-roboto [&:nth-child(2)]:font-lufga [&:nth-child(1)]:font-lufga'}
+                    className={'text-center font-roboto [&:nth-child(2)]:font-raleway [&:nth-child(1)]:font-raleway'}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -56,5 +56,5 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }

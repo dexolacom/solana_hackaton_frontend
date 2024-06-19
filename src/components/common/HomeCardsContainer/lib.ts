@@ -1,5 +1,8 @@
-import { ProjectType } from "@/lib/types";
-import { currencyFormatter } from "@/lib/utils";
+import { ProjectType } from '@/lib/types';
+import { currencyFormatter } from '@/lib/utils';
+import classicCase from '@/assets/images/classicCase.webp';
+import ecosystemCase from '@/assets/images/ecosystemCase.webp';
+import classicEarnCase from '@/assets/images/classicEarnCase.webp';
 
 export const classicHoldings = {
   holdings: {
@@ -7,39 +10,39 @@ export const classicHoldings = {
     items: [
       {
         name: 'BTC',
-        percent: 35,
+        percent: 30
       },
       {
         name: 'SOL',
-        percent: 25,
+        percent: 20
       },
       {
         name: 'ETH',
-        percent: 20,
+        percent: 15
       },
       {
         name: 'JUP',
-        percent: 20,
+        percent: 10
       },
-      // {
-      //   name: 'RNDR',
-      //   percent: 10,
-      // },
-      // {
-      //   name: 'HNT',
-      //   percent: 5,
-      // },
-      // {
-      //   name: 'BONK',
-      //   percent: 5,
-      // },
-      // {
-      //   name: 'PYTH',
-      //   percent: 5,
-      // },
-    ],
-  },
-}
+      {
+        name: 'RNDR',
+        percent: 10
+      },
+      {
+        name: 'HNT',
+        percent: 5
+      },
+      {
+        name: 'BONK',
+        percent: 5
+      },
+      {
+        name: 'PYTH',
+        percent: 5
+      }
+    ]
+  }
+};
 
 export const ecosystemHoldings = {
   holdings: {
@@ -47,53 +50,59 @@ export const ecosystemHoldings = {
     items: [
       {
         name: 'SOL',
-        percent: 35,
+        percent: 30
       },
       {
         name: 'JUP',
-        percent: 25,
+        percent: 15
       },
       {
         name: 'RNDR',
-        percent: 20,
+        percent: 15
       },
       {
         name: 'HNT',
-        percent: 20,
+        percent: 15
       },
-      // {
-      //   name: 'BONK',
-      //   percent: 10,
-      // },
-      // {
-      //   name: 'PYTH',
-      //   percent: 5,
-      // },
-      // {
-      //   name: 'RAY',
-      //   percent: 5,
-      // },
-      // {
-      //   name: 'JTO',
-      //   percent: 5,
-      // },
-      // {
-      //   name: 'WIF',
-      //   percent: 5,
-      // },
-    ],
-  },
-}
+      {
+        name: 'BONK',
+        percent: 10
+      },
+      {
+        name: 'PYTH',
+        percent: 5
+      },
+      {
+        name: 'RAY',
+        percent: 5
+      },
+      {
+        name: 'JTO',
+        percent: 5
+      },
+      {
+        name: 'WIF',
+        percent: 5
+      }
+    ]
+  }
+};
 
 interface GetCardsDataArgs {
-  projectList?: ProjectType[], 
-  classicInvested?: number, 
-  ecosystemInvested?: number,
-  isLoadingClassic: boolean,
-  isLoadingEcosystem: boolean
+  projectList?: ProjectType[];
+  classicInvested?: number;
+  ecosystemInvested?: number;
+  isLoadingClassic: boolean;
+  isLoadingEcosystem: boolean;
 }
 
-export const getCardsData = ({projectList, classicInvested, ecosystemInvested, isLoadingClassic,  isLoadingEcosystem }: GetCardsDataArgs) => {
+export const getCardsData = ({
+  projectList,
+  classicInvested,
+  ecosystemInvested,
+  isLoadingClassic,
+  isLoadingEcosystem
+}: GetCardsDataArgs) => {
   return [
     {
       title: 'classic',
@@ -101,18 +110,15 @@ export const getCardsData = ({projectList, classicInvested, ecosystemInvested, i
       content: {
         amount: {
           title: 'Total amount invested',
-          number: isLoadingClassic? 'Calculation...' : currencyFormatter(classicInvested ?? 0) ,
+          number: isLoadingClassic ? 'Calculation...' : currencyFormatter(classicInvested ?? 0)
         },
-        ...classicHoldings,
-        description: {
-          title: 'Description',
-          text: 'The Classic portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. With allocations across various cryptocurrencies, it aims to optimize returns while managing potential risks effectively.',
-        },
+        ...classicHoldings
       },
       linkPath: `/classic/${projectList?.find((item) => item.name === 'Classic')?.id ?? ''}`,
       buttonVariant: 'accent',
-      amountCardVariant: 'accent',
       progressVariant: 'classic',
+      amountVariant: 'bordered',
+      backgroundImage: classicCase
     },
     {
       title: 'solana ecosystem',
@@ -120,18 +126,15 @@ export const getCardsData = ({projectList, classicInvested, ecosystemInvested, i
       content: {
         amount: {
           title: 'Total amount invested',
-          number:  isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0),
+          number: isLoadingEcosystem ? 'Calculation...' : currencyFormatter(ecosystemInvested ?? 0)
         },
-        ...ecosystemHoldings,
-        description: {
-          title: 'Description',
-          text: `The Solana Ecosystem portfolio is tailored for enthusiasts who believe in the Solana network's potential. It comprises assets tied to the Solana ecosystem, providing investors with the opportunity to participate in the network's growth and development.`,
-        },
+        ...ecosystemHoldings
       },
       linkPath: `/solana/${projectList?.find((item) => item.name === 'Solana Ecosystem')?.id ?? ''}`,
       buttonVariant: 'accent',
-      amountCardVariant: 'accentTeal',
       progressVariant: 'solana',
+      amountVariant: 'bordered',
+      backgroundImage: ecosystemCase
     },
     {
       title: 'classic + earn',
@@ -139,54 +142,51 @@ export const getCardsData = ({projectList, classicInvested, ecosystemInvested, i
       content: {
         amount: {
           title: 'Total amount invested',
-          number: 'Coming soon',
+          number: 'Coming soon...'
         },
         holdings: {
           title: 'Holdings',
           items: [
             {
               name: 'BTC',
-              percent: 35,
+              percent: 30
             },
             {
               name: 'SOL',
-              percent: 25,
+              percent: 20
             },
             {
               name: 'ETH',
-              percent: 20,
+              percent: 15
             },
             {
               name: 'JUP',
-              percent: 20,
+              percent: 10
             },
-            // {
-            //   name: 'RNDR',
-            //   percent: 10,
-            // },
-            // {
-            //   name: 'HNT',
-            //   percent: 5,
-            // },
-            // {
-            //   name: 'BONK',
-            //   percent: 5,
-            // },
-            // {
-            //   name: 'PYTH',
-            //   percent: 5,
-            // },
-          ],
-        },
-        description: {
-          title: 'Description',
-          text: 'The Classic + Earn portfolio is a balanced investment strategy comprising a mix of low-risk and high-risk assets. It channels these assets into staking/landing/vaults for additional earning opportunities while aiming to optimize returns.',
-        },
+            {
+              name: 'RNDR',
+              percent: 10
+            },
+            {
+              name: 'HNT',
+              percent: 5
+            },
+            {
+              name: 'BONK',
+              percent: 5
+            },
+            {
+              name: 'PYTH',
+              percent: 5
+            }
+          ]
+        }
       },
       linkPath: '/classic-earn',
       buttonVariant: 'muted',
-      amountCardVariant: 'accentGray',
       progressVariant: 'classicEarn',
-    },
-  ]
-}
+      amountVariant: 'bordered',
+      backgroundImage: classicEarnCase
+    }
+  ];
+};

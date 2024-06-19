@@ -1,4 +1,4 @@
-import btc from '@/assets/icons/currency/btc.svg'
+import btc from '@/assets/icons/currency/btc.svg';
 
 export const ModalCurrency = () => {
   return (
@@ -6,5 +6,5 @@ export const ModalCurrency = () => {
       <img className={'-mt-[2px]'} src={btc} />
       0.00053 BTC
     </div>
-  )
-}
+  );
+};

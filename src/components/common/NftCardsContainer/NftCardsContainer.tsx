@@ -1,54 +1,60 @@
-import { NftCard } from '@/components/widgets/cards/NftCard/NftCard.tsx'
+import { NftCard } from '@/components/widgets/cards/NftCard/NftCard.tsx';
 import { addressClassicCollection } from '@/lib/blockchain/constant';
 import { useNftData } from '@/lib/blockchain/hooks/useNftData';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Loader2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { HoldingsFilterType } from '@/pages/MyHoldingsPage/lib/lib';
+import { OperationType, decimalsOperations } from '@/lib/helpers/decimalsOperations';
 
 export const NftCardsContainer = () => {
   const { publicKey } = useWallet();
   const { cards, isLoading } = useNftData();
-  
+
   const [searchParams] = useSearchParams();
 
   const holdingsFilter = (searchParams.get('filter') ?? 'all') as HoldingsFilterType;
 
-
   if (!publicKey) {
-    return (
-      <div className='h-[340px] flex justify-center items-center text-[20px]'>Please, connect wallet.</div>
-    )
+    return <div className='h-[340px] flex justify-center items-center text-[20px]'>Please, connect wallet.</div>;
   }
 
   if (isLoading && cards && cards[holdingsFilter].length === 0) {
     return (
       <div className='w-full h-[340px] flex justify-center items-center'>
-        <Loader2 size={80} className='animate-spin'/>
+        <Loader2 size={80} className='animate-spin' />
       </div>
-    )
-  } 
+    );
+  }
 
   return (
     <>
-      {cards && cards[holdingsFilter].length === 0 ?
-        <div className='h-[340px] flex justify-center items-center text-[20px]'>We have just checked, but there are no portfolios in your wallet.</div>
-        :
-        <div className='grid grid-cols-3 gap-4'>
-          {cards && cards[holdingsFilter].map((item) => {
-            const data = item?.metadata;
-            const title = data?.name.replace("PortfolioToken", data.collection.value.key === addressClassicCollection ? "Classic#" : "Solana Ecosystem #")
-            return <NftCard
-              key={`${data?.name}`}
-              title={title}
-              uri={data?.uri}
-              investedPrice={item.content.investedPrice}
-              collection={data.collection.value.key}
-              mint={data?.mint}
-            />;
-          })}
+      {cards && cards[holdingsFilter].length === 0 ? (
+        <div className='h-[340px] flex justify-center items-center text-[20px]'>
+          We have just checked, but there are no portfolios in your wallet.
         </div>
-      }
+      ) : (
+        <div className='grid gap-4 grid-cols-2 1920:grid-cols-3 '>
+          {cards &&
+            cards[holdingsFilter].map((item) => {
+              const title = item?.name.replace(
+                'BiscuitPortfolio',
+                item.collection.key.toString() === addressClassicCollection ? 'Classic# ' : 'Solana Ecosystem# '
+              );
+
+              return (
+                <NftCard
+                  key={`${item?.name}`}
+                  title={title}
+                  uri={item?.uri}
+                  investedPrice={decimalsOperations(item.content.amount, 1e6, OperationType.DIV)}
+                  collection={item.collection.key.toString()}
+                  mint={item.addressMint}
+                />
+              );
+            })}
+        </div>
+      )}
     </>
-  )
-}
+  );
+};

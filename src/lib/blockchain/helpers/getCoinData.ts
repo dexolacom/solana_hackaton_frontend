@@ -1,5 +1,5 @@
-import { coins } from "../constant";
+import { coins } from '../constant';
 
 export const getCoinData = (currency: string) => {
-  return coins.filter(item => item.currency === currency)[0]
-}
+  return coins.filter((item) => item.currency === currency)[0];
+};

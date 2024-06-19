@@ -1,3 +1,6 @@
+import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx';
+import { useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx';
+import { Button } from '@/components/ui/Button.tsx';
 import {
   Form,
   FormControl,
@@ -5,52 +8,54 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from '@/components/ui/Form.tsx'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx'
-import { Input } from '@/components/ui/Input.tsx'
-import { Button } from '@/components/ui/Button.tsx'
-import { Loader2 } from 'lucide-react'
-import { InfoCard } from '@/components/widgets/cards/InfoCard/InfoCard.tsx'
-import { FormCurrency } from '@/components/common/FormCurrency/FormCurrency.tsx'
-import { getFormCurrencyValues, useClassicForm } from '@/components/features/forms/ClassicForm/lib.tsx'
-import { useFormInfo } from '@/lib/hooks/useFormInfo.ts'
-import { classicCurrencyInfo, solanaCurrencyInfo } from '@/lib/constants.tsx'
-import { useEffect } from 'react'
-import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx'
+  FormMessage
+} from '@/components/ui/Form.tsx';
+import { Input } from '@/components/ui/Input.tsx';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select.tsx';
+import { FeeCard } from '@/components/widgets/cards/FeeCard/FeeCard.tsx';
+import { onlyIntegersInputValidator } from '@/lib/formUtils/formUtils.tsx';
+import { useFormInfo } from '@/lib/hooks/useFormInfo.ts';
+import { Loader2 } from 'lucide-react';
+import { useDebounce } from '@/lib/hooks/useDebounce';
+import { useEffect } from 'react';
+import { useCurrencyCount } from '@/lib/hooks/useCurrencyCount';
 
 interface ClassicFormProps {
-  currenciesVariant?: 'classic' | 'solana'
+  currenciesVariant?: 'classic' | 'solana';
 }
 
 export const ClassicForm = (props: ClassicFormProps) => {
-  const { currenciesVariant = 'classic' } = props
-  const { form, onSubmit, isLoading, solanaRate } = useClassicForm()
-  const infoCardData = useFormInfo(form.watch())
-  const amount = form.watch('amount')
-  const currency = form.watch('amountCurrency')
-  const amountWithCurrency = currency === 'USDC' ? amount : amount * (solanaRate ?? 0)
+  const { currenciesVariant = 'classic' } = props;
+  const { form, onSubmit, isLoading, solanaRate } = useClassicForm(currenciesVariant);
+  const {
+    handleSubmit,
+    formState: { errors }
+  } = form;
+  const infoCardData = useFormInfo(form.watch());
+  const amount = useDebounce(form.watch('amount'));
+  const currency = form.watch('amountCurrency');
+  const { currencyColumns, formCurrencyData } = useCurrencyCount({
+    solanaRate: solanaRate ?? 0,
+    amount,
+    currency,
+    currenciesVariant
+  });
 
-  const currencyInfo = currenciesVariant === 'classic' ? classicCurrencyInfo : solanaCurrencyInfo
-  const formCurrencyData = getFormCurrencyValues(amountWithCurrency, currencyInfo)
-  const currencyColumns =
-    currenciesVariant === 'classic'
-      ? { firstColumn: [0, 2], secondColumn: [2, formCurrencyData.length] }
-      : { firstColumn: [0, 2], secondColumn: [2, formCurrencyData.length] }
+  const clsRedBoard = 'border-2 border-[#F20000] hover:border-[#F20000] focus:border-[#F20000]';
 
   useEffect(() => {
-    onlyIntegersInputValidator()
-  }, [])
+    onlyIntegersInputValidator();
+  }, []);
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
+      <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
         <FormField
           control={form.control}
           name='amount'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Amount</FormLabel>
+              <FormLabel className={errors.amount && 'text-[#F20000]'}>Amount</FormLabel>
               <FormControl>
                 <Input
                   data-value={'numericInput'}
@@ -58,6 +63,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
                   maxLength={10}
                   placeholder='Enter amount of investment'
                   {...field}
+                  className={errors.amount && clsRedBoard}
                 />
               </FormControl>
               <FormDescription>MIN sum invested should be ≥ $100</FormDescription>
@@ -69,11 +75,11 @@ export const ClassicForm = (props: ClassicFormProps) => {
           control={form.control}
           name='amountCurrency'
           render={({ field }) => (
-            <FormItem >
-              <FormLabel>Amount Currency</FormLabel>
+            <FormItem>
+              <FormLabel className={errors.amountCurrency && 'text-[#F20000]'}>Amount Currency</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={'USDC'}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className={`${errors.amountCurrency && clsRedBoard} group`}>
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
@@ -108,7 +114,7 @@ export const ClassicForm = (props: ClassicFormProps) => {
             </FormItem>
           )}
         /> */}
-        <InfoCard data={infoCardData} />
+        <FeeCard data={infoCardData} />
         <FormCurrency data={formCurrencyData} columns={currencyColumns} />
         <Button variant={'accent'} className={'w-full gap-2'} disabled={isLoading}>
           {isLoading && <Loader2 className='animate-spin' />}
@@ -116,5 +122,5 @@ export const ClassicForm = (props: ClassicFormProps) => {
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};

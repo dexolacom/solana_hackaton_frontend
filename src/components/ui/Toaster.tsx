@@ -4,12 +4,12 @@ import {
   ToastDescription,
   ToastProvider,
   ToastTitle,
-  ToastViewport,
-} from '@/components/ui/Toast.tsx'
-import { useToast } from '@/lib/hooks/useToast.ts'
+  ToastViewport
+} from '@/components/ui/Toast.tsx';
+import { useToast } from '@/lib/hooks/useToast.ts';
 
 export function Toaster() {
-  const { toasts } = useToast()
+  const { toasts } = useToast();
 
   return (
     <ToastProvider>
@@ -23,9 +23,9 @@ export function Toaster() {
             {action}
             <ToastClose />
           </Toast>
-        )
+        );
       })}
       <ToastViewport />
     </ToastProvider>
-  )
+  );
 }

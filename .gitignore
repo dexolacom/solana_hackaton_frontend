@@ -25,3 +25,6 @@ dist-ssr
 .prettierrc.json
 .prettierignore
 .env
+
+# Yarn lock file
+yarn.lock
